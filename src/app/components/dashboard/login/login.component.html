@@ -1,0 +1,18 @@
+<div>
+    <form #formulario='ngForm' (ngSubmit)="onSubmit()"></form>
+    <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" class="form-control " placeholder="Introduzca nombre de usuario" name="username" ngModel>
+
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="text" class="form-control " placeholder="Introduzca su contraseña" name="username" ngModel>
+
+    </div>
+    <button class="btn btn-primary" type="submit">Acceder</button>
+    <button class="btn btn-primary" type="submit">Registro</button>
+
+
+</div>
