@@ -1,18 +1,47 @@
-<div>
-    <form #formulario='ngForm' (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label>Usuario</label>
-        <input type="text" class="form-control " placeholder="Introduzca nombre de usuario" name="username" ngModel>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border border-0 pr-5">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-10 mx-auto">
+              <img src="../../../../assets/img/log-nav.png" alt="">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                      <div class="form-group">
+                          <label>Usuario</label>
+                          <input type="text" class="form-control" placeholder="Introduzca nombre de usuario" name="username" formControlName="username">
+
+                      </div>
+
+                      <div class="form-group">
+                          <label>Password</label>
+                          <input type="text" class="form-control" placeholder="Introduzca su contraseña" name="password" formControlName="password">
+
+                      </div>
+                   </form>
+                  </div>
+                </div>
+              </div>
+
+
+      </div>
+      <div class="modal-footer border border-0 d-flex justify-content-between">
+        <button class="btn btn-primary" type="submit" data-dismiss="modal">Acceder</button>
+         <button class="btn btn-primary" type="submit">Registro</button>
+      </div>
     </div>
-
-    <div class="form-group">
-        <label>Password</label>
-        <input type="text" class="form-control " placeholder="Introduzca su contraseña" name="username" ngModel>
-
-    </div>
-    <button class="btn btn-primary" type="submit">Acceder</button>
-    <button class="btn btn-primary" type="submit">Registro</button>
-
-    </form>
+  </div>
 </div>
+
+
