@@ -9,6 +9,7 @@ import { navegacionComponent } from './components/home/navegacion/navegacion.com
 import { carouselComponent } from './components/carousel/carousel.component';
 import { MotoComponent } from './components/carousel/moto/moto.component';
 import { noticiasComponent } from './components/noticias/noticias.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
 { path: 'carousel', component: carouselComponent },
 { path: 'moto', component: MotoComponent },
 { path: 'noticias', component: noticiasComponent },
+{ path: 'dashboard', component: DashboardComponent },
 
 { path: '**', redirectTo: '/home' }];
 
