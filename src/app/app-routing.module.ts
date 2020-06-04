@@ -12,17 +12,17 @@ import { noticiasComponent } from './components/noticias/noticias.component';
 
 
 const routes: Routes = [
-{ path: '', pathMatch: 'full', redirectTo: '/home' },
-{ path: 'home', component: HomeComponent },
-{ path: 'anuncios', component: anunciosComponent },
-{ path: 'blog', component: blogComponent },
-{ path: 'tutoriales', component: TutorialesComponent },
-{ path: 'navegacion', component: navegacionComponent },
-{ path: 'carousel', component: carouselComponent },
-{ path: 'moto', component: MotoComponent },
-{ path: 'noticias', component: noticiasComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
+  { path: 'home', component: HomeComponent },
+  { path: 'anuncios', component: anunciosComponent },
+  { path: 'blog', component: blogComponent },
+  { path: 'tutoriales', component: TutorialesComponent },
+  { path: 'navegacion', component: navegacionComponent },
+  { path: 'carousel', component: carouselComponent },
+  { path: 'moto', component: MotoComponent },
+  { path: 'noticias', component: noticiasComponent },
 
-{ path: '**', redirectTo: '/home' }];
+  { path: '**', redirectTo: '/home' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
