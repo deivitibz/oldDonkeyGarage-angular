@@ -14,6 +14,7 @@ export class anunciosComponent implements OnInit {
 
   marcas: any;
   modelos: any;
+  filtroModelos: any[];
 
   form: FormGroup;
 
@@ -35,7 +36,15 @@ export class anunciosComponent implements OnInit {
   }
 
   filtrarMarcas(form){
-    console.log(form.value);
+    this.filtroModelos = [];
+    this.modelos.filter(result =>{
+      let idMarca = parseInt(form.value.marca);
+      let idModelo = result.brand_id;
+      if (idModelo === idMarca){
+        this.filtroModelos.push(result);
+      }
+    });
+
 
   }
 
