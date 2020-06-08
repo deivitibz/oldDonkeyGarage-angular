@@ -10,11 +10,15 @@ input.empty {
   text-decoration: inherit;
 }
 
-input{
+input {
   border-radius: 10px;
 }
 
 
-button{
+button {
   border-radius: 10px;
+}
+
+.height {
+  height: 35px;
 }
