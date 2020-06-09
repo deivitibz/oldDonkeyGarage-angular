@@ -24,6 +24,7 @@ import { RegisterComponent } from './components/dashboard/register/register.comp
 import { blogComponent } from './components/blog/blog.component';
 import { TutorialesComponent } from './components/blog/tutoriales/tutoriales.component';
 import { ChatComponent } from './components/dashboard/chat/chat.component';
+import { Error404Component } from './components/error404/error404.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ChatComponent } from './components/dashboard/chat/chat.component';
     RegisterComponent,
     blogComponent,
     TutorialesComponent,
-    ChatComponent
+    ChatComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
