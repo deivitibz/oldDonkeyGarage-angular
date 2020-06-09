@@ -14,11 +14,29 @@ input {
   border-radius: 10px;
 }
 
-
 button {
   border-radius: 10px;
 }
 
 .height {
   height: 35px;
+}
+
+.navbar-toggler {
+  border: none;
+  position: absolute;
+  top: 20px;
+  left: -30px;
+}
+
+.nav-item {
+  margin-right: 0;
+  text-align: center;
+}
+
+@media (min-width: 992px){
+  .nav-item{
+    margin-right: 2rem;
+  }
+
 }

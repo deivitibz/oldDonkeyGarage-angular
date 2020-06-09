@@ -1,0 +1,23 @@
+.sidebar{
+  width: 90px;
+  height: calc(100vh - 66px);
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-buttons{
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  background-color: tomato;
+  text-align: center;
+  font-size: 50px;
+  color: white;
+}
+
+.menu-buttons p{
+  font-size: 14px;
+}
