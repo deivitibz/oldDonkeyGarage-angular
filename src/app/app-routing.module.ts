@@ -10,7 +10,7 @@ import { carouselComponent } from './components/carousel/carousel.component';
 import { MotoComponent } from './components/carousel/moto/moto.component';
 import { noticiasComponent } from './components/noticias/noticias.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { Error404Component } from './error404';
+import { Error404Component } from './components/error404/error404.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -23,11 +23,8 @@ const routes: Routes = [
   { path: 'moto', component: MotoComponent },
   { path: 'noticias', component: noticiasComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'error404', component: Error404Component }
-
-
-
-  { path: '**', redirectTo: '/home' }];
+  { path: 'error404', component: Error404Component },
+  { path: '**', redirectTo: '/error404' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
