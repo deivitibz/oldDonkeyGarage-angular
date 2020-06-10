@@ -17,21 +17,13 @@ export class anuncioService {
     this.baseUrl = 'http://localhost:3000/api/anuncios';
 
   }
-  addAnuncio(anuncio): Promise<any> {
-    return this.httpClient.post(this.baseUrl + '/anuncio', anuncio).toPromise();
+  addAnuncio(anuncio) {
+    return this.httpClient.post(this.baseUrl , anuncio).toPromise();
 
 
   }
 
-  getAnuncios(): Promise<any[]> {
-    return new Promise((resolve, reject) => {
-      const Anuncio = [];
-      for (let anuncio of Anuncio) {
-        Anuncio.push();
-      }
-      resolve(Anuncio);
-    });
+  getAnuncios() {
+    return this.httpClient.get(this.baseUrl).toPromise();
   }
 }
-
-

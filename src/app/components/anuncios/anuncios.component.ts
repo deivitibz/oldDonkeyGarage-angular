@@ -14,6 +14,7 @@ import * as models from '../../db/moto_models.json';
 
 
 export class anunciosComponent implements OnInit {
+  value = 'Clear me';
 
   marcas: any;
   modelos: any;
@@ -58,8 +59,11 @@ export class anunciosComponent implements OnInit {
 
   }
 
-  onSubmitFormulario() {
+  async onSubmitFormulario() {
     console.log(this.form.value);
+    const response = await this.anuncioService.getAnuncios();
+    console.log(response);
+
 
   }
 

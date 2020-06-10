@@ -8,6 +8,10 @@ import { AppComponent } from './app.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatChipsModule} from '@angular/material/chips';
 
 // modulo router
 import { RouterModule } from '@angular/router';
@@ -65,7 +69,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatMenuModule,
     MatIconModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
