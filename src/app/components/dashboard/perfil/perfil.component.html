@@ -1,0 +1,53 @@
+<div class="container col-6 mx-auto">
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group mt-5">
+      <div class="text-center">
+        <h3>Formulario de Registro</h3>
+      </div>
+    </div>
+    <div class="form-group">
+
+      <div class="form-group">
+        <label for="">Nombre</label>
+        <input type="text" class="form-control" placeholder="Introduzca su nombre" formControlName="name" name="nombre">
+        <small class="form-text text-muted"
+          *ngIf="formulario.controls.name.errors && formulario.controls.name.touched">El nombre debe contener al menos
+          3
+          letras</small>
+      </div>
+      <div class="form-group">
+        <label for="">Apellidos</label>
+        <input type="text" class="form-control" placeholder="Introduzca sus apellidos" formControlName="surname"
+          name="Apellidos">
+        <small class="form-text text-muted"
+          *ngIf="formulario.controls.surname.errors && formulario.controls.surname.touched">El apellido debe contener al
+          menos 3 letras</small>
+      </div>
+
+      <div class="form-group">
+        <label>Móvil</label>
+        <input type="phoneNumber" class="form-control" placeholder="Introduzca un número de teléfono"
+          formControlName="phone" name="Telefono">
+        <small class="form-text text-muted"
+          *ngIf="formulario.controls.phone.errors && formulario.controls.phone.touched">No es un formato válido</small>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group col-6">
+        <label>Localidad</label>
+        <input type="text" class="form-control" formControlName="location" name="Localidad"
+          placeholder="Introduzca la localidad a la que pertenece">
+      </div>
+      <div class="form-group col-6">
+        <label>Provicia</label>
+        <input type="text" class="form-control" formControlName="location_Provincia" name="Provincia"
+          placeholder="Introduzca la localidad a la que pertenece">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!formulario.valid">Enviar
+      Formulario</button>
+
+  </form>
+</div>

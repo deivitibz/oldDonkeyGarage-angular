@@ -25,7 +25,7 @@ button {
 .navbar-toggler {
   border: none;
   position: absolute;
-  top: 20px;
+  top: 30px;
   left: -30px;
 }
 
@@ -34,8 +34,8 @@ button {
   text-align: center;
 }
 
-@media (min-width: 992px){
-  .nav-item{
+@media (min-width: 992px) {
+  .nav-item {
     margin-right: 2rem;
   }
 

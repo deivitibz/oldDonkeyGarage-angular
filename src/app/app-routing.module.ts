@@ -12,6 +12,7 @@ import { noticiasComponent } from './components/noticias/noticias.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { Error404Component } from './components/error404/error404.component';
 import { RegisterComponent } from './components/dashboard/register/register.component';
+import { PerfilComponent } from './components/dashboard/perfil/perfil.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -26,10 +27,12 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'registro', component: RegisterComponent },
   { path: 'error404', component: Error404Component },
-  { path: '**', redirectTo: '/error404' }];
+  { path: 'perfil', component: PerfilComponent },
+  { path: '**', redirectTo: '/error404' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -8,10 +8,10 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 // modulos formulario
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // modulo http
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 // componentes
 import { HomeComponent } from './components/home/home.component';
@@ -28,7 +28,7 @@ import { blogComponent } from './components/blog/blog.component';
 import { TutorialesComponent } from './components/blog/tutoriales/tutoriales.component';
 import { ChatComponent } from './components/dashboard/chat/chat.component';
 import { Error404Component } from './components/error404/error404.component';
-
+import { PerfilComponent } from './components/dashboard/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import { Error404Component } from './components/error404/error404.component';
     blogComponent,
     TutorialesComponent,
     ChatComponent,
-    Error404Component
+    Error404Component,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +55,9 @@ import { Error404Component } from './components/error404/error404.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
