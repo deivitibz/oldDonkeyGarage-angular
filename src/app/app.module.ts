@@ -39,6 +39,7 @@ import { ChatComponent } from './components/dashboard/chat/chat.component';
 import { Error404Component } from './components/error404/error404.component';
 import { PerfilComponent } from './components/dashboard/perfil/perfil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConstructorComponent } from './components/dashboard/perfil/constructor/constructor.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ChatComponent,
     Error404Component,
     PerfilComponent,
+    ConstructorComponent,
   ],
   imports: [
     BrowserModule,

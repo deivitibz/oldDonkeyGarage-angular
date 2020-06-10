@@ -1,1 +1,34 @@
 GET http://localhost:3000/api/anuncios
+
+###
+
+GET http://streaming.zapto.org:3000/api/constructor/5
+
+### mostrar constructor por id
+
+GET http://streaming.zapto.org:3000/api/constructor/
+
+### mostrar todos constructores
+
+POST http://streaming.zapto.org:3000/api/constructor
+Content-Type: application/json
+
+{
+    "nombre": "juanito",
+    "apellido": "valderrama",
+    "direccion": "calle marte"
+}
+
+### crear constructor
+
+PUT http://streaming.zapto.org:3000/api/constructor/6
+
+### editar constructor por id
+
+DELETE http://streaming.zapto.org:3000/api/constructor/1
+
+### eliminar un constructor por id
+
+
+
+
