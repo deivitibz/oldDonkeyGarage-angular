@@ -14,3 +14,6 @@ font-family: 'Source Serif Pro', serif;
   --color-D--color: #F6F2E6;
   --color-E--color: #EF8A42;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

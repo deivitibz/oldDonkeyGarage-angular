@@ -4,6 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// modulos material
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+
 // modulo router
 import { RouterModule } from '@angular/router';
 
@@ -29,6 +34,7 @@ import { TutorialesComponent } from './components/blog/tutoriales/tutoriales.com
 import { ChatComponent } from './components/dashboard/chat/chat.component';
 import { Error404Component } from './components/error404/error404.component';
 import { PerfilComponent } from './components/dashboard/perfil/perfil.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -56,6 +62,10 @@ import { PerfilComponent } from './components/dashboard/perfil/perfil.component'
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatMenuModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],
