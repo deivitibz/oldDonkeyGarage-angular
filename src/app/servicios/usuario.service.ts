@@ -14,11 +14,11 @@ export class UsuarioService {
 
   }
 
-  registro(formValues): Promise <any> {
+  registro(formValues): Promise<any> {
     return this.httpClient.post(this.baseUrl + '/registro', formValues).toPromise();
   }
 
-  login(formValues): Promise <any> {
+  login(formValues): Promise<any> {
     return this.httpClient.post(this.baseUrl + '/login', formValues).toPromise()
   }
 
