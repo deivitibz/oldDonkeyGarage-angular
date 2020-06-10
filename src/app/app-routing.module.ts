@@ -11,6 +11,7 @@ import { MotoComponent } from './components/carousel/moto/moto.component';
 import { noticiasComponent } from './components/noticias/noticias.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { Error404Component } from './components/error404/error404.component';
+import { RegisterComponent } from './components/dashboard/register/register.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'moto', component: MotoComponent },
   { path: 'noticias', component: noticiasComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'registro', component: RegisterComponent },
   { path: 'error404', component: Error404Component },
   { path: '**', redirectTo: '/error404' }];
 

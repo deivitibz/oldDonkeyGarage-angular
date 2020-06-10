@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private usuarioService: UsuarioService) {
     this.form = new FormGroup({
       username: new FormControl('',[]),
       password: new FormControl('',[])
@@ -23,8 +24,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(formValue) {
-    this.router.navigate(['home'])
+  async onSubmit() {
+    const response = await this.usuarioService.login(this.form.value);
+    if(response['success']) {
+      const token = response['token'];
+      localStorage.setItem('userToken', token)
+    }
 
   }
 }

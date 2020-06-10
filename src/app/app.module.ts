@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
 // modulos formulario
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
+// modulo http
+import { HttpClientModule } from '@angular/common/http'
+
 // componentes
 import { HomeComponent } from './components/home/home.component';
 import { navegacionComponent } from './components/home/navegacion/navegacion.component';
@@ -50,7 +53,8 @@ import { Error404Component } from './components/error404/error404.component';
     AppRoutingModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

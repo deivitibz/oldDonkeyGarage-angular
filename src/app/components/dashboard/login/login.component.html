@@ -16,7 +16,7 @@
       <!-- MODAL BODY -->
       <div class="modal-body mx-4 pb-0">
                   <!-- FORMULARIO LOGIN / REGISTRO -->
-                    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
                       <div class="form-group">
                           <label>Usuario</label>
                           <input type="text" class="form-control text-center" placeholder="Introduzca nombre de usuario" name="username" formControlName="username">
@@ -35,7 +35,7 @@
       <!-- MODAL FOOTER -->
       <div class="modal-footer border border-0 d-flex justify-content-between mx-4 mb-3">
         <button class="btn btn-primary" type="submit" data-dismiss="modal" [routerLink]="['/dashboard']">Acceder</button>
-         <button class="btn btn-primary" type="submit">Registro</button>
+        <button class="btn btn-primary" type="submit" data-dismiss="modal" [routerLink]="['/registro']">Registro</button>
       </div>
     </div>
   </div>
