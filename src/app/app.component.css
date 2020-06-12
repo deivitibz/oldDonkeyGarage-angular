@@ -1,0 +1,15 @@
+@import url('../styles.css');
+
+.bg-donkey {
+  background-color: var(--color-A--color);
+  /* background-color: black; */
+
+}
+
+.footer-donkey {
+  color: white;
+  margin: 0 auto;
+  font-family: var(--font-principal--font-family);
+  font-weight: 400;
+  font-size: 15px;
+}
