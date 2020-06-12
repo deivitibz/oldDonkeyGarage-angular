@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Serif+Pro:wght@400;600;700&display=swap');
+
+:root {
+  --font-principal--font-family: 'Oswald', sans-serif;
+  --font-secundaria--font-family: 'Source Serif Pro', serif;
+  --color-A--color: #1A2930;
+  --color-B--color: #587485;
+  --color-C--color: #C6DBE3;
+  --color-D--color: #F6F2E6;
+  --color-E--color: #EF8A42;
+}
+
+
+p {
+  font-family: var(--font-principal--font-family);
+  font-weight: 600;
+  color: var(--color-A--color);
+  font-size: 50px;
+}
+
+
+h1 {
+  font-family: var(--font-principal--font-family);
+  font-weight: 600;
+  color: var(--color-A--color);
+  font-size: 175px;
+  line-height: 0.6em;
+  margin-bottom: 35px;
+}
+
+@media (min-width: 576px) {
+
+  h1 {
+    font-size: 300px;
+  }
+
+  p {
+    font-size: 100px;
+  }
+
+}
