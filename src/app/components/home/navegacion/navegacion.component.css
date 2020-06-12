@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Serif+Pro:wght@400;600;700&display=swap');
+
+/* 
+font-family: 'Oswald', sans-serif;
+font-family: 'Source Serif Pro', serif;
+*/
+
+:root {
+  --font-principal--font-family: 'Oswald', sans-serif;
+  --font-secundaria--font-family: 'Source Serif Pro', serif;
+  --color-A--color: #1A2930;
+  --color-B--color: #587485;
+  --color-C--color: #C6DBE3;
+  --color-D--color: #F6F2E6;
+  --color-E--color: #EF8A42;
+}
+
 @font-face {
   font-family: FontAwesome;
   src: url("../../../../assets/fonts/fa-solid-900.otf") format("opentype");
@@ -16,6 +33,8 @@ input {
 
 button {
   border-radius: 10px;
+  /* color: var(--color-D--color); */
+  color: white;
 }
 
 .height {
@@ -26,12 +45,18 @@ button {
   border: none;
   position: absolute;
   top: 30px;
-  left: -30px;
+  left: -20px;
 }
 
 .nav-item {
   margin-right: 0;
   text-align: center;
+}
+
+.bg-donkey {
+  background-color: var(--color-A--color);
+  /* background-color: black; */
+
 }
 
 @media (min-width: 992px) {
