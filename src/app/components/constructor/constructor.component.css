@@ -1,0 +1,24 @@
+@import url('../../../styles.css');
+
+hr {
+  border-color: VAR(--color-A--color);
+  margin-bottom: 30px;
+  width: 40%;
+}
+
+.card {
+  border: none;
+}
+
+.card-header {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-footer {
+  border-top: none;
+}

@@ -1,0 +1,6 @@
+@import url('../../../styles.css');
+
+hr {
+  border-color: VAR(--color-A--color);
+  margin-bottom: 30px;
+}

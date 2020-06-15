@@ -1,7 +1,7 @@
 .slick-slide {
   display: block;
   float: left;
-  height: 146px!important;
+  height: 146px !important;
 }
 
 .card {
@@ -10,14 +10,10 @@
 }
 
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  hr{
+  hr {
     border-top: 4px solid white;
-      width: 10%;
+    width: 10%;
   }
-
-
-
-
 }
