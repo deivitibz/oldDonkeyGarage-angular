@@ -1,8 +1,20 @@
-<div class="slider" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-  <div><h3>1</h3></div>
-  <div><h3>2</h3></div>
-  <div><h3>3</h3></div>
-  <div><h3>4</h3></div>
-  <div><h3>5</h3></div>
-  <div><h3>6</h3></div>
+<div class="container bg-donkey-secondary pb-5">
+  <div class="py-5 text-center">
+    <h3 class="text-white">¿QUE MOTOS PERSONALIZADAS QUIERES VER?</h3>
+  </div>
+  <ngx-slick-carousel class="carousel"
+  #slickModal="slick-carousel"
+  [config]="slideConfig" >
+
+  <div ngxSlickItem *ngFor="let slide of slides" class="slide ">
+
+    <img src="{{ slide.img }}" alt="" style="width: 100%; height: auto;">
+    <div class="text-center">
+      <h5 class="text-white">{{ slide.name }}</h5>
+    </div>
+
+  </div>
+
+
+  </ngx-slick-carousel>
 </div>

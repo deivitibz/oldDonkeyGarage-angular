@@ -1,0 +1,23 @@
+.slick-slide {
+  display: block;
+  float: left;
+  height: 146px!important;
+}
+
+.card {
+  margin-top: 1em;
+  border-radius: 20px;
+}
+
+
+@media (min-width: 768px){
+
+  hr{
+    border-top: 4px solid white;
+      width: 10%;
+  }
+
+
+
+
+}

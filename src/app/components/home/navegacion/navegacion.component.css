@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Serif+Pro:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Serif+Pro:wght@400;600;700&display=swap");
 
-/* 
+/*
 font-family: 'Oswald', sans-serif;
 font-family: 'Source Serif Pro', serif;
 */
 
 :root {
-  --font-principal--font-family: 'Oswald', sans-serif;
-  --font-secundaria--font-family: 'Source Serif Pro', serif;
-  --color-A--color: #1A2930;
+  --font-principal--font-family: "Oswald", sans-serif;
+  --font-secundaria--font-family: "Source Serif Pro", serif;
+  --color-A--color: #1a2930;
   --color-B--color: #587485;
-  --color-C--color: #C6DBE3;
-  --color-D--color: #F6F2E6;
-  --color-E--color: #EF8A42;
+  --color-C--color: #c6dbe3;
+  --color-D--color: #f6f2e6;
+  --color-E--color: #ef8a42;
 }
 
 @font-face {
@@ -45,7 +45,7 @@ button {
   border: none;
   position: absolute;
   top: 30px;
-  left: -20px;
+  left: 0px;
 }
 
 .nav-item {
@@ -53,15 +53,27 @@ button {
   text-align: center;
 }
 
-.bg-donkey {
-  background-color: var(--color-A--color);
-  /* background-color: black; */
-
+.logo {
+  cursor: pointer;
 }
 
 @media (min-width: 992px) {
   .nav-item {
     margin-right: 2rem;
   }
+}
 
+@media (min-width: 768px) {
+  .logo {
+    /* padding: 3em 0; */
+    margin: 0 auto;
+  }
+
+
+}
+
+@media (min-width: 576px) {
+  .navbar-toggler {
+    left: -20px;
+  }
 }

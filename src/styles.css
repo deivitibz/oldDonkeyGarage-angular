@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Serif+Pro:wght@400;600;700&display=swap');
 
-/* 
+/*
 font-family: 'Oswald', sans-serif;
 font-family: 'Source Serif Pro', serif;
 */
@@ -17,3 +17,40 @@ font-family: 'Source Serif Pro', serif;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.slick-slide {
+  display: block;
+  float: left;
+  height: auto;
+}
+
+.bg-donkey {
+  background-color: var(--color-A--color);
+  /* background-color: black; */
+
+}
+
+.bg-donkey-secondary{
+  background-color: var(--color-B--color);
+}
+
+hr{
+  border-top: 2px solid white;
+    width: 35%;
+}
+
+
+
+
+
+@media (min-width: 768px){
+
+  hr{
+    border-top: 4px solid white;
+      width: 10%;
+  }
+
+
+
+
+}

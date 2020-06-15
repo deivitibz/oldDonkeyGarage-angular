@@ -14,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 
 // modulo slick carousel
@@ -26,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // modulo http
 import { HttpClientModule } from '@angular/common/http';
+
 
 // componentes
 import { HomeComponent } from './components/home/home.component';
@@ -85,7 +88,10 @@ import { AdminComponent } from './components/dashboard/admin/admin.component';
     MatChipsModule,
     SlickCarouselModule,
     MatCheckboxModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCardModule,
+    MatButtonModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent],
