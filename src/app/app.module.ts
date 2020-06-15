@@ -12,6 +12,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 // modulo router
 import { RouterModule } from '@angular/router';
@@ -21,6 +23,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // modulo http
 import { HttpClientModule } from '@angular/common/http';
+
+// modulo slick carousel
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 // componentes
 import { HomeComponent } from './components/home/home.component';
@@ -75,7 +80,10 @@ import { ConstructorComponent } from './components/dashboard/perfil/constructor/
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCardModule,
+    MatButtonModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent],
