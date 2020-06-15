@@ -5,6 +5,7 @@ import { anuncioService } from '../../servicios/anuncio.service';
 
 import * as brands from '../../db/moto_brands.json';
 import * as models from '../../db/moto_models.json';
+import { HttpHeaders, HttpRequest, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-anuncios',
@@ -14,7 +15,8 @@ import * as models from '../../db/moto_models.json';
 
 
 export class anunciosComponent implements OnInit {
-  value = 'Clear me';
+
+  files;
 
   marcas: any;
   modelos: any;
@@ -22,7 +24,8 @@ export class anunciosComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private anuncioService: anuncioService) {
+
+  constructor(private anuncioService: anuncioService,private http: HttpClient) {
     this.marcas = brands.data;
     this.modelos = models.data;
     this.form = new FormGroup({
@@ -30,10 +33,11 @@ export class anunciosComponent implements OnInit {
       descripcion: new FormControl('', []),
       precio: new FormControl('', []),
       marca: new FormControl('', []),
+      kms: new FormControl('', []),
       modelo: new FormControl('', []),
       itv: new FormControl('', []),
       homologacion: new FormControl('', []),
-      fileupload: new FormControl('', []),
+      file: new FormControl('', []),
       tipoCustom: new FormControl('', [])
 
     })
@@ -59,11 +63,17 @@ export class anunciosComponent implements OnInit {
 
   }
 
-  async onSubmitFormulario() {
-    console.log(this.form.value);
-    const response = await this.anuncioService.getAnuncios();
-    console.log(response);
+  onSubmitFormulario() {
+    this.anuncioService.addImages(this.files,this.form)
 
+    /* const response = await this.anuncioService.getAnuncios();
+    console.log(response); */
+
+
+  }
+
+  onFileChange($event){
+    this.files = $event.target.files
 
   }
 

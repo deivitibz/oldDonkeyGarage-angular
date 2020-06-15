@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http'
 import { Anuncio } from '../models/anuncio.model'
 import { anunciosComponent } from '../components/anuncios/anuncios.component';
 
@@ -12,18 +12,37 @@ import { anunciosComponent } from '../components/anuncios/anuncios.component';
 export class anuncioService {
 
   baseUrl: string;
+  files;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private http: HttpClient) {
     this.baseUrl = 'http://localhost:3000/api/anuncios';
 
   }
-  addAnuncio(anuncio) {
-    return this.httpClient.post(this.baseUrl , anuncio).toPromise();
+  addAnuncio(anuncio: Anuncio) {
+    return this.http.post(this.baseUrl , anuncio).toPromise();
 
 
   }
 
   getAnuncios() {
-    return this.httpClient.get(this.baseUrl).toPromise();
+    return this.http.get(this.baseUrl).toPromise();
+  }
+
+  addImages(files,form){
+    let fd = new FormData();
+    fd.append("file", files[0], 'nuevaImagen.png');
+    fd.append("name", files[0].name);
+
+    let header = new HttpHeaders();
+    header.append('Content-Type','multipart/form-data');
+    const req = new HttpRequest("POST","http://localhost:3000/api/anuncios/upload",fd, {
+      headers: header
+    });
+    this.http.request(req)
+    .toPromise()
+    .then(result => {
+      console.log(result);
+
+    })
   }
 }

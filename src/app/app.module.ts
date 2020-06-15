@@ -12,7 +12,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatGridListModule} from '@angular/material/grid-list';
 
+
+// modulo slick carousel
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 // modulo router
 import { RouterModule } from '@angular/router';
 
@@ -40,6 +45,7 @@ import { Error404Component } from './components/error404/error404.component';
 import { PerfilComponent } from './components/dashboard/perfil/perfil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConstructorComponent } from './components/dashboard/perfil/constructor/constructor.component';
+import { AdminComponent } from './components/dashboard/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +66,7 @@ import { ConstructorComponent } from './components/dashboard/perfil/constructor/
     Error404Component,
     PerfilComponent,
     ConstructorComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,10 @@ import { ConstructorComponent } from './components/dashboard/perfil/constructor/
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    SlickCarouselModule,
+    MatCheckboxModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent],
