@@ -1,0 +1,16 @@
+
+div.row{
+  border: cadetblue 4px solid;
+  border-style: ridge;
+  padding: 15px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+}
+div.container{
+
+    align-items: center;
+}
+ #categoria{
+     margin-top: 12px;
+ }

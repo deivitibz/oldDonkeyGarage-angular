@@ -25,4 +25,4 @@ export class Blog {
         this.estado = pEstado;
     }
 
-}  //id titulo descripcion autor categoria imagen estado fecha_publicacion
+} 
