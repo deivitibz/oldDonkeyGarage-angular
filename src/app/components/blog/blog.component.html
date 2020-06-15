@@ -1,30 +1,12 @@
-<div class="container">
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-    </ng-container>
+<div class="card" class='d-flex justify-content-center' style="width:250px" *ngFor="let post of allPosts">
+  <img class="card-img-top" src="https://www.thispersondoesnotexist.com/image" alt="Card image">
+  <div class="card-body">
+    <h4 class="card-Autor">Autor:{{post.autor}}</h4>
+    <h5 class="card-title">Titulo:</h5>
+    <p class="text">Texto:</p>
+    <p><strong>fecha:</strong></p>
+    <p><strong>Categoria</strong></p>
+    <button class="btn btn-primary">CATEGORIA</button>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  </div>
 </div>
