@@ -44,7 +44,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/dashboard/login/login.component';
 import { RegisterComponent } from './components/dashboard/register/register.component';
 import { blogComponent } from './components/blog/blog.component';
-import { TutorialesComponent } from './components/blog/tutoriales/tutoriales.component';
+import { TutorialesComponent } from './components/tutoriales/tutoriales.component';
 import { ChatComponent } from './components/dashboard/chat/chat.component';
 import { Error404Component } from './components/error404/error404.component';
 import { PerfilComponent } from './components/dashboard/perfil/perfil.component';
