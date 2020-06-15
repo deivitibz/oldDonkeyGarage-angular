@@ -13,6 +13,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { Error404Component } from './components/error404/error404.component';
 import { RegisterComponent } from './components/dashboard/register/register.component';
 import { PerfilComponent } from './components/dashboard/perfil/perfil.component';
+import { AdminComponent } from './components/dashboard/admin/admin.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'error404', component: Error404Component },
   { path: 'perfil', component: PerfilComponent },
+  { path: 'admin', component: AdminComponent },
   { path: '**', redirectTo: '/error404' },
 ];
 

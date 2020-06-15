@@ -1,6 +1,6 @@
-<app-navegacion></app-navegacion>
+<app-navegacion *ngIf="router.url !== '/admin'"></app-navegacion>
 <router-outlet></router-outlet>
-<footer class="container-fluid bg-donkey">
+<footer *ngIf="router.url !== '/admin'" class="container-fluid bg-donkey">
   <div class="row">
     <p class=" footer-donkey py-3">Copyright 2020 Old Donkey Garage &copy;</p>
   </div>

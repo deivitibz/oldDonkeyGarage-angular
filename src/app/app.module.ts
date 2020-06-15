@@ -16,10 +16,13 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 // modulo slick carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 // modulo router
 import { RouterModule } from '@angular/router';
 
@@ -91,6 +94,9 @@ import { AdminComponent } from './components/dashboard/admin/admin.component';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
     SlickCarouselModule
   ],
   providers: [],
