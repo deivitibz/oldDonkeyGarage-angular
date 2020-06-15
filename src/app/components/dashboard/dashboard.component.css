@@ -45,13 +45,17 @@ section.footer {
   bottom: 0;
 }
 
+td{
+  vertical-align: middle;
+}
+
 @media (min-width: 992px) {
   .sidebar {
     /* width: 90px; */
     background-color: var(--color-B--color);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     height: 100%;
     width: 81px;
   }

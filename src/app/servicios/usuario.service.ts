@@ -19,6 +19,8 @@ export class UsuarioService {
   }
 
   login(formValues): Promise<any> {
+    console.log(formValues);
+
     return this.httpClient.post(this.baseUrl + '/login', formValues).toPromise()
   }
 
