@@ -48,12 +48,12 @@ export class anunciosComponent implements OnInit {
   async ngOnInit() {
     const response = await this.anuncioService.getAnuncios();
     // console.log(response);
-    if (response['error']) {
-      this.router.navigate([]);
-    } else {
-      this.arrAnuncios = response;
-      console.log(response);
-    }
+    // if (response['error']) {
+    //   this.router.navigate([]);
+    // } else {
+    //   this.arrAnuncios = response;
+    //   console.log(response);
+    // }
   }
 
   filtrarMarcas(form) {
