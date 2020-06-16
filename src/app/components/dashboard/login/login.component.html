@@ -19,27 +19,27 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
           <div class="form-group">
             <label>Introduce tu email</label>
-            <input type="text" class="form-control text-center" placeholder="Introduzca tu email"
-              name="email" formControlName="email">
-            <small class="form-text text-muted"
-              *ngIf="form.controls.email.errors && form.controls.email.touched">Es necesario insertar un
+            <input type="text" class="form-control text-center" placeholder="Introduzca tu email" name="email"
+              formControlName="email">
+            <small class="form-text text-muted" *ngIf="form.controls.email.errors && form.controls.email.touched">Es
+              necesario insertar un
               usuario</small>
           </div>
 
           <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control text-center" placeholder="Introduzca su contraseña" name="password"
-              formControlName="password">
+            <input type="password" class="form-control text-center" placeholder="Introduzca su contraseña"
+              name="password" formControlName="password" autocomplete="on">
 
 
           </div>
           <div class="modal-footer border border-0 d-flex justify-content-between mx-4 mb-3">
-            <button #myButton id="acceder" class="btn btn-primary " type="submit" [disabled]="!form.valid" >Acceder</button>
+            <button #myButton id="acceder" class="btn btn-primary " type="submit"
+              [disabled]="!form.valid">Acceder</button>
             <button class="btn btn-primary" type="submit" data-dismiss="modal"
               [routerLink]="['/registro']">Registro</button>
           </div>
-          <small class="form-text text-muted"
-              *ngIf="!valid">Email o contraseña no valido</small>
+          <small class="form-text text-muted" *ngIf="!valid">Email o contraseña no valido</small>
 
         </form>
 

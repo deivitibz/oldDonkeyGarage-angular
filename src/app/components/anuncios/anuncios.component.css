@@ -1,3 +1,20 @@
-input[type="checkbox"]{
-  height: calc(0.3em + 1.5rem + 0px);
+@import url('../../../styles.css');
+
+hr {
+  border-color: VAR(--color-A--color);
+  margin-bottom: 30px;
+  width: 40%;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+input#file-upload-button {
+  color: aquamarine;
 }
