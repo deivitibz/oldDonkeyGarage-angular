@@ -30,7 +30,7 @@ export class anuncioService {
     header.append('Content-Type', 'multipart/form-data');
     const req = new HttpRequest(
       'POST',
-      'http://localhost:3000/api/anuncios/upload',
+      'http://streaming.zapto.org:3000/api/anuncios/upload',
       fd,
       {
         headers: header,

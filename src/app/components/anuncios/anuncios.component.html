@@ -74,6 +74,24 @@
                   </select>
                 </div>
 
+                <div class="row mt-2">
+                <div class="form-group col-6">
+                  <input type="hidden" formControlName="id_provincia" name="id_provincia" *ngFor="let provincia of provincias" [value]="provincia.id">
+                  <label for="">Provincia</label>
+                  <select (change)="getProvincias(form)" class="form-control" id="provincia" formControlName="provincia" name="provincia">
+                    <option value="" selected>Seleciona una provincia</option>
+                    <option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.nm}}</option>
+                  </select>
+                  <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
+                </div>
+                <div class="form-group col-6">
+                  <label for="">Población</label>
+                  <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion">
+                    <option value="" selected>Seleciona un poblacion</option>
+                    <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}</option>
+                  </select>
+                </div>
+                </div>
               </div>
               <div class="form-group mb-4">
                 <label for="">Tipo de custom</label>

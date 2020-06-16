@@ -1,5 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import Pslect from 'pselect.js';
 
 import * as brands from '../../db/moto_brands.json';
 import * as models from '../../db/moto_models.json';
@@ -15,12 +16,14 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
 })
 export class anunciosComponent implements OnInit {
   files;
-
+  provincias: string[];
+  poblaciones: string[];
   marcas: any;
   modelos: any;
   filtroModelos: any[];
+  filtroProvincias: any[];
 
-  arrAnuncios: Anuncio[];
+  arrAnuncios: any[];
 
   form: FormGroup;
 
@@ -32,8 +35,11 @@ export class anunciosComponent implements OnInit {
     this.marcas = brands.data;
     this.modelos = models.data;
     this.form = new FormGroup({
+      id_provincia: new FormControl('', []),
       titulo: new FormControl('', []),
       descripcion: new FormControl('', []),
+      provincia: new FormControl('', []),
+      poblacion: new FormControl('', []),
       precio: new FormControl('', []),
       marca: new FormControl('', []),
       kms: new FormControl('', []),
@@ -43,17 +49,21 @@ export class anunciosComponent implements OnInit {
       file: new FormControl('', []),
       tipoCustom: new FormControl('', []),
     });
+
+    this.provincias = new Pslect().constructor.provincesData;
+    this.poblaciones = new Pslect().constructor.municipesData;
+
   }
 
   async ngOnInit() {
     const response = await this.anuncioService.getAnuncios();
-    // console.log(response);
-    if (response['error']) {
+    console.log(response);
+/*     if (response['error']) {
       this.router.navigate([]);
     } else {
-      this.arrAnuncios = response;
+      this.arrAnuncios.push(response)
       console.log(response);
-    }
+    } */
   }
 
   filtrarMarcas(form) {
@@ -70,10 +80,36 @@ export class anunciosComponent implements OnInit {
   }
 
   onSubmitFormulario() {
-    this.anuncioService.addImages(this.files, this.form);
+    //this.anuncioService.addImages(this.files, this.form);
+    console.log(this.form.value);
+
+
+
   }
 
   onFileChange($event) {
     this.files = $event.target.files;
+  }
+
+  getProvincias(form){
+    this.filtroProvincias = [];
+    console.log(this.poblaciones);
+
+    this.poblaciones.filter((result)=>{
+
+
+      let idProvincia = this.form.value['provincia'];
+      let idPoblacion = result['id'];
+      idPoblacion = idPoblacion.substr(0,2)
+
+      if (idPoblacion === idProvincia){
+        this.filtroProvincias.push(result)
+        console.log(result);
+      }
+
+
+    })
+    //console.log(this.filtroProvincias);
+
   }
 }
