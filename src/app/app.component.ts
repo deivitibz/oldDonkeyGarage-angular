@@ -8,7 +8,12 @@ import * as $ from 'jquery';
 })
 export class AppComponent {
 
+  ruta: string;
+
   constructor(public router: Router){
+
+    this.ruta = 'usuarios';
+
   }
 
 }

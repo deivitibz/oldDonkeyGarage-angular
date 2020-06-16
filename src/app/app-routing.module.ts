@@ -16,9 +16,15 @@ import { PerfilComponent } from './components/dashboard/perfil/perfil.component'
 import { AdminComponent } from './components/dashboard/admin/admin.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { ConstructorComponent } from './components/constructor/constructor.component';
+// admin
+import { UsuariosComponent } from './components/dashboard/admin/usuarios/usuarios.component';
+import { NoticiasComponent } from './components/dashboard/admin/noticias/noticias.component';
+import { AnunciosComponent } from './components/dashboard/admin/anuncios/anuncios.component';
+import { VideotutorialesComponent } from './components/dashboard/admin/videotutoriales/videotutoriales.component';
+import { MotocicletasComponent } from './components/dashboard/admin/motocicletas/motocicletas.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/home' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'anuncios', component: anunciosComponent },
@@ -33,12 +39,19 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'error404', component: Error404Component },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: '**', redirectTo: '/error404' },
+  { path: 'admin', component: AdminComponent,
+    children: [
+      { path: 'usuarios', component: UsuariosComponent},
+      { path: 'noticias', component: NoticiasComponent},
+      { path: 'anuncios', component: AnunciosComponent},
+      { path: 'videotutoriales', component: VideotutorialesComponent},
+      { path: 'motocicletas', component: MotocicletasComponent}
+    ] },
+  { path: '**', redirectTo: '/error404' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+exports: [RouterModule],
 })
 export class AppRoutingModule {}

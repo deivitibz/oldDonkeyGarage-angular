@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConstructorService } from 'src/app/servicios/constructor.service';
 
 @Component({
   selector: 'app-constructor',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConstructorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private constructorService: ConstructorService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
+      const response = await this.constructorService.getAllConstructores();
+      console.log(response);
+
   }
-
 }
