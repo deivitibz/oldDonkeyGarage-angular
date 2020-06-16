@@ -6,6 +6,7 @@ import { Noticia } from '../models/noticia.model';
   providedIn: 'root',
 })
 export class NoticiaService {
+
   baseUrl: string;
 
   constructor(private httpClient: HttpClient) {

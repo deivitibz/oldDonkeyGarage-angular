@@ -16,7 +16,19 @@ export class blogComponent implements OnInit {
   async ngOnInit() {
     const respuesta = await this.noticiaService.getAllNoticias();
     console.log(respuesta);
-
+    this.getNoticia(1);
   }
 
-};
+
+  async getNoticia(id) {
+    const response = await this.noticiaService.getNoticia(id);
+    console.log(response);
+
+
+  }
+}
+
+
+
+
+
