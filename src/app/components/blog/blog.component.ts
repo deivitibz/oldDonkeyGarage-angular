@@ -16,10 +16,22 @@ export class blogComponent implements OnInit {
     this.allPosts = [];
   }
 
-  ngOnInit() {
-    this.noticiaService.getNoticia;
-    this.noticiaService.getAllNoticias();
-    console.log(this.noticiaService.getNoticia(4));
+  async ngOnInit() {
+    const respuesta = await this.noticiaService.getAllNoticias();
+    console.log(respuesta);
+    this.getNoticia(1);
   }
 
-};
+
+  async getNoticia(id) {
+    const response = await this.noticiaService.getNoticia(id);
+    console.log(response);
+
+
+  }
+}
+
+
+
+
+

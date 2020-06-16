@@ -6,10 +6,16 @@ import { Noticia } from '../models/noticia.model';
   providedIn: 'root',
 })
 export class NoticiaService {
+
   baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://streaming.zapto.org:3000/api/noticia';
+    this.baseUrl = 'http://streaming.zapto.org:3000/api/noticias';
+  }
+
+
+  getByNoticia(arg0: number): Noticia[] | PromiseLike<Noticia[]> {
+    throw new Error("Method not implemented.");
   }
 
   getNoticia(id) {
