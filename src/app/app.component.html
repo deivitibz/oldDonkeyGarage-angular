@@ -1,4 +1,4 @@
-<app-navegacion *ngIf="router.url !== '/admin'"></app-navegacion>
+<app-navegacion *ngIf="!router.url.includes('/admin')"></app-navegacion>
 <router-outlet></router-outlet>
 <footer *ngIf="router.url !== '/admin'" class="container-fluid bg-donkey">
   <div class="row">

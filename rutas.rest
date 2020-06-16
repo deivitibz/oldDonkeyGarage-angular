@@ -86,3 +86,6 @@ user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImNyZWF0ZWRBdCI
     "email": "david",
     "password": "12345"
 }
+
+###
+GET http://streaming.zapto.org:3000/api/constructor

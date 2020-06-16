@@ -8,6 +8,7 @@ import { ConstructorService } from 'src/app/servicios/constructor.service';
 })
 export class ConstructorComponent implements OnInit {
 
+<<<<<<< HEAD
   constructor(private constructorService: ConstructorService) {
   }
   async ngOnInit() {
@@ -21,5 +22,14 @@ export class ConstructorComponent implements OnInit {
     console.log(res);
 
 
+=======
+  constructor(private constructorService: ConstructorService) { }
+
+  async ngOnInit() {
+
+      const response = await this.constructorService.getAllConstructores();
+      console.log(response);
+
+>>>>>>> featured-admin
   }
 }
