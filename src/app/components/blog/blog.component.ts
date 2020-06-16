@@ -10,16 +10,13 @@ import { Noticia } from 'src/app/models/noticia.model';
 })
 export class blogComponent implements OnInit {
 
-  allPosts: Noticia[];
-
   constructor(private noticiaService: NoticiaService) {
-    this.allPosts = [];
   }
 
-  ngOnInit() {
-    this.noticiaService.getNoticia;
-    this.noticiaService.getAllNoticias();
-    console.log(this.noticiaService.getNoticia(4));
+  async ngOnInit() {
+    const respuesta = await this.noticiaService.getAllNoticias();
+    console.log(respuesta);
+
   }
 
 };

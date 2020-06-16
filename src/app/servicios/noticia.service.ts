@@ -9,7 +9,7 @@ export class NoticiaService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://streaming.zapto.org:3000/api/noticia';
+    this.baseUrl = 'http://streaming.zapto.org:3000/api/noticias';
   }
 
   getNoticia(id) {

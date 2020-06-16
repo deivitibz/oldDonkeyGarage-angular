@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MotocicletasService } from 'src/app/servicios/motocicletas.service';
 
 @Component({
   selector: 'app-moto',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MotoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private motoService: MotocicletasService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const response = await this.motoService.getAllMotos();
+    console.log(response);
+
   }
 
 }

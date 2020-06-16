@@ -35,16 +35,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   async onSubmit($event) {
+    let token = localStorage.getItem('userToken');
+
 
     const response = await this.usuarioService.login(this.form.value);
     console.log(response);
 
     if (response['success']) {
-
-      $("#exampleModal").hide();//ocultamos el modal
-      $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-      $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-      //this.renderer.setAttribute(this.myButton.nativeElement, "data-dismiss", 'modal')
+      this.cierraPopup()
       const token = response['token'];
       localStorage.setItem('userToken', token);
       this.form.reset();

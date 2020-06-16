@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 
 @Injectable({
@@ -15,13 +15,22 @@ export class UsuarioService {
   }
 
   registro(formValues): Promise<any> {
-    return this.httpClient.post(this.baseUrl + '/registro', formValues).toPromise();
+    const options = {
+      headers: new HttpHeaders({
+        "user-token": localStorage.getItem('userToken')
+      })
+    }
+    return this.httpClient.post(this.baseUrl + '/registro', formValues,options).toPromise();
   }
 
   login(formValues): Promise<any> {
     console.log(formValues);
-
-    return this.httpClient.post(this.baseUrl + '/login', formValues).toPromise()
+    const options = {
+      headers: new HttpHeaders({
+        "user-token": localStorage.getItem('userToken')
+      })
+    }
+    return this.httpClient.post(this.baseUrl + '/login', formValues,options).toPromise()
   }
 
 }

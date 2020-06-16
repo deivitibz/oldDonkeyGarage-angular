@@ -52,6 +52,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConstructorComponent } from './components/constructor/constructor.component';
 import { AdminComponent } from './components/dashboard/admin/admin.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { UsuariosComponent } from './components/dashboard/admin/usuarios/usuarios.component';
+import { NoticiasComponent } from './components/dashboard/admin/noticias/noticias.component';
+import { AnunciosComponent } from './components/dashboard/admin/anuncios/anuncios.component';
+import { VideotutorialesComponent } from './components/dashboard/admin/videotutoriales/videotutoriales.component';
+import { MotocicletasComponent } from './components/dashboard/admin/motocicletas/motocicletas.component';
+import { ConstructoresComponent } from './components/dashboard/admin/constructores/constructores.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +80,12 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
     ConstructorComponent,
     AdminComponent,
     NosotrosComponent,
+    UsuariosComponent,
+    NoticiasComponent,
+    AnunciosComponent,
+    VideotutorialesComponent,
+    MotocicletasComponent,
+    ConstructoresComponent,
   ],
   imports: [
     BrowserModule,

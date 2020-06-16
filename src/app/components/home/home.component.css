@@ -1,6 +1,8 @@
 .parallax{
-  background-image: url("https://picsum.photos/id/684/600/400?blur=5");
+  background-image: url("../../../assets/img/paralax-2.jpg");
   padding: 10em 0;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }

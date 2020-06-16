@@ -9,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class carouselComponent implements OnInit {
 
   slides = [
-    {img: "https://picsum.photos/1900/500/?blur"},
-    {img: "https://picsum.photos/1900/500/?blur"},
-    {img: "https://picsum.photos/1900/500/?blur"},
-    {img: "https://picsum.photos/1900/500/?blur"},
-    {img: "https://picsum.photos/1900/500/?blur"},
-    {img: "https://picsum.photos/1900/500/?blur"}
+    {img: "https://picsum.photos/1900/500/"},
+    {img: "https://picsum.photos/1900/500/"},
+    {img: "https://picsum.photos/1900/500/"},
+    {img: "https://picsum.photos/1900/500/"},
+    {img: "https://picsum.photos/1900/500/"},
+    {img: "https://picsum.photos/1900/500/"}
   ];
 
   slideConfig = {
