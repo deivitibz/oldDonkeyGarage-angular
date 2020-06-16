@@ -15,8 +15,15 @@ font-family: 'Source Serif Pro', serif;
   --color-E--color: #EF8A42;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .slick-slide {
   display: block;
@@ -30,24 +37,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 }
 
-.bg-donkey-secondary{
+.bg-donkey-secondary {
   background-color: var(--color-B--color);
 }
 
-hr{
+hr {
   border-top: 2px solid white;
-    width: 35%;
+  width: 35%;
 }
 
 
 
 
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  hr{
+  hr {
     border-top: 4px solid white;
-      width: 10%;
+    width: 10%;
   }
 
 
