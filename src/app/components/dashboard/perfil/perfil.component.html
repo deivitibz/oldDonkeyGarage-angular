@@ -1,53 +1,106 @@
-<div class="container col-6 mx-auto">
-  <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
-    <div class="form-group mt-5">
+<div class="container mx-auto px-4">
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <div class="form-group mt-5 ">
       <div class="text-center">
         <h3>Formulario de Registro</h3>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group col-12 p-0">
 
       <div class="form-group">
         <label for="">Nombre</label>
-        <input type="text" class="form-control" placeholder="Introduzca su nombre" formControlName="name" name="nombre">
+        <input type="text" class="form-control" placeholder="Introduzca su nombre" formControlName="username"
+          name="nombre">
         <small class="form-text text-muted"
-          *ngIf="formulario.controls.name.errors && formulario.controls.name.touched">El nombre debe contener al menos
-          3
-          letras</small>
+          *ngIf="formulario.controls.username.errors && formulario.controls.username.touched">Debe tener al menos 4
+          letras y no más de 16</small>
       </div>
+
       <div class="form-group">
-        <label for="">Apellidos</label>
-        <input type="text" class="form-control" placeholder="Introduzca sus apellidos" formControlName="surname"
-          name="Apellidos">
-        <small class="form-text text-muted"
-          *ngIf="formulario.controls.surname.errors && formulario.controls.surname.touched">El apellido debe contener al
-          menos 3 letras</small>
+        <label for="">Imagen Perfil</label>
+        <input type="text" class="form-control" formControlName="imagenes_usuario" name="imagenes_usuario">
       </div>
+
+      <div class="form-group">
+        <label for="">Dirección</label>
+        <input type="text" class="form-control" placeholder="Calle del labrador, nº4" formControlName="direccion"
+          name="direccion">
+        <small class="form-text text-muted"
+          *ngIf="formulario.controls.direccion.errors && formulario.controls.direccion.touched">Campo
+          obligatorio</small>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-6">
+
+          <label for="">Provincia</label>
+          <select class="form-control" id="provincia" formControlName="provincia" name="provincia">
+            <option value="" selected>Elige una provincia</option>
+          </select>
+          <small class="form-text text-muted"
+            *ngIf="formulario.controls.provincia.errors && formulario.controls.provincia.touched">Debe
+            insertar una provincia</small>
+
+        </div>
+        <div class="form-group col-6">
+          <label for="">Población</label>
+          <select class="form-control" id="localidad" formControlName="localidad" name="localidad">
+            <option value="" selected>Elige una población</option>
+            <small class="form-text text-muted"
+              *ngIf="formulario.controls.localidad.errors && formulario.controls.localidad.touched">Debe
+              insertar una localidad</small>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Constructor</label>
+        <input type="text" class="form-control" formControlName="nombre_constructor" placeholder="Custom Bike"
+          name="nombre_constructor">
+
+        <small class="form-text text-muted"
+          *ngIf="formulario.controls.nombre_constructor.errors && formulario.controls.nombre_constructor.touched">Debe
+          insertar un nombre</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Descripción</label>
+        <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+          placeholder="Introduce el titulo de tu anuncio"></textarea>
+        <small class="form-text text-muted"
+          *ngIf="formulario.controls.descripcion.errors && formulario.controls.descripcion.touched">Debe contener un
+          minimo
+          de 30
+          letras y un máximo de 150</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Persona contacto</label>
+        <input type="text" class="form-control" placeholder="Juan Pérez" formControlName="persona_contacto"
+          name="persona_contacto">
+      </div>
+      <small class="form-text text-muted"
+        *ngIf="formulario.controls.persona_contacto.errors && formulario.controls.persona_contacto.touched">Debe tener
+        un nombre de min 3 letras y max 15</small>
 
       <div class="form-group">
         <label>Móvil</label>
-        <input type="phoneNumber" class="form-control" placeholder="Introduzca un número de teléfono"
-          formControlName="phone" name="Telefono">
+        <input type="phoneNumber" class="form-control" placeholder="Introduzca un teléfono móvil"
+          formControlName="telefono" name="telefono" autocomplete="off">
         <small class="form-text text-muted"
-          *ngIf="formulario.controls.phone.errors && formulario.controls.phone.touched">No es un formato válido</small>
+          *ngIf="formulario.controls.telefono.errors && formulario.controls.telefono.touched">Inserte un número
+          móvil</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Imagen Perfil</label>
+        <input type="text" class="form-control" formControlName="imagenes_constructor" name="imagenes_constructor">
       </div>
 
     </div>
 
-    <div class="row">
-      <div class="form-group col-6">
-        <label>Localidad</label>
-        <input type="text" class="form-control" formControlName="location" name="Localidad"
-          placeholder="Introduzca la localidad a la que pertenece">
-      </div>
-      <div class="form-group col-6">
-        <label>Provicia</label>
-        <input type="text" class="form-control" formControlName="location_Provincia" name="Provincia"
-          placeholder="Introduzca la localidad a la que pertenece">
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!formulario.valid">Enviar
-      Formulario</button>
+    <button type="submit" class="btn btn-primary btn-block my-4 " [disabled]="!formulario.valid">Enviar</button>
 
   </form>
 </div>

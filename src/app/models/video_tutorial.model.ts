@@ -6,6 +6,8 @@ export class Video_tutorial {
   categoria: string[];
   url_video: string;
   premium: boolean;
+  fecha_publicacion: string;
+  usuarios_id: number;
 
   constructor(
     id: number,
@@ -14,7 +16,9 @@ export class Video_tutorial {
     autor: string,
     categoria: string[],
     url_video: string,
-    premium: boolean
+    premium: boolean,
+    fecha_publicacion: string,
+    usuarios_id: number
   ) {
     this.id = id;
     this.titulo = titulo;
@@ -23,5 +27,7 @@ export class Video_tutorial {
     this.categoria = categoria;
     this.url_video = url_video;
     this.premium = premium;
+    this.fecha_publicacion = fecha_publicacion;
+    this.usuarios_id = usuarios_id;
   }
 }

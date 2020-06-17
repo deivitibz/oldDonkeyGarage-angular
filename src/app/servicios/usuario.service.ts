@@ -8,7 +8,7 @@ export class UsuarioService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://localhost:3000/api/usuarios';
+    this.baseUrl = 'http://streaming.zapto.org:3000/api/usuarios';
   }
 
   registro(formValues): Promise<any> {
