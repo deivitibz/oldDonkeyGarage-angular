@@ -1,42 +1,51 @@
 export class Anuncio {
   id: number;
-  usuario: string;
   titulo: string;
   imagenes: string[];
   descripcion: string;
   km: string;
   year: string;
-  tipo_moto: string[];
   provincia: string;
-  precio: number;
+  poblacion: string;
   itv: boolean;
   homologacion: boolean;
+  fecha_publicacion: string;
+  precio: number;
+  marca: string;
+  modelo: string;
+  usuarios_id: string;
 
   constructor(
     id: number,
-    usuario: string,
     titulo: string,
     imagenes: string[],
     descripcion: string,
     km: string,
     year: string,
-    tipo_moto: string[],
     provincia: string,
-    precio: number,
+    poblacion: string,
     itv: boolean,
-    homologacion: boolean
+    homologacion: boolean,
+    fecha_publicacion: string,
+    precio: number,
+    marca: string,
+    modelo: string,
+    usuarios_id: string
   ) {
     this.id = id;
-    this.usuario = usuario;
     this.titulo = titulo;
     this.imagenes = imagenes;
     this.descripcion = descripcion;
     this.km = km;
     this.year = year;
-    this.tipo_moto = tipo_moto;
     this.provincia = provincia;
-    this.precio = precio;
+    this.poblacion = poblacion;
     this.itv = itv;
     this.homologacion = homologacion;
+    this.fecha_publicacion = fecha_publicacion;
+    this.precio = precio;
+    this.marca = marca;
+    this.modelo = modelo;
+    this.usuarios_id = usuarios_id;
   }
 }
