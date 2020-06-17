@@ -16,7 +16,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title m-3">VENDE TU BURRA</h3>
+            <h4 class="modal-title m-3">CREA TU ANUNCIO</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -27,66 +27,45 @@
                 <label for="">Titulo</label>
                 <input type="text" class="form-control" formControlName="titulo" name="titulo"
                   placeholder="Introduce el titulo de tu anuncio">
-                <small class="form-text text-muted"
-                  *ngIf="form.controls.titulo.errors && form.controls.titulo.touched">Debe contener al menos 8
-                  letras</small>
               </div>
               <div class="form-group">
                 <label for="">Descripción</label>
                 <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
                   placeholder="Introduce el titulo de tu anuncio"></textarea>
-                <small class="form-text text-muted"
-                  *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe contener un minimo
-                  de 30
-                  letras y un máximo de 150</small>
               </div>
 
               <div class="row">
                 <div class="form-group col-6">
                   <label>Precio</label>
                   <input type="number" class="form-control" formControlName="precio" name="precio" placeholder="Precio">
-                  <small class="form-text text-muted"
-                    *ngIf="form.controls.precio.errors && form.controls.precio.touched">Debe tener un
-                    precio válido</small>
                 </div>
                 <div class="form-group col-6">
                   <label>KMS</label>
                   <input type="number" class="form-control" formControlName="kms" name="kms" placeholder="Kilometros">
-                  <small class="form-text text-muted" *ngIf="form.controls.kms.errors && form.controls.kms.touched">Debe
-                    tener un kilometraje válido</small>
                 </div>
               </div>
 
               <div class="row">
                 <div class="custom-control custom-checkbox mx-auto col-5">
-                  <input type="checkbox" class="custom-control-input" id="itv" formControlName="itv" name="itv">
+                  <input type="checkbox" checked="false" class="custom-control-input" id="itv" formControlName="itv"
+                    name="itv">
                   <label class="custom-control-label" for="itv">ITV</label>
                 </div>
                 <div class="custom-control custom-checkbox mx-auto col-5">
-                  <input type="checkbox" class="custom-control-input" id="homologacion" formControlName="homologacion"
-                    name="homologacion">
+                  <input type="checkbox" checked="false" class="custom-control-input" id="homologacion"
+                    formControlName="homologacion" name="homologacion">
                   <label class="custom-control-label" for="homologacion">Homologación</label>
                 </div>
               </div>
 
-              <div class="form-group col-12 p-0 mt-2">
-                <label>Año</label>
-                <input type="date" class="form-control" formControlName="year" name="year" placeholder="year">
-                <small class="form-text text-muted" *ngIf="form.controls.year.errors && form.controls.year.touched">Debe
-                  insertar un año</small>
-              </div>
-
-              <div class="row">
+              <div class="row mt-2">
                 <div class="form-group col-6">
                   <label for="">Marca</label>
                   <select (change)="filtrarMarcas(form)" class="form-control" formControlName="marca" name="marca">
                     <option value="" selected>Seleciona una marca</option>
                     <option *ngFor="let marca of marcas" [id]="marca.id" [value]="marca.id">{{marca.name}}</option>
-                  </select>
 
-                  <small class="form-text text-muted"
-                    *ngIf="form.controls.marca.errors && form.controls.marca.touched">Debe
-                    insertar una marca</small>
+                  </select>
                 </div>
                 <div class="form-group col-6">
                   <label for="">Modelo</label>
@@ -96,54 +75,29 @@
                   </select>
                 </div>
 
-<<<<<<< HEAD
                 <div class="row mt-2">
-                <div class="form-group col-6">
-                  <input type="hidden" formControlName="id_provincia" name="id_provincia" *ngFor="let provincia of provincias" [value]="provincia.id">
-                  <label for="">Provincia</label>
-                  <select (change)="getProvincias($event)" class="form-control" id="provincia" formControlName="provincia" name="provincia">
-                    <option value="" selected>Seleciona una provincia</option>
-                    <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia" [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
-                  </select>
-                  <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
-                </div>
-                <div class="form-group col-6">
-                  <label for="">Población</label>
-                  <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion">
-                    <option value="" selected>Seleciona un poblacion</option>
-                    <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}</option>
-                  </select>
-                </div>
-=======
-                <div class="row mx-auto">
                   <div class="form-group col-6">
-
                     <input type="hidden" formControlName="id_provincia" name="id_provincia"
                       *ngFor="let provincia of provincias" [value]="provincia.id">
-
                     <label for="">Provincia</label>
-                    <select (change)="getProvincias(form)" class="form-control" id="provincia"
+                    <select (change)="getProvincias($event)" class="form-control" id="provincia"
                       formControlName="provincia" name="provincia">
-                      <option value="" selected>Elige una provincia</option>
-                      <option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.nm}}</option>
+                      <option value="" selected>Seleciona una provincia</option>
+                      <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
+                        [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
                     </select>
-                    <small class="form-text text-muted"
-                      *ngIf="form.controls.provincia.errors && form.controls.provincia.touched">Debe
-                      insertar una provincia</small>
                     <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
                   </div>
                   <div class="form-group col-6">
                     <label for="">Población</label>
                     <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion">
-                      <option value="" selected>Elige una población</option>
+                      <option value="" selected>Seleciona un poblacion</option>
                       <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
                       </option>
                     </select>
                   </div>
->>>>>>> featured-models
                 </div>
               </div>
-
               <div class="form-group mb-4">
                 <label for="">Tipo de custom</label>
                 <select class="form-control" formControlName="tipoCustom" name="tipoCustom">
@@ -157,11 +111,10 @@
 
                 </select>
               </div>
-
               <div class="row mx-0">
                 <input class="form-control-file" (change)="onFileChange($event)" type="file" value="Enviar"
-                  formControlName="file">
-                <button class="btn btn-primary btn-block mt-4" type="submit" [disabled]="!form.valid">Enviar</button>
+                  formControlName="file" multiple="multiple">
+                <button class="btn btn-primary btn-block mt-4" type="submit">Enviar</button>
               </div>
 
             </form>
