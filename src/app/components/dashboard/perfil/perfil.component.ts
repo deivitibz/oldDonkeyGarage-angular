@@ -92,5 +92,7 @@ export class PerfilComponent implements OnInit {
     const edit = await this.perfilService.editPerfil(id);
     console.log(edit);
   }
-  onSubmit() { }
+  onSubmit() {
+
+  }
 }

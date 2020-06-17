@@ -37,22 +37,16 @@ export class blogComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
-  ngOnInit() { }
-
-
-
-}
 
 
 
 
 
 
-=======
-  onSubmit() {}
 
-  onFileChange() {}
+  onSubmit() { }
+
+  onFileChange() { }
 
   async ngOnInit() {
     const respuesta = await this.noticiaService.getAllNoticias();
@@ -65,4 +59,3 @@ export class blogComponent implements OnInit {
     console.log(response);
   }
 }
->>>>>>> 81935daaa62642ab14ad2ad6b757dec53e7b3ef8
