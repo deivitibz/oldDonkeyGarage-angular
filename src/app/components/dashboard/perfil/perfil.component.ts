@@ -18,15 +18,49 @@ export class PerfilComponent implements OnInit {
 
   constructor(private perfilService: PerfilService) {
     this.formulario = new FormGroup({
-      name: new FormControl(
+      username: new FormControl(
         '',
-        Validators.compose([Validators.required, Validators.minLength(3)])
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^[A-Za-z_][a-z0-9_-]{3,15}$/),
+        ])
       ),
-      surname: new FormControl(
+      email: new FormControl(
         '',
-        Validators.compose([Validators.required, Validators.minLength(3)])
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/),
+        ])
       ),
-      phone: new FormControl(
+      password: new FormControl(''),
+      repeatPassword: new FormControl(''),
+      nombre: new FormControl('', []),
+      direccion: new FormControl('', [Validators.required]),
+      provincia: new FormControl('', [Validators.required]),
+      localidad: new FormControl('', [Validators.required]),
+      nombre_constructor: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^[A-Za-z_][a-z0-9_-]{3,15}$/),
+        ])
+      ),
+      descripcion: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(20),
+          Validators.maxLength(150),
+        ])
+      ),
+      persona_contacto: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^[A-Za-z_][a-z0-9_-]{3,15}$/),
+        ])
+      ),
+      telefono: new FormControl(
         '',
         Validators.compose([
           Validators.required,
@@ -35,8 +69,8 @@ export class PerfilComponent implements OnInit {
           ),
         ]),
       ),
-      location: new FormControl(''),
-      location_Provincia: new FormControl(''),
+      imagenes_usuario: new FormControl('', []),
+      imagenes_constructor: new FormControl('', []),
     });
   }
   async ngOnInit() {

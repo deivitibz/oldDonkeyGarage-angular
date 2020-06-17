@@ -17,6 +17,8 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
 export class anunciosComponent implements OnInit {
   files;
   provincias: string[];
+  provinciasOrder: any[];
+
   poblaciones: string[];
   marcas: any;
   modelos: any;
@@ -34,31 +36,82 @@ export class anunciosComponent implements OnInit {
   ) {
     this.marcas = brands.data;
     this.modelos = models.data;
+
     this.form = new FormGroup({
       id_provincia: new FormControl('', []),
-      titulo: new FormControl('', []),
-      descripcion: new FormControl('', []),
-      provincia: new FormControl('', []),
+      titulo: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(3)])
+      ),
+      file: new FormControl('', []),
+      descripcion: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(150),
+          Validators.minLength(30),
+        ])
+      ),
+      kms: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^\$?\d+(,\d{3})*(\.\d*)?$/),
+        ])
+      ),
+      year: new FormControl('', [Validators.required]),
+      provincia: new FormControl('', [Validators.required]),
       poblacion: new FormControl('', []),
-      precio: new FormControl('', []),
-      marca: new FormControl('', []),
-      kms: new FormControl('', []),
-      modelo: new FormControl('', []),
       itv: new FormControl('', []),
       homologacion: new FormControl('', []),
-      file: new FormControl('', []),
+      precio: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^\$?\d+(,\d{3})*(\.\d*)?$/),
+        ])
+      ),
+      marca: new FormControl('', [Validators.required]),
+      modelo: new FormControl('', []),
       tipoCustom: new FormControl('', []),
     });
 
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
+<<<<<<< HEAD
+    this.provinciasOrder = [];
+    for (let provincia of this.provincias){
+      const provinciaObj: Object = { provincia: provincia['nm'],id: provincia['id']}
+      this.provinciasOrder.push(provinciaObj)
+      //this.provinciasOrder.push({ 'provincia': provincia['nm'].toString(), 'id': parseInt(provincia['id']) })
+    }
+    this.provinciasOrder.sort((a,b)=>{
+      return this.compareStrings(a['provincia'], b['provincia']);
+    })
+    console.log(this.provinciasOrder.sort());
 
+  }
+
+  compareStrings(a, b) {
+    // Assuming you want case-insensitive comparison
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+
+    return (a < b) ? -1 : (a > b) ? 1 : 0;
+=======
+>>>>>>> featured-models
   }
 
   async ngOnInit() {
     const response = await this.anuncioService.getAnuncios();
-    console.log(response);
+<<<<<<< HEAD
+
+
 /*     if (response['error']) {
+=======
+    console.log(response);
+    /*     if (response['error']) {
+>>>>>>> featured-models
       this.router.navigate([]);
     } else {
       this.arrAnuncios.push(response)
@@ -82,34 +135,41 @@ export class anunciosComponent implements OnInit {
   onSubmitFormulario() {
     //this.anuncioService.addImages(this.files, this.form);
     console.log(this.form.value);
-
-
-
   }
 
   onFileChange($event) {
     this.files = $event.target.files;
   }
 
-  getProvincias(form){
+<<<<<<< HEAD
+  getProvincias($event){
     this.filtroProvincias = [];
-    console.log(this.poblaciones);
-
     this.poblaciones.filter((result)=>{
 
 
-      let idProvincia = this.form.value['provincia'];
-      let idPoblacion = result['id'];
-      idPoblacion = idPoblacion.substr(0,2)
+      let idProvincia = $event.target.options[$event.target.options['selectedIndex']].dataset.id;
+=======
+  getProvincias(form) {
+    this.filtroProvincias = [];
+    console.log(this.poblaciones);
 
+    this.poblaciones.filter((result) => {
+      let idProvincia = this.form.value['provincia'];
+>>>>>>> featured-models
+      let idPoblacion = result['id'];
+      idPoblacion = idPoblacion.substr(0, 2);
+
+<<<<<<< HEAD
       if (idPoblacion === idProvincia){
         this.filtroProvincias.push(result)
+        //console.log(result);
+=======
+      if (idPoblacion === idProvincia) {
+        this.filtroProvincias.push(result);
         console.log(result);
+>>>>>>> featured-models
       }
-
-
-    })
+    });
     //console.log(this.filtroProvincias);
-
   }
 }

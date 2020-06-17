@@ -1,16 +1,16 @@
+@import url('../../../styles.css');
 
-div.row{
-  border: cadetblue 4px solid;
-  border-style: ridge;
-  padding: 15px;
-  width: 600px;
-  display: flex;
-  align-items: center;
+hr {
+  border-color: VAR(--color-A--color);
+  margin-bottom: 30px;
+  width: 40%;
 }
-div.container{
 
-    align-items: center;
+.modal-header {
+  border-bottom: none;
+  padding-bottom: 0;
 }
- #categoria{
-     margin-top: 12px;
- }
+
+.modal-footer {
+  border-top: none;
+}

@@ -1,20 +1,118 @@
 <div class="container">
   <div class="row">
-    <div class="col-4">
-      <h4 class="card-title">Autor:</h4>
-      <h5 class="card-title">Titulo:</h5>
-      <img class="img-fluid " src="https://www.thispersondoesnotexist.com/image" alt="">
-      <h5 id="categoria" class="card-title">Categoria:</h5>
-      <h5 class="card-title">Descripcion:</h5>
-
-      <h5 class="card-title">Estado:</h5>
-      <h5 class="card-title">Fecha:</h5>
-
-
-
+    <div class="col-12 text-center mt-4">
+      <h2>HABLEMOS DE BURRAS</h2>
+      <hr>
     </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-block col-8 mx-auto" data-toggle="modal"
+      data-target="#modalAnuncio">
+      CREAR UN POST
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="modalAnuncio" tabindex="-1" role="dialog" aria-labelledby="modalAnuncio"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title m-3">¿QUÉ TE CUENTAS?</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3 pt-1">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="">Titulo</label>
+                <input type="text" class="form-control" formControlName="titulo" name="titulo"
+                  placeholder="Introduce el titulo de tu anuncio">
+                <small class="form-text text-muted"
+                  *ngIf="formulario.controls.titulo.errors && formulario.controls.titulo.touched">Debe contener al menos
+                  10
+                  letras</small>
+              </div>
+
+              <div class="form-group">
+                <label for="">Imágen</label>
+                <input type="text" class="form-control" formControlName="imagen" name="imagen">
+
+              </div>
+
+              <div class="form-group">
+                <label for="">Descripción</label>
+                <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+                  placeholder="Introduce el titulo de tu anuncio"></textarea>
+                <small class="form-text text-muted"
+                  *ngIf="formulario.controls.descripcion.errors && formulario.controls.descripcion.touched">Debe
+                  contener un minimo
+                  de 100
+                  letras y un máximo de 1000</small>
+              </div>
+
+              <div class="form-group">
+                <label for="">Autor</label>
+                <input type="text" class="form-control" formControlName="autor" name="autor" placeholder="@juan_camus">
+                <small class="form-text text-muted"
+                  *ngIf="formulario.controls.autor.errors && formulario.controls.autor.touched">Debe contener al menos 3
+                  letras</small>
+              </div>
+
+              <div class="form-group mb-4">
+                <label for="">Categoría</label>
+                <select class="form-control" formControlName="categoria" name="categoria">
+                  <option value="">Elija una categoría</option>
+                  <option value="">Mecánica</option>
+                  <option value="">Eléctricidad</option>
+                  <option value="">Pintura</option>
+                  <option value="">Reparación</option>
+                  <option value="">Consejos</option>
+                  <option value="">Homologaciones</option>
+                  <option value="">Noticias</option>
+                </select>
+
+
+              </div>
+
+              <div class="row mx-0">
+
+                <button class="btn btn-primary btn-block " type="submit" [disabled]="!formulario.valid">Enviar</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="mx-auto col-10 col-md-6 col-lg-4 pt-3">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary">LIKE</button>
+          <button mat-flat-button color="accent">SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+
+
+
   </div>
 
 </div>
-
-<app-moto></app-moto>
