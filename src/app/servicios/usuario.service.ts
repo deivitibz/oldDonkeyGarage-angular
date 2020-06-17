@@ -23,14 +23,11 @@ export class UsuarioService {
   }
 
   login(formValues): Promise<any> {
-    console.log(formValues);
-    const options = {
-      headers: new HttpHeaders({
-        'user-token': localStorage.getItem('userToken'),
-      }),
-    };
+    //console.log(formValues);
     return this.httpClient
-      .post(this.baseUrl + '/login', formValues, options)
+      .post(this.baseUrl + '/login', formValues)
       .toPromise();
   }
+
+
 }

@@ -1,9 +1,8 @@
 GET http://localhost:3000/api/usuarios
 user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImNyZWF0ZWRBdCI6MTU5MjI0MzAwOSwiZXhwaXJlZEF0IjoxNTkyMjQzOTA5LCJpYXQiOjE1OTIyNDMwMDl9.SSbJp8HxMXxtAjIPzWA78w1ydT5oVXqeosUR8B_N0QI
-<<<<<<< HEAD
+
+###
 GET http://streaming.zapto.org:3000/api/anuncios
-=======
->>>>>>> featured-models
 
 ###
 
@@ -41,10 +40,8 @@ GET http://streaming.zapto.org:3000/api/noticias/1
 
 ### mostrar noticia
 
-<<<<<<< HEAD
 GET http://streaming.zapto.org:3000/api/motos
-=======
->>>>>>> featured-models
+###
 GET http://streaming.zapto.org:3000/api/noticias
 
 ### mostrar todas noticias
@@ -85,7 +82,6 @@ user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImNyZWF0ZWRBdCI
 {
     "email": "david",
     "password": "12345"
-<<<<<<< HEAD
 }
 
 ###
@@ -102,6 +98,17 @@ Content-Type: application/json
   "username": "deivit",
   "password": "deivit"
 }
-=======
 }
->>>>>>> featured-models
+
+###
+POST http://streaming.zapto.org:3000/api/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "david@david.es",
+  "password": "12345"
+}
+
+###
+GET http://streaming.zapto.org:3000/api/usuarios/check
+user-token:
