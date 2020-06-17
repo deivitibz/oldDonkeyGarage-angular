@@ -22,6 +22,7 @@ import { NoticiasComponent } from './components/dashboard/admin/noticias/noticia
 import { AnunciosComponent } from './components/dashboard/admin/anuncios/anuncios.component';
 import { VideotutorialesComponent } from './components/dashboard/admin/videotutoriales/videotutoriales.component';
 import { MotocicletasComponent } from './components/dashboard/admin/motocicletas/motocicletas.component';
+import { ConstructoresComponent } from './components/dashboard/admin/constructores/constructores.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -45,6 +46,7 @@ const routes: Routes = [
       { path: 'noticias', component: NoticiasComponent},
       { path: 'anuncios', component: AnunciosComponent},
       { path: 'videotutoriales', component: VideotutorialesComponent},
+      { path: 'constructores', component: ConstructoresComponent},
       { path: 'motocicletas', component: MotocicletasComponent}
     ] },
   { path: '**', redirectTo: '/error404' }

@@ -19,8 +19,8 @@
 
 <div class="container-fluid">
   <div class="row">
-
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="col-2 p-0 m-0">
+    <nav id="sidebarMenu" class="col-12 d-md-block bg-light sidebar collapse p-0">
       <div class="sidebar-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -101,10 +101,14 @@
         </ul>
       </div>
     </nav>
-
   </div>
-  <router-outlet></router-outlet>
+  <div class="col-10 bg-donkey-light">
+    <!-- <app-admin-noticias></app-admin-noticias> -->
+    <router-outlet></router-outlet>
+  </div>
+  </div>
 </div>
+
 
 
 
