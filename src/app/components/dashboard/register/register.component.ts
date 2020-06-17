@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async onSubmit() {
     const response = await this.userService.registro(this.formulario.value);

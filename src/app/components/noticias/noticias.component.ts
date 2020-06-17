@@ -50,12 +50,12 @@ export class noticiasComponent implements OnInit {
     console.log('beforeChange');
   }
 
-  constructor(private noticiasService: NoticiaService) {}
+  constructor(private noticiasService: NoticiaService) { }
 
   async ngOnInit() {
     const respuesta = await this.noticiasService.getAllNoticias();
     //console.log(respuesta);
-    this.getNoticia(2);
+    // this.getNoticia(2);
   }
   async getNoticia(id) {
     const resp = await this.noticiasService.getNoticia(id);

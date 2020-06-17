@@ -13,20 +13,12 @@ export class blogComponent implements OnInit {
   constructor(private noticiaService: NoticiaService) {
   }
 
-  async ngOnInit() {
-    const respuesta = await this.noticiaService.getAllNoticias();
-    console.log(respuesta);
-    this.getNoticia(1);
-  }
+  ngOnInit() { }
 
 
-  async getNoticia(id) {
-    const response = await this.noticiaService.getNoticia(id);
-    console.log(response);
 
-
-  }
 }
+
 
 
 

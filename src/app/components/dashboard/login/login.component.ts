@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild  } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   valid: boolean;
 
   constructor(
-        private router: Router,
-        private usuarioService: UsuarioService,
-        private renderer: Renderer2
-        ) {
+    private router: Router,
+    private usuarioService: UsuarioService,
+    private renderer: Renderer2
+  ) {
 
 
 
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async onSubmit($event) {
     let token = localStorage.getItem('userToken');
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       this.form.reset();
       this.router.navigate(['dashboard']);
 
-    } else if ( response['error']) {
+    } else if (response['error']) {
       this.form.reset();
       this.valid = false;
     }
