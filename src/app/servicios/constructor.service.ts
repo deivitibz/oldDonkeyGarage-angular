@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Constructor } from '../models/constructor.model';
+import { Usuario } from '../models/usuario_perfil.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,8 @@ export class ConstructorService {
     return this.httpClient.get(this.baseUrl).toPromise();
   }
 
-  newConstructor(constructor: Constructor) {
-    return this.httpClient.post(this.baseUrl, constructor).toPromise();
+  newConstructor(usuario: Usuario) {
+    return this.httpClient.post(this.baseUrl, usuario).toPromise();
   }
 
   deleteConstructor(id) {
