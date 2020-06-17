@@ -47,11 +47,11 @@
 
               <div class="row">
                 <div class="custom-control custom-checkbox mx-auto col-5">
-                  <input type="checkbox" class="custom-control-input" id="itv" formControlName="itv" name="itv">
+                  <input type="checkbox" checked="false" class="custom-control-input" id="itv" formControlName="itv" name="itv">
                   <label class="custom-control-label" for="itv">ITV</label>
                 </div>
                 <div class="custom-control custom-checkbox mx-auto col-5">
-                  <input type="checkbox" class="custom-control-input" id="homologacion" formControlName="homologacion"
+                  <input type="checkbox" checked="false" class="custom-control-input" id="homologacion" formControlName="homologacion"
                     name="homologacion">
                   <label class="custom-control-label" for="homologacion">Homologación</label>
                 </div>
@@ -108,7 +108,7 @@
               </div>
               <div class="row mx-0">
                 <input class="form-control-file" (change)="onFileChange($event)" type="file" value="Enviar"
-                  formControlName="file">
+                  formControlName="file" multiple="multiple">
                 <button class="btn btn-primary btn-block mt-4" type="submit">Enviar</button>
               </div>
 

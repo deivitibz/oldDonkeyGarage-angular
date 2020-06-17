@@ -15,7 +15,7 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
   styleUrls: ['./anuncios.component.css'],
 })
 export class anunciosComponent implements OnInit {
-  files;
+  files: string[];
   provincias: string[];
   provinciasOrder: any[];
 
@@ -34,6 +34,7 @@ export class anunciosComponent implements OnInit {
     private http: HttpClient,
     private router: Router
   ) {
+
     this.marcas = brands.data;
     this.modelos = models.data;
     this.form = new FormGroup({
@@ -51,7 +52,7 @@ export class anunciosComponent implements OnInit {
       file: new FormControl('', []),
       tipoCustom: new FormControl('', []),
     });
-
+    this.files = [];
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
     this.provinciasOrder = [];
@@ -102,6 +103,8 @@ export class anunciosComponent implements OnInit {
 
   onSubmitFormulario() {
     //this.anuncioService.addImages(this.files, this.form);
+
+    // nombre del archivo
     console.log(this.form.value);
 
 
@@ -109,7 +112,9 @@ export class anunciosComponent implements OnInit {
   }
 
   onFileChange($event) {
-    this.files = $event.target.files;
+    this.files.push($event.target.files);
+    console.log(this.files);
+
   }
 
   getProvincias($event){
@@ -123,12 +128,8 @@ export class anunciosComponent implements OnInit {
 
       if (idPoblacion === idProvincia){
         this.filtroProvincias.push(result)
-        //console.log(result);
       }
-
-
     })
-    //console.log(this.filtroProvincias);
 
   }
 }
