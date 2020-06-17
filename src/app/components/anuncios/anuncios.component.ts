@@ -34,31 +34,54 @@ export class anunciosComponent implements OnInit {
   ) {
     this.marcas = brands.data;
     this.modelos = models.data;
+
     this.form = new FormGroup({
       id_provincia: new FormControl('', []),
-      titulo: new FormControl('', []),
-      descripcion: new FormControl('', []),
-      provincia: new FormControl('', []),
+      titulo: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(3)])
+      ),
+      file: new FormControl('', []),
+      descripcion: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(150),
+          Validators.minLength(30),
+        ])
+      ),
+      kms: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^\$?\d+(,\d{3})*(\.\d*)?$/),
+        ])
+      ),
+      year: new FormControl('', [Validators.required]),
+      provincia: new FormControl('', [Validators.required]),
       poblacion: new FormControl('', []),
-      precio: new FormControl('', []),
-      marca: new FormControl('', []),
-      kms: new FormControl('', []),
-      modelo: new FormControl('', []),
       itv: new FormControl('', []),
       homologacion: new FormControl('', []),
-      file: new FormControl('', []),
+      precio: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^\$?\d+(,\d{3})*(\.\d*)?$/),
+        ])
+      ),
+      marca: new FormControl('', [Validators.required]),
+      modelo: new FormControl('', []),
       tipoCustom: new FormControl('', []),
     });
 
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
-
   }
 
   async ngOnInit() {
     const response = await this.anuncioService.getAnuncios();
     console.log(response);
-/*     if (response['error']) {
+    /*     if (response['error']) {
       this.router.navigate([]);
     } else {
       this.arrAnuncios.push(response)
@@ -82,34 +105,26 @@ export class anunciosComponent implements OnInit {
   onSubmitFormulario() {
     //this.anuncioService.addImages(this.files, this.form);
     console.log(this.form.value);
-
-
-
   }
 
   onFileChange($event) {
     this.files = $event.target.files;
   }
 
-  getProvincias(form){
+  getProvincias(form) {
     this.filtroProvincias = [];
     console.log(this.poblaciones);
 
-    this.poblaciones.filter((result)=>{
-
-
+    this.poblaciones.filter((result) => {
       let idProvincia = this.form.value['provincia'];
       let idPoblacion = result['id'];
-      idPoblacion = idPoblacion.substr(0,2)
+      idPoblacion = idPoblacion.substr(0, 2);
 
-      if (idPoblacion === idProvincia){
-        this.filtroProvincias.push(result)
+      if (idPoblacion === idProvincia) {
+        this.filtroProvincias.push(result);
         console.log(result);
       }
-
-
-    })
+    });
     //console.log(this.filtroProvincias);
-
   }
 }
