@@ -17,6 +17,8 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
 export class anunciosComponent implements OnInit {
   files;
   provincias: string[];
+  provinciasOrder: any[];
+
   poblaciones: string[];
   marcas: any;
   modelos: any;
@@ -52,12 +54,31 @@ export class anunciosComponent implements OnInit {
 
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
+    this.provinciasOrder = [];
+    for (let provincia of this.provincias){
+      const provinciaObj: Object = { provincia: provincia['nm'],id: provincia['id']}
+      this.provinciasOrder.push(provinciaObj)
+      //this.provinciasOrder.push({ 'provincia': provincia['nm'].toString(), 'id': parseInt(provincia['id']) })
+    }
+    this.provinciasOrder.sort((a,b)=>{
+      return this.compareStrings(a['provincia'], b['provincia']);
+    })
+    console.log(this.provinciasOrder.sort());
 
+  }
+
+  compareStrings(a, b) {
+    // Assuming you want case-insensitive comparison
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+
+    return (a < b) ? -1 : (a > b) ? 1 : 0;
   }
 
   async ngOnInit() {
     const response = await this.anuncioService.getAnuncios();
-    console.log(response);
+
+
 /*     if (response['error']) {
       this.router.navigate([]);
     } else {
@@ -91,20 +112,18 @@ export class anunciosComponent implements OnInit {
     this.files = $event.target.files;
   }
 
-  getProvincias(form){
+  getProvincias($event){
     this.filtroProvincias = [];
-    console.log(this.poblaciones);
-
     this.poblaciones.filter((result)=>{
 
 
-      let idProvincia = this.form.value['provincia'];
+      let idProvincia = $event.target.options[$event.target.options['selectedIndex']].dataset.id;
       let idPoblacion = result['id'];
       idPoblacion = idPoblacion.substr(0,2)
 
       if (idPoblacion === idProvincia){
         this.filtroProvincias.push(result)
-        console.log(result);
+        //console.log(result);
       }
 
 

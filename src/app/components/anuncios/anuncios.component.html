@@ -78,9 +78,9 @@
                 <div class="form-group col-6">
                   <input type="hidden" formControlName="id_provincia" name="id_provincia" *ngFor="let provincia of provincias" [value]="provincia.id">
                   <label for="">Provincia</label>
-                  <select (change)="getProvincias(form)" class="form-control" id="provincia" formControlName="provincia" name="provincia">
+                  <select (change)="getProvincias($event)" class="form-control" id="provincia" formControlName="provincia" name="provincia">
                     <option value="" selected>Seleciona una provincia</option>
-                    <option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.nm}}</option>
+                    <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia" [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
                   </select>
                   <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
                 </div>
