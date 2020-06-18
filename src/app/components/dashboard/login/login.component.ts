@@ -45,7 +45,9 @@ export class LoginComponent implements OnInit {
 
       const response = await this.usuarioService.login(this.form.value)
       const token = response.token;
-      if (typeof token !== 'undefined') {
+      console.log(response);
+
+      if (typeof token !== 'undefined' || token === '') {
         localStorage.setItem('user-token', token)
         console.log('se a añadido el token');
         this.cierraPopup();
