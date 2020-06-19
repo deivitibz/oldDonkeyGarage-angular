@@ -8,13 +8,16 @@ import { ConstructorService } from '../../servicios/constructor.service';
 })
 export class ConstructorComponent implements OnInit {
 
-  constructor(private constructorService: ConstructorService) { }
+  allConstructor: any[];
+  constructor(private constructorService: ConstructorService) {
+    this.allConstructor = [];
+  }
 
   async ngOnInit() {
 
     const response = await this.constructorService.getAllConstructores();
-    console.log(response);
-    this.getConstructor(1)
+    this.allConstructor.push(response);
+
   }
 
   async getConstructor(id) {
