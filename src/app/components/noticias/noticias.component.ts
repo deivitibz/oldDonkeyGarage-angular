@@ -7,6 +7,8 @@ import { NoticiaService } from 'src/app/servicios/noticia.service';
   styleUrls: ['./noticias.component.css'],
 })
 export class noticiasComponent implements OnInit {
+  allNoticias: any[];
+
   slides = [
     { img: 'http://placehold.it/350x150/000000' },
     { img: 'http://placehold.it/350x150/111111' },
@@ -50,13 +52,16 @@ export class noticiasComponent implements OnInit {
     console.log('beforeChange');
   }
 
-  constructor(private noticiasService: NoticiaService) {}
+  constructor(private noticiasService: NoticiaService) {
+    this.allNoticias = [];
+  }
 
   async ngOnInit() {
-    const respuesta = await this.noticiasService.getAllNoticias();
+    const response = await this.noticiasService.getAllNoticias();
+    this.allNoticias.push(response);
     //console.log(respuesta);
-    this.getNoticia(2);
   }
+
   async getNoticia(id) {
     const resp = await this.noticiasService.getNoticia(id);
     //console.log(resp);

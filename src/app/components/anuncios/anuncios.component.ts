@@ -15,7 +15,7 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
   styleUrls: ['./anuncios.component.css'],
 })
 export class anunciosComponent implements OnInit {
-  files;
+  files: string[];
   provincias: string[];
   provinciasOrder: any[];
 
@@ -25,7 +25,7 @@ export class anunciosComponent implements OnInit {
   filtroModelos: any[];
   filtroProvincias: any[];
 
-  arrAnuncios: any[];
+  allAnuncios: any[];
 
   form: FormGroup;
 
@@ -34,62 +34,41 @@ export class anunciosComponent implements OnInit {
     private http: HttpClient,
     private router: Router
   ) {
+    this.allAnuncios = [];
+
     this.marcas = brands.data;
     this.modelos = models.data;
-
     this.form = new FormGroup({
       id_provincia: new FormControl('', []),
-      titulo: new FormControl(
-        '',
-        Validators.compose([Validators.required, Validators.minLength(3)])
-      ),
-      file: new FormControl('', []),
-      descripcion: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.maxLength(150),
-          Validators.minLength(30),
-        ])
-      ),
-      kms: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(/^\$?\d+(,\d{3})*(\.\d*)?$/),
-        ])
-      ),
-      year: new FormControl('', [Validators.required]),
-      provincia: new FormControl('', [Validators.required]),
+      titulo: new FormControl('', []),
+      descripcion: new FormControl('', []),
+      provincia: new FormControl('', []),
       poblacion: new FormControl('', []),
+      precio: new FormControl('', []),
+      marca: new FormControl('', []),
+      kms: new FormControl('', []),
+      modelo: new FormControl('', []),
       itv: new FormControl('', []),
       homologacion: new FormControl('', []),
-      precio: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(/^\$?\d+(,\d{3})*(\.\d*)?$/),
-        ])
-      ),
-      marca: new FormControl('', [Validators.required]),
-      modelo: new FormControl('', []),
+      file: new FormControl('', []),
       tipoCustom: new FormControl('', []),
     });
-
+    this.files = [];
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
-<<<<<<< HEAD
     this.provinciasOrder = [];
-    for (let provincia of this.provincias){
-      const provinciaObj: Object = { provincia: provincia['nm'],id: provincia['id']}
-      this.provinciasOrder.push(provinciaObj)
+    for (let provincia of this.provincias) {
+      const provinciaObj: Object = {
+        provincia: provincia['nm'],
+        id: provincia['id'],
+      };
+      this.provinciasOrder.push(provinciaObj);
       //this.provinciasOrder.push({ 'provincia': provincia['nm'].toString(), 'id': parseInt(provincia['id']) })
     }
-    this.provinciasOrder.sort((a,b)=>{
+    this.provinciasOrder.sort((a, b) => {
       return this.compareStrings(a['provincia'], b['provincia']);
-    })
+    });
     console.log(this.provinciasOrder.sort());
-
   }
 
   compareStrings(a, b) {
@@ -97,26 +76,20 @@ export class anunciosComponent implements OnInit {
     a = a.toLowerCase();
     b = b.toLowerCase();
 
-    return (a < b) ? -1 : (a > b) ? 1 : 0;
-=======
->>>>>>> featured-models
+    return a < b ? -1 : a > b ? 1 : 0;
   }
 
   async ngOnInit() {
     const response = await this.anuncioService.getAnuncios();
-<<<<<<< HEAD
+    this.allAnuncios.push(response);
+    console.log(this.allAnuncios);
 
-
-/*     if (response['error']) {
-=======
-    console.log(response);
     /*     if (response['error']) {
->>>>>>> featured-models
-      this.router.navigate([]);
-    } else {
-      this.arrAnuncios.push(response)
-      console.log(response);
-    } */
+          this.router.navigate([]);
+        } else {
+          this.arrAnuncios.push(response)
+          console.log(response);
+        } */
   }
 
   filtrarMarcas(form) {
@@ -134,42 +107,28 @@ export class anunciosComponent implements OnInit {
 
   onSubmitFormulario() {
     //this.anuncioService.addImages(this.files, this.form);
+
+    // nombre del archivo
     console.log(this.form.value);
   }
 
   onFileChange($event) {
-    this.files = $event.target.files;
+    this.files.push($event.target.files);
+    console.log(this.files);
   }
 
-<<<<<<< HEAD
-  getProvincias($event){
+  getProvincias($event) {
     this.filtroProvincias = [];
-    this.poblaciones.filter((result)=>{
-
-
-      let idProvincia = $event.target.options[$event.target.options['selectedIndex']].dataset.id;
-=======
-  getProvincias(form) {
-    this.filtroProvincias = [];
-    console.log(this.poblaciones);
-
     this.poblaciones.filter((result) => {
-      let idProvincia = this.form.value['provincia'];
->>>>>>> featured-models
+      let idProvincia =
+        $event.target.options[$event.target.options['selectedIndex']].dataset
+          .id;
       let idPoblacion = result['id'];
       idPoblacion = idPoblacion.substr(0, 2);
 
-<<<<<<< HEAD
-      if (idPoblacion === idProvincia){
-        this.filtroProvincias.push(result)
-        //console.log(result);
-=======
       if (idPoblacion === idProvincia) {
         this.filtroProvincias.push(result);
-        console.log(result);
->>>>>>> featured-models
       }
     });
-    //console.log(this.filtroProvincias);
   }
 }
