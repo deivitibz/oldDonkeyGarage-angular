@@ -19,7 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // modulo slick carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -60,6 +60,9 @@ import { AnunciosComponent } from './components/dashboard/admin/anuncios/anuncio
 import { VideotutorialesComponent } from './components/dashboard/admin/videotutoriales/videotutoriales.component';
 import { MotocicletasComponent } from './components/dashboard/admin/motocicletas/motocicletas.component';
 import { ConstructoresComponent } from './components/dashboard/admin/constructores/constructores.component';
+
+/* import { UsuarioDashComponent } from './components/dashboard/usuario/usuario.component';
+import { ConstructorDashComponent } from './components/dashboard/constructor/constructor.component'; */
 
 @NgModule({
   declarations: [
@@ -119,4 +122,4 @@ import { ConstructoresComponent } from './components/dashboard/admin/constructor
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

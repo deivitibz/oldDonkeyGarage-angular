@@ -4,12 +4,12 @@
       <!-- MENU LATERAL -->
       <div class="nav sidebar">
         <div class="menu-buttons">
-          <a href="/dashboard"><i class="fas fa-user-astronaut    "></i></a>
-          <p style="font-size: 14px;">TEXTO</p>
+          <a href="" [routerLink]="['usuario', 'perfil']"><i class="fas fa-user-astronaut"></i></a>
+          <p style="font-size: 14px;">USUARIO</p>
         </div>
         <div class="menu-buttons">
-          <a href=""><i class="fa fa-user-secret" aria-hidden="true"></i></a>
-          <p style="font-size: 14px;">TEXTO</p>
+          <a href="" [routerLink]="['constructor', 'perfil']"><i class="fa fa-user-secret"></i></a>
+          <p style="font-size: 14px;">ANUNCIO</p>
         </div>
         <div class="menu-buttons">
           <a href=""><i class="fas fa-poo    "></i></a>
@@ -28,25 +28,14 @@
           <p style="font-size: 14px;">TEXTO</p>
         </div>
       </div>
-
-
-      <!-- <ul class="list-group" style="height: 100vh; width: 90px;" class="d-flex justify-content-around flex-column bg-primary">
-          <li class="">First item</li>
-          <li class="">Second item</li>
-          <li class="">Third item</li>
-          <li class="">First item</li>
-          <li class="">Second item</li>
-          <li class="">Third item</li>
-          <li class="">First item</li>
-          <li class="">Second item</li>
-          <li class="">Third item</li>
-        </ul> -->
-
     </div>
     <div class="col-12 col-sm-12 col-md-11">
       <!-- CONTENIDO -->
-
-      <div class="container mt-5">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<!-- <div class="container mt-5">
         <div class="row">
           <div class="col-sm-10">
             <h3>Tus anuncios publicados</h3>
@@ -58,6 +47,7 @@
           </div>
         </div>
         <!-- navegacion anuncios -->
+<!--
         <div class="row my-4">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
@@ -73,10 +63,10 @@
           </nav>
 
         </div>
-      </div>
+      </div> -->
 
-      <!-- TABLA ANUNCIOS -->
-
+<!-- TABLA ANUNCIOS -->
+<!--
       <div class="container">
         <div class="row">
           <table class="table table-responsive-sm">
@@ -113,13 +103,14 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
 <section class="footer">
   <div class="row m-0">
     <!-- MENU BOTTOM -->
     <div class="nav bottom-sidebar">
       <div class="menu-buttons">
-        <a href="/dashboard"><i class="fas fa-user-astronaut    "></i></a>
+        <a href="/home"><i class="fas fa-user-astronaut    "></i></a>
         <p style="font-size: 10px;">INICIO</p>
       </div>
       <div class="menu-buttons">
@@ -127,7 +118,7 @@
         <p style="font-size: 10px;">FAVORITOS</p>
       </div>
       <div class="menu-buttons">
-        <a href=""><i class="fas fa-poo    "></i></a>
+        <a href="" [routerLink]="['constructor','perfil']"><i class="fas fa-poo    "></i></a>
         <p style="font-size: 10px;">SUBIR</p>
       </div>
       <div class="menu-buttons">
@@ -135,9 +126,10 @@
         <p style="font-size: 10px;">MENSAJES</p>
       </div>
       <div class="menu-buttons">
-        <a href=""><i class="fab fa-slideshare"></i></a>
+        <a href="" [routerLink]="['usuario', 'perfil']"><i class="fab fa-slideshare"></i></a>
         <p style="font-size: 10px;">MI PERFIL</p>
       </div>
     </div>
   </div>
+
 </section>

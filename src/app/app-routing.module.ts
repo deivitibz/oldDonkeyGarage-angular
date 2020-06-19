@@ -19,6 +19,7 @@ import { PerfilComponent } from './components/dashboard/perfil/perfil.component'
 import { AdminComponent } from './components/dashboard/admin/admin.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { ConstructorComponent } from './components/constructor/constructor.component';
+
 // admin
 import { UsuariosComponent } from './components/dashboard/admin/usuarios/usuarios.component';
 import { NoticiasComponent } from './components/dashboard/admin/noticias/noticias.component';
@@ -26,6 +27,12 @@ import { AnunciosComponent } from './components/dashboard/admin/anuncios/anuncio
 import { VideotutorialesComponent } from './components/dashboard/admin/videotutoriales/videotutoriales.component';
 import { MotocicletasComponent } from './components/dashboard/admin/motocicletas/motocicletas.component';
 import { ConstructoresComponent } from './components/dashboard/admin/constructores/constructores.component';
+
+// dashboard
+import { UsuarioDashComponent } from './components/dashboard/usuario/usuario.component';
+import { UsuarioDashPerfilComponent } from './components/dashboard/usuario/perfil/perfil.component';
+import { ConstructorDashComponent } from './components/dashboard/constructor/constructor.component';
+import { ConstructorDashPerfilComponent } from './components/dashboard/constructor/perfil/perfil.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -39,19 +46,36 @@ const routes: Routes = [
   { path: 'carousel', component: carouselComponent },
   { path: 'moto', component: MotoComponent },
   { path: 'noticias', component: noticiasComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'dashboard', component: DashboardComponent,
+    children: [
+      {
+        path: 'constructor', component: ConstructorDashComponent,
+        children: [
+          { path: 'perfil', component: ConstructorDashPerfilComponent }
+        ]
+      },
+      {
+        path: 'usuario', component: UsuarioDashComponent,
+        children: [
+          { path: 'perfil', component: UsuarioDashPerfilComponent }
+        ]
+      }
+    ]
+  },
   { path: 'registro', component: RegisterComponent },
   { path: 'error404', component: Error404Component },
   { path: 'perfil', component: PerfilComponent },
   { path: 'admin', component: AdminComponent, canActivate: [LoginGuard],
     children: [
-      { path: 'usuarios', component: UsuariosComponent},
-      { path: 'noticias', component: NoticiasComponent},
-      { path: 'anuncios', component: AnunciosComponent},
-      { path: 'videotutoriales', component: VideotutorialesComponent},
-      { path: 'constructores', component: ConstructoresComponent},
-      { path: 'motocicletas', component: MotocicletasComponent}
-    ] },
+      { path: 'usuarios', component: UsuariosComponent },
+      { path: 'noticias', component: NoticiasComponent },
+      { path: 'anuncios', component: AnunciosComponent },
+      { path: 'videotutoriales', component: VideotutorialesComponent },
+      { path: 'constructores', component: ConstructoresComponent },
+      { path: 'motocicletas', component: MotocicletasComponent }
+    ]
+  },
   { path: '**', redirectTo: '/error404' }
 ];
 
@@ -59,4 +83,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {useHash: true})],
 exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
