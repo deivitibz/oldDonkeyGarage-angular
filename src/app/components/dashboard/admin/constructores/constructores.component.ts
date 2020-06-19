@@ -7,10 +7,15 @@ import { ConstructorService } from 'src/app/servicios/constructor.service';
   styleUrls: ['./constructores.component.css']
 })
 export class ConstructoresComponent implements OnInit {
+  dtOptions: DataTables.Settings = {};
 
   constructor(private constructorService: ConstructorService) { }
 
   async ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
 
       const response = await this.constructorService.getAllConstructores();
       console.log(response);

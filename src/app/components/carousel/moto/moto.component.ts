@@ -13,7 +13,10 @@ export class MotoComponent implements OnInit {
   async ngOnInit() {
     const response = await this.motoService.getAllMotos();
     console.log(response);
-
+    this.getMoto(1)
   }
-
+  async getMoto(id) {
+    const respuesta = await this.motoService.getMoto(id);
+    console.log(respuesta);
+  }
 }

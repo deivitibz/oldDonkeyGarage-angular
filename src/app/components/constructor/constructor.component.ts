@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConstructorService } from 'src/app/servicios/constructor.service';
+import { ConstructorService } from '../../servicios/constructor.service';
 
 @Component({
   selector: 'app-constructor',
@@ -8,18 +8,20 @@ import { ConstructorService } from 'src/app/servicios/constructor.service';
 })
 export class ConstructorComponent implements OnInit {
 
+  allConstructor: any[];
   constructor(private constructorService: ConstructorService) {
+    this.allConstructor = [];
   }
+
   async ngOnInit() {
-    const respuesta = await this.constructorService.getAllConstructores();
-    console.log(respuesta);
-    this.getConstructor(1);
+
+    const response = await this.constructorService.getAllConstructores();
+    this.allConstructor.push(response);
+
   }
 
   async getConstructor(id) {
-    const res = await this.constructorService.getConstructor(id);
-    console.log(res);
-
-
+    const resp = await this.constructorService.getConstructor(id)
+    console.log(resp);
   }
 }

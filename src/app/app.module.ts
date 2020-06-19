@@ -19,9 +19,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // modulo slick carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { DataTablesModule } from 'angular-datatables';
 
 // modulo router
 import { RouterModule } from '@angular/router';
@@ -59,6 +61,9 @@ import { VideotutorialesComponent } from './components/dashboard/admin/videotuto
 import { MotocicletasComponent } from './components/dashboard/admin/motocicletas/motocicletas.component';
 import { ConstructoresComponent } from './components/dashboard/admin/constructores/constructores.component';
 
+/* import { UsuarioDashComponent } from './components/dashboard/usuario/usuario.component';
+import { ConstructorDashComponent } from './components/dashboard/constructor/constructor.component'; */
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +90,7 @@ import { ConstructoresComponent } from './components/dashboard/admin/constructor
     AnunciosComponent,
     VideotutorialesComponent,
     MotocicletasComponent,
-    ConstructoresComponent,
+    ConstructoresComponent
   ],
   imports: [
     BrowserModule,
@@ -110,9 +115,11 @@ import { ConstructoresComponent } from './components/dashboard/admin/constructor
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    MatTabsModule,
     SlickCarouselModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

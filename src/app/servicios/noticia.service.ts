@@ -33,4 +33,8 @@ export class NoticiaService {
     const noticia = await this.getNoticia(id);
     return this.httpClient.put(this.baseUrl, noticia).toPromise();
   }
+
+  getFakeApi(){
+    return this.httpClient.get('https://jsonplaceholder.typicode.com/posts').toPromise()
+  }
 }

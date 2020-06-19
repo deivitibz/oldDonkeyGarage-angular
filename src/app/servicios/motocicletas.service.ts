@@ -18,4 +18,9 @@ export class MotocicletasService {
     return this.httpClient.get(this.baseUrl).toPromise()
   }
 
+  getMoto(id) {
+    return this.httpClient.get(this.baseUrl + '/' + id).toPromise();
+  }
+
+
 }

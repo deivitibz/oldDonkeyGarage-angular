@@ -78,7 +78,7 @@
                 <div class="row mt-2">
                   <div class="form-group col-6">
                     <input type="hidden" formControlName="id_provincia" name="id_provincia"
-                      *ngFor="let provincia of provincias" [value]="provincia['id']">
+                      *ngFor="let provincia of provincias" [value]="provincia.id">
                     <label for="">Provincia</label>
                     <select (change)="getProvincias($event)" class="form-control" id="provincia"
                       formControlName="provincia" name="provincia">

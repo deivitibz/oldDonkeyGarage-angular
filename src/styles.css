@@ -41,6 +41,10 @@ body {
   background-color: var(--color-B--color);
 }
 
+.bg-donkey-light {
+  background-color: var(--color-D--color);
+}
+
 hr {
   border-top: 2px solid white;
   width: 35%;

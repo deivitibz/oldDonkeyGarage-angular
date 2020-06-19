@@ -37,9 +37,16 @@ export class blogComponent implements OnInit {
     });
   }
 
-  onSubmit() {}
 
-  onFileChange() {}
+
+
+
+
+
+
+  onSubmit() { }
+
+  onFileChange() { }
 
   async ngOnInit() {
     const respuesta = await this.noticiaService.getAllNoticias();
