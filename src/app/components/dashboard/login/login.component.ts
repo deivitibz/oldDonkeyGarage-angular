@@ -39,17 +39,21 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
 
-    if (!localStorage.getItem('user-token') || !this.form.valid) {
+    // usuario y contraseña correcto
+    // guardo token
+    // can activate comprobar rutas protegidas
+
+
+    if (!localStorage.getItem('user-token')  || !this.form.valid) {
 
       // comprobar si el formulario es valido
-
-      const response = await this.usuarioService.login(this.form.value)
+      const response = await this.usuarioService.login(this.form.value);
       const token = response.token;
-      console.log(response);
+      //console.log(response);
 
-      if (typeof token !== 'undefined' || token === '') {
+       if (typeof token !== 'undefined' || token !== '') {
         localStorage.setItem('user-token', token)
-        console.log('se a añadido el token');
+        //console.log('se a añadido el token');
         this.cierraPopup();
         this.form.reset()
         this.router.navigate(['dashboard'])
@@ -70,7 +74,7 @@ export class LoginComponent implements OnInit {
         this.cierraPopup();
         this.router.navigate(['dashboard'])
       } else if (response['error_type'] === 'noToken'){
-
+        localStorage.setItem('user-token', '')
       } else if (response['error_type'] === 'caducadoToken'){
         localStorage.setItem('user-token', '')
       }

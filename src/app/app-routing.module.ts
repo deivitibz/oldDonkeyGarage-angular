@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+// guard
+import { LoginGuard } from './login.guard'
+
 
 import { HomeComponent } from './components/home/home.component';
 import { anunciosComponent } from './components/anuncios/anuncios.component';
@@ -40,7 +43,7 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'error404', component: Error404Component },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'admin', component: AdminComponent,
+  { path: 'admin', component: AdminComponent, canActivate: [LoginGuard],
     children: [
       { path: 'usuarios', component: UsuariosComponent},
       { path: 'noticias', component: NoticiasComponent},
@@ -53,7 +56,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
 exports: [RouterModule],
 })
 export class AppRoutingModule {}

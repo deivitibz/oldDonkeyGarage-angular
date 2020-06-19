@@ -23,6 +23,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 // modulo slick carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { DataTablesModule } from 'angular-datatables';
 
 // modulo router
 import { RouterModule } from '@angular/router';
@@ -86,7 +87,7 @@ import { ConstructoresComponent } from './components/dashboard/admin/constructor
     AnunciosComponent,
     VideotutorialesComponent,
     MotocicletasComponent,
-    ConstructoresComponent,
+    ConstructoresComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +114,7 @@ import { ConstructoresComponent } from './components/dashboard/admin/constructor
     MatListModule,
     MatTabsModule,
     SlickCarouselModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent],

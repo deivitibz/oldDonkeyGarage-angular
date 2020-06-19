@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { NoticiaService } from 'src/app/servicios/noticia.service';
 
 export interface PeriodicElement {
   name: string;
   position: number;
   weight: number;
   symbol: string;
+}
+
+export interface Noticia {
+  title: string;
+  body: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -26,12 +32,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./noticias.component.css']
 })
 export class NoticiasComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  allNoticias: any
+  displayedColumns: string[] = ['position', 'name', 'username', 'email'];
+  dataSource = this.allNoticias;
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(private noticiasService: NoticiaService) {
+    this.allNoticias = []
+  }
+
+  async ngOnInit() {
+
+    this.allNoticias = await this.noticiasService.getFakeApi();
+    console.log(this.allNoticias);
+
+
   }
 
   onFileChange($event){

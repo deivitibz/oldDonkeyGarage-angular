@@ -24,14 +24,18 @@ export class UsuarioService {
     //console.log(formValues);
     const options = {
       headers: new HttpHeaders({
-        'user-token': localStorage.getItem('user-token'),
-      }),
+        'user-token': 'akjsdñfljañsdfjñladskf'
+      })
     };
-    return this.httpClient.post(this.baseUrl + '/login', formValues, options).toPromise();
+    return this.httpClient.post(this.baseUrl + '/login', formValues,options).toPromise();
   }
 
   getUsers(): Promise<any> {
     return this.httpClient.get(this.baseUrl).toPromise();
+  }
+
+  getUserById(id): Promise<any>{
+    return this.httpClient.get(this.baseUrl + '/' + id).toPromise()
   }
 
 

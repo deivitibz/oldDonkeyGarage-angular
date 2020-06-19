@@ -110,8 +110,9 @@ Content-Type: application/json
 }
 
 ###
-GET http://streaming.zapto.org:3000/api/usuarios/check
+POST http://streaming.zapto.org:3000/api/usuarios/login
+user-token: añlsdkfj
 
 
 ###
-GET http://localhost:3000/api/usuarios
+GET http://localhost:3000/api/usuarios/6
