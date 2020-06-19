@@ -57,7 +57,7 @@ td{
     flex-direction: column;
     /* justify-content: space-between; */
     height: 100%;
-    width: 81px;
+    width: 100%;
   }
 
   .bottom-sidebar {

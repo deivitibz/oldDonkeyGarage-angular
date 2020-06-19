@@ -6,9 +6,12 @@ import { Usuario } from '../models/usuario_perfil.model';
   providedIn: 'root',
 })
 export class ConstructorService {
+
   baseUrl: string;
   constructor(private httpClient: HttpClient) {
+
     this.baseUrl = 'http://streaming.zapto.org:3000/api/constructor';
+
   }
 
   getConstructor(id) {
