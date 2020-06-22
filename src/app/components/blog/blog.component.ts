@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class blogComponent implements OnInit {
   formulario: FormGroup;
+  allBlogs: any[];
 
   constructor(private noticiaService: NoticiaService) {
     this.formulario = new FormGroup({
@@ -35,13 +36,8 @@ export class blogComponent implements OnInit {
       fecha_publicacion: new FormControl('', []),
       usuarios_id: new FormControl('', []),
     });
+    this.allBlogs = [];
   }
-
-
-
-
-
-
 
 
   onSubmit() { }
@@ -50,8 +46,8 @@ export class blogComponent implements OnInit {
 
   async ngOnInit() {
     const respuesta = await this.noticiaService.getAllNoticias();
-    console.log(respuesta);
-    this.getNoticia(1);
+    this.allBlogs.push(respuesta);
+
   }
 
   async getNoticia(id) {

@@ -15,8 +15,10 @@ import { PerfilService } from '../../../servicios/perfil.service';
 })
 export class PerfilComponent implements OnInit {
   formulario: FormGroup;
+  allPerfil: any[];
 
   constructor(private perfilService: PerfilService) {
+    this.allPerfil = [];
     this.formulario = new FormGroup({
       username: new FormControl(
         '',
@@ -74,7 +76,8 @@ export class PerfilComponent implements OnInit {
     });
   }
   async ngOnInit() {
-    //this.getAllPerfil()
+    const response = await this.perfilService.getAllPerfiles();
+    this.allPerfil.push(response);
 
   }
 

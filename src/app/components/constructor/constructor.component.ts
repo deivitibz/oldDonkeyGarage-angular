@@ -18,6 +18,7 @@ export class ConstructorComponent implements OnInit {
     const response = await this.constructorService.getAllConstructores();
     this.allConstructor.push(response);
 
+
   }
 
   async getConstructor(id) {
