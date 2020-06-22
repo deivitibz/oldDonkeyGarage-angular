@@ -1,135 +1,91 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-1 p-0">
-      <!-- MENU LATERAL -->
-      <div class="nav sidebar">
-        <div class="menu-buttons">
-          <a href="" [routerLink]="['usuario', 'perfil']"><i class="fas fa-user-astronaut"></i></a>
-          <p style="font-size: 14px;">USUARIO</p>
+<div class="container-fluid p-0">
+
+  <mat-drawer-container class="example-container bg-donkey-secondary " autosize>
+    <mat-drawer #drawer class="example-sidenav bg-donkey " mode="side">
+
+      <div class="row ">
+
+        <div class="col-12 mx-auto">
+          <img class="img-fluid m-1" width="80%" src="../../../assets/img/logo-404.png" alt="">
         </div>
-        <div class="menu-buttons">
-          <a href="" [routerLink]="['constructor', 'perfil']"><i class="fa fa-user-secret"></i></a>
-          <p style="font-size: 14px;">ANUNCIO</p>
+
+        <div class="col-12">
+          <ul class="nav flex-column">
+
+            <li class="bg-donkey list-group-item my-1">
+              <a class="nav-link active text-center" [routerLink]="['usuario', 'perfil']">
+                <img class="img-fluid m-1" width="35%" src="../../../assets/img/casco.png" alt="">
+                Usuarios
+              </a>
+            </li>
+            <li class="bg-donkey list-group-item my-1">
+              <a class="nav-link text-center" [routerLink]="['noticias']">
+                <img class="img-fluid m-1" width="35%" src="../../../assets/img/anuncios.png" alt="">
+                Anuncios
+              </a>
+            </li>
+            <li class="bg-donkey list-group-item my-1">
+              <a class="nav-link text-center" [routerLink]="['noticias']">
+                <img class="img-fluid m-1" width="35%" src="../../../assets/img/mensaje.png" alt="">
+                Mensajes
+              </a>
+            </li>
+            <li class="bg-donkey list-group-item my-1">
+              <a class="nav-link text-center" [routerLink]="['noticias']">
+                <img class="img-fluid m-1" width="40%" src="../../../assets/img/moto.png" alt="">
+                Constructor
+              </a>
+            </li>
+          </ul>
         </div>
-        <div class="menu-buttons">
-          <a href=""><i class="fas fa-poo    "></i></a>
-          <p style="font-size: 14px;">TEXTO</p>
+
+        <div class="col-12">
+          <button class="btn btn-block bg-danger">Log Out</button>
         </div>
-        <div class="menu-buttons">
-          <a href=""><i class="fab fa-themeisle"></i></a>
-          <p style="font-size: 14px;">TEXTO</p>
-        </div>
-        <div class="menu-buttons">
-          <a href=""><i class="fab fa-slideshare"></i></a>
-          <p style="font-size: 14px;">TEXTO</p>
-        </div>
-        <div class="menu-buttons">
-          <a href=""><i class="fas fa-motorcycle"></i></a>
-          <p style="font-size: 14px;">TEXTO</p>
-        </div>
+
+      </div>
+
+    </mat-drawer>
+
+
+    <div class="row">
+      <div class="col-12">
+        <mat-toolbar color="">
+          <mat-toolbar-row>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="drawer.toggle()">menu</mat-icon>
+
+          </mat-toolbar-row>
+        </mat-toolbar>
+
       </div>
     </div>
-    <div class="col-12 col-sm-12 col-md-11">
-      <!-- CONTENIDO -->
-      <router-outlet></router-outlet>
+
+    <div class="row">
+      <div class="col-11 mx-auto mt-4">
+        <img class="img-fluid" src="../../../assets/img/usuario-dash.jpg" alt="">
+      </div>
     </div>
-  </div>
+
+    <div class="row">
+      <div class="col-11 mx-auto">
+        <router-outlet></router-outlet>
+        <mat-card *ngIf="empty">
+          <mat-card-header>
+            <mat-card-title>title</mat-card-title>
+            <mat-card-subtitle>subtitle</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ok</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+  </mat-drawer-container>
+
+
+
 </div>
-<!-- <div class="container mt-5">
-        <div class="row">
-          <div class="col-sm-10">
-            <h3>Tus anuncios publicados</h3>
-            <p>Aqui encontraras todos tus anuncios publicados</p>
-          </div>
-          <div class="col-sm-2">
-            <h4>5</h4>
-            <p>PRODUCTOS</p>
-          </div>
-        </div>
-        <!-- navegacion anuncios -->
-<!--
-        <div class="row my-4">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">En venta <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Vendidos</a>
-              </li>
-            </ul>
-
-          </nav>
-
-        </div>
-      </div> -->
-
-<!-- TABLA ANUNCIOS -->
-<!--
-      <div class="container">
-        <div class="row">
-          <table class="table table-responsive-sm">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><img src="https://picsum.photos/id/684/100/100" alt=""></td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<section class="footer">
-  <div class="row m-0">
-    <!-- MENU BOTTOM -->
-    <div class="nav bottom-sidebar">
-      <div class="menu-buttons">
-        <a href="/home"><i class="fas fa-user-astronaut    "></i></a>
-        <p style="font-size: 10px;">INICIO</p>
-      </div>
-      <div class="menu-buttons">
-        <a href=""><i class="fa fa-user-secret" aria-hidden="true"></i></a>
-        <p style="font-size: 10px;">FAVORITOS</p>
-      </div>
-      <div class="menu-buttons">
-        <a href="" [routerLink]="['constructor','perfil']"><i class="fas fa-poo    "></i></a>
-        <p style="font-size: 10px;">SUBIR</p>
-      </div>
-      <div class="menu-buttons">
-        <a href=""><i class="fab fa-themeisle"></i></a>
-        <p style="font-size: 10px;">MENSAJES</p>
-      </div>
-      <div class="menu-buttons">
-        <a href="" [routerLink]="['usuario', 'perfil']"><i class="fab fa-slideshare"></i></a>
-        <p style="font-size: 10px;">MI PERFIL</p>
-      </div>
-    </div>
-  </div>
-
-</section>

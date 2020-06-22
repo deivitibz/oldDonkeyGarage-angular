@@ -45,7 +45,7 @@ section.footer {
   bottom: 0;
 }
 
-td{
+td {
   vertical-align: middle;
 }
 
@@ -63,4 +63,18 @@ td{
   .bottom-sidebar {
     display: none;
   }
+}
+
+mat-drawer {
+  width: 185px;
+}
+
+a.nav-link {
+  color: white;
+  font-family: VAR(--font-principal--);
+  font-size: 1.4em;
+}
+
+.list-group-item {
+  border: none;
 }

@@ -61,8 +61,10 @@ import { VideotutorialesComponent } from './components/dashboard/admin/videotuto
 import { MotocicletasComponent } from './components/dashboard/admin/motocicletas/motocicletas.component';
 import { ConstructoresComponent } from './components/dashboard/admin/constructores/constructores.component';
 
-/* import { UsuarioDashComponent } from './components/dashboard/usuario/usuario.component';
-import { ConstructorDashComponent } from './components/dashboard/constructor/constructor.component'; */
+import { UsuarioDashComponent } from './components/dashboard/usuario/usuario.component';
+import { ConstructorDashComponent } from './components/dashboard/constructor/constructor.component';
+import { UsuarioDashPerfilComponent } from './components/dashboard/usuario/perfil/perfil.component';
+import { ConstructorDashPerfilComponent } from './components/dashboard/constructor/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,11 @@ import { ConstructorDashComponent } from './components/dashboard/constructor/con
     AnunciosComponent,
     VideotutorialesComponent,
     MotocicletasComponent,
-    ConstructoresComponent
+    ConstructoresComponent,
+    UsuarioDashComponent,
+    ConstructorDashComponent,
+    UsuarioDashPerfilComponent,
+    ConstructorDashPerfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,9 +123,9 @@ import { ConstructorDashComponent } from './components/dashboard/constructor/con
     MatListModule,
     MatTabsModule,
     SlickCarouselModule,
-    DataTablesModule
+    DataTablesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
