@@ -22,12 +22,7 @@ export class UsuarioService {
 
   login(formValues): Promise<any> {
     //console.log(formValues);
-    const options = {
-      headers: new HttpHeaders({
-        'user-token': 'akjsdñfljañsdfjñladskf'
-      })
-    };
-    return this.httpClient.post(this.baseUrl + '/login', formValues,options).toPromise();
+    return this.httpClient.post(this.baseUrl + '/login', formValues).toPromise();
   }
 
   getUsers(): Promise<any> {

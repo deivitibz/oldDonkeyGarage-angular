@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   valid: boolean;
   baseUrl: string;
+  validToken: boolean;
 
   constructor(
     private router: Router,
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
     private httpClient: HttpClient
   ) {
 
-
+    this.validToken = false;
 
     this.baseUrl = 'http://streaming.zapto.org:3000/api/usuarios'
     this.form = new FormGroup({
@@ -38,17 +39,29 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   async onSubmit() {
+    const response = await this.usuarioService.login(this.form.value);
+    console.log(response);
+
+    if (response['success']) {
+      this.saveToken(response.token);
+      this.cierraPopup();
+      this.form.reset();
+      this.router.navigate(['admin']);
+    } else {
+      console.log('no se a podido hacer login');
+
+    }
+
 
     // usuario y contraseña correcto
     // guardo token
     // can activate comprobar rutas protegidas
 
 
-    if (!localStorage.getItem('user-token')  || !this.form.valid) {
+    /* if (!localStorage.getItem('user-token')  || !this.form.valid) {
 
       // comprobar si el formulario es valido
-      const response = await this.usuarioService.login(this.form.value);
-      const token = response.token;
+
       //console.log(response);
 
        if (typeof token !== 'undefined' || token !== '') {
@@ -78,13 +91,8 @@ export class LoginComponent implements OnInit {
       } else if (response['error_type'] === 'caducadoToken'){
         localStorage.setItem('user-token', '')
       }
-
-
-    }
-
-
-
-  }
+    } */
+ }
 
   checkToken(token):Promise<any>{
       const options = {
@@ -94,6 +102,10 @@ export class LoginComponent implements OnInit {
     };
     return this.httpClient.get(this.baseUrl + '/check', options).toPromise();
 
+  }
+
+  saveToken(token){
+    localStorage.setItem('user-token', token)
   }
 
   cierraPopup() {

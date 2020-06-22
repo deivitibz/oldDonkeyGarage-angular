@@ -18,7 +18,7 @@ export class ConstructoresComponent implements OnInit {
     };
 
       const response = await this.constructorService.getAllConstructores();
-      console.log(response);
+      if(response['error']) localStorage.removeItem('user-token')
 
   }
 

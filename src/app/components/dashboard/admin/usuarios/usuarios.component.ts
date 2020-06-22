@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 export interface Usuario {
@@ -18,11 +18,12 @@ export interface Usuario {
 
 export class UsuariosComponent implements OnInit {
 
+
+  oneUser: Object;
   allUsers: Usuario[];
   displayedColumns: string[] = ['id','username','email','actions']
   dataSource = this.allUsers
 
-  oneUser: Object;
 
   form: FormGroup;
 
@@ -30,6 +31,7 @@ export class UsuariosComponent implements OnInit {
     this.allUsers = []
 
     this.oneUser = new Object;
+
 
     this.form = new FormGroup({
       username: new FormControl(
@@ -88,8 +90,8 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
 
+  async ngOnInit() {
     try{
       const response = await this.usuarioService.getUsers();
       console.log(response);
