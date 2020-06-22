@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./anuncios.component.css']
 })
 export class AnunciosComponent implements OnInit {
+  dtOptions: DataTables.Settings = {};
 
-  constructor() { }
+  constructor() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+   }
 
   ngOnInit(): void {
+
   }
 
 }

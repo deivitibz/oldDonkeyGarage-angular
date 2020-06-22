@@ -34,7 +34,7 @@ export class NoticiaService {
     return this.httpClient.put(this.baseUrl, noticia).toPromise();
   }
 
-  getFakeApi(){
+  getFakeApi(): Promise<any>{
     return this.httpClient.get('https://jsonplaceholder.typicode.com/posts').toPromise()
   }
 }

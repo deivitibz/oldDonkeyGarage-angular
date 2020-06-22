@@ -1,93 +1,100 @@
-<header class="p-3">
-  <h3>Control Noticias</h3>
+<div class="container-fluid p-0">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Lista de usuarios registrados</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">add</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
 
-</header>
-<section>
-
+<div class="container">
   <mat-tab-group>
-    <mat-tab label="First">
-      <mat-table [dataSource]="allNoticias" class="mat-elevation-z8">
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-        </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-        </ng-container>
+    <mat-tab label="Lista de noticias">
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="username">
-          <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
-        </ng-container>
+      <div class="container">
+        <table datatable [dtOptions]="dtOptions" class="table mat-elevation-z8">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let noticia of allNoticias">
+              <td>{{noticia.id}}</td>
+              <td>{{noticia.title}}</td>
+              <td>{{noticia.body}}</td>
+              <td>
+                <mat-icon (click)="deleteNoticia(noticia)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
+                <mat-icon (click)="editNoticia(noticia)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-        </ng-container>
+     <!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
     </mat-tab>
+    <mat-tab label="Añadir noticia">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="">Titulo</label>
+    <input type="text" class="form-control" formControlName="titulo" name="titulo"
+      placeholder="Introduce el titulo de tu anuncio">
+    <small class="form-text text-muted"
+      *ngIf="form.controls.titulo.errors && form.controls.titulo.touched">Debe contener al menos
+      10
+      letras</small>
+  </div>
 
+  <div class="form-group">
+    <label for="">Imágen</label>
+    <input type="text" class="form-control" formControlName="imagen" name="imagen">
 
-    <mat-tab label="Second">
-      <div class="col-6 mx-auto">
-      <form class="example-form">
-        <mat-form-field class="example-full-width">
-          <mat-label>Company (disabled)</mat-label>
-          <input matInput disabled value="Google">
-        </mat-form-field>
+  </div>
 
-        <table class="example-full-width" cellspacing="0"><tr>
-          <td><mat-form-field class="example-full-width">
-            <mat-label>First name</mat-label>
-            <input matInput>
-          </mat-form-field></td>
-          <td><mat-form-field class="example-full-width">
-            <mat-label>Long Last Name That Will Be Truncated</mat-label>
-            <input matInput>
-          </mat-form-field></td>
-        </tr></table>
+  <div class="form-group">
+    <label for="">Descripción</label>
+    <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+      placeholder="Introduce el titulo de tu anuncio"></textarea>
+    <small class="form-text text-muted"
+      *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe
+      contener un minimo
+      de 100
+      letras y un máximo de 1000</small>
+  </div>
 
-        <p>
-          <mat-form-field class="example-full-width">
-            <mat-label>Address</mat-label>
-            <textarea matInput placeholder="Ex. 100 Main St">1600 Amphitheatre Pkwy</textarea>
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <mat-label>Address 2</mat-label>
-            <textarea matInput></textarea>
-          </mat-form-field>
-        </p>
+  <div class="form-group">
+    <label for="">Autor</label>
+    <input type="text" class="form-control" formControlName="autor" name="autor" placeholder="@juan_camus">
+    <small class="form-text text-muted"
+      *ngIf="form.controls.autor.errors && form.controls.autor.touched">Debe contener al menos 3
+      letras</small>
+  </div>
 
-        <table class="example-full-width" cellspacing="0"><tr>
-          <td><mat-form-field class="example-full-width">
-            <mat-label>City</mat-label>
-            <input matInput placeholder="Ex. San Francisco">
-          </mat-form-field></td>
-          <td><mat-form-field class="example-full-width">
-            <mat-label>State</mat-label>
-            <input matInput placeholder="Ex. California">
-          </mat-form-field></td>
-          <td><mat-form-field class="example-full-width">
-            <mat-label>Postal Code</mat-label>
-            <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043">
-            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-          </mat-form-field></td>
-        </tr></table>
+  <div class="form-group mb-4">
+    <label for="">Categoría</label>
+    <select class="form-control" formControlName="categoria" name="categoria">
+      <option value="">Elija una categoría</option>
+      <option value="mecanica">Mecánica</option>
+      <option value="electricidad">Eléctricidad</option>
+      <option value="pintura">Pintura</option>
+      <option value="reparacion">Reparación</option>
+      <option value="consejos">Consejos</option>
+      <option value="homologaciones">Homologaciones</option>
+      <option value="noticias">Noticias</option>
+    </select>
+  </div>
+  <div class="row mx-0">
+<!--     <button class="btn btn-primary btn-block " type="submit" [disabled]="!form.valid">Enviar</button>
+ -->    <button class="btn btn-primary btn-block " type="submit" >Enviar</button>
+  </div>
       </form>
-    </div>
     </mat-tab>
-
   </mat-tab-group>
+</div>
 
-
-
-</section>

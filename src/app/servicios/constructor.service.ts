@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../models/usuario_perfil.model';
 
 @Injectable({
@@ -15,11 +15,17 @@ export class ConstructorService {
   }
 
   getConstructor(id) {
+
     return this.httpClient.get(this.baseUrl + '/' + id).toPromise();
   }
 
   getAllConstructores() {
-    return this.httpClient.get(this.baseUrl).toPromise();
+    const options = {
+      headers: new HttpHeaders({
+        'user-token': localStorage.getItem('user-token'),
+      }),
+    };
+    return this.httpClient.get(this.baseUrl,options).toPromise();
   }
 
   newConstructor(usuario: Usuario) {

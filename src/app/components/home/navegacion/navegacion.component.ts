@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class navegacionComponent implements OnInit {
 
-  constructor() { }
+  token: string;
+
+  constructor() {
+    this.token = localStorage.getItem('user-token')
+  }
 
   ngOnInit(): void {
   }
+
 
 }
