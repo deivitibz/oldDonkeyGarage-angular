@@ -9,22 +9,21 @@ import { Router } from '@angular/router';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import { anuncioService } from 'src/app/servicios/anuncio.service';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-anuncios',
   templateUrl: './anuncios.component.html',
-  styleUrls: ['./anuncios.component.css']
+  styleUrls: ['./anuncios.component.css'],
 })
-
-
 export class AnunciosComponent implements OnInit {
   displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'precio'];
   dataSource: MatTableDataSource<Anuncio>;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   files: string[];
   // filtro poblaciones / provincias
@@ -41,9 +40,10 @@ export class AnunciosComponent implements OnInit {
   // formulario
   form: FormGroup;
 
-
-
-  constructor(private anuncioService:anuncioService) {
+  constructor(
+    private anuncioService: anuncioService,
+    private authService: AuthService
+  ) {
     this.marcas = brands.data;
     this.modelos = models.data;
 
@@ -69,17 +69,18 @@ export class AnunciosComponent implements OnInit {
       poblacion: new FormControl('', []),
       precio: new FormControl('', []),
       marca: new FormControl('', []),
-      kms: new FormControl('', []),
+      km: new FormControl('', []),
+      year: new FormControl('', []),
       modelo: new FormControl('', []),
       itv: new FormControl('', []),
       homologacion: new FormControl('', []),
-      file: new FormControl('', []),
+      imagenes: new FormControl('', []),
       tipoCustom: new FormControl('', []),
     });
-   }
+  }
 
   async ngOnInit() {
-    this.allAnuncios = await this.anuncioService.getAnuncios()
+    this.allAnuncios = await this.anuncioService.getAnuncios();
     this.dataSource = new MatTableDataSource(this.allAnuncios);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -94,22 +95,21 @@ export class AnunciosComponent implements OnInit {
     }
   }
 
-
-  deleteNoticia(anuncio){
+  deleteNoticia(anuncio) {
     console.log(anuncio);
   }
 
-  editNoticia(anuncio){
+  editNoticia(anuncio) {
     console.log(anuncio);
   }
 
-  async addNoticia(){
-    this.anuncioService.addAnuncio(this.form.value)
+  async addNoticia() {
+    this.anuncioService.addAnuncio(this.form.value);
   }
 
   filtrarMarcas(form) {
     this.filtroModelos = [];
-      this.modelos.filter((result) => {
+    this.modelos.filter((result) => {
       var idMarca = parseInt($('#marca option:selected').attr('id'));
       let idModelo = result.brand_id;
       if (idModelo === idMarca) {
@@ -119,13 +119,17 @@ export class AnunciosComponent implements OnInit {
   }
 
   async onSubmitFormulario() {
-    //this.anuncioService.addImages(this.files, this.form);
-    const result = await this.anuncioService.addAnuncio(this.form.value)
+    // console.log(this.form.value);
+
+    const newAnuncio = this.form.value;
+    newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
+    // this.anuncioService.addImages(this.files, this.form);
+
+    const result = await this.anuncioService.addAnuncio(newAnuncio);
     console.log(result);
 
-
     // nombre del archivo
-    //console.log(this.form.value);
+    console.log(this.form.value);
   }
 
   onFileChange($event) {
@@ -154,5 +158,4 @@ export class AnunciosComponent implements OnInit {
 
     return a < b ? -1 : a > b ? 1 : 0;
   }
-
 }

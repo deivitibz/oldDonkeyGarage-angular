@@ -11,3 +11,7 @@
 td {
   padding-right: 8px;
 }
+
+table.mat-table {
+  width: 100%;
+}

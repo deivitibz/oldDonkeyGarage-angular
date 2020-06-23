@@ -3,29 +3,35 @@ import { NoticiaService } from 'src/app/servicios/noticia.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Noticia } from 'src/app/models/noticia.model';
 
+// imports de tablas
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-admin-noticias',
   templateUrl: './noticias.component.html',
-  styleUrls: ['./noticias.component.css']
+  styleUrls: ['./noticias.component.css'],
 })
 export class NoticiasComponent implements OnInit {
   allNoticias: Noticia[];
   oneNoticia: Noticia;
- //formulario
+
+  //formulario
   form: FormGroup;
 
   //datatables settings
-  displayedColumns: string[] = ['id','titulo','descripcion','autor','categoria','imagen','estado','fecha_publicacion']
+  displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'autor'];
+  dataSource: MatTableDataSource<Noticia>;
 
-  dtOptions: DataTables.Settings = {};
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-
-
-  constructor(private noticiasService: NoticiaService) {
-
-    // inicializacion de variables
-    this.allNoticias = [];
+  constructor(
+    private noticiasService: NoticiaService,
+    private authService: AuthService
+  ) {
     // formulario
     this.form = new FormGroup({
       titulo: new FormControl(
@@ -50,64 +56,46 @@ export class NoticiasComponent implements OnInit {
       fecha_publicacion: new FormControl('', []),
       usuarios_id: new FormControl('', []),
     });
-
   }
 
   async ngOnInit() {
-
     this.allNoticias = await this.noticiasService.getAllNoticias();
-    console.log(this.allNoticias);
-
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      data: this.allNoticias,
-      columns: [
-        { data: 'id' },
-        { data: 'titulo' },
-        { data: 'descripcion' },
-        { data: 'autor' },
-        { data: 'categoria' },
-        { data: 'estado' },
-        { data: 'fecha_publicacion' }
-    ]
-    };
-
+    this.dataSource = new MatTableDataSource(this.allNoticias);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  onFileChange($event){
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
-  async deleteNoticia(element){
-    const response = await this.noticiasService.deleteNoticia(element.id)
+
+  onFileChange($event) {}
+  async deleteNoticia(element) {
+    const response = await this.noticiasService.deleteNoticia(element.id);
     console.log(response);
-
-
   }
 
-  async onSubmit(){
+  async onSubmit() {
     const newNoticia = this.form.value;
-    newNoticia.usuarios_id = "10";
-    console.log(newNoticia);
+    const loginId = this.authService.decodeToken();
+
+    newNoticia.usuarios_id = loginId.userId;
 
     const response = await this.noticiasService.newNoticia(newNoticia);
     console.log(response);
-
-
   }
 
-  async editNoticia(noticia){
+  async editNoticia(noticia) {
     console.log(noticia);
 
     //const noticia = await this.noticiasService.editNoticia(noticia.id)
     //this.oneNoticia = new Noticia(1,'','','',[],'',true,'',1)
     //console.log(response);
     //console.log(this.oneNoticia);
-
-
-
   }
-
-
-
 }

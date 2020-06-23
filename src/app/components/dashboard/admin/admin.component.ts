@@ -1,22 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
 })
-
 export class AdminComponent implements OnInit {
-
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.usuarioService.decodeToken();
+    this.authService.decodeToken();
   }
 
-  logout(){
-    localStorage.removeItem('user-token')
+  logout() {
+    localStorage.removeItem('user-token');
   }
-
 }
