@@ -13,8 +13,8 @@ export class NoticiaService {
     this.baseUrl = 'http://streaming.zapto.org:3000/api/noticias';
   }
 
-  getNoticia(id) {
-    return this.httpClient.get(this.baseUrl + '/' + id).toPromise();
+  getNoticia(id): Promise<Noticia> {
+    return this.httpClient.get<Noticia>(this.baseUrl + '/' + id).toPromise();
   }
 
   getAllNoticias(): Promise<Noticia[]> {

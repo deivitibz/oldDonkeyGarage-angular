@@ -45,6 +45,13 @@
               <th mat-header-cell *matHeaderCellDef> Autor </th>
               <td mat-cell *matCellDef="let element"> {{element.autor}} </td>
             </ng-container>
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon (click)="deleteNoticia(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
+                <mat-icon (click)="editNoticia(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
+              </td>
+            </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -55,15 +62,13 @@
 
       </div>
 
-      <!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
-
     </mat-tab>
     <mat-tab label="Añadir noticia">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="">Titulo</label>
           <input type="text" class="form-control" formControlName="titulo" name="titulo"
-            placeholder="Introduce el titulo de tu anuncio">
+            placeholder="Introduce el titulo de tu anuncio" [value]="noticiaEdit.titulo">
           <small class="form-text text-muted" *ngIf="form.controls.titulo.errors && form.controls.titulo.touched">Debe
             contener al menos
             10
@@ -72,14 +77,14 @@
 
         <div class="form-group">
           <label for="">Imágen</label>
-          <input type="text" class="form-control" formControlName="imagen" name="imagen">
+          <input type="text" class="form-control" formControlName="imagen" name="imagen" [value]="noticiaEdit.imagen">
 
         </div>
 
         <div class="form-group">
           <label for="">Descripción</label>
           <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
-            placeholder="Introduce el titulo de tu anuncio"></textarea>
+            placeholder="Introduce el titulo de tu anuncio" [value]="noticiaEdit.descripcion"></textarea>
           <small class="form-text text-muted"
             *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe
             contener un minimo
@@ -89,7 +94,7 @@
 
         <div class="form-group">
           <label for="">Autor</label>
-          <input type="text" class="form-control" formControlName="autor" name="autor" placeholder="@juan_camus">
+          <input type="text" class="form-control" formControlName="autor" name="autor" placeholder="@juan_camus" [value]="noticiaEdit.autor">
           <small class="form-text text-muted" *ngIf="form.controls.autor.errors && form.controls.autor.touched">Debe
             contener al menos 3
             letras</small>
@@ -97,7 +102,7 @@
 
         <div class="form-group mb-4">
           <label for="">Categoría</label>
-          <select class="form-control" formControlName="categoria" name="categoria">
+          <select class="form-control" formControlName="categoria" name="categoria" [value]="noticiaEdit.categoria">
             <option value="">Elija una categoría</option>
             <option value="mecanica">Mecánica</option>
             <option value="electricidad">Eléctricidad</option>
@@ -110,7 +115,8 @@
         </div>
         <div class="row mx-0">
           <!--     <button class="btn btn-primary btn-block " type="submit" [disabled]="!form.valid">Enviar</button>
- --> <button class="btn btn-primary btn-block " type="submit">Enviar</button>
+ --> <button *ngIf="!noticiaEdit.id" class="btn btn-primary btn-block " type="submit">Enviar</button>
+    <button *ngIf="noticiaEdit.id" class="btn btn-primary btn-block " type="submit">Editar</button>
         </div>
       </form>
     </mat-tab>

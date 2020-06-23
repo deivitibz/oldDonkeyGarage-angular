@@ -18,11 +18,12 @@ export class NoticiasComponent implements OnInit {
   allNoticias: Noticia[];
   oneNoticia: Noticia;
 
+  noticiaEdit: any;
   //formulario
   form: FormGroup;
 
   //datatables settings
-  displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'autor'];
+  displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'autor','actions'];
   dataSource: MatTableDataSource<Noticia>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -56,6 +57,8 @@ export class NoticiasComponent implements OnInit {
       fecha_publicacion: new FormControl('', []),
       usuarios_id: new FormControl('', []),
     });
+
+    this.noticiaEdit = []
   }
 
   async ngOnInit() {
@@ -82,20 +85,29 @@ export class NoticiasComponent implements OnInit {
 
   async onSubmit() {
     const newNoticia = this.form.value;
-    const loginId = this.authService.decodeToken();
+    newNoticia.usuarios_id = this.authService.decodeToken()['userId'];
+    if(this.noticiaEdit.id){
+      await this.editNoticia(newNoticia)
+    } else {
+      const response = await this.noticiasService.newNoticia(newNoticia);
+      console.log(response);
+    }
 
-    newNoticia.usuarios_id = loginId.userId;
-
-    const response = await this.noticiasService.newNoticia(newNoticia);
-    console.log(response);
   }
 
   async editNoticia(noticia) {
-    console.log(noticia);
+    const noticiaEdit = await this.noticiasService.getNoticia(noticia.id);
+    this.noticiaEdit = noticiaEdit;
+
+    const response = await this.noticiasService.editNoticia(noticia);
+    console.log(response);
+
 
     //const noticia = await this.noticiasService.editNoticia(noticia.id)
     //this.oneNoticia = new Noticia(1,'','','',[],'',true,'',1)
     //console.log(response);
     //console.log(this.oneNoticia);
   }
+
+
 }
