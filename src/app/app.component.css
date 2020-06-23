@@ -13,8 +13,3 @@
   font-weight: 400;
   font-size: 15px;
 }
-
-.mat-drawer-inner-container {
-  display: flex !important;
-  align-items: stretch !important;
-}

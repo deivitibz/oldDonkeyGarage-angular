@@ -1,73 +1,185 @@
+<div class="container-fluid p-0">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Lista de Anuncios</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">add</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
 <div class="container">
-  <table datatable [dtOptions]="dtOptions" class="table mat-elevation-z8">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>First name</th>
-        <th>Last name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Foo</td>
-        <td>Bar</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Someone</td>
-        <td>Youknow</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Iamout</td>
-        <td>Ofinspiration</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Yoda</td>
-        <td>Skywalker</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>Patrick</td>
-        <td>Dupont</td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>Barack</td>
-        <td>Obama</td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>François</td>
-        <td>Holland</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>Michel</td>
-        <td>Popo</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>Chuck</td>
-        <td>Norris</td>
-      </tr>
-      <tr>
-        <td>10</td>
-        <td>Simon</td>
-        <td>Robin</td>
-      </tr>
-      <tr>
-        <td>11</td>
-        <td>Louis</td>
-        <td>Lin</td>
-      </tr>
-      <tr>
-        <td>12</td>
-        <td>Zelda</td>
-        <td>Link</td>
-      </tr>
-    </tbody>
-  </table>
+  <mat-tab-group>
+
+    <mat-tab label="table test">
+      <!-- filtro -->
+
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+      </mat-form-field>
+
+
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef> Titulo </th>
+            <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef> Precio </th>
+            <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+    </mat-tab>
+
+    <mat-tab label="Lista de anuncios">
+
+      <!-- <div class="container">
+        <table datatable [dtOptions]="dtOptions" class="table mat-elevation-z8">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Titulo</th>
+              <th>Descripcion</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let anuncio of allAnuncios">
+              <td>{{anuncio.id}}</td>
+              <td>{{anuncio.titulo}}</td>
+              <td>{{anuncio.descripcion}}</td>
+              <td>{{anuncio.precio}} €</td>
+              <td>
+                <mat-icon (click)="deleteNoticia(anuncio)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
+                <mat-icon (click)="editNoticia(anuncio)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon></td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
+     <!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+
+    </mat-tab>
+    <mat-tab label="Añadir anuncio">
+      <form [formGroup]="form" (ngSubmit)="onSubmitFormulario()">
+        <div class="form-group">
+          <label for="">Titulo</label>
+          <input type="text" class="form-control" formControlName="titulo" name="titulo"
+            placeholder="Introduce el titulo de tu anuncio">
+        </div>
+        <div class="form-group">
+          <label for="">Descripción</label>
+          <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+            placeholder="Introduce el titulo de tu anuncio"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Precio</label>
+            <input type="number" class="form-control" formControlName="precio" name="precio" placeholder="Precio">
+          </div>
+          <div class="form-group col-6">
+            <label>KMS</label>
+            <input type="number" class="form-control" formControlName="kms" name="kms" placeholder="Kilometros">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="custom-control custom-checkbox mx-auto col-5">
+            <input type="checkbox" value="false" class="custom-control-input" id="itv" formControlName="itv" name="itv" >
+            <label class="custom-control-label" for="itv">ITV</label>
+          </div>
+          <div class="custom-control custom-checkbox mx-auto col-5">
+            <input type="checkbox" value="false" class="custom-control-input" id="homologacion" formControlName="homologacion" name="homologacion">
+            <label class="custom-control-label" for="homologacion">Homologación</label>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="form-group col-6">
+            <label for="">Marca</label>
+            <select (change)="filtrarMarcas(form)" id="marca" class="form-control" formControlName="marca" name="marca">
+              <option value="" selected>Seleciona una marca</option>
+              <option *ngFor="let marca of marcas" [id]="marca.id" [value]="marca.name">{{marca.name}}</option>
+
+            </select>
+          </div>
+          <div class="form-group col-6">
+            <label for="">Modelo</label>
+            <select class="form-control" formControlName="modelo" name="modelo">
+              <option value="" selected>Seleciona un modelo</option>
+              <option *ngFor="let modelo of filtroModelos" [value]="modelo.name">{{modelo.name}}</option>
+            </select>
+          </div>
+
+          <div class="row mt-2">
+            <div class="form-group col-6">
+              <label for="">Provincia</label>
+              <select (change)="getProvincias($event)" class="form-control" id="provincia"
+                formControlName="provincia" name="provincia">
+                <option value="" selected>Seleciona una provincia</option>
+                <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
+                  [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
+              </select>
+              <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
+            </div>
+            <div class="form-group col-6">
+              <label for="">Población</label>
+              <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion">
+                <option value="" selected>Seleciona un poblacion</option>
+                <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="">Tipo de custom</label>
+          <select class="form-control" formControlName="tipoCustom" name="tipoCustom">
+            <option value="">Modelo custom</option>
+            <option value="">Bobber</option>
+            <option value="">Café Racer</option>
+            <option value="">Chopped</option>
+            <option value="">Brad</option>
+            <option value="">Street tracker</option>
+            <option value="">Scramblet</option>
+
+          </select>
+        </div>
+        <div class="row mx-0">
+          <input class="form-control-file" (change)="onFileChange($event)" type="file" value="Enviar"
+            formControlName="file" multiple="multiple">
+          <button class="btn btn-primary btn-block mt-4" type="submit">Enviar</button>
+        </div>
+
+      </form>
+    </mat-tab>
+  </mat-tab-group>
 </div>

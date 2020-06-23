@@ -28,6 +28,7 @@
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",
     "jquery": "^3.5.1",
+    "jwt-decode": "^2.2.0",
     "ngx-slick-carousel": "^0.5.1",
     "pselect.js": "^4.0.1",
     "rxjs": "~6.5.4",

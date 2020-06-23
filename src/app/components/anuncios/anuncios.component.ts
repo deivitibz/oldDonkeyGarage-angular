@@ -4,7 +4,7 @@ import Pslect from 'pselect.js';
 
 import * as brands from '../../db/moto_brands.json';
 import * as models from '../../db/moto_models.json';
-import { HttpHeaders, HttpRequest, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import { anuncioService } from 'src/app/servicios/anuncio.service';
@@ -16,17 +16,18 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
 })
 export class anunciosComponent implements OnInit {
   files: string[];
+  // filtro poblaciones / provincias
   provincias: string[];
   provinciasOrder: any[];
-
   poblaciones: string[];
+  // filtro marca / modelo
   marcas: any;
   modelos: any;
   filtroModelos: any[];
   filtroProvincias: any[];
 
-  allAnuncios: any[];
-
+  allAnuncios: Anuncio[];
+  // formulario
   form: FormGroup;
 
   constructor(
@@ -34,7 +35,7 @@ export class anunciosComponent implements OnInit {
     private http: HttpClient,
     private router: Router
   ) {
-    this.allAnuncios = [];
+
 
     this.marcas = brands.data;
     this.modelos = models.data;
@@ -81,8 +82,8 @@ export class anunciosComponent implements OnInit {
 
   async ngOnInit() {
     const response = await this.anuncioService.getAnuncios();
-    this.allAnuncios.push(response);
-    console.log(this.allAnuncios);
+    this.allAnuncios = response;
+    //console.log(this.allAnuncios);
 
     /*     if (response['error']) {
           this.router.navigate([]);

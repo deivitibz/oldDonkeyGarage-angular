@@ -51,6 +51,9 @@ hr {
 }
 
 
+.mat-drawer-inner-container {
+  display: flex;
+}
 
 
 

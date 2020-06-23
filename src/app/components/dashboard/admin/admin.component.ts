@@ -9,11 +9,14 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit() {
-
+    this.usuarioService.decodeToken();
   }
 
+  logout(){
+    localStorage.removeItem('user-token')
+  }
 
 }

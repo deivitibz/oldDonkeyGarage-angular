@@ -55,7 +55,7 @@ export class NoticiasComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.allNoticias = await this.noticiasService.getFakeApi();
+    this.allNoticias = await this.noticiasService.getAllNoticias();
     console.log(this.allNoticias);
 
     this.dtOptions = {
@@ -87,8 +87,12 @@ export class NoticiasComponent implements OnInit {
 
   async onSubmit(){
     const newNoticia = this.form.value;
+    newNoticia.usuarios_id = "10";
+    console.log(newNoticia);
+
     const response = await this.noticiasService.newNoticia(newNoticia);
     console.log(response);
+
 
   }
 

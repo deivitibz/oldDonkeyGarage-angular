@@ -17,8 +17,8 @@ export class NoticiaService {
     return this.httpClient.get(this.baseUrl + '/' + id).toPromise();
   }
 
-  getAllNoticias() {
-    return this.httpClient.get(this.baseUrl).toPromise();
+  getAllNoticias(): Promise<Noticia[]> {
+    return this.httpClient.get<Noticia[]>(this.baseUrl).toPromise();
   }
 
   newNoticia(noticia: Noticia) {
