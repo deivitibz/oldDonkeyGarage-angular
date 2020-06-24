@@ -39,7 +39,6 @@ export class VideotutorialesComponent implements OnInit {
       autor: new FormControl('', []),
       categoria: new FormControl('', []),
       url_video: new FormControl('', []),
-      premium: new FormControl('', []),
       fecha_publicacion: new FormControl('', []),
       usuarios_id: new FormControl('', []),
     });
