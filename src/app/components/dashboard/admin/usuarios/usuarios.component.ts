@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import Pslect from 'pselect.js';
 
 import {
   MatSnackBar,
@@ -18,21 +19,23 @@ export interface Usuario {
   rol: string
 }
 
-
-
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
 })
 
-
 export class UsuariosComponent implements OnInit {
   panelOpenState = false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-
-  displayedColumns: string[] = ['id', 'username', 'email','rol','actions'];
+  // filtro poblaciones / provincias
+  provincias: string[];
+  provinciasOrder: any[];
+  poblaciones: string[];
+  filtroProvincias: any[];
+  //material tables
+  displayedColumns: string[] = ['id', 'username', 'email', 'rol', 'actions'];
   dataSource: MatTableDataSource<Usuario>;
 
   usuarioEdit: any;
@@ -43,10 +46,25 @@ export class UsuariosComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private usuarioService: UsuarioService,private _snackBar: MatSnackBar) {
+  constructor(private usuarioService: UsuarioService, private _snackBar: MatSnackBar) {
     this.allUsers = []
     this.usuarioEdit = []
 
+    this.provincias = new Pslect().constructor.provincesData;
+    this.poblaciones = new Pslect().constructor.municipesData;
+    this.provinciasOrder = [];
+
+    for (let provincia of this.provincias) {
+      const provinciaObj: Object = {
+        provincia: provincia['nm'],
+        id: provincia['id'],
+      };
+      this.provinciasOrder.push(provinciaObj);
+      //this.provinciasOrder.push({ 'provincia': provincia['nm'].toString(), 'id': parseInt(provincia['id']) })
+    }
+    this.provinciasOrder.sort((a, b) => {
+      return this.compareStrings(a['provincia'], b['provincia']);
+    });
     //formulario
     this.form = new FormGroup({
       username: new FormControl(
@@ -107,38 +125,28 @@ export class UsuariosComponent implements OnInit {
 
 
   async ngOnInit() {
-      this.allUsers = await this.usuarioService.getUsers();
-      this.dataSource = new MatTableDataSource(this.allUsers);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
-
-
+    this.allUsers = await this.usuarioService.getUsers();
+    this.dataSource = new MatTableDataSource(this.allUsers);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  async deleteUser(element){
+  async deleteUser(element) {
     const response = await this.usuarioService.deleteUser(element.id);
-
     this.openSnackBar(response);
-
-
-
-    /* const response = await this.usuarioService.getUserById(element.id)
-    console.log(response); */
-
-
   }
 
-  async editUser(element){
+  async editUser(element) {
     this.togglePanel()
     this.usuarioEdit = await this.usuarioService.getUserById(element.id);
 
   }
 
-  async onSubmit(){
+  async onSubmit() {
     const newUser = this.form.value;
-
     if (this.usuarioEdit.id) {
+      const response = await this.usuarioService.createUser(newUser);
+      console.log(response);
 
     } else {
       const response = await this.usuarioService.registro;
@@ -147,7 +155,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   openSnackBar(message) {
-    this._snackBar.open(message,'Cerrar', {
+    this._snackBar.open(message, 'Cerrar', {
       duration: 2000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
@@ -156,16 +164,35 @@ export class UsuariosComponent implements OnInit {
 
   togglePanel() {
     this.panelOpenState = !this.panelOpenState
-}
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
+  getProvincias($event) {
+    this.filtroProvincias = [];
+    this.poblaciones.filter((result) => {
+      let idProvincia =
+        $event.target.options[$event.target.options['selectedIndex']].dataset.id;
+      let idPoblacion = result['id'];
+      idPoblacion = idPoblacion.substr(0, 2);
+      if (idPoblacion === idProvincia) {
+        this.filtroProvincias.push(result);
+      }
+    });
+  }
+
+  compareStrings(a, b) {
+    // Assuming you want case-insensitive comparison
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+
+    return a < b ? -1 : a > b ? 1 : 0;
+  }
 
 }

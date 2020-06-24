@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Usuario } from './../models/usuario_perfil.model';
 
 
 
@@ -41,6 +42,10 @@ export class UsuarioService {
 
   isLogged(){
     return localStorage.getItem('user-token')
+  }
+
+  createUser(user):Promise <Usuario>{
+    return this.httpClient.post<Usuario>(this.baseUrl, user).toPromise();
   }
 
 }

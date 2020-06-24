@@ -9,6 +9,7 @@
 </div>
 
 <div class="container">
+  <!-- tabla -->
   <div class="row">
 
     <mat-expansion-panel [expanded]="!panelOpenState">
@@ -18,7 +19,7 @@
 
 
 
-    <!-- tabla -->
+
     <mat-form-field>
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
@@ -54,13 +55,14 @@
     <!-- tabla -->
     </mat-expansion-panel>
   </div>
+  <!-- formulario -->
   <div class="row">
     <mat-expansion-panel [expanded]="panelOpenState">
       <mat-expansion-panel-header>
         Crear Editar Usuarios
       </mat-expansion-panel-header>
 
-      <!-- formulario -->
+
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group col-12 p-0">
 
@@ -91,8 +93,10 @@
             <div class="form-group col-6">
 
               <label for="">Provincia</label>
-              <select class="form-control" id="provincia" formControlName="provincia" name="provincia">
+              <select class="form-control" id="provincia" formControlName="provincia" name="provincia" (change)="getProvincias($event)">
                 <option value="{{usuarioEdit['provincia']}}" selected>Elige una provincia</option>
+                <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
+                        [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
               </select>
               <small class="form-text text-muted"
                 *ngIf="form.controls.provincia.errors && form.controls.provincia.touched">Debe
@@ -103,6 +107,8 @@
               <label for="">Población</label>
               <select class="form-control" id="localidad" formControlName="localidad" name="localidad">
                 <option value="{{usuarioEdit['poblacion']}}" selected>Elige una población</option>
+                <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
+                </option>
                 <small class="form-text text-muted"
                   *ngIf="form.controls.localidad.errors && form.controls.localidad.touched">Debe
                   insertar una localidad</small>
