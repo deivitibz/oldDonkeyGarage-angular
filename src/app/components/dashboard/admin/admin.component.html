@@ -1,19 +1,99 @@
+<div class="container-fluid p-0">
+  <mat-drawer-container>
+<!-- menu sidebar -->
+    <mat-drawer #drawer class="example-sidenav bg-donkey" mode="side">
+
+      <div class="row ">
+
+        <div class="col-12">
+          <img class="img-fluid m-1" src="../../../assets/img/log-sm-n.png" alt="">
+        </div>
+
+        <div class="col-12">
+          <ul class="nav flex-column">
+
+            <li class="bg-donkey list-group-item my-1">
+              <a class="nav-link active text-center" [routerLink]="['usuarios']">
+                <img class="img-fluid m-1" width="35%" src="../../../assets/img/casco.png" alt="">
+                Usuarios
+              </a>
+            </li>
+            <li class="bg-donkey list-group-item my-1">
+              <a class="nav-link text-center" [routerLink]="['anuncios']">
+                <img class="img-fluid m-1" width="35%" src="../../../assets/img/anuncios.png" alt="">
+                Anuncios
+              </a>
+            </li>
+            <li class="bg-donkey list-group-item my-1">
+              <a class="nav-link text-center" [routerLink]="['noticias']">
+                <img class="img-fluid m-1" width="35%" src="../../../assets/img/mensaje.png" alt="">
+                Noticias
+              </a>
+            </li>
+            <li class="bg-donkey list-group-item my-1">
+              <a class="nav-link text-center" [routerLink]="['videotutoriales']">
+                <img class="img-fluid m-1" width="40%" src="../../../assets/img/moto.png" alt="">
+                Videotutoriales
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-block bg-danger" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>
+        </div>
+
+      </div>
+
+    </mat-drawer>
+
+<!-- boton sidebar -->
+    <div class="row">
+      <div class="col-12">
+        <mat-toolbar color="">
+          <mat-toolbar-row>
+             <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="drawer.toggle()">menu</mat-icon>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <router-outlet></router-outlet>
+<!--         <mat-card>
+          <mat-card-header>
+            <mat-card-title>title</mat-card-title>
+            <mat-card-subtitle>subtitle</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ok</button>
+          </mat-card-actions>
+        </mat-card> -->
+      </div>
+    </div>
+  </mat-drawer-container>
+</div>
+
 <!-- <mat-toolbar class="bg-donkey text-white text-center">
   <mat-toolbar-row>
     <span>Old Donkey Admin Panel</span>
   </mat-toolbar-row>
 </mat-toolbar> -->
 
-<nav class="navbar navbar-dark sticky-top bg-donkey flex-md-nowrap p-0 shadow">
+<!-- <nav class="navbar navbar-dark sticky-top bg-donkey flex-md-nowrap p-0 shadow">
 
 
 
   <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" (click)="drawer.toggle()">Old Donkey Admin</a>
-  <!-- <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+ -->  <!-- <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button> -->
 
-  <ul class="navbar-nav px-3">
+  <!-- <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" href="#" (click)="logout()">Sign out</a>
     </li>
@@ -109,7 +189,7 @@
   <div>
 
   </div>
-</div>
+</div> -->
 
 <!--
 <div class="container-fluid">

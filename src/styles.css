@@ -68,3 +68,12 @@ hr {
 
 
 }
+
+
+.mat-paginator {
+  width: 100%;
+}
+
+.mat-expansion-panel {
+  width: 100%;
+}

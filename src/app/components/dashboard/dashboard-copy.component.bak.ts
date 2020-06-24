@@ -40,7 +40,7 @@
         </div>
 
         <div class="col-12">
-          <button class="btn btn-block bg-danger" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>
+          <button class="btn btn-block bg-danger" [routerLink]="['/home']" routerLinkActive="router-link-active" ] (click)="logout()">Log Out</button>
         </div>
 
       </div>

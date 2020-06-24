@@ -47,7 +47,7 @@ const routes: Routes = [
   { path: 'moto', component: MotoComponent },
   { path: 'noticias', component: noticiasComponent },
   {
-    path: 'dashboard', component: DashboardComponent,canActivate: [LoginGuard],
+    path: 'dashboard', component: DashboardComponent,
     children: [
       {
         path: 'constructor', component: ConstructorDashComponent,

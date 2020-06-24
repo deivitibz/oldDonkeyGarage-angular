@@ -31,6 +31,10 @@ export class UsuarioService {
     return this.httpClient.get(this.baseUrl).toPromise();
   }
 
+  deleteUser(userId): Promise<any> {
+    return this.httpClient.delete(this.baseUrl+'/'+userId).toPromise();
+  }
+
   getUserById(id): Promise<any>{
     return this.httpClient.get(this.baseUrl + '/' + id).toPromise()
   }

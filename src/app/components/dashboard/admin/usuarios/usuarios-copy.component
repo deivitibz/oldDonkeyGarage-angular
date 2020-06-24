@@ -1,0 +1,350 @@
+<div class="container-fluid p-0">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Lista de usuarios registrados</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">add</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- tabla -->
+    <div class="col-12 bg-donkey-secondary">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Usuario </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rol">
+          <th mat-header-cell *matHeaderCellDef> Rol </th>
+          <td mat-cell *matCellDef="let element"> {{element.rol}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon (click)="editUser(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
+            <mat-icon (click)="deleteUser(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Lista Usuarios
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-group mt-5 ">
+                <div class="text-center">
+                  <h3>Formulario de Registro</h3>
+                </div>
+              </div>
+              <div class="form-group col-12 p-0">
+
+                <div class="form-group">
+                  <label for="">Nombre</label>
+                  <input value="{{usuarioEdit['username']}}" type="text" class="form-control" placeholder="Introduzca su nombre" formControlName="username"
+                    name="nombre">
+                  <small class="form-text text-muted"
+                    *ngIf="form.controls.username.errors && form.controls.username.touched">Debe tener al menos 4
+                    letras y no más de 16</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="">Imagen Perfil</label>
+                  <input value="{{usuarioEdit['imagenes_usuario']}}" type="text" class="form-control" formControlName="imagenes_usuario" name="imagenes_usuario">
+                </div>
+
+                <div class="form-group">
+                  <label for="">Dirección</label>
+                  <input value="{{usuarioEdit['direccion']}}" type="text" class="form-control" placeholder="Calle del labrador, nº4" formControlName="direccion"
+                    name="direccion">
+                  <small class="form-text text-muted"
+                    *ngIf="form.controls.direccion.errors && form.controls.direccion.touched">Campo
+                    obligatorio</small>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-6">
+
+                    <label for="">Provincia</label>
+                    <select class="form-control" id="provincia" formControlName="provincia" name="provincia">
+                      <option value="{{usuarioEdit['provincia']}}" selected>Elige una provincia</option>
+                    </select>
+                    <small class="form-text text-muted"
+                      *ngIf="form.controls.provincia.errors && form.controls.provincia.touched">Debe
+                      insertar una provincia</small>
+
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="">Población</label>
+                    <select class="form-control" id="localidad" formControlName="localidad" name="localidad">
+                      <option value="{{usuarioEdit['poblacion']}}" selected>Elige una población</option>
+                      <small class="form-text text-muted"
+                        *ngIf="form.controls.localidad.errors && form.controls.localidad.touched">Debe
+                        insertar una localidad</small>
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="">Constructor</label>
+                  <input value="{{usuarioEdit['constructor']}}" type="text" class="form-control" formControlName="nombre_constructor" placeholder="Custom Bike"
+                    name="nombre_constructor">
+
+                  <small class="form-text text-muted"
+                    *ngIf="form.controls.nombre_constructor.errors && form.controls.nombre_constructor.touched">Debe
+                    insertar un nombre</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="">Descripción</label>
+                  <textarea value="{{usuarioEdit['descripcion']}}" rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+                    placeholder="Introduce el titulo de tu anuncio"></textarea>
+                  <small class="form-text text-muted"
+                    *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe contener un
+                    minimo
+                    de 30
+                    letras y un máximo de 150</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="">Persona contacto</label>
+                  <input value="{{usuarioEdit['persona_contacto']}}" type="text" class="form-control" placeholder="Juan Pérez" formControlName="persona_contacto"
+                    name="persona_contacto">
+                </div>
+                <small class="form-text text-muted"
+                  *ngIf="form.controls.persona_contacto.errors && form.controls.persona_contacto.touched">Debe tener
+                  un nombre de min 3 letras y max 15</small>
+
+                <div class="form-group">
+                  <label>Móvil</label>
+                  <input value="{{usuarioEdit['telefono']}}" type="phoneNumber" class="form-control" placeholder="Introduzca un teléfono móvil"
+                    formControlName="telefono" name="telefono" autocomplete="off">
+                  <small class="form-text text-muted"
+                    *ngIf="form.controls.telefono.errors && form.controls.telefono.touched">Inserte un número
+                    móvil</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="">Imagen Perfil</label>
+                  <input value="{{usuarioEdit['imagenes_usuario']}}" type="text" class="form-control" formControlName="imagenes_constructor" name="imagenes_constructor">
+                </div>
+
+              </div>
+
+              <button *ngIf="!usuarioEdit.id" class="btn btn-primary btn-block " type="submit">Enviar</button>
+              <button *ngIf="usuarioEdit.id" class="btn btn-primary btn-block " type="submit">Editar</button>
+
+            </form>
+
+          </mat-expansion-panel>
+          <mat-expansion-panel
+                               (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Self aware panel
+              </mat-panel-title>
+              <mat-panel-description>
+                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field>
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+            </mat-form-field>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="rol">
+                <th mat-header-cell *matHeaderCellDef> Rol </th>
+                <td mat-cell *matCellDef="let element"> {{element.rol}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-icon (click)="editUser(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
+                  <mat-icon (click)="deleteUser(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+        <!-- formulario usuario -->
+        <div class="col-12">
+          formulario 1
+        </div>
+        <!-- formulario -->
+        <div class="col-12 bg-donkey-secondary">
+<!--           <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group mt-5 ">
+              <div class="text-center">
+                <h3>Formulario de Registro</h3>
+              </div>
+            </div>
+            <div class="form-group col-12 p-0">
+
+              <div class="form-group">
+                <label for="">Nombre</label>
+                <input value="{{usuarioEdit['username']}}" type="text" class="form-control" placeholder="Introduzca su nombre" formControlName="username"
+                  name="nombre">
+                <small class="form-text text-muted"
+                  *ngIf="form.controls.username.errors && form.controls.username.touched">Debe tener al menos 4
+                  letras y no más de 16</small>
+              </div>
+
+              <div class="form-group">
+                <label for="">Imagen Perfil</label>
+                <input value="{{usuarioEdit['imagenes_usuario']}}" type="text" class="form-control" formControlName="imagenes_usuario" name="imagenes_usuario">
+              </div>
+
+              <div class="form-group">
+                <label for="">Dirección</label>
+                <input value="{{usuarioEdit['direccion']}}" type="text" class="form-control" placeholder="Calle del labrador, nº4" formControlName="direccion"
+                  name="direccion">
+                <small class="form-text text-muted"
+                  *ngIf="form.controls.direccion.errors && form.controls.direccion.touched">Campo
+                  obligatorio</small>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-6">
+
+                  <label for="">Provincia</label>
+                  <select class="form-control" id="provincia" formControlName="provincia" name="provincia">
+                    <option value="{{usuarioEdit['provincia']}}" selected>Elige una provincia</option>
+                  </select>
+                  <small class="form-text text-muted"
+                    *ngIf="form.controls.provincia.errors && form.controls.provincia.touched">Debe
+                    insertar una provincia</small>
+
+                </div>
+                <div class="form-group col-6">
+                  <label for="">Población</label>
+                  <select class="form-control" id="localidad" formControlName="localidad" name="localidad">
+                    <option value="{{usuarioEdit['poblacion']}}" selected>Elige una población</option>
+                    <small class="form-text text-muted"
+                      *ngIf="form.controls.localidad.errors && form.controls.localidad.touched">Debe
+                      insertar una localidad</small>
+
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="">Constructor</label>
+                <input value="{{usuarioEdit['constructor']}}" type="text" class="form-control" formControlName="nombre_constructor" placeholder="Custom Bike"
+                  name="nombre_constructor">
+
+                <small class="form-text text-muted"
+                  *ngIf="form.controls.nombre_constructor.errors && form.controls.nombre_constructor.touched">Debe
+                  insertar un nombre</small>
+              </div>
+
+              <div class="form-group">
+                <label for="">Descripción</label>
+                <textarea value="{{usuarioEdit['descripcion']}}" rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+                  placeholder="Introduce el titulo de tu anuncio"></textarea>
+                <small class="form-text text-muted"
+                  *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe contener un
+                  minimo
+                  de 30
+                  letras y un máximo de 150</small>
+              </div>
+
+              <div class="form-group">
+                <label for="">Persona contacto</label>
+                <input value="{{usuarioEdit['persona_contacto']}}" type="text" class="form-control" placeholder="Juan Pérez" formControlName="persona_contacto"
+                  name="persona_contacto">
+              </div>
+              <small class="form-text text-muted"
+                *ngIf="form.controls.persona_contacto.errors && form.controls.persona_contacto.touched">Debe tener
+                un nombre de min 3 letras y max 15</small>
+
+              <div class="form-group">
+                <label>Móvil</label>
+                <input value="{{usuarioEdit['telefono']}}" type="phoneNumber" class="form-control" placeholder="Introduzca un teléfono móvil"
+                  formControlName="telefono" name="telefono" autocomplete="off">
+                <small class="form-text text-muted"
+                  *ngIf="form.controls.telefono.errors && form.controls.telefono.touched">Inserte un número
+                  móvil</small>
+              </div>
+
+              <div class="form-group">
+                <label for="">Imagen Perfil</label>
+                <input value="{{usuarioEdit['imagenes_usuario']}}" type="text" class="form-control" formControlName="imagenes_constructor" name="imagenes_constructor">
+              </div>
+
+            </div>
+
+            <button *ngIf="!usuarioEdit.id" class="btn btn-primary btn-block " type="submit">Enviar</button>
+            <button *ngIf="usuarioEdit.id" class="btn btn-primary btn-block " type="submit">Editar</button>
+
+          </form> -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

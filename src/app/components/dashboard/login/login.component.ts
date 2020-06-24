@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       this.saveToken(response.token);
       this.cierraPopup();
       this.form.reset();
-      this.router.navigate(['admin']);
+      this.router.navigate(['dashboard']);
     } else {
       console.log('no se a podido hacer login');
 

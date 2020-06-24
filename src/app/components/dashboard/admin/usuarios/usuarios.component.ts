@@ -1,10 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+
 export interface Usuario {
   id: number,
   username: string,
-  email: string;
+  email: string,
+  rol: string
 }
 
 
@@ -17,22 +28,26 @@ export interface Usuario {
 
 
 export class UsuariosComponent implements OnInit {
+  panelOpenState = false;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
+  displayedColumns: string[] = ['id', 'username', 'email','rol','actions'];
+  dataSource: MatTableDataSource<Usuario>;
 
-  oneUser: Object;
+  usuarioEdit: any;
   allUsers: Usuario[];
-  displayedColumns: string[] = ['id','username','email','actions']
-  dataSource = this.allUsers
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   form: FormGroup;
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private usuarioService: UsuarioService,private _snackBar: MatSnackBar) {
     this.allUsers = []
+    this.usuarioEdit = []
 
-    this.oneUser = new Object;
-
-
+    //formulario
     this.form = new FormGroup({
       username: new FormControl(
         '',
@@ -92,36 +107,65 @@ export class UsuariosComponent implements OnInit {
 
 
   async ngOnInit() {
-    try{
-      const response = await this.usuarioService.getUsers();
-      console.log(response);
-      this.allUsers = response;
+      this.allUsers = await this.usuarioService.getUsers();
+      this.dataSource = new MatTableDataSource(this.allUsers);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
 
-    } catch (err) {
-      console.log(err);
 
-    }
 
   }
 
   async deleteUser(element){
-    const response = await this.usuarioService.getUserById(element.id)
-    console.log(response);
+    const response = await this.usuarioService.deleteUser(element.id);
+
+    this.openSnackBar(response);
+
+
+
+    /* const response = await this.usuarioService.getUserById(element.id)
+    console.log(response); */
 
 
   }
 
   async editUser(element){
-    this.oneUser = await this.usuarioService.getUserById(element.id)
-    //console.log(response);
-    console.log(this.oneUser);
-
-
+    this.togglePanel()
+    this.usuarioEdit = await this.usuarioService.getUserById(element.id);
 
   }
 
-  onSubmit(){
+  async onSubmit(){
+    const newUser = this.form.value;
 
+    if (this.usuarioEdit.id) {
+
+    } else {
+      const response = await this.usuarioService.registro;
+      console.log(response);
+    }
   }
+
+  openSnackBar(message) {
+    this._snackBar.open(message,'Cerrar', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+
+  togglePanel() {
+    this.panelOpenState = !this.panelOpenState
+}
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
 
 }
