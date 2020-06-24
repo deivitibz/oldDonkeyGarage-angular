@@ -115,7 +115,7 @@ export class NoticiasComponent implements OnInit {
   onFileChange($event) {}
 
   async deleteNoticia(noticia) {
-    const response = await this.noticiasService.deleteNoticia(noticia.id);
+    const response = await this.noticiasService.deleteNoticia(noticia);
     this.openSnackBar(response['succes']);
     this.reloadData();
   }

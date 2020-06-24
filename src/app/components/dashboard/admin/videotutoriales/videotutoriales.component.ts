@@ -8,6 +8,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService } from 'src/app/servicios/auth.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-videotutoriales',
@@ -15,14 +20,28 @@ import { AuthService } from 'src/app/servicios/auth.service';
   styleUrls: ['./videotutoriales.component.css'],
 })
 export class VideotutorialesComponent implements OnInit {
+  panelOpenState = false;
   allTutoriales: Video_tutorial[];
   oneTutorial: Video_tutorial;
+
+  tutorialEdit: any;
+  estado: string;
 
   //Formulario
   form: FormGroup;
 
+  //snackbar
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
   //datatables settings
-  displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'autor'];
+  displayedColumns: string[] = [
+    'id',
+    'titulo',
+    'descripcion',
+    'autor',
+    'actions',
+  ];
   dataSource: MatTableDataSource<Video_tutorial>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -30,8 +49,12 @@ export class VideotutorialesComponent implements OnInit {
 
   constructor(
     private tutorialesService: TutorialesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
   ) {
+    this.estado = 'Añadir';
+    this.tutorialEdit = [];
+
     // Formulario
     this.form = new FormGroup({
       titulo: new FormControl('', []),
@@ -45,10 +68,18 @@ export class VideotutorialesComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.allTutoriales = await this.tutorialesService.getAllTutorial();
+    this.reloadData();
+  }
+
+  materialDataTable() {
     this.dataSource = new MatTableDataSource(this.allTutoriales);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  async reloadData() {
+    this.allTutoriales = await this.tutorialesService.getAllTutorial();
+    this.materialDataTable();
   }
 
   applyFilter(event: Event) {
@@ -60,16 +91,47 @@ export class VideotutorialesComponent implements OnInit {
     }
   }
 
+  openSnackBar(message) {
+    this._snackBar.open(message, 'Cerrar', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+
+  togglePanel() {}
+
+  async deleteTutorial(tutorial) {
+    const response = await this.tutorialesService.deleteTutorial(tutorial);
+    this.openSnackBar(response['success']);
+    this.reloadData();
+  }
+
   async onSubmit() {
     const newTutorial = this.form.value;
-    console.log(newTutorial);
-
     newTutorial.usuarios_id = this.authService.decodeToken()['userId'];
 
-    const response = await this.tutorialesService.newTutorial(newTutorial);
+    // console.log(newTutorial);
 
-    // console.log(response);
+    // console.log(newTutorial.usuarios_id);
 
-    // console.log(this.form.value);
+    if (this.tutorialEdit.id) {
+      const response = await this.tutorialesService.editTutorial(
+        this.tutorialEdit.id,
+        newTutorial
+      );
+      this.reloadData();
+      this.openSnackBar(response['success']);
+    } else {
+      const response = await this.tutorialesService.newTutorial(newTutorial);
+      this.reloadData();
+      this.openSnackBar(response['success']);
+    }
+  }
+
+  async editTutorial(tutorial) {
+    this.tutorialEdit = await this.tutorialesService.getTutorial(tutorial.id);
+    // console.log(this.tutorialEdit);
+    this.estado = 'Editar';
   }
 }

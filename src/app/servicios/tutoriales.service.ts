@@ -8,8 +8,6 @@ import { HttpClient } from '@angular/common/http';
 export class TutorialesService {
   baseUrl: string;
 
-  // allTutoriales: Video_tutorial[];
-
   constructor(private httpClient: HttpClient) {
     this.baseUrl = 'http://localhost:3000/api/tutoriales';
   }
@@ -22,16 +20,17 @@ export class TutorialesService {
     return this.httpClient.get<Video_tutorial[]>(this.baseUrl).toPromise();
   }
 
-  deleteTutorial(id) {
-    return this.httpClient.delete(this.baseUrl, id).toPromise();
+  deleteTutorial(tutorial) {
+    return this.httpClient.delete(this.baseUrl + '/' + tutorial.id).toPromise();
   }
 
   newTutorial(video_tutorial: Video_tutorial) {
     return this.httpClient.post(this.baseUrl, video_tutorial).toPromise();
   }
 
-  editTutorial(id) {
-    const tutorial = this.getTutorial(id);
-    return this.httpClient.put(this.baseUrl, tutorial).toPromise();
+  editTutorial(id, newTutorial) {
+    return this.httpClient
+      .put(this.baseUrl + '/' + id, newTutorial)
+      .toPromise();
   }
 }
