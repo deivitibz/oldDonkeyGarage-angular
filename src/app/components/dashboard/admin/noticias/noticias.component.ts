@@ -23,7 +23,13 @@ export class NoticiasComponent implements OnInit {
   form: FormGroup;
 
   //datatables settings
-  displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'autor','actions'];
+  displayedColumns: string[] = [
+    'id',
+    'titulo',
+    'descripcion',
+    'autor',
+    'actions',
+  ];
   dataSource: MatTableDataSource<Noticia>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -58,7 +64,7 @@ export class NoticiasComponent implements OnInit {
       usuarios_id: new FormControl('', []),
     });
 
-    this.noticiaEdit = []
+    this.noticiaEdit = [];
   }
 
   async ngOnInit() {
@@ -86,13 +92,12 @@ export class NoticiasComponent implements OnInit {
   async onSubmit() {
     const newNoticia = this.form.value;
     newNoticia.usuarios_id = this.authService.decodeToken()['userId'];
-    if(this.noticiaEdit.id){
-      await this.editNoticia(newNoticia)
+    if (this.noticiaEdit.id) {
+      await this.editNoticia(newNoticia);
     } else {
       const response = await this.noticiasService.newNoticia(newNoticia);
       console.log(response);
     }
-
   }
 
   async editNoticia(noticia) {
@@ -102,12 +107,9 @@ export class NoticiasComponent implements OnInit {
     const response = await this.noticiasService.editNoticia(noticia);
     console.log(response);
 
-
     //const noticia = await this.noticiasService.editNoticia(noticia.id)
     //this.oneNoticia = new Noticia(1,'','','',[],'',true,'',1)
     //console.log(response);
     //console.log(this.oneNoticia);
   }
-
-
 }

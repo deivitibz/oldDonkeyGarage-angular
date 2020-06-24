@@ -8,26 +8,30 @@ import { HttpClient } from '@angular/common/http';
 export class TutorialesService {
   baseUrl: string;
 
-  allTutoriales: any[];
+  // allTutoriales: Video_tutorial[];
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://streaming.zapto.org:3000/api/tutoriales';
+    this.baseUrl = 'http://localhost:3000/api/tutoriales';
   }
 
   getTutorial(id) {
     return this.httpClient.get(this.baseUrl + '/' + id).toPromise();
   }
 
-  getAllTutorial() {
-    return this.httpClient.get(this.baseUrl).toPromise();
+  getAllTutorial(): Promise<Video_tutorial[]> {
+    return this.httpClient.get<Video_tutorial[]>(this.baseUrl).toPromise();
+  }
+
+  deleteTutorial(id) {
+    return this.httpClient.delete(this.baseUrl, id).toPromise();
   }
 
   newTutorial(video_tutorial: Video_tutorial) {
-    return this.httpClient.post(this.baseUrl, Video_tutorial).toPromise();
+    return this.httpClient.post(this.baseUrl, video_tutorial).toPromise();
   }
 
   editTutorial(id) {
     const tutorial = this.getTutorial(id);
-    return this.httpClient.put(this.baseUrl, Video_tutorial).toPromise();
+    return this.httpClient.put(this.baseUrl, tutorial).toPromise();
   }
 }
