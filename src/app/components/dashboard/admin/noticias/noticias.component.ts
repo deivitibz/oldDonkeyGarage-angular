@@ -82,9 +82,7 @@ export class NoticiasComponent implements OnInit {
 
   async onSubmit() {
     const newNoticia = this.form.value;
-    const loginId = this.authService.decodeToken();
-
-    newNoticia.usuarios_id = loginId.userId;
+    newNoticia.usuarios_id = this.authService.decodeToken()['userId'];
 
     const response = await this.noticiasService.newNoticia(newNoticia);
     console.log(response);

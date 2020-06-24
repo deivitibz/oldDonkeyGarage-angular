@@ -6,3 +6,114 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
+<div class="container">
+  <mat-tab-group>
+
+    <mat-tab label="Lista de Tutoriales">
+
+      <div class="container">
+
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia"> <!-- evento que llama a funcion-->
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="titulo">
+              <th mat-header-cell *matHeaderCellDef> Titulo </th>
+              <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="descripcion">
+              <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="autor">
+              <th mat-header-cell *matHeaderCellDef> Autor </th>
+              <td mat-cell *matCellDef="let element"> {{element.autor}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+
+      </div>
+
+      <!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+
+    </mat-tab>
+    <mat-tab label="Añadir tutorial">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="">Titulo</label>
+          <input type="text" class="form-control" formControlName="titulo" name="titulo"
+            placeholder="Introduce el titulo de tu anuncio">
+          <!-- <small class="form-text text-muted" *ngIf="form.controls.titulo.errors && form.controls.titulo.touched">Debe
+            contener al menos
+            10
+            letras</small> -->
+        </div>
+
+        <div class="form-group">
+          <label for="">URL video</label>
+          <input type="text" class="form-control" formControlName="url_video" name="url_video">
+
+        </div>
+
+        <div class="form-group">
+          <label for="">Descripción</label>
+          <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+            placeholder="Introduce el titulo de tu anuncio"></textarea>
+          <!-- <small class="form-text text-muted"
+            *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe
+            contener un minimo
+            de 100
+            letras y un máximo de 1000
+            </small> -->
+        </div>
+
+        <div class="form-group">
+          <label for="">Autor</label>
+          <input type="text" class="form-control" formControlName="autor" name="autor" placeholder="@juan_camus">
+          <!-- <small class="form-text text-muted" *ngIf="form.controls.autor.errors && form.controls.autor.touched">Debe
+            contener al menos 3
+            letras
+            </small> -->
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="">Categoría</label>
+          <select class="form-control" formControlName="categoria" name="categoria">
+            <option value="">Elija una categoría</option>
+            <option value="mecanica">Mecánica</option>
+            <option value="electricidad">Eléctricidad</option>
+            <option value="pintura">Pintura</option>
+            <option value="reparacion">Reparación</option>
+            <option value="consejos">Consejos</option>
+            <option value="homologaciones">Homologaciones</option>
+            <option value="noticias">Noticias</option>
+          </select>
+        </div>
+        <div class="row mx-0">
+          <!--     <button class="btn btn-primary btn-block " type="submit" [disabled]="!form.valid">Enviar</button>
+   --> <button class="btn btn-primary btn-block " type="submit">Enviar</button>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</div>
