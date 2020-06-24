@@ -1,27 +1,75 @@
-<div class="row flex-column">
-  <div class="col-12">
-    <img src="https://picsum.photos/id/684/600/400" alt="">
-  </div>
-
-  <div class="col-12">
-    <ul></ul>
-  </div>
-
-  <div class="col-12">
-    <button></button>
-  </div>
+<div class="container-fluid p-0">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Tipo Motocicletas</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>
+<div class="container">
+
+  <div class="row">
+
+    <div class="mat-elevation-z8 col-12 my-4">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia"> <!-- evento que llama a funcion-->
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef> Tipo </th>
+          <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon (click)="editMoto(element)" class="example-icon" aria-hidden="false"
+              aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
+
+            <mat-icon (click)="deleteMoto(element)" class="example-icon" aria-hidden="false"
+              aria-label="Example heart icon">
+              delete</mat-icon>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+    <div class="mat-elevation-z4 col-12 ">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <h4 class="text-center pt-3">{{estado}} motocicleta</h4>
+          <label for="">Tipo de moto</label>
+          <input type="text" class="form-control" formControlName="tipo" name="tipo" value="{{motoEdit['tipo']}}"
+            placeholder="Introduce el titulo de tu anuncio">
+          <!-- <small class="form-text text-muted" *ngIf="form.controls.titulo.errors && form.controls.titulo.touched">Debe
+            contener al menos
+            10
+            letras</small> -->
+        </div>
+
+        <div class="row mx-0">
+          <button *ngIf="!motoEdit.id" class="btn btn-primary btn-block " type="submit">Enviar</button>
+          <button *ngIf="motoEdit.id" class="btn btn-primary btn-block " type="submit">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
 
-<mat-drawer-container class="example-container">
 
 
 
-  <mat-drawer mode="side" opened>
 
-  </mat-drawer>
-
-
-
-  <mat-drawer-content>Main content</mat-drawer-content>
-</mat-drawer-container>
+</div>

@@ -8,6 +8,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService } from 'src/app/servicios/auth.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-noticias',
@@ -19,8 +24,14 @@ export class NoticiasComponent implements OnInit {
   oneNoticia: Noticia;
 
   noticiaEdit: any;
+  estado: string;
+
   //formulario
   form: FormGroup;
+
+  //snackbar
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   //datatables settings
   displayedColumns: string[] = [
@@ -37,8 +48,12 @@ export class NoticiasComponent implements OnInit {
 
   constructor(
     private noticiasService: NoticiaService,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
   ) {
+    this.estado = 'Añadir';
+    this.noticiaEdit = [];
+
     // formulario
     this.form = new FormGroup({
       titulo: new FormControl(
@@ -63,15 +78,21 @@ export class NoticiasComponent implements OnInit {
       fecha_publicacion: new FormControl('', []),
       usuarios_id: new FormControl('', []),
     });
-
-    this.noticiaEdit = [];
   }
 
   async ngOnInit() {
-    this.allNoticias = await this.noticiasService.getAllNoticias();
+    this.reloadData();
+  }
+
+  materialDataTable() {
     this.dataSource = new MatTableDataSource(this.allNoticias);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  async reloadData() {
+    this.allNoticias = await this.noticiasService.getAllNoticias();
+    this.materialDataTable();
   }
 
   applyFilter(event: Event) {
@@ -83,33 +104,43 @@ export class NoticiasComponent implements OnInit {
     }
   }
 
+  openSnackBar(message) {
+    this._snackBar.open(message, 'Cerrar', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+
   onFileChange($event) {}
-  async deleteNoticia(element) {
-    const response = await this.noticiasService.deleteNoticia(element.id);
-    console.log(response);
+
+  async deleteNoticia(noticia) {
+    const response = await this.noticiasService.deleteNoticia(noticia.id);
+    this.openSnackBar(response['succes']);
+    this.reloadData();
   }
 
   async onSubmit() {
     const newNoticia = this.form.value;
     newNoticia.usuarios_id = this.authService.decodeToken()['userId'];
+
     if (this.noticiaEdit.id) {
-      await this.editNoticia(newNoticia);
+      const response = await this.noticiasService.editNoticia(
+        this.noticiaEdit,
+        newNoticia
+      );
+
+      this.openSnackBar(response['success']);
+      this.reloadData();
     } else {
       const response = await this.noticiasService.newNoticia(newNoticia);
-      console.log(response);
+      this.openSnackBar(response['success']);
+      this.reloadData();
     }
   }
 
   async editNoticia(noticia) {
-    const noticiaEdit = await this.noticiasService.getNoticia(noticia.id);
-    this.noticiaEdit = noticiaEdit;
-
-    const response = await this.noticiasService.editNoticia(noticia);
-    console.log(response);
-
-    //const noticia = await this.noticiasService.editNoticia(noticia.id)
-    //this.oneNoticia = new Noticia(1,'','','',[],'',true,'',1)
-    //console.log(response);
-    //console.log(this.oneNoticia);
+    this.noticiaEdit = await this.noticiasService.getNoticia(noticia.id);
+    this.estado = 'Editar';
   }
 }

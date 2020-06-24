@@ -20,8 +20,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // modulo slick carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -129,6 +129,7 @@ import { ConstructorDashPerfilComponent } from './components/dashboard/construct
     MatPaginatorModule,
     SlickCarouselModule,
     DataTablesModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
