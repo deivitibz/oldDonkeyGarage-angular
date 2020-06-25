@@ -79,7 +79,7 @@ export class anunciosComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const response = await this.anuncioService.getAllAnuncios();
+    const response = await this.anuncioService.getAnuncios();
     this.allAnuncios = response;
     //console.log(this.allAnuncios);
 

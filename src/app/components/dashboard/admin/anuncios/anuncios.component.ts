@@ -1,17 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Anuncio } from 'src/app/models/anuncio.model';
+import { anuncioService } from 'src/app/servicios/anuncio.service';
+
 import Pslect from 'pselect.js';
 
 import * as brands from '../../../../db/moto_brands.json';
 import * as models from '../../../../db/moto_models.json';
-import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Anuncio } from 'src/app/models/anuncio.model';
-import { anuncioService } from 'src/app/servicios/anuncio.service';
+
+// imports tablas
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService } from 'src/app/servicios/auth.service';
+
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -117,7 +119,7 @@ export class AnunciosComponent implements OnInit {
   }
 
   async reloadData() {
-    this.allAnuncios = await this.anuncioService.getAllAnuncios();
+    this.allAnuncios = await this.anuncioService.getAnuncios();
     this.materialDataTable();
   }
 
@@ -156,7 +158,7 @@ export class AnunciosComponent implements OnInit {
     this.anuncioEdit = await this.anuncioService.getAnuncio(anuncio.id);
   }
 
-  async addNoticia() {
+  async addAnuncio() {
     this.anuncioService.addAnuncio(this.form.value);
   }
 
@@ -164,14 +166,14 @@ export class AnunciosComponent implements OnInit {
     const newAnuncio = this.form.value;
     newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
     newAnuncio.file = '';
-    const filename = this.files[0].name;
+    const filename = this.files[0]['name'];
     //filename = filename.toString().trim();
     console.log(filename.toString().trim());
 
     //console.log(this.files[0].name);
 
     const file = new FormData();
-    file.append('imagen', this.files[0], this.files[0].name);
+    file.append('imagen', this.files[0], this.files[0]['name']);
 
     //this.anuncioService.addImages(file);
     /* let header: HttpHeaders = new HttpHeaders();
@@ -197,16 +199,17 @@ export class AnunciosComponent implements OnInit {
     // this.anuncioService.addImages(this.files, this.form);
 
     if (this.anuncioEdit.id) {
-      const response = await this.anuncioService.editAnuncio(
+      const response = await this.anuncioService.editAnuncioById(
         this.anuncioEdit.id,
         newAnuncio
       );
+
       console.log(response);
 
       this.reloadData();
       this.openSnackBar(response['success']);
     } else {
-      const response = await this.anuncioService.newAnuncio(newAnuncio);
+      const response = await this.anuncioService.addAnuncio(newAnuncio);
       this.reloadData();
       this.openSnackBar(response['success']);
     }
