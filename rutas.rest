@@ -115,4 +115,26 @@ user-token: añlsdkfj
 
 
 ###
-GET http://localhost:3000/api/usuarios/6
+GET http://localhost:3000/api/anuncios/48
+
+###
+PUT http://localhost:3000/api/usuarios/22
+Content-Type: application/json
+
+{
+  "username": "david",
+  "email": "david@deivit.es",
+  "password": "",
+  "rol": "",
+  "nombre": "",
+  "apellidos": "",
+  "direccion": "",
+  "localidad": "",
+  "provincia": "",
+  "nombre_constructor": "",
+  "descripcion": "",
+  "persona_contacto": "",
+  "telefono": 38748374,
+  "imagenes_usuario": null,
+  "imagenes_constructor": null
+}

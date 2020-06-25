@@ -10,7 +10,7 @@ export class ConstructorService {
   baseUrl: string;
   constructor(private httpClient: HttpClient) {
 
-    this.baseUrl = 'http://streaming.zapto.org:3000/api/constructor';
+    this.baseUrl = 'http://localhost:3000/api/constructor';
 
   }
 

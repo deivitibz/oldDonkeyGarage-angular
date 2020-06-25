@@ -110,11 +110,6 @@ export class VideotutorialesComponent implements OnInit {
   async onSubmit() {
     const newTutorial = this.form.value;
     newTutorial.usuarios_id = this.authService.decodeToken()['userId'];
-
-    // console.log(newTutorial);
-
-    // console.log(newTutorial.usuarios_id);
-
     if (this.tutorialEdit.id) {
       const response = await this.tutorialesService.editTutorial(
         this.tutorialEdit.id,

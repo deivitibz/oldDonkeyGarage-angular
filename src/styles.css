@@ -77,3 +77,7 @@ hr {
 .mat-expansion-panel {
   width: 100%;
 }
+
+table.mat-table {
+  width: 100%;
+}

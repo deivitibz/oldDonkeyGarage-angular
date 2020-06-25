@@ -1,1 +1,163 @@
 <router-outlet></router-outlet>
+<div class="container-fluid mt-2">
+  <!-- tabla -->
+  <div class="row">
+
+    <mat-expansion-panel [expanded]="!panelOpenState">
+      <mat-expansion-panel-header>
+        Mis Anuncios
+      </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="titulo">
+        <th mat-header-cell *matHeaderCellDef> Titulo </th>
+        <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+      </ng-container>
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+      </ng-container>
+      <ng-container matColumnDef="precio">
+        <th mat-header-cell *matHeaderCellDef> Precio </th>
+        <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon (click)="editUser(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
+          <mat-icon (click)="deleteUser(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <!-- tabla -->
+    </mat-expansion-panel>
+  </div>
+  <!-- formulario -->
+  <div class="row">
+    <mat-expansion-panel [expanded]="panelOpenState">
+      <mat-expansion-panel-header>
+        Crear Editar Usuarios
+      </mat-expansion-panel-header>
+
+      <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <!-- titulo -->
+        <div class="form-group">
+          <label for="">Titulo</label>
+          <input value="{{anuncioEdit['titulo']}}" type="text" class="form-control" formControlName="titulo" name="titulo"
+            placeholder="Introduce el titulo de tu anuncio">
+        </div>
+        <!-- descripcion -->
+        <div class="form-group">
+          <label for="">Descripción</label>
+          <textarea [value]="anuncioEdit['descripcion']" rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+            placeholder="Introduce el titulo de tu anuncio"></textarea>
+        </div>
+        <!-- precio - km -->
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Precio</label>
+            <input [value]="anuncioEdit['precio']" type="number" class="form-control" formControlName="precio" name="precio" placeholder="Precio">
+          </div>
+          <div class="form-group col-6">
+            <label>KM</label>
+            <input [value]="anuncioEdit['km']" type="number" class="form-control" formControlName="km" name="km" placeholder="Kilometros">
+          </div>
+        </div>
+        <!-- itv - homologacion -->
+        <div class="row">
+          <div class="custom-control custom-checkbox mx-auto col-5">
+            <input type="checkbox" [value]="anuncioEdit['itv']" class="custom-control-input" id="itv" formControlName="itv" name="itv">
+            <label class="custom-control-label" for="itv">ITV</label>
+          </div>
+          <div class="custom-control custom-checkbox mx-auto col-5">
+            <input type="checkbox" [value]="anuncioEdit['homologacion']" class="custom-control-input" id="homologacion"
+              formControlName="homologacion" name="homologacion">
+            <label class="custom-control-label" for="homologacion">Homologación</label>
+          </div>
+        </div>
+        <!-- marca - modelo -->
+        <div class="row mt-2">
+          <div class="form-group col-6">
+            <label for="">Marca</label>
+            <select (change)="filtrarMarcas(form)" id="marca" class="form-control" formControlName="marca" name="marca">
+              <option value="" selected>{{anuncioEdit['marca']}}</option>
+              <option *ngFor="let marca of marcas" [id]="marca.id" [value]="marca.name">{{marca.name}}</option>
+
+            </select>
+          </div>
+          <div class="form-group col-6">
+            <label for="">Modelo</label>
+            <select class="form-control" formControlName="modelo" name="modelo">
+              <option value="" selected>{{anuncioEdit['modelo']}}</option>
+              <option *ngFor="let modelo of filtroModelos" [value]="modelo.name">{{modelo.name}}</option>
+            </select>
+          </div>
+
+
+        </div>
+        <!-- provincia - poblacion -->
+        <div class="row mt-2">
+          <div class="form-group col-6">
+            <label for="">Provincia</label>
+            <select (change)="getProvincias($event)" class="form-control" id="provincia" formControlName="provincia"
+              name="provincia">
+              <option [value]="anuncioEdit['provincia']" selected>{{anuncioEdit['provincia']}}</option>
+              <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
+                [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
+            </select>
+            <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
+          </div>
+          <div class="form-group col-6">
+            <label for="">Población</label>
+            <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion">
+              <option value="" selected>{{anuncioEdit['poblacion']}}</option>
+              <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- año -->
+        <div class="form-group">
+          <label for="">Año</label>
+          <input [value]="anuncioEdit['year']" type="text" class="form-control" formControlName="year" name="year"
+            placeholder="Introduce el titulo de tu anuncio">
+        </div>
+        <!-- tipo custom -->
+        <div class="form-group mb-4">
+          <label for="">Tipo de custom</label>
+          <select class="form-control" name="tipoCustom">
+            <option value="">{{anuncioEdit['tipo_custom']}}</option>
+            <option value="">Bobber</option>
+            <option value="">Café Racer</option>
+            <option value="">Chopped</option>
+            <option value="">Brad</option>
+            <option value="">Street tracker</option>
+            <option value="">Scramblet</option>
+
+          </select>
+        </div>
+        <div class="row mx-0">
+          <!-- <input type="file" name="avatar" (change)="onFileChange($event)"  formControlName="avatar" /> -->
+          <!-- <input class="form-control-file" (change)="onFileChange($event)" type="file" name="file" formControlName="file"> -->
+          <button *ngIf="!anuncioEdit['id']" class="btn btn-primary btn-block " type="submit">Enviar</button>
+          <button *ngIf="anuncioEdit['id']" class="btn btn-primary btn-block " type="submit">Editar</button>
+        </div>
+
+      </form>
+
+      <!-- formulario -->
+
+    </mat-expansion-panel>
+  </div>
+</div>

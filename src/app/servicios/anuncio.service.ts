@@ -8,7 +8,7 @@ import { anunciosComponent } from '../components/anuncios/anuncios.component';
 })
 export class anuncioService {
   baseUrl: string;
-  files;
+  files: FormData;
 
   constructor(private http: HttpClient) {
     this.baseUrl = 'http://localhost:3000/api/anuncios';
@@ -22,24 +22,27 @@ export class anuncioService {
     return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
   }
 
-  addImages(files, form) {
-    let fd = new FormData();
-    fd.append('file', files[0], 'nuevaImagen.png');
-    fd.append('name', files[0].name);
+  getAnunciosById(id): Promise<Anuncio[]>{
+    return this.http.get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id).toPromise();
+  }
 
-    let header = new HttpHeaders();
-    header.append('Content-Type', 'multipart/form-data');
-    const req = new HttpRequest(
-      'POST',
-      'http://streaming.zapto.org:3000/api/anuncios/upload',
-      fd,
-      {
-        headers: header,
-      }
-    );
-    this.http
-      .request(req)
-      .toPromise()
+  editAnuncioById(id,newAnuncio): Promise<Anuncio>{
+    return this.http.put<Anuncio>(this.baseUrl + '/' + id,newAnuncio).toPromise()
+  }
+
+  getAnuncio(id): Promise<any>{
+    return this.http.get(this.baseUrl + '/' + id).toPromise();
+  }
+
+  deleteAnuncio(id): Promise<Anuncio>{
+    return this.http.delete<Anuncio>(this.baseUrl + '/' + id).toPromise()
+  }
+
+  async addImages(file) {
+    let header: HttpHeaders = new HttpHeaders();
+    header.append('Content-Type','multipart/form-data');
+    let req = new HttpRequest("POST","http://localhost:3000/api/upload",file, { headers: header });
+    this.http.request(req).toPromise()
       .then((result) => {
         console.log(result);
       });
