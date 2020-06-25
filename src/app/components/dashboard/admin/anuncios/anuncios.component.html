@@ -10,10 +10,13 @@
 </div>
 
 <div class="container">
-  <mat-tab-group>
+  <!-- tabla -->
+  <div class="row">
 
-    <mat-tab label="table test">
-      <!-- filtro -->
+    <mat-expansion-panel [expanded]="!panelOpenState">
+      <mat-expansion-panel-header>
+        Lista Anuncios
+      </mat-expansion-panel-header>
 
       <mat-form-field>
         <mat-label>Filter</mat-label>
@@ -21,105 +24,94 @@
       </mat-form-field>
 
 
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-          <!-- Position Column -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="titulo">
+          <th mat-header-cell *matHeaderCellDef> Titulo </th>
+          <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+        </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="titulo">
-            <th mat-header-cell *matHeaderCellDef> Titulo </th>
-            <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
-          </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+        </ng-container>
 
-          <!-- Weight Column -->
-          <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef> Descripcion </th>
-            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-          </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="autor">
+          <th mat-header-cell *matHeaderCellDef> Precio </th>
+          <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
 
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="precio">
-            <th mat-header-cell *matHeaderCellDef> Precio </th>
-            <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
-          </ng-container>
+            <mat-icon (click)="editAnuncio(element)" class="example-icon" aria-hidden="false"
+              aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+            <mat-icon (click)="deleteAnuncio(element)" class="example-icon" aria-hidden="false"
+              aria-label="Example heart icon">
+              delete</mat-icon>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
+          </td>
+        </ng-container>
 
-    </mat-tab>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 
-    <mat-tab label="Lista de anuncios">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
-      <!-- <div class="container">
-        <table datatable [dtOptions]="dtOptions" class="table mat-elevation-z8">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Titulo</th>
-              <th>Descripcion</th>
-              <th>Precio</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let anuncio of allAnuncios">
-              <td>{{anuncio.id}}</td>
-              <td>{{anuncio.titulo}}</td>
-              <td>{{anuncio.descripcion}}</td>
-              <td>{{anuncio.precio}} €</td>
-              <td>
-                <mat-icon (click)="deleteNoticia(anuncio)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
-                <mat-icon (click)="editNoticia(anuncio)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon></td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
+    </mat-expansion-panel>
+  </div>
+  <!-- formulario -->
+  <div class="row">
+    <mat-expansion-panel [expanded]="panelOpenState">
+      <mat-expansion-panel-header>
+        Crear Editar Anuncios
+      </mat-expansion-panel-header>
 
-      <!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
-
-    </mat-tab>
-    <mat-tab label="Añadir anuncio">
       <form [formGroup]="form" (ngSubmit)="onSubmitFormulario()">
         <div class="form-group">
           <label for="">Titulo</label>
           <input type="text" class="form-control" formControlName="titulo" name="titulo"
-            placeholder="Introduce el titulo de tu anuncio">
+            placeholder="Introduce el titulo de tu anuncio" value="{{anuncioEdit['titulo']}}">
         </div>
         <div class="form-group">
           <label for="">Descripción</label>
           <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
-            placeholder="Introduce el titulo de tu anuncio"></textarea>
+            placeholder="Introduce el titulo de tu anuncio" value="{{anuncioEdit['descripcion']}}"></textarea>
         </div>
 
         <div class="row">
           <div class="form-group col-6">
             <label>Precio</label>
-            <input type="number" class="form-control" formControlName="precio" name="precio" placeholder="Precio">
+            <input type="number" class="form-control" formControlName="precio" name="precio" placeholder="Precio"
+              value="{{anuncioEdit['precio']}}">
           </div>
           <div class="form-group col-6">
             <label>KM</label>
-            <input type="number" class="form-control" formControlName="km" name="km" placeholder="Kilometros">
+            <input type="number" class="form-control" formControlName="km" name="km" placeholder="Kilometros"
+              value="{{anuncioEdit['km']}}">
           </div>
         </div>
 
         <div class="row">
           <div class="custom-control custom-checkbox mx-auto col-5">
-            <input type="checkbox" value="false" class="custom-control-input" id="itv" formControlName="itv" name="itv">
+            <input type="checkbox" value="false" class="custom-control-input" id="itv" formControlName="itv" name="itv"
+              value="{{anuncioEdit['itv']}}">
             <label class="custom-control-label" for="itv">ITV</label>
           </div>
           <div class="custom-control custom-checkbox mx-auto col-5">
             <input type="checkbox" value="false" class="custom-control-input" id="homologacion"
-              formControlName="homologacion" name="homologacion">
+              formControlName="homologacion" name="homologacion" value="{{anuncioEdit['homologacion']}}">
             <label class="custom-control-label" for="homologacion">Homologación</label>
           </div>
         </div>
@@ -127,7 +119,8 @@
         <div class="row mt-2">
           <div class="form-group col-6">
             <label for="">Marca</label>
-            <select (change)="filtrarMarcas(form)" id="marca" class="form-control" formControlName="marca" name="marca">
+            <select (change)="filtrarMarcas(form)" id="marca" class="form-control" formControlName="marca" name="marca"
+              value="{{anuncioEdit['marca']}}">
               <option value="" selected>Seleciona una marca</option>
               <option *ngFor="let marca of marcas" [id]="marca.id" [value]="marca.name">{{marca.name}}</option>
 
@@ -135,41 +128,47 @@
           </div>
           <div class="form-group col-6">
             <label for="">Modelo</label>
-            <select class="form-control" formControlName="modelo" name="modelo">
+            <select class="form-control" formControlName="modelo" value="{{anuncioEdit['modelo']}}" name="modelo">
               <option value="" selected>Seleciona un modelo</option>
               <option *ngFor="let modelo of filtroModelos" [value]="modelo.name">{{modelo.name}}</option>
             </select>
           </div>
 
-          <div class="row mt-2">
-            <div class="form-group col-6">
-              <label for="">Provincia</label>
-              <select (change)="getProvincias($event)" class="form-control" id="provincia" formControlName="provincia"
-                name="provincia">
-                <option value="" selected>Seleciona una provincia</option>
-                <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
-                  [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
-              </select>
-              <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
-            </div>
-            <div class="form-group col-6">
-              <label for="">Población</label>
-              <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion">
-                <option value="" selected>Seleciona un poblacion</option>
-                <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
-                </option>
-              </select>
-            </div>
+
+        </div>
+        <div class="row mt-2 mx-auto">
+          <div class="form-group col-6 pl-0">
+            <label for="">Provincia</label>
+            <select (change)="getProvincias($event)" class="form-control" id="provincia" formControlName="provincia"
+              name="provincia" value="{{anuncioEdit['Provincia']}}">
+              <option value="" selected>Seleciona una provincia</option>
+              <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
+                [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
+            </select>
+            <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
+          </div>
+          <div class="form-group col-6 pr-0">
+            <label for="">Población</label>
+            <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion"
+              value="{{anuncioEdit['poblacion']}}">
+              <option value="" selected>Seleciona un poblacion</option>
+              <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
+              </option>
+            </select>
           </div>
         </div>
+
         <div class="form-group">
           <label for="">Año</label>
           <input type="text" class="form-control" formControlName="year" name="year"
-            placeholder="Introduce el titulo de tu anuncio">
+            placeholder="Introduce el titulo de tu anuncio" value="{{anuncioEdit['year']}}">
         </div>
-        <div class="form-group mb-4">
+
+        <!-- CONEXION CON TIPO_MOTO o VALORES FIJOS?? -->
+
+        <!-- <div class="form-group mb-4">
           <label for="">Tipo de custom</label>
-          <select class="form-control" formControlName="tipoCustom" name="tipoCustom">
+          <select class="form-control" formControlName="tipoCustom" name="tipoCustom" value="{{anuncioEdit['titulo']}}">
             <option value="">Modelo custom</option>
             <option value="">Bobber</option>
             <option value="">Café Racer</option>
@@ -179,14 +178,17 @@
             <option value="">Scramblet</option>
 
           </select>
-        </div>
+        </div> -->
+
+
         <div class="row mx-0">
           <input class="form-control-file" (change)="onFileChange($event)" type="file" value="Enviar"
             formControlName="imagenes" multiple="multiple">
-          <button class="btn btn-primary btn-block mt-4" type="submit">Enviar</button>
+          <button *ngIf="!anuncioEdit.id" class="btn btn-primary btn-block " type="submit">Enviar</button>
+          <button *ngIf="anuncioEdit.id" class="btn btn-primary btn-block " type="submit">Editar</button>
         </div>
-
       </form>
-    </mat-tab>
-  </mat-tab-group>
+
+    </mat-expansion-panel>
+  </div>
 </div>

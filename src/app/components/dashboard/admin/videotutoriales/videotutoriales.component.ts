@@ -20,7 +20,6 @@ import {
   styleUrls: ['./videotutoriales.component.css'],
 })
 export class VideotutorialesComponent implements OnInit {
-  panelOpenState = false;
   allTutoriales: Video_tutorial[];
   oneTutorial: Video_tutorial;
 
@@ -29,6 +28,9 @@ export class VideotutorialesComponent implements OnInit {
 
   //Formulario
   form: FormGroup;
+
+  //panel
+  panelOpenState = false;
 
   //snackbar
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
@@ -99,7 +101,9 @@ export class VideotutorialesComponent implements OnInit {
     });
   }
 
-  togglePanel() {}
+  togglePanel() {
+    this.panelOpenState = !this.panelOpenState;
+  }
 
   async deleteTutorial(tutorial) {
     const response = await this.tutorialesService.deleteTutorial(tutorial);
@@ -110,10 +114,6 @@ export class VideotutorialesComponent implements OnInit {
   async onSubmit() {
     const newTutorial = this.form.value;
     newTutorial.usuarios_id = this.authService.decodeToken()['userId'];
-
-    // console.log(newTutorial);
-
-    // console.log(newTutorial.usuarios_id);
 
     if (this.tutorialEdit.id) {
       const response = await this.tutorialesService.editTutorial(
@@ -130,6 +130,7 @@ export class VideotutorialesComponent implements OnInit {
   }
 
   async editTutorial(tutorial) {
+    this.togglePanel();
     this.tutorialEdit = await this.tutorialesService.getTutorial(tutorial.id);
     // console.log(this.tutorialEdit);
     this.estado = 'Editar';

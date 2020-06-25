@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Anuncio } from '../models/anuncio.model';
-import { anunciosComponent } from '../components/anuncios/anuncios.component';
 
 @Injectable({
   providedIn: 'root',
@@ -10,16 +9,33 @@ export class anuncioService {
   baseUrl: string;
   files;
 
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient) {
     this.baseUrl = 'http://localhost:3000/api/anuncios';
   }
 
   addAnuncio(anuncio): Promise<Anuncio> {
-    return this.http.post<Anuncio>(this.baseUrl, anuncio).toPromise();
+    return this.httpClient.post<Anuncio>(this.baseUrl, anuncio).toPromise();
   }
 
-  getAnuncios(): Promise<Anuncio[]> {
-    return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
+  getAnuncio(id) {
+    return this.httpClient.get(this.baseUrl + '/' + id).toPromise();
+  }
+
+  getAllAnuncios(): Promise<Anuncio[]> {
+    return this.httpClient.get<Anuncio[]>(this.baseUrl).toPromise();
+  }
+
+  newAnuncio(anuncio: Anuncio) {
+    return this.httpClient.post(this.baseUrl, anuncio).toPromise();
+  }
+
+  deleteAnuncio(anuncio) {
+    // console.log(anuncio);
+    return this.httpClient.delete(this.baseUrl + '/' + anuncio.id).toPromise();
+  }
+
+  editAnuncio(id, newAnuncio) {
+    return this.httpClient.put(this.baseUrl + '/' + id, newAnuncio).toPromise();
   }
 
   addImages(files, form) {
@@ -37,7 +53,7 @@ export class anuncioService {
         headers: header,
       }
     );
-    this.http
+    this.httpClient
       .request(req)
       .toPromise()
       .then((result) => {
