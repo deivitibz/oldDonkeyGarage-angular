@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Anuncio } from '../models/anuncio.model';
-import { anunciosComponent } from '../components/anuncios/anuncios.component';
 
 @Injectable({
   providedIn: 'root',
@@ -10,39 +9,53 @@ export class anuncioService {
   baseUrl: string;
   files: FormData;
 
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient) {
     this.baseUrl = 'http://localhost:3000/api/anuncios';
   }
 
   addAnuncio(anuncio): Promise<Anuncio> {
-    return this.http.post<Anuncio>(this.baseUrl, anuncio).toPromise();
+    return this.httpClient.post<Anuncio>(this.baseUrl, anuncio).toPromise();
   }
 
-  getAnuncios(): Promise<Anuncio[]> {
-    return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
+  getAnuncio(id) {
+    return this.httpClient.get(this.baseUrl + '/' + id).toPromise();
   }
 
-  getAnunciosById(id): Promise<Anuncio[]>{
-    return this.http.get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id).toPromise();
+  getAllAnuncios(): Promise<Anuncio[]> {
+    return this.httpClient.get<Anuncio[]>(this.baseUrl).toPromise();
   }
 
-  editAnuncioById(id,newAnuncio): Promise<Anuncio>{
-    return this.http.put<Anuncio>(this.baseUrl + '/' + id,newAnuncio).toPromise()
+  newAnuncio(anuncio: Anuncio) {
+    return this.httpClient.post(this.baseUrl, anuncio).toPromise();
   }
 
-  getAnuncio(id): Promise<any>{
-    return this.http.get(this.baseUrl + '/' + id).toPromise();
+  deleteAnuncio(anuncio) {
+    // console.log(anuncio);
+    return this.httpClient.delete(this.baseUrl + '/' + anuncio.id).toPromise();
   }
 
-  deleteAnuncio(id): Promise<Anuncio>{
-    return this.http.delete<Anuncio>(this.baseUrl + '/' + id).toPromise()
+  editAnuncio(id, newAnuncio) {
+    return this.httpClient.put(this.baseUrl + '/' + id, newAnuncio).toPromise();
   }
 
-  async addImages(file) {
-    let header: HttpHeaders = new HttpHeaders();
-    header.append('Content-Type','multipart/form-data');
-    let req = new HttpRequest("POST","http://localhost:3000/api/upload",file, { headers: header });
-    this.http.request(req).toPromise()
+  addImages(files, form) {
+    let fd = new FormData();
+    fd.append('file', files[0], 'nuevaImagen.png');
+    fd.append('name', files[0].name);
+
+    let header = new HttpHeaders();
+    header.append('Content-Type', 'multipart/form-data');
+    const req = new HttpRequest(
+      'POST',
+      'http://streaming.zapto.org:3000/api/anuncios/upload',
+      fd,
+      {
+        headers: header,
+      }
+    );
+    this.httpClient
+      .request(req)
+      .toPromise()
       .then((result) => {
         console.log(result);
       });

@@ -12,6 +12,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService } from 'src/app/servicios/auth.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-anuncios',
@@ -19,32 +24,52 @@ import { AuthService } from 'src/app/servicios/auth.service';
   styleUrls: ['./anuncios.component.css'],
 })
 export class AnunciosComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'precio'];
+  allAnuncios: Anuncio[];
+
+  anuncioEdit: any;
+
+  files: string[];
+
+  //panel
+  panelOpenState = false;
+
+  //snackbar
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  //datatables settings
+  displayedColumns: string[] = [
+    'id',
+    'titulo',
+    'descripcion',
+    'autor',
+    'actions',
+  ];
   dataSource: MatTableDataSource<Anuncio>;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-
-  files;
   // filtro poblaciones / provincias
   provincias: string[];
   poblaciones: string[];
   provinciasOrder: any[];
+
   // filtro marca / modelo
   marcas: any;
   modelos: any;
   filtroModelos: any[];
   filtroProvincias: any[];
 
-  allAnuncios: Anuncio[];
   // formulario
   form: FormGroup;
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private anuncioService: anuncioService,
     private authService: AuthService,
-    private http: HttpClient
+    private _snackBar: MatSnackBar
   ) {
+    this.anuncioEdit = [];
 
     this.marcas = brands.data;
     this.modelos = models.data;
@@ -57,7 +82,7 @@ export class AnunciosComponent implements OnInit {
         provincia: provincia['nm'],
         id: provincia['id'],
       };
-    this.provinciasOrder.push(provinciaObj);
+      this.provinciasOrder.push(provinciaObj);
     }
     /* ordenar de la A a la Z las provincias */
     this.provinciasOrder.sort((a, b) => {
@@ -76,17 +101,24 @@ export class AnunciosComponent implements OnInit {
       modelo: new FormControl('', []),
       itv: new FormControl('', []),
       homologacion: new FormControl('', []),
-      file: new FormControl('', []),
-      tipoCustom: new FormControl('', []),
-      avatar: new FormControl('', []),
+      imagenes: new FormControl('', []),
+      // tipoCustom: new FormControl('', []),
     });
   }
 
   async ngOnInit() {
-    //this.allAnuncios = await this.anuncioService.getAnuncios();
+    this.reloadData();
+  }
+
+  materialDataTable() {
     this.dataSource = new MatTableDataSource(this.allAnuncios);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  async reloadData() {
+    this.allAnuncios = await this.anuncioService.getAllAnuncios();
+    this.materialDataTable();
   }
 
   applyFilter(event: Event) {
@@ -97,16 +129,91 @@ export class AnunciosComponent implements OnInit {
     }
   }
 
-  deleteNoticia(anuncio) {
-    console.log(anuncio);
+  openSnackBar(message) {
+    this._snackBar.open(message, 'Cerrar', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
-  editNoticia(anuncio) {
-    console.log(anuncio);
+  togglePanel() {
+    this.panelOpenState = !this.panelOpenState;
+  }
+
+  async deleteAnuncio(anuncio) {
+    // console.log(anuncio);
+
+    const response = await this.anuncioService.deleteAnuncio(anuncio.id);
+    console.log(response);
+
+    // this.openSnackBar(response['success']);
+    // this.reloadData();
+  }
+
+  async editAnuncio(anuncio) {
+    this.togglePanel();
+    this.anuncioEdit = await this.anuncioService.getAnuncio(anuncio.id);
   }
 
   async addNoticia() {
     this.anuncioService.addAnuncio(this.form.value);
+  }
+
+  onSubmit() {
+    const newAnuncio = this.form.value;
+    newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
+    newAnuncio.file = '';
+    const filename = this.files[0].name;
+    //filename = filename.toString().trim();
+    console.log(filename.toString().trim());
+
+    //console.log(this.files[0].name);
+
+    const file = new FormData();
+    file.append('imagen', this.files[0], this.files[0].name);
+
+    //this.anuncioService.addImages(file);
+    /* let header: HttpHeaders = new HttpHeaders();
+    header.append('Content-Type','multipart/form-data');
+    let req = new HttpRequest("POST","http://localhost:3000/api/upload",file, { headers: header });
+    this.http.request(req).toPromise()
+      .then((result) => {
+        console.log(result);
+      }); */
+
+    //this.anuncioService.addImages(newAnuncio.imagenes);
+    //console.log(newAnuncio);
+    //const response = this.anuncioService.addAnuncio(newAnuncio)
+    //console.log(response);
+  }
+
+  async onSubmitFormulario() {
+    // console.log(this.form.value);
+    const newAnuncio = this.form.value;
+    newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
+    // console.log(newAnuncio);
+
+    // this.anuncioService.addImages(this.files, this.form);
+
+    if (this.anuncioEdit.id) {
+      const response = await this.anuncioService.editAnuncio(
+        this.anuncioEdit.id,
+        newAnuncio
+      );
+      console.log(response);
+
+      this.reloadData();
+      this.openSnackBar(response['success']);
+    } else {
+      const response = await this.anuncioService.newAnuncio(newAnuncio);
+      this.reloadData();
+      this.openSnackBar(response['success']);
+    }
+  }
+
+  onFileChange($event) {
+    this.files = $event.target.files;
   }
 
   filtrarMarcas(form) {
@@ -118,56 +225,6 @@ export class AnunciosComponent implements OnInit {
         this.filtroModelos.push(result);
       }
     });
-  }
-
-  onSubmit(){
-    const newAnuncio = this.form.value;
-    newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
-    newAnuncio.file = '';
-    const filename = this.files[0].name;
-    //filename = filename.toString().trim();
-    console.log(filename.toString().trim());
-
-
-    //console.log(this.files[0].name);
-
-
-    const file = new FormData;
-    file.append("imagen", this.files[0],this.files[0].name);
-
-    //this.anuncioService.addImages(file);
-    /* let header: HttpHeaders = new HttpHeaders();
-    header.append('Content-Type','multipart/form-data');
-    let req = new HttpRequest("POST","http://localhost:3000/api/upload",file, { headers: header });
-    this.http.request(req).toPromise()
-      .then((result) => {
-        console.log(result);
-      }); */
-
-
-
-
-    //this.anuncioService.addImages(newAnuncio.imagenes);
-    //console.log(newAnuncio);
-    //const response = this.anuncioService.addAnuncio(newAnuncio)
-    //console.log(response);
-
-  }
-
-  async onSubmitFormulario() {
-    // console.log(this.form.value);
-    const newAnuncio = this.form.value;
-    newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
-    // this.anuncioService.addImages(this.files, this.form);
-    const result = await this.anuncioService.addAnuncio(newAnuncio);
-    console.log(result);
-    // nombre del archivo
-    console.log(this.form.value);
-  }
-
-  onFileChange($event) {
-    this.files = $event.target.files;
-
   }
 
   getProvincias($event) {
