@@ -1,8 +1,13 @@
-.parallax{
-  background-image: url("../../../assets/img/paralax-2.jpg");
+.parallax {
+  background-image: url("../../../assets/img/paralax-3.jpg");
   padding: 10em 0;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
+}
+
+h1 {
+  font-family: VAR(--font-principal--);
+  font-weight: 300;
 }

@@ -11,7 +11,7 @@ font-family: 'Source Serif Pro', serif;
   --color-A--color: #1A2930;
   --color-B--color: #587485;
   --color-C--color: #C6DBE3;
-  --color-D--color: #F6F2E6;
+  --color-D--color: #d8d8d8;
   --color-E--color: #EF8A42;
 }
 
@@ -44,6 +44,7 @@ body {
 .bg-donkey-light {
   background-color: var(--color-D--color);
 }
+
 
 hr {
   border-top: 2px solid white;

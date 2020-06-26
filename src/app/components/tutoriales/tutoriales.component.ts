@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TutorialesService } from 'src/app/servicios/tutoriales.service';
+import { Video_tutorial } from '../../models/video_tutorial.model';
 
 @Component({
   selector: 'app-tutoriales',
@@ -7,7 +8,7 @@ import { TutorialesService } from 'src/app/servicios/tutoriales.service';
   styleUrls: ['./tutoriales.component.css'],
 })
 export class TutorialesComponent implements OnInit {
-  allTutoriales: any[];
+  allTutoriales: Video_tutorial[];
 
   constructor(private tutorialesService: TutorialesService) {
     this.allTutoriales = [];
@@ -15,6 +16,7 @@ export class TutorialesComponent implements OnInit {
 
   async ngOnInit() {
     const response = await this.tutorialesService.getAllTutorial();
-    this.allTutoriales.push(response);
+    this.allTutoriales = response;
+    console.log(response);
   }
 }

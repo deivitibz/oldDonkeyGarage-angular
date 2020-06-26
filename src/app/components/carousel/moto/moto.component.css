@@ -1,0 +1,9 @@
+.bg-precio {
+  color: rgb(167, 167, 167);
+}
+
+.btn-dark {
+  color: white;
+  background-color: VAR(--color-B--color);
+  border-color: VAR(--color-B--color);
+}

@@ -5,42 +5,19 @@ hr {
   margin-bottom: 30px;
 }
 
-.sticky {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 30px;
-
-
-  color: #fff;
-  text-align: center;
-
-}
 
 h1 {
   color: #fff;
-  font-size: 10em;
+  font-size: 4em;
   font-family: VAR(--font-principal--font-family);
 
 }
 
-.block-1,
-.block-3 {
-  height: 1200px;
-  padding: 70px 20px;
+.parallax {
+  background-image: url("../../../assets/img/garaje1.jpg");
+  padding: 12em 0;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('../../../assets/img/garaje2.jpg');
-  box-sizing: border-box;
+  background-attachment: fixed;
   background-position: center;
-
-}
-
-.block-2 {
-  background: url('http://www.tipue.com/img/bomp.jpg') no-repeat fixed;
-  background-size: cover;
-  height: 900px;
-  background-position: center;
-}
-
-.block-3 {
-  background-image: url('http://www.tipue.com/img/look.jpg');
 }

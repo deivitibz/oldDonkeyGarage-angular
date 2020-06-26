@@ -11,11 +11,11 @@ export class NoticiaComponent implements OnInit {
       img: '../../../../assets/img/motos/bobber2.png',
     },
     {
-      name: 'BRAD',
+      name: 'BRAT',
       img: '../../../../assets/img/motos/brad2.png',
     },
     {
-      name: 'CAFÉ RACER',
+      name: 'C.RACER',
       img: '../../../../assets/img/motos/cafe_racer2.png',
     },
     {
@@ -23,11 +23,11 @@ export class NoticiaComponent implements OnInit {
       img: '../../../../assets/img/motos/chopped2.png',
     },
     {
-      name: 'SCRAMBLET',
+      name: 'SCRAMBLER',
       img: '../../../../assets/img/motos/scrambler2.png',
     },
     {
-      name: 'STREET-TRACKER',
+      name: 'S.TRACKER',
       img: '../../../../assets/img/motos/street2.png',
     },
   ];

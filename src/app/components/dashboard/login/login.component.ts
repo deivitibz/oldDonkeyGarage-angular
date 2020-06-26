@@ -1,11 +1,15 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import * as $ from 'jquery';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-
 
 @Component({
   selector: 'app-login',
@@ -13,7 +17,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  @ViewChild("qmodal") qmodal
+  @ViewChild('qmodal') qmodal;
 
   form: FormGroup;
   valid: boolean;
@@ -26,17 +30,16 @@ export class LoginComponent implements OnInit {
     private renderer: Renderer2,
     private httpClient: HttpClient
   ) {
-
     this.validToken = false;
 
-    this.baseUrl = 'http://localhost:3000/api/usuarios'
+    this.baseUrl = 'http://localhost:3000/api/usuarios';
     this.form = new FormGroup({
-      email: new FormControl('',),
-      password: new FormControl('')
+      email: new FormControl(''),
+      password: new FormControl(''),
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   async onSubmit() {
     const response = await this.usuarioService.login(this.form.value);
@@ -48,15 +51,12 @@ export class LoginComponent implements OnInit {
       this.form.reset();
       this.router.navigate(['dashboard']);
     } else {
-      console.log('no se a podido hacer login');
-
+      console.log('no se ha podido hacer login');
     }
-
 
     // usuario y contraseña correcto
     // guardo token
     // can activate comprobar rutas protegidas
-
 
     /* if (!localStorage.getItem('user-token')  || !this.form.valid) {
 
@@ -92,27 +92,24 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user-token', '')
       }
     } */
- }
+  }
 
-  checkToken(token):Promise<any>{
-      const options = {
+  checkToken(token): Promise<any> {
+    const options = {
       headers: new HttpHeaders({
-        'user-token': token
+        'user-token': token,
       }),
     };
     return this.httpClient.get(this.baseUrl + '/check', options).toPromise();
-
   }
 
-  saveToken(token){
-    localStorage.setItem('user-token', token)
+  saveToken(token) {
+    localStorage.setItem('user-token', token);
   }
 
   cierraPopup() {
-    $("#exampleModal").hide();//ocultamos el modal
-    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+    $('#exampleModal').hide(); //ocultamos el modal
+    $('body').removeClass('modal-open'); //eliminamos la clase del body para poder hacer scroll
+    $('.modal-backdrop').remove(); //eliminamos el backdrop del modal
   }
-
-
 }

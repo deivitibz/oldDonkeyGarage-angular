@@ -1,156 +1,49 @@
-<div class="container">
+<div class="container-fluid px-4 bg-donkey-secondary">
   <div class="row">
-    <div class="col-12 text-center mt-4">
+    <!-- <div class="col-12 text-center mt-4">
       <h2>NUESTRAS BURRAS EN VENTA</h2>
       <hr>
-    </div>
+    </div> -->
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-block col-8 mx-auto" data-toggle="modal"
-      data-target="#modalAnuncio">
-      CREAR UN ANUNCIO
-    </button>
-    <!-- Modal -->
-    <div class="modal fade" id="modalAnuncio" tabindex="-1" role="dialog" aria-labelledby="modalAnuncio"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title m-3">CREA TU ANUNCIO</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body mx-3 pt-1">
-            <form [formGroup]="form" (ngSubmit)="onSubmitFormulario()">
-              <div class="form-group">
-                <label for="">Titulo</label>
-                <input type="text" class="form-control" formControlName="titulo" name="titulo"
-                  placeholder="Introduce el titulo de tu anuncio">
-              </div>
-              <div class="form-group">
-                <label for="">Descripción</label>
-                <textarea rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
-                  placeholder="Introduce el titulo de tu anuncio"></textarea>
-              </div>
-
-              <div class="row">
-                <div class="form-group col-6">
-                  <label>Precio</label>
-                  <input type="number" class="form-control" formControlName="precio" name="precio" placeholder="Precio">
-                </div>
-                <div class="form-group col-6">
-                  <label>KMS</label>
-                  <input type="number" class="form-control" formControlName="kms" name="kms" placeholder="Kilometros">
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="custom-control custom-checkbox mx-auto col-5">
-                  <input type="checkbox" checked="false" class="custom-control-input" id="itv" formControlName="itv"
-                    name="itv">
-                  <label class="custom-control-label" for="itv">ITV</label>
-                </div>
-                <div class="custom-control custom-checkbox mx-auto col-5">
-                  <input type="checkbox" checked="false" class="custom-control-input" id="homologacion"
-                    formControlName="homologacion" name="homologacion">
-                  <label class="custom-control-label" for="homologacion">Homologación</label>
-                </div>
-              </div>
-
-              <div class="row mt-2">
-                <div class="form-group col-6">
-                  <label for="">Marca</label>
-                  <select (change)="filtrarMarcas(form)" class="form-control" formControlName="marca" name="marca">
-                    <option value="" selected>Seleciona una marca</option>
-                    <option *ngFor="let marca of marcas" [id]="marca.id" [value]="marca.id">{{marca.name}}</option>
-
-                  </select>
-                </div>
-                <div class="form-group col-6">
-                  <label for="">Modelo</label>
-                  <select class="form-control" formControlName="modelo" name="modelo">
-                    <option value="" selected>Seleciona un modelo</option>
-                    <option *ngFor="let modelo of filtroModelos" [value]="modelo.name">{{modelo.name}}</option>
-                  </select>
-                </div>
-
-                <div class="row mt-2">
-                  <div class="form-group col-6">
-                    <input type="hidden" formControlName="id_provincia" name="id_provincia"
-                      *ngFor="let provincia of provincias" [value]="provincia.id">
-                    <label for="">Provincia</label>
-                    <select (change)="getProvincias($event)" class="form-control" id="provincia"
-                      formControlName="provincia" name="provincia">
-                      <option value="" selected>Seleciona una provincia</option>
-                      <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
-                        [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
-                    </select>
-                    <!-- <input type="hidden" name="id" *ngFor="let provincia of provincias" formControlName="id" [value]="provincia.id"> -->
-                  </div>
-                  <div class="form-group col-6">
-                    <label for="">Población</label>
-                    <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion">
-                      <option value="" selected>Seleciona un poblacion</option>
-                      <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group mb-4">
-                <label for="">Tipo de custom</label>
-                <select class="form-control" formControlName="tipoCustom" name="tipoCustom">
-                  <option value="">Modelo custom</option>
-                  <option value="">Bobber</option>
-                  <option value="">Café Racer</option>
-                  <option value="">Chopped</option>
-                  <option value="">Brad</option>
-                  <option value="">Street tracker</option>
-                  <option value="">Scramblet</option>
-
-                </select>
-              </div>
-              <div class="row mx-0">
-                <input class="form-control-file" (change)="onFileChange($event)" type="file" value="Enviar"
-                  formControlName="file" multiple="multiple">
-                <button class="btn btn-primary btn-block mt-4" type="submit">Enviar</button>
-              </div>
-
-            </form>
-          </div>
-          <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div> -->
-        </div>
-      </div>
+    <div class=" container-fluid bg-donkey-secondary my-4">
+      <app-noticia></app-noticia>
     </div>
 
   </div>
 
   <div class="row">
-    <div class="col-10 col-md-6 col-lg-4 pt-3" *ngFor="let noticia of allAnuncios">
+    <div class="mx-auto col-10 col-md-6 col-lg-4 py-3" *ngFor="let anuncio of allAnuncios">
       <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image src="https://picsum.photos/id/694/600/400" alt="Photo of a Shiba Inu">
+        <!-- <mat-card-header> -->
+
+        <div class="row mt-2 mb-3">
+          <div class="col-8">
+            <h5 class="">
+              {{anuncio.titulo}}
+            </h5>
+          </div>
+          <div class="col-3 p-0 d-flex justify-content-end">
+            <h5 class="mb-0 bg-precio">
+              {{anuncio.precio}}
+            </h5>
+          </div>
+
+        </div>
+
+        <!-- <mat-card-subtitle>{{anuncio.autor}}</mat-card-subtitle> -->
+        <!-- </mat-card-header> -->
+
         <mat-card-content>
-          <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-          </p>
+          <p>{{anuncio.descripcion}}</p>
         </mat-card-content>
-        <mat-card-actions class="d-flex justify-content-between">
-          <button mat-flat-button color="primary">LIKE</button>
-          <button mat-flat-button color="accent">SHARE</button>
+        <mat-card-actions>
+          <button class="btn btn-info btn-block">VER ANUNCIO</button>
+
         </mat-card-actions>
       </mat-card>
     </div>
+
   </div>
 </div>
 

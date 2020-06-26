@@ -10,6 +10,13 @@
 }
 
 
+* {
+  box-sizing: border-box;
+  line-height: 1.5;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
 @media (min-width: 768px) {
 
   hr {

@@ -6,7 +6,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import Pslect from 'pselect.js';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/servicios/auth.service';
 import * as brands from '../../../db/moto_brands.json';
@@ -15,12 +19,18 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-dash-usuario',
   templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css']
+  styleUrls: ['./usuario.component.css'],
 })
 export class UsuarioDashComponent implements OnInit {
   panelOpenState = false;
   estado = 'Añadir';
-  displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'precio','actions'];
+  displayedColumns: string[] = [
+    'id',
+    'titulo',
+    'descripcion',
+    'precio',
+    'actions',
+  ];
   dataSource: MatTableDataSource<Anuncio>;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
@@ -45,15 +55,16 @@ export class UsuarioDashComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-
-  constructor(private anuncioService: anuncioService,
+  constructor(
+    private anuncioService: anuncioService,
     private authService: AuthService,
     private http: HttpClient,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar
+  ) {
     this.marcas = brands.data;
     this.modelos = models.data;
-    this.anunciosUser = []
-    this.anuncioEdit = []
+    this.anunciosUser = [];
+    this.anuncioEdit = [];
     /* provincias - poblaciones */
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
@@ -98,11 +109,12 @@ export class UsuarioDashComponent implements OnInit {
 
   async ngOnInit() {
     this.reloadData();
-
   }
   async reloadData() {
     const currentUser = this.authService.decodeToken();
-    this.anunciosUser = await this.anuncioService.getAnunciosById(currentUser['userId'])
+    this.anunciosUser = await this.anuncioService.getAnunciosById(
+      currentUser['userId']
+    );
     this.materialDataTable();
   }
 
@@ -129,7 +141,7 @@ export class UsuarioDashComponent implements OnInit {
   }
 
   togglePanel() {
-    this.panelOpenState = !this.panelOpenState
+    this.panelOpenState = !this.panelOpenState;
   }
 
   applyFilter(event: Event) {
@@ -141,24 +153,26 @@ export class UsuarioDashComponent implements OnInit {
   }
 
   async deleteUser(element) {
-    const response = await this.anuncioService.deleteAnuncio(element.id)
+    const response = await this.anuncioService.deleteAnuncio(element.id);
     //const response = await this.usuarioService.deleteUser(element.id);
     this.openSnackBar(response['success']);
-    this.reloadData()
+    this.reloadData();
   }
 
   async editUser(element) {
-    this.togglePanel()
+    this.togglePanel();
     this.anuncioEdit = await this.anuncioService.getAnuncio(element.id);
-    this.reloadData()
-
+    this.reloadData();
   }
   async onSubmit() {
     const newAnuncio = this.form.value;
-    newAnuncio.usuarios_id = this.authService.decodeToken()['userId']
+    newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
 
-    if(this.anuncioEdit['id']){
-      const response = await this.anuncioService.editAnuncioById(this.anuncioEdit['id'],newAnuncio);
+    if (this.anuncioEdit['id']) {
+      const response = await this.anuncioService.editAnuncioById(
+        this.anuncioEdit['id'],
+        newAnuncio
+      );
       this.reloadData();
       this.openSnackBar(response['success']);
     } else {
@@ -172,7 +186,8 @@ export class UsuarioDashComponent implements OnInit {
     this.filtroProvincias = [];
     this.poblaciones.filter((result) => {
       let idProvincia =
-        $event.target.options[$event.target.options['selectedIndex']].dataset.id;
+        $event.target.options[$event.target.options['selectedIndex']].dataset
+          .id;
       let idPoblacion = result['id'];
       idPoblacion = idPoblacion.substr(0, 2);
       if (idPoblacion === idProvincia) {
@@ -183,8 +198,5 @@ export class UsuarioDashComponent implements OnInit {
 
   onFileChange($event) {
     this.files = $event.target.files;
-
   }
-
-
 }

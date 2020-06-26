@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Video_tutorial } from '../models/video_tutorial.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,14 @@ export class TutorialesService {
   }
 
   getAllTutorial(): Promise<Video_tutorial[]> {
-    return this.httpClient.get<Video_tutorial[]>(this.baseUrl).toPromise();
+    const options = {
+      headers: new HttpHeaders({
+        'user-token': localStorage.getItem('user-token'),
+      }),
+    };
+    return this.httpClient
+      .get<Video_tutorial[]>(this.baseUrl, options)
+      .toPromise();
   }
 
   deleteTutorial(tutorial) {

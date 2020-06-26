@@ -6,11 +6,9 @@ hr {
   width: 40%;
 }
 
-.modal-header {
-  border-bottom: none;
-  padding-bottom: 0;
-}
 
-.modal-footer {
-  border-top: none;
+.btn-info {
+  color: #fff;
+  background-color: VAR(--color-A--color);
+  border-color: VAR(--color-A--color);
 }
