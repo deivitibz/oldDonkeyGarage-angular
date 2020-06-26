@@ -5,12 +5,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import Pslect from 'pselect.js';
-
+import { LoginGuard } from 'src/app/login.guard';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 export interface Usuario {
   id: number;
@@ -33,6 +34,7 @@ export class UsuariosComponent implements OnInit {
   provinciasOrder: any[];
   poblaciones: string[];
   filtroProvincias: any[];
+
   //material tables
   displayedColumns: string[] = ['id', 'username', 'email', 'rol', 'actions'];
   dataSource: MatTableDataSource<Usuario>;
@@ -47,7 +49,9 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private _snackBar: MatSnackBar
+    private authService: AuthService,
+    private _snackBar: MatSnackBar,
+    private guard: LoginGuard
   ) {
     this.allUsers = [];
     this.usuarioEdit = [];

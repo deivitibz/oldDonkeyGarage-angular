@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
 import { Usuario } from './../models/usuario_perfil.model';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
   usuarioActivo: Usuario;
-
-  constructor() {}
+  baseUrl = 'http://localhost:3000/api/check';
+  constructor(private http: HttpClient) {}
 
   decodeToken() {
     let token = localStorage.getItem('user-token');
@@ -18,17 +17,21 @@ export class AuthService {
     return decoded;
   }
 
+  checkToken() {
+    return this.http.get(this.baseUrl).toPromise();
+  }
+
   isAdmin() {
-    if (this.decodeToken){
+    if (this.decodeToken) {
       return true;
     }
   }
 
-  generateHeaders(){
+  generateHeaders() {
     return {
       headers: new HttpHeaders({
-        'user-token': localStorage.getItem('user-token')
-      })
-    }
+        'user-token': localStorage.getItem('user-token'),
+      }),
+    };
   }
 }

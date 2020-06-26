@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 export class UsuarioService {
   baseUrl: string;
 
-  constructor(private httpClient: HttpClient,private auth: AuthService) {
+  constructor(private httpClient: HttpClient, private auth: AuthService) {
     this.baseUrl = 'http://localhost:3000/api/usuarios';
   }
 
@@ -20,25 +20,33 @@ export class UsuarioService {
       }),
     }; */
     return this.httpClient
-      .post(this.baseUrl + '/registro', formValues).toPromise();
+      .post(this.baseUrl + '/registro', formValues)
+      .toPromise();
   }
 
   login(formValues): Promise<any> {
     //console.log(formValues);
-    return this.httpClient.post(this.baseUrl + '/login', formValues).toPromise();
+    return this.httpClient
+      .post(this.baseUrl + '/login', formValues)
+      .toPromise();
   }
 
   getUsers(): Promise<any> {
-
-    return this.httpClient.get(this.baseUrl, this.auth.generateHeaders()).toPromise();
+    return this.httpClient
+      .get(this.baseUrl, this.auth.generateHeaders())
+      .toPromise();
   }
 
   deleteUser(userId): Promise<any> {
-    return this.httpClient.delete(this.baseUrl + '/' + userId,this.auth.generateHeaders()).toPromise();
+    return this.httpClient
+      .delete(this.baseUrl + '/' + userId, this.auth.generateHeaders())
+      .toPromise();
   }
 
   getUserById(id): Promise<any> {
-    return this.httpClient.get(this.baseUrl + '/' + id).toPromise();
+    return this.httpClient
+      .get(this.baseUrl + '/' + id, this.auth.generateHeaders())
+      .toPromise();
   }
 
   isLogged() {
@@ -46,10 +54,18 @@ export class UsuarioService {
   }
 
   createUser(user): Promise<Usuario> {
-    return this.httpClient.post<Usuario>(this.baseUrl, user).toPromise();
+    return this.httpClient
+      .post<Usuario>(this.baseUrl, user, this.auth.generateHeaders())
+      .toPromise();
   }
 
-  editUserById(id,usuarioEdit): Promise<Usuario> {
-    return this.httpClient.put<Usuario>(this.baseUrl + '/' + id, usuarioEdit).toPromise();
+  editUserById(id, usuarioEdit): Promise<Usuario> {
+    return this.httpClient
+      .put<Usuario>(
+        this.baseUrl + '/' + id,
+        usuarioEdit,
+        this.auth.generateHeaders()
+      )
+      .toPromise();
   }
 }

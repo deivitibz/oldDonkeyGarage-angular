@@ -12,30 +12,33 @@
         <img mat-card-image src="https://picsum.photos/id/694/600/400" alt="Photo of a Shiba Inu">
         <!-- <mat-card-header> -->
 
-        <div class="row mt-2 mb-3">
-          <div class="col-8">
-            <h5 class="">
-              {{moto.titulo}}
-            </h5>
-          </div>
-          <div class="col-3 p-0 d-flex justify-content-end">
-            <h5 class="mb-0 bg-precio">
-              {{moto.precio}}
-            </h5>
+        <div class="px-3 mt-3">
+          <div class="row mt-4 mb-3">
+            <div class="col-8">
+              <h5 class="">
+                {{moto.titulo}}
+              </h5>
+            </div>
+            <div class="col-3 p-0 d-flex justify-content-end">
+              <h5 class="mb-0 bg-precio">
+                {{moto.precio}} €
+              </h5>
+            </div>
+
           </div>
 
+          <!-- <mat-card-subtitle>{{noticia.autor}}</mat-card-subtitle> -->
+          <!-- </mat-card-header> -->
+
+          <mat-card-content>
+            <p>{{moto.descripcion}}</p>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button class="btn btn-dark btn-block">VER ANUNCIO</button>
+
+          </mat-card-actions>
         </div>
-
-        <!-- <mat-card-subtitle>{{noticia.autor}}</mat-card-subtitle> -->
-        <!-- </mat-card-header> -->
-
-        <mat-card-content>
-          <p>{{moto.descripcion}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button class="btn btn-dark btn-block">VER ANUNCIO</button>
-
-        </mat-card-actions>
       </mat-card>
     </div>
 
