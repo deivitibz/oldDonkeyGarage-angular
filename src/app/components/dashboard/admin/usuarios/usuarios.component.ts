@@ -13,18 +13,17 @@ import {
 } from '@angular/material/snack-bar';
 
 export interface Usuario {
-  id: number,
-  username: string,
-  email: string,
-  rol: string
+  id: number;
+  username: string;
+  email: string;
+  rol: string;
 }
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  styleUrls: ['./usuarios.component.css'],
 })
-
 export class UsuariosComponent implements OnInit {
   panelOpenState = false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
@@ -46,9 +45,12 @@ export class UsuariosComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private usuarioService: UsuarioService, private _snackBar: MatSnackBar) {
-    this.allUsers = []
-    this.usuarioEdit = []
+  constructor(
+    private usuarioService: UsuarioService,
+    private _snackBar: MatSnackBar
+  ) {
+    this.allUsers = [];
+    this.usuarioEdit = [];
 
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
@@ -116,13 +118,12 @@ export class UsuariosComponent implements OnInit {
           Validators.pattern(
             /(\+34|0034|34)?[ -]*(6|7)([0-9]){2}[ -]?(([0-9]){2}[ -]?([0-9]){2}[ -]?([0-9]){2}|([0-9]){3}[ -]?([0-9]){3})/
           ),
-        ]),
+        ])
       ),
       imagenes_usuario: new FormControl('', []),
       imagenes_constructor: new FormControl('', []),
     });
   }
-
 
   async ngOnInit() {
     this.allUsers = await this.usuarioService.getUsers();
@@ -137,9 +138,8 @@ export class UsuariosComponent implements OnInit {
   }
 
   async editUser(element) {
-    this.togglePanel()
+    this.togglePanel();
     this.usuarioEdit = await this.usuarioService.getUserById(element.id);
-
   }
 
   async onSubmit() {
@@ -147,7 +147,6 @@ export class UsuariosComponent implements OnInit {
     if (this.usuarioEdit.id) {
       const response = await this.usuarioService.createUser(newUser);
       console.log(response);
-
     } else {
       const response = await this.usuarioService.registro;
       console.log(response);
@@ -163,7 +162,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   togglePanel() {
-    this.panelOpenState = !this.panelOpenState
+    this.panelOpenState = !this.panelOpenState;
   }
 
   applyFilter(event: Event) {
@@ -178,7 +177,8 @@ export class UsuariosComponent implements OnInit {
     this.filtroProvincias = [];
     this.poblaciones.filter((result) => {
       let idProvincia =
-        $event.target.options[$event.target.options['selectedIndex']].dataset.id;
+        $event.target.options[$event.target.options['selectedIndex']].dataset
+          .id;
       let idPoblacion = result['id'];
       idPoblacion = idPoblacion.substr(0, 2);
       if (idPoblacion === idProvincia) {
@@ -194,5 +194,4 @@ export class UsuariosComponent implements OnInit {
 
     return a < b ? -1 : a > b ? 1 : 0;
   }
-
 }

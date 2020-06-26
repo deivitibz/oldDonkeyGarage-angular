@@ -35,8 +35,6 @@ export class anunciosComponent implements OnInit {
     private http: HttpClient,
     private router: Router
   ) {
-
-
     this.marcas = brands.data;
     this.modelos = models.data;
     this.form = new FormGroup({
@@ -51,7 +49,7 @@ export class anunciosComponent implements OnInit {
       modelo: new FormControl('', []),
       itv: new FormControl('', []),
       homologacion: new FormControl('', []),
-      file: new FormControl('', []),
+      imagenes: new FormControl('', []),
       tipoCustom: new FormControl('', []),
     });
     this.files = [];
@@ -81,7 +79,7 @@ export class anunciosComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const response = await this.anuncioService.getAnuncios();
+    const response = await this.anuncioService.getAllAnuncios();
     this.allAnuncios = response;
     //console.log(this.allAnuncios);
 

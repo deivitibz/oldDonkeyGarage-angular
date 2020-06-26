@@ -6,72 +6,76 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
+
 <div class="container">
+  <!-- tabla -->
+  <div class="row my-4">
 
-  <mat-tab-group>
+    <mat-expansion-panel [expanded]="!panelOpenState">
+      <mat-expansion-panel-header>
+        Lista Tutoriales
+      </mat-expansion-panel-header>
 
-    <mat-tab label="Lista de Tutoriales">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+      </mat-form-field>
 
-      <div class="container">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <mat-form-field>
-          <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia"> <!-- evento que llama a funcion-->
-        </mat-form-field>
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource">
+        <!-- Name Column -->
+        <ng-container matColumnDef="titulo">
+          <th mat-header-cell *matHeaderCellDef> Titulo </th>
+          <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+        </ng-container>
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> ID </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+        </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="titulo">
-              <th mat-header-cell *matHeaderCellDef> Titulo </th>
-              <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
-            </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="autor">
+          <th mat-header-cell *matHeaderCellDef> Autor </th>
+          <td mat-cell *matCellDef="let element"> {{element.autor}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="descripcion">
-              <th mat-header-cell *matHeaderCellDef> Descripcion </th>
-              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-            </ng-container>
+            <mat-icon (click)="editTutorial(element)" class="example-icon" aria-hidden="false"
+              aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="autor">
-              <th mat-header-cell *matHeaderCellDef> Autor </th>
-              <td mat-cell *matCellDef="let element"> {{element.autor}} </td>
-            </ng-container>
-            <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef> Actions </th>
-              <td mat-cell *matCellDef="let element">
+            <mat-icon (click)="deleteTutorial(element)" class="example-icon" aria-hidden="false"
+              aria-label="Example heart icon">
+              delete</mat-icon>
 
-                <mat-icon (click)="editTutorial(element)" class="example-icon" aria-hidden="false"
-                  aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
+          </td>
+        </ng-container>
 
-                <mat-icon (click)="deleteTutorial(element)" class="example-icon" aria-hidden="false"
-                  aria-label="Example heart icon">
-                  delete</mat-icon>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 
-              </td>
-            </ng-container>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </mat-expansion-panel>
+  </div>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+  <!-- formulario -->
+  <div class="row mb-4">
 
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-        </div>
+    <mat-expansion-panel [expanded]="panelOpenState">
+      <mat-expansion-panel-header>
+        Crear Editar Tutoriales
+      </mat-expansion-panel-header>
 
-      </div>
-
-      <!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
-
-    </mat-tab>
-    <mat-tab label="Añadir tutorial">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="">Titulo</label>
@@ -131,35 +135,9 @@
           <button *ngIf="tutorialEdit.id" class="btn btn-primary btn-block " type="submit">Editar</button>
         </div>
       </form>
-    </mat-tab>
-  </mat-tab-group>
-</div>
 
-
-<!-- <mat-accordion> CONTENEDOR TOTAL
-
-    <mat-expansion-panel> CONTENEDOR EXTENSIBLE
-      <mat-expansion-panel-header> CONTENEDOR DEL TITULO
-        <mat-panel-title> 
-          TITULO
-        </mat-panel-title>
-
-      </mat-expansion-panel-header>
-      
-      CONTENIDO
-      
+      <!-- formulario -->
     </mat-expansion-panel>
 
-
-    <mat-extension-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          TITULO2
-        </mat-panel-title>
-
-        CONTENIDO
-
-      </mat-expansion-panel-header>
-    </mat-extension-panel>
-
-  </mat-accordion> -->
+  </div>
+</div>

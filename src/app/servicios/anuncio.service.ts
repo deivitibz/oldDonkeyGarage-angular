@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Anuncio } from '../models/anuncio.model';
-import { anunciosComponent } from '../components/anuncios/anuncios.component';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +17,19 @@ export class anuncioService {
     return this.http.post<Anuncio>(this.baseUrl, anuncio).toPromise();
   }
 
-  getAnuncios(): Promise<Anuncio[]> {
+  getAllAnuncios(): Promise<Anuncio[]> {
     return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
   }
+
+  newAnuncio(anuncio: Anuncio) {
+    return this.http.post(this.baseUrl, anuncio).toPromise();
+  }
+
+
+  editAnuncio(id, newAnuncio) {
+    return this.http.put(this.baseUrl + '/' + id, newAnuncio).toPromise();
+  }
+
 
   getAnunciosById(id): Promise<Anuncio[]>{
     return this.http.get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id).toPromise();

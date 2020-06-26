@@ -29,6 +29,9 @@ export class NoticiasComponent implements OnInit {
   //formulario
   form: FormGroup;
 
+  // panel
+  panelOpenState = false;
+
   //snackbar
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -112,6 +115,9 @@ export class NoticiasComponent implements OnInit {
     });
   }
 
+  togglePanel() {
+    this.panelOpenState = !this.panelOpenState;
+  }
   onFileChange($event) {}
 
   async deleteNoticia(noticia) {
@@ -140,7 +146,10 @@ export class NoticiasComponent implements OnInit {
   }
 
   async editNoticia(noticia) {
+    this.togglePanel();
     this.noticiaEdit = await this.noticiasService.getNoticia(noticia.id);
-    this.estado = 'Editar';
+    console.log(noticia.id);
+
+    // this.estado = 'Editar';
   }
 }
