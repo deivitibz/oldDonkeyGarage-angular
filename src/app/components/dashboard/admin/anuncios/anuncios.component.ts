@@ -8,6 +8,8 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import { anuncioService } from 'src/app/servicios/anuncio.service';
+
+// imports tablas
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -28,7 +30,8 @@ export class AnunciosComponent implements OnInit {
 
   anuncioEdit: any;
 
-  files: string[];
+  files;
+  //files: string[];
 
   //panel
   panelOpenState = false;
@@ -67,8 +70,10 @@ export class AnunciosComponent implements OnInit {
   constructor(
     private anuncioService: anuncioService,
     private authService: AuthService,
+    private http: HttpClient,
     private _snackBar: MatSnackBar
   ) {
+
     this.anuncioEdit = [];
 
     this.marcas = brands.data;
@@ -101,12 +106,16 @@ export class AnunciosComponent implements OnInit {
       modelo: new FormControl('', []),
       itv: new FormControl('', []),
       homologacion: new FormControl('', []),
+      file: new FormControl('', []),
+      tipoCustom: new FormControl('', []),
+      avatar: new FormControl('', []),
       imagenes: new FormControl('', []),
       // tipoCustom: new FormControl('', []),
     });
   }
 
   async ngOnInit() {
+    //this.allAnuncios = await this.anuncioService.getAnuncios();
     this.reloadData();
   }
 
@@ -192,6 +201,16 @@ export class AnunciosComponent implements OnInit {
     // console.log(this.form.value);
     const newAnuncio = this.form.value;
     newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
+    // this.anuncioService.addImages(this.files, this.form);
+
+/*  TODO: REVISAR SI NO FUNCION
+    const result = await this.anuncioService.addAnuncio(newAnuncio);
+    console.log(result);
+    // nombre del archivo
+    console.log(this.form.value);
+
+ */
+
     // console.log(newAnuncio);
 
     // this.anuncioService.addImages(this.files, this.form);
