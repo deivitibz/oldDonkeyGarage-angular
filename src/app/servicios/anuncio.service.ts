@@ -22,6 +22,18 @@ export class anuncioService {
     return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
   }
 
+  getAllAnuncios(): Promise<Anuncio[]> {
+    return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
+  }
+
+  newAnuncio(anuncio: Anuncio) {
+    return this.http.post(this.baseUrl, anuncio).toPromise();
+  }
+
+  editAnuncio(id, newAnuncio) {
+    return this.http.put(this.baseUrl + '/' + id, newAnuncio).toPromise();
+  }
+
   getAnunciosById(id): Promise<Anuncio[]> {
     return this.http
       .get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id)
