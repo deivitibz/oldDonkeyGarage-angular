@@ -5,16 +5,23 @@ hr {
   margin-bottom: 30px;
 }
 
-
-h1 {
-  color: #fff;
-  font-size: 4em;
-  font-family: VAR(--font-principal--font-family);
-
+.display-1 {
+  font-size: 3rem;
 }
 
+
 .parallax {
-  background-image: url("../../../assets/img/garaje1.jpg");
+  background-image: url("../../../assets/img/carrusel/bmw-5.jpg");
+  padding: 12em 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+
+.parallax2 {
+  background-image: url("../../../assets/img/paralax-nosotros.jpg");
   padding: 12em 0;
   background-repeat: no-repeat;
   background-size: cover;

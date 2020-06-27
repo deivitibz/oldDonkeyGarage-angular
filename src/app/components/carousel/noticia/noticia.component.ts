@@ -11,11 +11,11 @@ export class NoticiaComponent implements OnInit {
       img: '../../../../assets/img/motos/bobber2.png',
     },
     {
-      name: 'BRAT',
-      img: '../../../../assets/img/motos/brad2.png',
+      name: 'SCRAMBLER',
+      img: '../../../../assets/img/motos/scrambler2.png',
     },
     {
-      name: 'C.RACER',
+      name: 'RACER',
       img: '../../../../assets/img/motos/cafe_racer2.png',
     },
     {
@@ -23,11 +23,11 @@ export class NoticiaComponent implements OnInit {
       img: '../../../../assets/img/motos/chopped2.png',
     },
     {
-      name: 'SCRAMBLER',
-      img: '../../../../assets/img/motos/scrambler2.png',
+      name: 'BRAD',
+      img: '../../../../assets/img/motos/brad2.png',
     },
     {
-      name: 'S.TRACKER',
+      name: 'TRACKER',
       img: '../../../../assets/img/motos/street2.png',
     },
   ];
@@ -58,7 +58,7 @@ export class NoticiaComponent implements OnInit {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
