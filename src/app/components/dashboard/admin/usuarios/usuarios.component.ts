@@ -4,8 +4,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import Pslect from 'pselect.js';
-import { LoginGuard } from 'src/app/login.guard';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -51,108 +49,66 @@ export class UsuariosComponent implements OnInit {
     private usuarioService: UsuarioService,
     private authService: AuthService,
     private _snackBar: MatSnackBar,
-    private guard: LoginGuard
   ) {
     this.allUsers = [];
     this.usuarioEdit = [];
 
-    this.provincias = new Pslect().constructor.provincesData;
-    this.poblaciones = new Pslect().constructor.municipesData;
-    this.provinciasOrder = [];
-
-    for (let provincia of this.provincias) {
-      const provinciaObj: Object = {
-        provincia: provincia['nm'],
-        id: provincia['id'],
-      };
-      this.provinciasOrder.push(provinciaObj);
-      //this.provinciasOrder.push({ 'provincia': provincia['nm'].toString(), 'id': parseInt(provincia['id']) })
-    }
-    this.provinciasOrder.sort((a, b) => {
-      return this.compareStrings(a['provincia'], b['provincia']);
-    });
     //formulario
-    this.form = new FormGroup({
-      username: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(/^[A-Za-z_][a-z0-9_-]{3,15}$/),
-        ])
-      ),
-      email: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/),
-        ])
-      ),
-      password: new FormControl(''),
-      repeatPassword: new FormControl(''),
-      nombre: new FormControl('', []),
-      direccion: new FormControl('', [Validators.required]),
-      provincia: new FormControl('', [Validators.required]),
-      localidad: new FormControl('', [Validators.required]),
-      nombre_constructor: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(/^[A-Za-z_][a-z0-9_-]{3,15}$/),
-        ])
-      ),
-      descripcion: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(20),
-          Validators.maxLength(150),
-        ])
-      ),
-      persona_contacto: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(/^[A-Za-z_][a-z0-9_-]{3,15}$/),
-        ])
-      ),
-      telefono: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(
-            /(\+34|0034|34)?[ -]*(6|7)([0-9]){2}[ -]?(([0-9]){2}[ -]?([0-9]){2}[ -]?([0-9]){2}|([0-9]){3}[ -]?([0-9]){3})/
-          ),
-        ])
-      ),
-      imagenes_usuario: new FormControl('', []),
-      imagenes_constructor: new FormControl('', []),
-    });
+    this.initializeForm()
   }
 
   async ngOnInit() {
-    this.allUsers = await this.usuarioService.getUsers();
+    this.reloadData();
+  }
+
+  materialDataTable() {
     this.dataSource = new MatTableDataSource(this.allUsers);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
+  async reloadData() {
+    let response = await this.usuarioService.getUsers();
+    this.allUsers = response;
+    this.authService.checkToken(response);
+    this.materialDataTable();
+  }
+
   async deleteUser(element) {
     const response = await this.usuarioService.deleteUser(element.id);
-    this.openSnackBar(response);
+    this.openSnackBar(response['success']);
+    this.reloadData();
   }
 
   async editUser(element) {
     this.togglePanel();
     this.usuarioEdit = await this.usuarioService.getUserById(element.id);
+    this.initializeForm()
+    //console.log(this.usuarioEdit);
+
+  }
+
+  initializeForm(){
+    //formulario
+    this.form = new FormGroup({
+      username: new FormControl(
+        this.usuarioEdit['username']),
+      email: new FormControl(
+        this.usuarioEdit['email']),
+      password: new FormControl(this.usuarioEdit['password']),
+
+      // repeatPassword: new FormControl(''),
+      rol: new FormControl(this.usuarioEdit['rol']),
+    });
   }
 
   async onSubmit() {
     const newUser = this.form.value;
     if (this.usuarioEdit.id) {
-      const response = await this.usuarioService.createUser(newUser);
+      const response = await this.usuarioService.editUserById(this.usuarioEdit.id,newUser);
       console.log(response);
     } else {
-      const response = await this.usuarioService.registro;
+      const response = await this.usuarioService.createUser(newUser)
       console.log(response);
     }
   }

@@ -24,7 +24,7 @@ export class AuthService {
       console.log('no hay token');
 
     } else {
-      console.log(response);
+      // console.log(response);
 
       if(response['error']){
         localStorage.removeItem('user-token');

@@ -119,7 +119,7 @@ td {
 }
 
 mat-drawer {
-  width: 185px;
+  width: 250px;
 }
 
 a.nav-link {
@@ -130,4 +130,7 @@ a.nav-link {
 
 .list-group-item {
   border: none;
+}
+.row{
+
 }
