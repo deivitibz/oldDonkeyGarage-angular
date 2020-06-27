@@ -128,6 +128,7 @@ export class AnunciosComponent implements OnInit {
 
   async reloadData() {
     this.allAnuncios = await this.anuncioService.getAnuncios();
+    this.authService.checkToken(this.allAnuncios);
     this.materialDataTable();
   }
 

@@ -80,7 +80,9 @@ export class VideotutorialesComponent implements OnInit {
   }
 
   async reloadData() {
-    this.allTutoriales = await this.tutorialesService.getAllTutorial();
+    let response = await this.tutorialesService.getAllTutorial();
+    response = this.allTutoriales
+    this.authService.checkToken(response);
     this.materialDataTable();
   }
 

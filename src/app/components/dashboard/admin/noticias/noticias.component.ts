@@ -85,6 +85,8 @@ export class NoticiasComponent implements OnInit {
 
   async ngOnInit() {
     this.reloadData();
+
+
   }
 
   materialDataTable() {
@@ -94,7 +96,9 @@ export class NoticiasComponent implements OnInit {
   }
 
   async reloadData() {
-    this.allNoticias = await this.noticiasService.getAllNoticias();
+    let response = await this.noticiasService.getAllNoticias();
+    this.allNoticias = response;
+    this.authService.checkToken(response);
     this.materialDataTable();
   }
 
@@ -122,7 +126,7 @@ export class NoticiasComponent implements OnInit {
 
   async deleteNoticia(noticia) {
     const response = await this.noticiasService.deleteNoticia(noticia);
-    this.openSnackBar(response['succes']);
+    this.openSnackBar(response['success']);
     this.reloadData();
   }
 
@@ -131,10 +135,7 @@ export class NoticiasComponent implements OnInit {
     newNoticia.usuarios_id = this.authService.decodeToken()['userId'];
 
     if (this.noticiaEdit.id) {
-      const response = await this.noticiasService.editNoticia(
-        this.noticiaEdit,
-        newNoticia
-      );
+      const response = await this.noticiasService.editNoticia(this.noticiaEdit.id,newNoticia);
 
       this.openSnackBar(response['success']);
       this.reloadData();
