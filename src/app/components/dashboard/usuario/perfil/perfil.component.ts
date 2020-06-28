@@ -11,9 +11,10 @@ import { HttpHeaders, HttpRequest, HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-dash-usuario-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  styleUrls: ['./perfil.component.scss', './perfil.component.css']
 })
 export class UsuarioDashPerfilComponent implements OnInit {
+  panelOpenState = false;
   provincias: string[];
   provinciasOrder: any[];
   poblaciones: string[];
@@ -75,6 +76,11 @@ export class UsuarioDashPerfilComponent implements OnInit {
       }
     });
   }
+
+  togglePanel() {
+    this.panelOpenState = !this.panelOpenState;
+  }
+  
   compareStrings(a, b) {
     // Assuming you want case-insensitive comparison
     a = a.toLowerCase();

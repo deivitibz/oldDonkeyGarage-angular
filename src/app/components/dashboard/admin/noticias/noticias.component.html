@@ -1,6 +1,6 @@
 <div class="container-fluid p-0">
   <mat-toolbar color="primary">
-    <mat-toolbar-row>
+    <mat-toolbar-row class="bg-donkey">
       <span>Lista de noticias</span>
       <span class="example-spacer"></span>
     </mat-toolbar-row>
@@ -25,34 +25,35 @@
 
         <!-- Position Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <th mat-header-cell *matHeaderCellDef class="pr-3"> ID </th>
           <td mat-cell *matCellDef="let element"> {{element.id}} </td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="titulo">
-          <th mat-header-cell *matHeaderCellDef> Titulo </th>
+          <th mat-header-cell *matHeaderCellDef class="pr-3"> Titulo </th>
           <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="descripcion">
+        <!-- <ng-container matColumnDef="descripcion">
           <th mat-header-cell *matHeaderCellDef> Descripcion </th>
           <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-        </ng-container>
-
+        </ng-container> -->
+ 
         <!-- Symbol Column -->
         <ng-container matColumnDef="autor">
-          <th mat-header-cell *matHeaderCellDef> Autor </th>
+          <th mat-header-cell *matHeaderCellDef class="pr-3"> Autor </th>
           <td mat-cell *matCellDef="let element"> {{element.autor}} </td>
         </ng-container>
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <th mat-header-cell *matHeaderCellDef class="pr-3"> Actions </th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon (click)="deleteNoticia(element)" class="example-icon" aria-hidden="false"
-              aria-label="Example heart icon">delete</mat-icon>
-            <mat-icon (click)="editNoticia(element)" class="example-icon" aria-hidden="false"
+            <mat-icon (click)="editNoticia(element)" class="example-icon mr-2" aria-hidden="false"
               aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
+            <mat-icon (click)="deleteNoticia(element)" class="example-icon " aria-hidden="false"
+              aria-label="Example heart icon">delete</mat-icon>
+
           </td>
         </ng-container>
 

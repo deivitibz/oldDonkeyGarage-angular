@@ -40,7 +40,7 @@ export class NoticiasComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'titulo',
-    'descripcion',
+    // 'descripcion',
     'autor',
     'actions',
   ];

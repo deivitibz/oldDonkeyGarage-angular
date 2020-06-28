@@ -69,6 +69,7 @@ import { UsuarioDashComponent } from './components/dashboard/usuario/usuario.com
 import { ConstructorDashComponent } from './components/dashboard/constructor/constructor.component';
 import { UsuarioDashPerfilComponent } from './components/dashboard/usuario/perfil/perfil.component';
 import { ConstructorDashPerfilComponent } from './components/dashboard/constructor/perfil/perfil.component';
+import { DetalleComponent } from './components/anuncios/detalle/detalle.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { ConstructorDashPerfilComponent } from './components/dashboard/construct
     ConstructorDashComponent,
     UsuarioDashPerfilComponent,
     ConstructorDashPerfilComponent,
+    DetalleComponent,
   ],
   imports: [
     BrowserModule,

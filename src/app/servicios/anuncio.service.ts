@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Anuncio } from '../models/anuncio.model';
 import { anunciosComponent } from '../components/anuncios/anuncios.component';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',

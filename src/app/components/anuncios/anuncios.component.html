@@ -1,4 +1,4 @@
-<div class="container-fluid px-4 bg-donkey-secondary">
+<div *ngIf="!router.url.includes('anuncios/detalle')" class="container-fluid px-4 bg-donkey-secondary">
   <div class="row">
     <!-- <div class="col-12 text-center mt-4">
       <h2>NUESTRAS BURRAS EN VENTA</h2>
@@ -46,6 +46,7 @@
 
   </div>
 </div>
+<router-outlet></router-outlet>
 
 
 

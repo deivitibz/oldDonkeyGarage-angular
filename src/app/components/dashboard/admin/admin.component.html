@@ -1,46 +1,48 @@
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 m-0 bg-donkey-secondary">   
   <mat-drawer-container>
 <!-- menu sidebar -->
-    <mat-drawer #drawer class="example-sidenav bg-donkey" mode="side">
+    <mat-drawer #drawer class="example-sidenav bg-donkey p-0 m-0" mode="side">
+ 
+      <div class="row p-0 m-0">
 
-      <div class="row">
-
-        <div class="col-12">
-          <img class="w-75 m-1" src="../../../../assets/img/iconografia/logo-b.png" alt="">
+        <div class="col-10 mx-auto mt-3 d-flex">
+          <div class="mx-auto">
+            <img class="img-fluid mx-auto p-2 m-1" src="../../../../assets/img/iconografia/logo-b.png" alt="">
+          </div>
         </div>
 
-        <div class="col-12">
+        <div class="col-12 mb-4 mx-auto">
           <ul class="nav flex-column">
 
-            <li class="bg-donkey list-group-item my-1">
+            <li class="bg-donkey list-group-item my-1 mt-0">
               <a class="nav-link active text-center" [routerLink]="['usuarios']">
-                <img class="img-fluid m-1" width="35%" src="../../../assets/img/casco.png" alt="">
+                <img class="img-fluid m-1" width="30%" src="../../../assets/img/casco.png" alt="">
                 Usuarios
               </a>
             </li>
-            <li class="bg-donkey list-group-item my-1">
+            <li class="bg-donkey list-group-item my-1 mt-0">
               <a class="nav-link text-center" [routerLink]="['anuncios']">
-                <img class="img-fluid m-1" width="35%" src="../../../assets/img/anuncios.png" alt="">
-                Anuncios
+                <img class="img-fluid m-1 p-1 mr-2" width="30%" src="../../../assets/img/anuncios.png" alt="">
+                 Anuncios
               </a>
             </li>
-            <li class="bg-donkey list-group-item my-1">
+            <li class="bg-donkey list-group-item my-1 ml-1 mt-0">
               <a class="nav-link text-center" [routerLink]="['noticias']">
-                <img class="img-fluid m-1" width="35%" src="../../../assets/img/mensaje.png" alt="">
+                <img class="img-fluid mr-3 m-1" width="26%" src="../../../assets/img/mensaje.png" alt="">
                 Noticias
               </a>
             </li>
-            <li class="bg-donkey list-group-item my-1">
+            <li class="bg-donkey list-group-item my-1 mt-0">
               <a class="nav-link text-center" [routerLink]="['videotutoriales']">
-                <img class="img-fluid m-1" width="40%" src="../../../assets/img/moto.png" alt="">
-                Videotutoriales
+                <img class="img-fluid m-1 mr-2" width="30%" src="../../../assets/img/moto.png" alt="">
+                Tutoriales
               </a>
             </li>
           </ul>
         </div> 
 
-        <div class="col-12">
-          <button class="btn btn-block bg-danger" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>
+        <div class="col-12 mx-auto p-0 d-flex">
+          <button class="btn btn-block bg-danger text-white" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>
         </div>
 
       </div>
@@ -48,18 +50,19 @@
     </mat-drawer>
 
 <!-- boton sidebar -->
-    <div class="row">
-      <div class="col-12">
+    <div class="row p-0 mx-0">
+      <div class="col-12 px-0 ">
         <mat-toolbar color="">
           <mat-toolbar-row>
              <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="drawer.toggle()">menu</mat-icon>
+             <h2 class="mx-auto">panel de administracion</h2>
           </mat-toolbar-row>
         </mat-toolbar>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12">
+    <div class="row p-0 mx-0  bg-donkey-secondary">
+      <div class="col-12 p-0 m-0">
         <router-outlet></router-outlet>
 <!--         <mat-card>
           <mat-card-header>

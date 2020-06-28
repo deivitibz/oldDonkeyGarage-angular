@@ -40,7 +40,7 @@ export class VideotutorialesComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'titulo',
-    'descripcion',
+    // 'descripcion',
     'autor',
     'actions',
   ];
@@ -81,7 +81,7 @@ export class VideotutorialesComponent implements OnInit {
 
   async reloadData() {
     let response = await this.tutorialesService.getAllTutorial();
-    response = this.allTutoriales
+    this.allTutoriales = response; 
     this.authService.checkToken(response);
     this.materialDataTable();
   }

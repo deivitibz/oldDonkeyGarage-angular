@@ -119,9 +119,18 @@ td {
 }
 
 mat-drawer {
-  width: 250px;
+  width: 315px;
 }
 
+.mat-drawer-container {
+  background-color: VAR(--color-B--color);
+  
+}
+
+.mat-toolbar.mat-primary {
+  background: VAR(--color-A--color);
+  color: white;
+}
 a.nav-link {
   color: white;
   font-family: VAR(--font-principal--);
@@ -130,7 +139,4 @@ a.nav-link {
 
 .list-group-item {
   border: none;
-}
-.row{
-
 }

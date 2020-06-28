@@ -1,5 +1,5 @@
 <router-outlet></router-outlet>
-<div class="container-fluid mt-2">
+<div class="container-fluid mt-2" *ngIf="!router.url.includes('/dashboard/usuario/perfil')">
   <!-- tabla -->
   <div class="row">
 
@@ -47,7 +47,7 @@
   <div class="row">
     <mat-expansion-panel [expanded]="panelOpenState">
       <mat-expansion-panel-header>
-        Crear Editar Usuarios
+        Crear Editar Anuncios
       </mat-expansion-panel-header>
 
       <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">

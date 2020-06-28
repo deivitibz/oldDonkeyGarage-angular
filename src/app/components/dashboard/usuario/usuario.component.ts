@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import * as brands from '../../../db/moto_brands.json';
 import * as models from '../../../db/moto_models.json';
 import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-dash-usuario',
   templateUrl: './usuario.component.html',
@@ -59,7 +60,8 @@ export class UsuarioDashComponent implements OnInit {
     private anuncioService: anuncioService,
     private authService: AuthService,
     private http: HttpClient,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public router: Router
   ) {
     this.marcas = brands.data;
     this.modelos = models.data;
@@ -108,6 +110,8 @@ export class UsuarioDashComponent implements OnInit {
   }
 
   async ngOnInit() {
+    console.log(this.router.url);
+    
     this.reloadData();
   }
   async reloadData() {
