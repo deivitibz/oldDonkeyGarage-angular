@@ -60,11 +60,11 @@ export class NoticiasComponent implements OnInit {
     // formulario
     this.form = new FormGroup({
       titulo: new FormControl(
-        '',
+        this.noticiaEdit.titulo,
         Validators.compose([Validators.required, Validators.minLength(10)])
       ),
       descripcion: new FormControl(
-        '',
+        this.noticiaEdit.descripcion,
         Validators.compose([
           Validators.required,
           Validators.maxLength(1000),
@@ -72,13 +72,13 @@ export class NoticiasComponent implements OnInit {
         ])
       ),
       autor: new FormControl(
-        '',
+        this.noticiaEdit.autor,
         Validators.compose([Validators.required, Validators.minLength(3)])
       ),
-      categoria: new FormControl('', []),
-      imagen: new FormControl('', []),
-      estado: new FormControl('', []),
-      fecha_publicacion: new FormControl('', []),
+      categoria: new FormControl(this.noticiaEdit.categoria, []),
+      imagen: new FormControl(this.noticiaEdit.imagen, []),
+      estado: new FormControl(this.noticiaEdit.estado, []),
+      fecha_publicacion: new FormControl(this.noticiaEdit.fecha_publicacion, []),
       usuarios_id: new FormControl('', []),
     });
   }
@@ -134,7 +134,9 @@ export class NoticiasComponent implements OnInit {
     const newNoticia = this.form.value;
     newNoticia.usuarios_id = this.authService.decodeToken()['userId'];
 
-    if (this.noticiaEdit.id) {
+    console.log(newNoticia);
+
+    /* if (this.noticiaEdit.id) {
       const response = await this.noticiasService.editNoticia(this.noticiaEdit.id,newNoticia);
 
       this.openSnackBar(response['success']);
@@ -143,7 +145,7 @@ export class NoticiasComponent implements OnInit {
       const response = await this.noticiasService.newNoticia(newNoticia);
       this.openSnackBar(response['success']);
       this.reloadData();
-    }
+    } */
   }
 
   async editNoticia(noticia) {
