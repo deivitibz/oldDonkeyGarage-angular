@@ -22,10 +22,9 @@ export class AuthService {
     /* return this.http.get(this.baseUrl).toPromise(); */
     if(!localStorage.getItem('user-token')){
       console.log('no hay token');
-
+      this.router.navigate(['home']);
     } else {
       // console.log(response);
-
       if(response['error']){
         localStorage.removeItem('user-token');
         this.router.navigate(['home']);

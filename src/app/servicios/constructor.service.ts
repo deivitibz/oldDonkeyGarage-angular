@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../models/usuario_perfil.model';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { Usuario } from '../models/usuario_perfil.model';
 export class ConstructorService {
 
   baseUrl: string;
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,private auth:AuthService) {
 
     this.baseUrl = 'http://localhost:3000/api/constructor';
 
@@ -29,16 +30,16 @@ export class ConstructorService {
   }
 
   newConstructor(usuario: Usuario) {
-    return this.httpClient.post(this.baseUrl, usuario).toPromise();
+    return this.httpClient.post(this.baseUrl, usuario,this.auth.generateHeaders()).toPromise();
   }
 
   deleteConstructor(id) {
-    return this.httpClient.delete(this.baseUrl, id).toPromise();
+    return this.httpClient.delete(this.baseUrl + '/' +id,this.auth.generateHeaders()).toPromise();
   }
 
   async editConstructor(id) {
     const constructor = await this.getConstructor(id);
-    return this.httpClient.put(this.baseUrl, constructor).toPromise();
+    return this.httpClient.put(this.baseUrl, constructor,this.auth.generateHeaders()).toPromise();
   }
 
   // TODO: mostrar un anuncio

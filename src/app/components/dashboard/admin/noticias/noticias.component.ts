@@ -20,6 +20,12 @@ import {
   styleUrls: ['./noticias.component.css'],
 })
 export class NoticiasComponent implements OnInit {
+  hidden = false;
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
+
   allNoticias: Noticia[];
   oneNoticia: Noticia;
 
@@ -58,6 +64,14 @@ export class NoticiasComponent implements OnInit {
     this.noticiaEdit = [];
 
     // formulario
+    this.initializeForm();
+  }
+
+  async ngOnInit() {
+    this.reloadData();
+  }
+
+  initializeForm(){
     this.form = new FormGroup({
       titulo: new FormControl(
         this.noticiaEdit.titulo,
@@ -65,11 +79,7 @@ export class NoticiasComponent implements OnInit {
       ),
       descripcion: new FormControl(
         this.noticiaEdit.descripcion,
-        Validators.compose([
-          Validators.required,
-          Validators.maxLength(1000),
-          Validators.minLength(10),
-        ])
+        Validators.compose([Validators.required,Validators.maxLength(1000),Validators.minLength(10),])
       ),
       autor: new FormControl(
         this.noticiaEdit.autor,
@@ -81,12 +91,6 @@ export class NoticiasComponent implements OnInit {
       fecha_publicacion: new FormControl(this.noticiaEdit.fecha_publicacion, []),
       usuarios_id: new FormControl('', []),
     });
-  }
-
-  async ngOnInit() {
-    this.reloadData();
-
-
   }
 
   materialDataTable() {
@@ -113,7 +117,7 @@ export class NoticiasComponent implements OnInit {
 
   openSnackBar(message) {
     this._snackBar.open(message, 'Cerrar', {
-      duration: 2000,
+      duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
@@ -134,25 +138,24 @@ export class NoticiasComponent implements OnInit {
     const newNoticia = this.form.value;
     newNoticia.usuarios_id = this.authService.decodeToken()['userId'];
 
-    console.log(newNoticia);
-
-    /* if (this.noticiaEdit.id) {
+    if (this.noticiaEdit.id) {
       const response = await this.noticiasService.editNoticia(this.noticiaEdit.id,newNoticia);
-
-      this.openSnackBar(response['success']);
       this.reloadData();
+      this.form.reset();
+      this.noticiaEdit = [];
+      this.togglePanel();
+      this.openSnackBar(response['success']);
     } else {
       const response = await this.noticiasService.newNoticia(newNoticia);
-      this.openSnackBar(response['success']);
       this.reloadData();
-    } */
+      this.form.reset();
+      this.openSnackBar(response['success']);
+    }
   }
 
   async editNoticia(noticia) {
     this.togglePanel();
     this.noticiaEdit = await this.noticiasService.getNoticia(noticia.id);
-    console.log(noticia.id);
-
-    // this.estado = 'Editar';
+    this.initializeForm();
   }
 }

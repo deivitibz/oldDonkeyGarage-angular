@@ -4,11 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/servicios/auth.service';
 
 export interface Usuario {
@@ -106,16 +102,22 @@ export class UsuariosComponent implements OnInit {
     const newUser = this.form.value;
     if (this.usuarioEdit.id) {
       const response = await this.usuarioService.editUserById(this.usuarioEdit.id,newUser);
-      console.log(response);
+      this.reloadData()
+      this.form.reset();
+      this.usuarioEdit = [];
+      this.togglePanel();
+      this.openSnackBar(response['success'])
     } else {
-      const response = await this.usuarioService.createUser(newUser)
-      console.log(response);
+      const response = await this.usuarioService.registro(newUser)
+      this.reloadData();
+      this.form.reset();
+      this.openSnackBar(response['success'])
     }
   }
 
   openSnackBar(message) {
     this._snackBar.open(message, 'Cerrar', {
-      duration: 2000,
+      duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });

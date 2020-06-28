@@ -7,10 +7,15 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class UploadService {
 
+  filePath: string;
+
   constructor(private http: HttpClient,private auth: AuthService) { }
 
   async addImages(files): Promise<any> {
+    this.auth.generateHeaders();
     files[0].userId = this.auth.decodeToken()['userId'];
+    //console.log(files[0].name);
+
     let fd = new FormData();
     fd.append('imagen', files[0], 'nuevaImagen.png');
     fd.append('name', files[0].name);
@@ -23,8 +28,11 @@ export class UploadService {
     );
     this.http.request(req).toPromise().then(
       (result) => {
-        console.log(result);
+        this.filePath = result['body']['path']
+        console.log(this.filePath);
+
       });
+
   }
 
 }

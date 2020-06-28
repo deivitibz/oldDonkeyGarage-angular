@@ -67,7 +67,6 @@ export class anunciosComponent implements OnInit {
     this.provinciasOrder.sort((a, b) => {
       return this.compareStrings(a['provincia'], b['provincia']);
     });
-    console.log(this.provinciasOrder.sort());
   }
 
   compareStrings(a, b) {

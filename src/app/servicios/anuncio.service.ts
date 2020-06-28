@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Anuncio } from '../models/anuncio.model';
 import { anunciosComponent } from '../components/anuncios/anuncios.component';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,12 +11,12 @@ export class anuncioService {
   baseUrl: string;
   files: FormData;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private auth: AuthService) {
     this.baseUrl = 'http://localhost:3000/api/anuncios';
   }
 
   addAnuncio(anuncio): Promise<Anuncio> {
-    return this.http.post<Anuncio>(this.baseUrl, anuncio).toPromise();
+    return this.http.post<Anuncio>(this.baseUrl, anuncio,this.auth.generateHeaders()).toPromise();
   }
 
   getAnuncios(): Promise<Anuncio[]> {
@@ -26,32 +27,27 @@ export class anuncioService {
     return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
   }
 
-  newAnuncio(anuncio: Anuncio) {
-    return this.http.post(this.baseUrl, anuncio).toPromise();
-  }
 
   editAnuncio(id, newAnuncio) {
-    return this.http.put(this.baseUrl + '/' + id, newAnuncio).toPromise();
+    return this.http.put(this.baseUrl + '/' + id, newAnuncio,this.auth.generateHeaders()).toPromise();
   }
 
   getAnunciosById(id): Promise<Anuncio[]> {
     return this.http
-      .get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id)
+      .get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id,this.auth.generateHeaders())
       .toPromise();
   }
 
   editAnuncioById(id, newAnuncio): Promise<Anuncio> {
-    return this.http
-      .put<Anuncio>(this.baseUrl + '/' + id, newAnuncio)
-      .toPromise();
+    return this.http.put<Anuncio>(this.baseUrl + '/' + id, newAnuncio,this.auth.generateHeaders()).toPromise();
   }
 
   getAnuncio(id): Promise<any> {
-    return this.http.get(this.baseUrl + '/' + id).toPromise();
+    return this.http.get(this.baseUrl + '/' + id,this.auth.generateHeaders()).toPromise();
   }
 
   deleteAnuncio(id): Promise<Anuncio> {
-    return this.http.delete<Anuncio>(this.baseUrl + '/' + id).toPromise();
+    return this.http.delete<Anuncio>(this.baseUrl + '/' + id,this.auth.generateHeaders()).toPromise();
   }
 
   async addImages(file) {

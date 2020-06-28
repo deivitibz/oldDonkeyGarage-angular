@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Pslect from 'pselect.js';
 import { UploadService } from './../../../../servicios/upload.service';
 import { HttpHeaders, HttpRequest, HttpClient } from '@angular/common/http';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dash-usuario-perfil',
@@ -22,14 +23,17 @@ export class UsuarioDashPerfilComponent implements OnInit {
   form: FormGroup;
   datosUsuario: Usuario[];
   files;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(
     private auth: AuthService,
     private router: Router,
     private usuarioService: UsuarioService,
     private uploadService: UploadService,
-    private http: HttpClient
+    private http: HttpClient,
+    private _snackBar: MatSnackBar
   ) {
-
+    this.datosUsuario = [];
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
     this.provinciasOrder = [];
@@ -46,13 +50,11 @@ export class UsuarioDashPerfilComponent implements OnInit {
     this.provinciasOrder.sort((a, b) => {
       return this.compareStrings(a['provincia'], b['provincia']);
     });
+    this.initializeForm()
   }
 
   async ngOnInit() {
-    this.datosUsuario = [];
-    this.usuarioActivo = this.auth.decodeToken();
-    this.datosUsuario = await this.usuarioService.getUserById(this.usuarioActivo['userId'])
-    this.initializeForm()
+    this.loadData();
     /* if (this.usuarioActivo.rol === 'admin'){
       this.router.navigate(['admin'])
     } else {
@@ -63,33 +65,33 @@ export class UsuarioDashPerfilComponent implements OnInit {
 
 
   }
-  getProvincias($event) {
-    this.filtroProvincias = [];
-    this.poblaciones.filter((result) => {
-      let idProvincia =
-        $event.target.options[$event.target.options['selectedIndex']].dataset.id;
-      let idPoblacion = result['id'];
-      idPoblacion = idPoblacion.substr(0, 2);
-      if (idPoblacion === idProvincia) {
-        this.filtroProvincias.push(result);
-      }
-    });
-  }
-  compareStrings(a, b) {
-    // Assuming you want case-insensitive comparison
-    a = a.toLowerCase();
-    b = b.toLowerCase();
 
-    return a < b ? -1 : a > b ? 1 : 0;
+  async loadData(){
+    this.usuarioActivo = this.auth.decodeToken();
+    this.datosUsuario = await this.usuarioService.getUserById(this.usuarioActivo['userId'])
+    this.initializeForm();
   }
+
 
   async onSubmit() {
-    const editUser = this.form.value
-    //const response = await this.usuarioService.editUserById(this.usuarioActivo['userId'],editUser);
-    //console.log(response);
-    const response = await this.uploadService.addImages(this.files)
+    console.log(this.form.value);
+
+    const response = await this.usuarioService.editPerfil(this.usuarioActivo['userId'],this.form.value);
+    console.log(response);
+    this.loadData();
+    this.openSnackBar(response['success'])
+
+    //const response = await this.uploadService.addImages(this.files)
 
 
+  }
+
+  openSnackBar(message) {
+    this._snackBar.open(message, 'Cerrar', {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
   initializeForm(){
@@ -172,8 +174,26 @@ export class UsuarioDashPerfilComponent implements OnInit {
   onFileChange($event) {
     this.files = $event.target.files;
     console.log(this.files);
-
-
   }
 
+  getProvincias($event) {
+    this.filtroProvincias = [];
+    this.poblaciones.filter((result) => {
+      let idProvincia =
+        $event.target.options[$event.target.options['selectedIndex']].dataset.id;
+      let idPoblacion = result['id'];
+      idPoblacion = idPoblacion.substr(0, 2);
+      if (idPoblacion === idProvincia) {
+        this.filtroProvincias.push(result);
+      }
+    });
+  }
+
+  compareStrings(a, b) {
+    // Assuming you want case-insensitive comparison
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+
+    return a < b ? -1 : a > b ? 1 : 0;
+  }
 }

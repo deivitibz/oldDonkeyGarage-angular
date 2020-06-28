@@ -2,25 +2,19 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import { anuncioService } from 'src/app/servicios/anuncio.service';
-
 import Pslect from 'pselect.js';
-
 import * as brands from '../../../../db/moto_brands.json';
 import * as models from '../../../../db/moto_models.json';
 import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-
 // imports tablas
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService } from 'src/app/servicios/auth.service';
 
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { UploadService } from './../../../../servicios/upload.service';
 
 @Component({
   selector: 'app-anuncios',
@@ -29,40 +23,26 @@ import {
 })
 export class AnunciosComponent implements OnInit {
   allAnuncios: Anuncio[];
-
   anuncioEdit: any;
-
   files;
   //files: string[];
-
   //panel
   panelOpenState = false;
-
   //snackbar
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-
   //datatables settings
-  displayedColumns: string[] = [
-    'id',
-    'titulo',
-    'descripcion',
-    'autor',
-    'actions',
-  ];
+  displayedColumns: string[] = ['id','titulo','descripcion','precio','actions'];
   dataSource: MatTableDataSource<Anuncio>;
-
   // filtro poblaciones / provincias
   provincias: string[];
   poblaciones: string[];
   provinciasOrder: any[];
-
   // filtro marca / modelo
   marcas: any;
   modelos: any;
   filtroModelos: any[];
   filtroProvincias: any[];
-
   // formulario
   form: FormGroup;
 
@@ -73,10 +53,10 @@ export class AnunciosComponent implements OnInit {
     private anuncioService: anuncioService,
     private authService: AuthService,
     private http: HttpClient,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private upload: UploadService
   ) {
     this.anuncioEdit = [];
-
     this.marcas = brands.data;
     this.modelos = models.data;
     /* provincias - poblaciones */
@@ -95,29 +75,31 @@ export class AnunciosComponent implements OnInit {
       return this.compareStrings(a['provincia'], b['provincia']);
     });
     /* campos formulario */
-    this.form = new FormGroup({
-      titulo: new FormControl('', []),
-      descripcion: new FormControl('', []),
-      provincia: new FormControl('', []),
-      poblacion: new FormControl('', []),
-      precio: new FormControl('', []),
-      marca: new FormControl('', []),
-      km: new FormControl('', []),
-      year: new FormControl('', []),
-      modelo: new FormControl('', []),
-      itv: new FormControl('', []),
-      homologacion: new FormControl('', []),
-      file: new FormControl('', []),
-      tipoCustom: new FormControl('', []),
-      avatar: new FormControl('', []),
-      imagenes: new FormControl('', []),
-      // tipoCustom: new FormControl('', []),
-    });
+    this.initializeForm();
   }
 
   async ngOnInit() {
     //this.allAnuncios = await this.anuncioService.getAnuncios();
     this.reloadData();
+  }
+
+  initializeForm(){
+    this.form = new FormGroup({
+      titulo: new FormControl(this.anuncioEdit['titulo'], []),
+      descripcion: new FormControl(this.anuncioEdit['descripcion'], []),
+      provincia: new FormControl(this.anuncioEdit['provincia'], []),
+      poblacion: new FormControl(this.anuncioEdit['poblacion'], []),
+      precio: new FormControl(this.anuncioEdit['precio'], []),
+      marca: new FormControl(this.anuncioEdit['marca'], []),
+      km: new FormControl(this.anuncioEdit['km'], []),
+      year: new FormControl(this.anuncioEdit['year'], []),
+      modelo: new FormControl(this.anuncioEdit['modelo'], []),
+      itv: new FormControl(this.anuncioEdit['itv'], []),
+      homologacion: new FormControl(this.anuncioEdit['homologacion'], []),
+      tipoCustom: new FormControl(this.anuncioEdit['tipoCustom'], []),
+      imagen_id: new FormControl(this.anuncioEdit['imagen_id'], []),
+      // tipoCustom: new FormControl('', []),
+    });
   }
 
   materialDataTable() {
@@ -127,8 +109,9 @@ export class AnunciosComponent implements OnInit {
   }
 
   async reloadData() {
-    this.allAnuncios = await this.anuncioService.getAnuncios();
-    this.authService.checkToken(this.allAnuncios);
+    const response = await this.anuncioService.getAllAnuncios();
+    this.allAnuncios = response
+    this.authService.checkToken(response);
     this.materialDataTable();
   }
 
@@ -142,7 +125,7 @@ export class AnunciosComponent implements OnInit {
 
   openSnackBar(message) {
     this._snackBar.open(message, 'Cerrar', {
-      duration: 2000,
+      duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
@@ -153,18 +136,15 @@ export class AnunciosComponent implements OnInit {
   }
 
   async deleteAnuncio(anuncio) {
-    // console.log(anuncio);
-
     const response = await this.anuncioService.deleteAnuncio(anuncio.id);
-    console.log(response);
-
-    // this.openSnackBar(response['success']);
-    // this.reloadData();
+    this.openSnackBar(response['success']);
+    this.reloadData();
   }
 
   async editAnuncio(anuncio) {
     this.togglePanel();
     this.anuncioEdit = await this.anuncioService.getAnuncio(anuncio.id);
+    this.initializeForm()
   }
 
   async addAnuncio() {
@@ -174,12 +154,8 @@ export class AnunciosComponent implements OnInit {
   onSubmit() {
     const newAnuncio = this.form.value;
     newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
-    newAnuncio.file = '';
+    newAnuncio.imagen = '';
     const filename = this.files[0]['name'];
-    //filename = filename.toString().trim();
-    console.log(filename.toString().trim());
-
-    //console.log(this.files[0].name);
 
     const file = new FormData();
     file.append('imagen', this.files[0], this.files[0]['name']);
@@ -200,42 +176,30 @@ export class AnunciosComponent implements OnInit {
   }
 
   async onSubmitFormulario() {
-    // console.log(this.form.value);
     const newAnuncio = this.form.value;
     newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
-    // this.anuncioService.addImages(this.files, this.form);
-
-    /*  TODO: REVISAR SI NO FUNCION
-    const result = await this.anuncioService.addAnuncio(newAnuncio);
-    console.log(result);
-    // nombre del archivo
-    console.log(this.form.value);
-
- */
-
-    // console.log(newAnuncio);
-
-    // this.anuncioService.addImages(this.files, this.form);
-
-    if (this.anuncioEdit.id) {
-      const response = await this.anuncioService.editAnuncioById(
-        this.anuncioEdit.id,
-        newAnuncio
-      );
-
-      console.log(response);
-
+    if(this.anuncioEdit.id){
+      const response = await this.anuncioService.editAnuncioById(this.anuncioEdit.id,newAnuncio);
       this.reloadData();
+      this.form.reset();
+      this.anuncioEdit = [];
+      this.togglePanel();
       this.openSnackBar(response['success']);
     } else {
       const response = await this.anuncioService.addAnuncio(newAnuncio);
       this.reloadData();
+      this.form.reset();
       this.openSnackBar(response['success']);
+      this.panelOpenState = false;
     }
+
   }
 
   onFileChange($event) {
     this.files = $event.target.files;
+    //console.log(this.files);
+
+    this.upload.addImages(this.files)
   }
 
   filtrarMarcas(form) {

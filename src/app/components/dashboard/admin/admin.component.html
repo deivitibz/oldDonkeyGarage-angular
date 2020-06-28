@@ -1,7 +1,7 @@
 <div class="container-fluid p-0">
   <mat-drawer-container>
 <!-- menu sidebar -->
-    <mat-drawer #drawer class="example-sidenav bg-donkey" mode="side">
+    <mat-drawer #drawer class="example-sidenav bg-donkey" mode="side" opened>
 
       <div class="row">
 
@@ -37,7 +37,7 @@
               </a>
             </li>
           </ul>
-        </div> 
+        </div>
 
         <div class="col-12">
           <button class="btn btn-block bg-danger" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>

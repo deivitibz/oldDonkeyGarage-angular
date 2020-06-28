@@ -1,7 +1,7 @@
 <div class="container-fluid p-0">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span>Lista de noticias</span>
+      <span class="mx-auto" [matBadge]="allNoticias.length" matBadgeOverlap="false" matBadgeColor="warn">Lista de noticias</span>
       <span class="example-spacer"></span>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -104,10 +104,8 @@
           <label for="">Autor</label>
           <input type="text" class="form-control" formControlName="autor" name="autor" placeholder="@juan_camus"
             [value]="noticiaEdit.autor">
-          <small class="form-text text-muted" *ngIf="form.controls.autor.errors && form.controls.autor.touched">Debe
-            contener al menos 3
-            letras</small>
-        </div>
+          </div>
+          <small class="form-text text-muted" *ngIf="form.controls.autor.errors && form.controls.autor.touched">Debe contener al menos 3 letras</small>
 
         <div class="form-group mb-4">
           <label for="">Categoría</label>
@@ -123,7 +121,7 @@
           </select>
         </div>
         <div class="row mx-0">
-          <button *ngIf="!noticiaEdit.id" class="btn btn-primary btn-block " type="submit">Enviar</button>
+          <button *ngIf="!noticiaEdit.id" class="btn btn-primary btn-block " type="submit" [disabled]="!form.valid">Enviar</button>
           <button *ngIf="noticiaEdit.id" class="btn btn-primary btn-block " type="submit">Editar</button>
         </div>
       </form>

@@ -6,11 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import Pslect from 'pselect.js';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import {  MatSnackBar,  MatSnackBarHorizontalPosition,  MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/servicios/auth.service';
 import * as brands from '../../../db/moto_brands.json';
@@ -59,11 +55,12 @@ export class UsuarioDashComponent implements OnInit {
     private anuncioService: anuncioService,
     private authService: AuthService,
     private http: HttpClient,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public router: Router
   ) {
     this.marcas = brands.data;
     this.modelos = models.data;
-    this.anunciosUser = [];
+    /* this.anunciosUser = []; */
     this.anuncioEdit = [];
     /* provincias - poblaciones */
     this.provincias = new Pslect().constructor.provincesData;
@@ -81,18 +78,23 @@ export class UsuarioDashComponent implements OnInit {
       return this.compareStrings(a['provincia'], b['provincia']);
     });
 
-    this.form = new FormGroup({
-      titulo: new FormControl(this.anunciosUser['titulo'], []),
-      descripcion: new FormControl(this.anunciosUser['descripcion'], []),
-      provincia: new FormControl(this.anunciosUser['provincia'], []),
-      poblacion: new FormControl(this.anunciosUser['poblacion'], []),
-      precio: new FormControl(this.anunciosUser['precio'], []),
-      marca: new FormControl(this.anunciosUser['marca'], []),
-      km: new FormControl(this.anunciosUser['km'], []),
-      year: new FormControl(this.anunciosUser['year'], []),
-      modelo: new FormControl(this.anunciosUser['modelo'], []),
-      itv: new FormControl(this.anunciosUser['itv'], []),
-      homologacion: new FormControl(this.anunciosUser['homologacion'], []),
+    this.initializeForm();
+
+  }
+
+  initializeForm(){
+        this.form = new FormGroup({
+      titulo: new FormControl(this.anuncioEdit['titulo'], []),
+      descripcion: new FormControl(this.anuncioEdit['descripcion'], []),
+      provincia: new FormControl(this.anuncioEdit['provincia'], []),
+      poblacion: new FormControl(this.anuncioEdit['poblacion'], []),
+      precio: new FormControl(this.anuncioEdit['precio'], []),
+      marca: new FormControl(this.anuncioEdit['marca'], []),
+      km: new FormControl(this.anuncioEdit['km'], []),
+      year: new FormControl(this.anuncioEdit['year'], []),
+      modelo: new FormControl(this.anuncioEdit['modelo'], []),
+      itv: new FormControl(this.anuncioEdit['itv'], []),
+      homologacion: new FormControl(this.anuncioEdit['homologacion'], []),
     });
   }
 
@@ -107,14 +109,12 @@ export class UsuarioDashComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.reloadData();
   }
   async reloadData() {
     const currentUser = this.authService.decodeToken();
-    this.anunciosUser = await this.anuncioService.getAnunciosById(
-      currentUser['userId']
-    );
+    this.anunciosUser = await this.anuncioService.getAnunciosById(currentUser['userId']);
     this.materialDataTable();
   }
 
@@ -162,24 +162,24 @@ export class UsuarioDashComponent implements OnInit {
   async editUser(element) {
     this.togglePanel();
     this.anuncioEdit = await this.anuncioService.getAnuncio(element.id);
-    this.reloadData();
+    this.initializeForm();
   }
   async onSubmit() {
     const newAnuncio = this.form.value;
     newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
-
+    console.log(newAnuncio);
     if (this.anuncioEdit['id']) {
-      const response = await this.anuncioService.editAnuncioById(
-        this.anuncioEdit['id'],
-        newAnuncio
-      );
+      const response = await this.anuncioService.editAnuncioById(this.anuncioEdit['id'],this.form.value);
       this.reloadData();
       this.openSnackBar(response['success']);
+      this.togglePanel()
     } else {
       const response = await this.anuncioService.addAnuncio(newAnuncio);
       this.reloadData();
       this.openSnackBar(response['success']);
     }
+
+
   }
 
   getProvincias($event) {

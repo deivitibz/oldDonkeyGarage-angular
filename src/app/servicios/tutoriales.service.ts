@@ -22,23 +22,14 @@ export class TutorialesService {
   }
 
   deleteTutorial(tutorial) {
-    const options = this.Auth.generateHeaders();
-    return this.httpClient
-      .delete(this.baseUrl + '/' + tutorial.id, options)
-      .toPromise();
+    return this.httpClient.delete(this.baseUrl + '/' + tutorial.id, this.Auth.generateHeaders()).toPromise();
   }
 
   newTutorial(video_tutorial: Video_tutorial) {
-    const options = this.Auth.generateHeaders();
-    return this.httpClient
-      .post(this.baseUrl, video_tutorial, options)
-      .toPromise();
+    return this.httpClient.post(this.baseUrl, video_tutorial, this.Auth.generateHeaders()).toPromise();
   }
 
   editTutorial(id, newTutorial) {
-    const options = this.Auth.generateHeaders();
-    return this.httpClient
-      .put(this.baseUrl + '/' + id, newTutorial, options)
-      .toPromise();
+    return this.httpClient.put(this.baseUrl + '/' + id, newTutorial, this.Auth.generateHeaders()).toPromise();
   }
 }

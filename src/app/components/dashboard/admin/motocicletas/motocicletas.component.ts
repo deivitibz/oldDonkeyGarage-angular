@@ -79,7 +79,7 @@ export class MotocicletasComponent implements OnInit {
 
   openSnackBar(message) {
     this._snackBar.open(message, 'Cerrar', {
-      duration: 2000,
+      duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });

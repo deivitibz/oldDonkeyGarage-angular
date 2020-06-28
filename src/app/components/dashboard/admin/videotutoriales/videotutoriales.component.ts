@@ -56,21 +56,25 @@ export class VideotutorialesComponent implements OnInit {
   ) {
     this.estado = 'Añadir';
     this.tutorialEdit = [];
+    this.initializeForm();
 
-    // Formulario
-    this.form = new FormGroup({
-      titulo: new FormControl('', []),
-      descripcion: new FormControl('', []),
-      autor: new FormControl('', []),
-      categoria: new FormControl('', []),
-      url_video: new FormControl('', []),
-      fecha_publicacion: new FormControl('', []),
-      usuarios_id: new FormControl('', []),
-    });
   }
 
   async ngOnInit() {
     this.reloadData();
+  }
+
+  initializeForm(){
+    // Formulario
+    this.form = new FormGroup({
+      titulo: new FormControl(this.tutorialEdit['titulo'], []),
+      descripcion: new FormControl(this.tutorialEdit['descripcion'], []),
+      autor: new FormControl(this.tutorialEdit['autor'], []),
+      categoria: new FormControl(this.tutorialEdit['categoria'], []),
+      url_video: new FormControl(this.tutorialEdit['url_video'], []),
+      fecha_publicacion: new FormControl(this.tutorialEdit['fecha_publicacion'], []),
+      usuarios_id: new FormControl(this.tutorialEdit['usuarios_id'], [])
+    });
   }
 
   materialDataTable() {
@@ -81,7 +85,7 @@ export class VideotutorialesComponent implements OnInit {
 
   async reloadData() {
     let response = await this.tutorialesService.getAllTutorial();
-    response = this.allTutoriales
+    this.allTutoriales = response;
     this.authService.checkToken(response);
     this.materialDataTable();
   }
@@ -97,7 +101,7 @@ export class VideotutorialesComponent implements OnInit {
 
   openSnackBar(message) {
     this._snackBar.open(message, 'Cerrar', {
-      duration: 2000,
+      duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
@@ -117,15 +121,16 @@ export class VideotutorialesComponent implements OnInit {
     const newTutorial = this.form.value;
     newTutorial.usuarios_id = this.authService.decodeToken()['userId'];
     if (this.tutorialEdit.id) {
-      const response = await this.tutorialesService.editTutorial(
-        this.tutorialEdit.id,
-        newTutorial
-      );
+      const response = await this.tutorialesService.editTutorial(this.tutorialEdit.id,newTutorial);
       this.reloadData();
+      this.form.reset();
+      this.tutorialEdit = [];
+      this.togglePanel();
       this.openSnackBar(response['success']);
     } else {
       const response = await this.tutorialesService.newTutorial(newTutorial);
       this.reloadData();
+      this.form.reset();
       this.openSnackBar(response['success']);
     }
   }
@@ -133,6 +138,7 @@ export class VideotutorialesComponent implements OnInit {
   async editTutorial(tutorial) {
     this.togglePanel();
     this.tutorialEdit = await this.tutorialesService.getTutorial(tutorial.id);
+    this.initializeForm();
     // console.log(this.tutorialEdit);
     this.estado = 'Editar';
   }
