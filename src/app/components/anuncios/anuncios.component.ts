@@ -33,7 +33,7 @@ export class anunciosComponent implements OnInit {
   constructor(
     private anuncioService: anuncioService,
     private http: HttpClient,
-    private router: Router
+    public router: Router
   ) {
     this.marcas = brands.data;
     this.modelos = models.data;

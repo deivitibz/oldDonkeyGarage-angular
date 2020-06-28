@@ -1,5 +1,7 @@
 .bg-precio {
   color: rgb(167, 167, 167);
+  font-family: VAR(--font-precios--font-family);
+  font-size: 2rem;
 }
 
 .btn-dark {
@@ -7,3 +9,4 @@
   background-color: VAR(--color-B--color);
   border-color: VAR(--color-B--color);
 }
+

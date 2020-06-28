@@ -12,9 +12,10 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 @Component({
   selector: 'app-dash-usuario-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  styleUrls: ['./perfil.component.scss', './perfil.component.css']
 })
 export class UsuarioDashPerfilComponent implements OnInit {
+  panelOpenState = false;
   provincias: string[];
   provinciasOrder: any[];
   poblaciones: string[];

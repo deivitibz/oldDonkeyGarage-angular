@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Old-stamper';
+  src: url("./assets/fonts/old_stamper.otf");
+}
+@font-face {
+  font-family: 'Barber';
+  src: url("./assets/fonts/Barber-Street_PersonalUseOnly.otf");
+}
 /*@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Serif+Pro:wght@400;600;700&display=swap');*/
 
 /*
@@ -8,6 +16,9 @@ font-family: 'Source Serif Pro', serif;
 :root {
   --font-principal--font-family: 'Oswald', sans-serif;
   --font-secundaria--font-family: 'Source Serif Pro', serif;
+  --font-precios--font-family: 'Old-stamper', serif;
+  --font-barber--font-family: 'Barber', serif;
+
   --color-A--color: #1A2930;
   --color-B--color: #587485;
   --color-C--color: #C6DBE3;

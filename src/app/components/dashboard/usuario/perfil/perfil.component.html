@@ -1,134 +1,272 @@
-<div class="row">
-  <div class="col-12">
-    <!-- AQUI VA EL FORMULARIO DE REGISTRO -->
-    <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-      <div class="form-group col-12 p-0">
+<div class="row m-0 my-6 d-flex">
+  <div class="col-6  d-flex">
+    <img class="img-fluid mx-auto" src="https://picsum.photos/id/620/250/250" alt="">
+  </div>
+  <div class="col-6  pt-4">
+    <h4>nombre</h4>
+    <strong>apellidos</strong><br>
+    <strong>dirección</strong><br>
+    <strong>email</strong><br>
+  </div>
+</div>
 
-        <div class="row">
-          <div class="col-6">
-            <div class="form-group">
-          <label for="">Nombre</label>
-          <input value="{{datosUsuario['username']}}" type="text" class="form-control" placeholder="Introduzca su nombre" formControlName="username"
-            name="nombre">
-          <small class="form-text text-muted"
-            *ngIf="form.controls.username.errors && form.controls.username.touched">Debe tener al menos 4
-            letras y no más de 16</small>
-        </div>
-          </div>
-          <div class="col-6">
-            <div class="form-group">
-              <label for="">Apellidos</label>
-              <input value="{{datosUsuario['apellidos']}}" type="text" class="form-control" placeholder="Introduzca su apellido" formControlName="apellidos"
-                name="apellidos">
-              <small class="form-text text-muted"
-                *ngIf="form.controls.username.errors && form.controls.username.touched">Debe tener al menos 4
-                letras y no más de 16</small>
-            </div>
-          </div>
-        </div>
+<div class="row px-3 pt-0">
+  <mat-expansion-panel [expanded]="!panelOpenState">
+    <mat-expansion-panel-header>
+      Editar Perfil
+    </mat-expansion-panel-header>
 
+     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="form-group col-12 p-0">
 
-
-        <div class="row">
-          <div class="col-6">
-            <div class="form-group">
-          <label for="">Imagen Perfil</label>
-          <input type="file" class="form-control-file" (change)="onFileChange($event)" formControlName="imagenes_usuario" name="imagenes_usuario">
-        </div>
-          </div>
-          <div class="col-6">
-            <div class="form-group">
-          <label for="">Dirección</label>
-          <input value="{{datosUsuario['direccion']}}" type="text" class="form-control" placeholder="Calle del labrador, nº4" formControlName="direccion"
-            name="direccion">
-          <small class="form-text text-muted"
-            *ngIf="form.controls.direccion.errors && form.controls.direccion.touched">Campo
-            obligatorio</small>
-        </div>
-          </div>
-        </div>
-
-
-
-
-
-        <div class="row">
-          <div class="form-group col-6">
-
-            <label for="">Provincia</label>
-            <select class="form-control" id="provincia" formControlName="provincia" name="provincia" (change)="getProvincias($event)">
-              <option value="{{datosUsuario['provincia']}}" selected>{{datosUsuario['provincia']}}</option>
-              <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
-                      [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
-            </select>
-            <small class="form-text text-muted"
-              *ngIf="form.controls.provincia.errors && form.controls.provincia.touched">Debe
-              insertar una provincia</small>
-
-          </div>
-          <div class="form-group col-6">
-            <label for="">Población</label>
-            <select class="form-control" id="localidad" formControlName="localidad" name="localidad">
-              <option value="{{datosUsuario['poblacion']}}" selected>{{datosUsuario['poblacion']}}</option>
-              <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
-              </option>
-              <small class="form-text text-muted"
-                *ngIf="form.controls.localidad.errors && form.controls.localidad.touched">Debe
-                insertar una localidad</small>
-
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="">Constructor</label>
-          <input value="{{datosUsuario['constructor']}}" type="text" class="form-control" formControlName="nombre_constructor" placeholder="Custom Bike"
-            name="nombre_constructor">
-
-          <small class="form-text text-muted"
-            *ngIf="form.controls.nombre_constructor.errors && form.controls.nombre_constructor.touched">Debe
-            insertar un nombre</small>
-        </div>
-
-        <div class="form-group">
-          <label for="">Descripción</label>
-          <textarea value="{{datosUsuario['descripcion']}}" rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
-            placeholder="Introduce el titulo de tu anuncio"></textarea>
-          <small class="form-text text-muted"
-            *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe contener un
-            minimo
-            de 30
-            letras y un máximo de 150</small>
-        </div>
-
-        <div class="form-group">
-          <label for="">Persona contacto</label>
-          <input value="{{datosUsuario['persona_contacto']}}" type="text" class="form-control" placeholder="Juan Pérez" formControlName="persona_contacto"
-            name="persona_contacto">
-        </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+        <label for="">Nombre</label>
+        <input value="{{datosUsuario['username']}}" type="text" class="form-control" placeholder="Introduzca su nombre" formControlName="username"
+          name="nombre">
         <small class="form-text text-muted"
-          *ngIf="form.controls.persona_contacto.errors && form.controls.persona_contacto.touched">Debe tener
-          un nombre de min 3 letras y max 15</small>
-
-        <div class="form-group">
-          <label>Móvil</label>
-          <input value="{{datosUsuario['telefono']}}" type="phoneNumber" class="form-control" placeholder="Introduzca un teléfono móvil"
-            formControlName="telefono" name="telefono" autocomplete="off">
-          <small class="form-text text-muted"
-            *ngIf="form.controls.telefono.errors && form.controls.telefono.touched">Inserte un número
-            móvil</small>
+          *ngIf="form.controls.username.errors && form.controls.username.touched">Debe tener al menos 4
+          letras y no más de 16</small>
+      </div>
         </div>
-
-        <div class="form-group">
-          <label for="">Imagen Perfil</label>
-          <input value="{{datosUsuario['imagenes_usuario']}}" type="text" class="form-control" formControlName="imagenes_constructor" name="imagenes_constructor">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="">Apellidos</label>
+            <input value="{{datosUsuario['apellidos']}}" type="text" class="form-control" placeholder="Introduzca su apellido" formControlName="apellidos"
+              name="apellidos">
+            <small class="form-text text-muted"
+              *ngIf="form.controls.username.errors && form.controls.username.touched">Debe tener al menos 4
+              letras y no más de 16</small>
+          </div>
         </div>
-
       </div>
 
-      <button class="btn btn-primary btn-block " type="submit">Editar</button>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+        <label for="">Imagen Perfil</label>
+        <input type="file" class="form-control-file" (change)="onFileChange($event)" formControlName="imagenes_usuario" name="imagenes_usuario">
+      </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+        <label for="">Dirección</label>
+        <input value="{{datosUsuario['direccion']}}" type="text" class="form-control" placeholder="Calle del labrador, nº4" formControlName="direccion"
+          name="direccion">
+        <small class="form-text text-muted"
+          *ngIf="form.controls.direccion.errors && form.controls.direccion.touched">Campo
+          obligatorio</small>
+      </div>
+        </div>
+      </div>
 
-    </form>
+      <div class="row">
+        <div class="form-group col-6">
 
-  </div>
+          <label for="">Provincia</label>
+          <select class="form-control" id="provincia" formControlName="provincia" name="provincia" (change)="getProvincias($event)">
+            <option value="{{datosUsuario['provincia']}}" selected>{{datosUsuario['provincia']}}</option>
+            <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
+                    [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
+          </select>
+          <small class="form-text text-muted"
+            *ngIf="form.controls.provincia.errors && form.controls.provincia.touched">Debe
+            insertar una provincia</small>
+
+        </div>
+        <div class="form-group col-6">
+          <label for="">Población</label>
+          <select class="form-control" id="localidad" formControlName="localidad" name="localidad">
+            <option value="{{datosUsuario['poblacion']}}" selected>{{datosUsuario['poblacion']}}</option>
+            <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
+            </option>
+            <small class="form-text text-muted"
+              *ngIf="form.controls.localidad.errors && form.controls.localidad.touched">Debe
+              insertar una localidad</small>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Constructor</label>
+        <input value="{{datosUsuario['constructor']}}" type="text" class="form-control" formControlName="nombre_constructor" placeholder="Custom Bike"
+          name="nombre_constructor">
+
+        <small class="form-text text-muted"
+          *ngIf="form.controls.nombre_constructor.errors && form.controls.nombre_constructor.touched">Debe
+          insertar un nombre</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Descripción</label>
+        <textarea value="{{datosUsuario['descripcion']}}" rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+          placeholder="Introduce el titulo de tu anuncio"></textarea>
+        <small class="form-text text-muted"
+          *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe contener un
+          minimo
+          de 30
+          letras y un máximo de 150</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Persona contacto</label>
+        <input value="{{datosUsuario['persona_contacto']}}" type="text" class="form-control" placeholder="Juan Pérez" formControlName="persona_contacto"
+          name="persona_contacto">
+      </div>
+      <small class="form-text text-muted"
+        *ngIf="form.controls.persona_contacto.errors && form.controls.persona_contacto.touched">Debe tener
+        un nombre de min 3 letras y max 15</small>
+
+      <div class="form-group">
+        <label>Móvil</label>
+        <input value="{{datosUsuario['telefono']}}" type="phoneNumber" class="form-control" placeholder="Introduzca un teléfono móvil"
+          formControlName="telefono" name="telefono" autocomplete="off">
+        <small class="form-text text-muted"
+          *ngIf="form.controls.telefono.errors && form.controls.telefono.touched">Inserte un número
+          móvil</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Imagen Perfil</label>
+        <input value="{{datosUsuario['imagenes_usuario']}}" type="text" class="form-control" formControlName="imagenes_constructor" name="imagenes_constructor">
+      </div>
+
+    </div>
+
+    <button class="btn btn-primary btn-block " type="submit">Editar</button>
+
+     </form>
+
+    </mat-expansion-panel>
+
+</div>
+
+
+<div class="col-12">
+  <!-- AQUI VA EL FORMULARIO DE REGISTRO -->
+  <!-- <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="form-group col-12 p-0">
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+        <label for="">Nombre</label>
+        <input value="{{datosUsuario['username']}}" type="text" class="form-control" placeholder="Introduzca su nombre" formControlName="username"
+          name="nombre">
+        <small class="form-text text-muted"
+          *ngIf="form.controls.username.errors && form.controls.username.touched">Debe tener al menos 4
+          letras y no más de 16</small>
+      </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="">Apellidos</label>
+            <input value="{{datosUsuario['apellidos']}}" type="text" class="form-control" placeholder="Introduzca su apellido" formControlName="apellidos"
+              name="apellidos">
+            <small class="form-text text-muted"
+              *ngIf="form.controls.username.errors && form.controls.username.touched">Debe tener al menos 4
+              letras y no más de 16</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+        <label for="">Imagen Perfil</label>
+        <input type="file" class="form-control-file" (change)="onFileChange($event)" formControlName="imagenes_usuario" name="imagenes_usuario">
+      </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+        <label for="">Dirección</label>
+        <input value="{{datosUsuario['direccion']}}" type="text" class="form-control" placeholder="Calle del labrador, nº4" formControlName="direccion"
+          name="direccion">
+        <small class="form-text text-muted"
+          *ngIf="form.controls.direccion.errors && form.controls.direccion.touched">Campo
+          obligatorio</small>
+      </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-6">
+
+          <label for="">Provincia</label>
+          <select class="form-control" id="provincia" formControlName="provincia" name="provincia" (change)="getProvincias($event)">
+            <option value="{{datosUsuario['provincia']}}" selected>{{datosUsuario['provincia']}}</option>
+            <option *ngFor="let provincia of provinciasOrder" [value]="provincia.provincia"
+                    [attr.data-id]="provincia.id">{{provincia.provincia}}</option>
+          </select>
+          <small class="form-text text-muted"
+            *ngIf="form.controls.provincia.errors && form.controls.provincia.touched">Debe
+            insertar una provincia</small>
+
+        </div>
+        <div class="form-group col-6">
+          <label for="">Población</label>
+          <select class="form-control" id="localidad" formControlName="localidad" name="localidad">
+            <option value="{{datosUsuario['poblacion']}}" selected>{{datosUsuario['poblacion']}}</option>
+            <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
+            </option>
+            <small class="form-text text-muted"
+              *ngIf="form.controls.localidad.errors && form.controls.localidad.touched">Debe
+              insertar una localidad</small>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Constructor</label>
+        <input value="{{datosUsuario['constructor']}}" type="text" class="form-control" formControlName="nombre_constructor" placeholder="Custom Bike"
+          name="nombre_constructor">
+
+        <small class="form-text text-muted"
+          *ngIf="form.controls.nombre_constructor.errors && form.controls.nombre_constructor.touched">Debe
+          insertar un nombre</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Descripción</label>
+        <textarea value="{{datosUsuario['descripcion']}}" rows="5" cols="50" class="form-control" formControlName="descripcion" name="descripcion"
+          placeholder="Introduce el titulo de tu anuncio"></textarea>
+        <small class="form-text text-muted"
+          *ngIf="form.controls.descripcion.errors && form.controls.descripcion.touched">Debe contener un
+          minimo
+          de 30
+          letras y un máximo de 150</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Persona contacto</label>
+        <input value="{{datosUsuario['persona_contacto']}}" type="text" class="form-control" placeholder="Juan Pérez" formControlName="persona_contacto"
+          name="persona_contacto">
+      </div>
+      <small class="form-text text-muted"
+        *ngIf="form.controls.persona_contacto.errors && form.controls.persona_contacto.touched">Debe tener
+        un nombre de min 3 letras y max 15</small>
+
+      <div class="form-group">
+        <label>Móvil</label>
+        <input value="{{datosUsuario['telefono']}}" type="phoneNumber" class="form-control" placeholder="Introduzca un teléfono móvil"
+          formControlName="telefono" name="telefono" autocomplete="off">
+        <small class="form-text text-muted"
+          *ngIf="form.controls.telefono.errors && form.controls.telefono.touched">Inserte un número
+          móvil</small>
+      </div>
+
+      <div class="form-group">
+        <label for="">Imagen Perfil</label>
+        <input value="{{datosUsuario['imagenes_usuario']}}" type="text" class="form-control" formControlName="imagenes_constructor" name="imagenes_constructor">
+      </div>
+
+    </div>
+
+    <button class="btn btn-primary btn-block " type="submit">Editar</button>
+
+  </form> -->
+
 </div>

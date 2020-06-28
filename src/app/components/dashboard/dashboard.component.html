@@ -1,68 +1,101 @@
-<div class="container-fluid p-0">
-
-  <mat-drawer-container class="example-container bg-donkey-secondary ">
-    <mat-drawer #drawer class="example-sidenav bg-donkey " mode="side" opened>
-
-      <div class="row ">
-
-        <div class="col-12 mx-auto">
-          <img class="img-fluid m-1" width="80%" src="../../../assets/img/logo-404.png" alt="">
-        </div>
-
-        <div class="col-12">
-          <ul class="nav flex-column">
-
-            <li class="bg-donkey list-group-item my-1">
-              <a class="nav-link active text-center" [routerLink]="['usuario', 'perfil']">
-                <img class="img-fluid m-1" width="35%" src="../../../assets/img/casco.png" alt="">
-                Mi Perfil
-              </a>
-            </li>
-            <li class="bg-donkey list-group-item my-1">
-              <a class="nav-link text-center" [routerLink]="['usuario']">
-                <img class="img-fluid m-1" width="35%" src="../../../assets/img/anuncios.png" alt="">
-                Mis Anuncios
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-12">
-          <button class="btn btn-block bg-danger" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>
-        </div>
-
-      </div>
-
-    </mat-drawer>
 
 
-    <div class="row">
-      <div class="col-12">
-        <mat-toolbar color="">
-          <mat-toolbar-row>
-             <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="drawer.toggle()">menu</mat-icon>
-
-          </mat-toolbar-row>
-        </mat-toolbar>
-
+  <!-- <nav class="navbar navbar-expand-lg navbar navbar-dark bg-donkey">
+    <a class="navbar-brand text-white" href="#">
+      <img class="img-fluid w-10" src="../../../assets/img/iconografia/logo-b.png" alt="">
+      OLD DONKEY DASHBOARD</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#">PERFIL <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="#">ANUNCIOS</a>
+        <a class="nav-item nav-link" href="#">LOG OUT</a>
       </div>
     </div>
+  </nav> -->
+  <div class="container-fluid p-0">
+    <div class="row m-0">
+  
+        <div class="col-12 py-4 d-flex bg-donkey">
+          <img class="img-fluid w-10 mx-auto" src="../../../assets/img/iconografia/logo-b.png" alt="">
+        </div>
+      
+        <div class="col-6 col-md-6  p-0">
 
-    <div class="row">
-      <div class="col-11 mx-auto mt-4">
-        <img class="img-fluid" src="../../../assets/img/usuario-dash.jpg" alt="">
+          <button class=" btn btn-donkey btn-block" [routerLink]="['usuario', 'perfil']">
+            <img class=" mr-4" width="7%" src="../../../assets/img/casco.png" alt="">
+            Mi perfil
+          </button>
+              <!-- <a class=" btn btn-donkey btn-block" [routerLink]="['usuario', 'perfil']">
+                  <img class=" mr-4" width="7%" src="../../../assets/img/casco.png" alt="">
+                  Mi perfil
+                </a> -->
+        </div>
+      
+        <div class="col-6 col-md-6 p-0">
+          <button class="btn btn-donkey btn-block" [routerLink]="['usuario']">
+            Anuncios
+            <img class="ml-4" width="8.1%" src="../../../assets/img/anuncios.png" alt="">
+            
+          </button>
+        </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+
+ 
+
+  <!-- <mat-drawer #drawer class="example-sidenav bg-donkey p-0 m-0" mode="side">
+ 
+    <div class="row p-0 m-0">
+
+      <div class="col-10 mx-auto mt-3 d-flex">
+        <div class="mx-auto">
+          <img class="img-fluid mx-auto p-2 m-1" src="../../../../assets/img/iconografia/logo-b.png" alt="">
+        </div>
       </div>
+
+      <div class="col-12 mb-4 mx-auto">
+        <ul class="nav flex-column">
+
+          <li class="bg-donkey list-group-item my-1 mt-0">
+            <a class="nav-link active text-center" [routerLink]="['usuarios']">
+              <img class="img-fluid m-1" width="30%" src="../../../assets/img/casco.png" alt="">
+              Usuarios
+            </a>
+          </li>
+          <li class="bg-donkey list-group-item my-1 mt-0">
+            <a class="nav-link text-center" [routerLink]="['anuncios']">
+              <img class="img-fluid m-1 p-1 mr-2" width="30%" src="../../../assets/img/anuncios.png" alt="">
+               Anuncios
+            </a>
+          </li>
+          <li class="bg-donkey list-group-item my-1 ml-1 mt-0">
+            <a class="nav-link text-center" [routerLink]="['noticias']">
+              <img class="img-fluid mr-3 m-1" width="26%" src="../../../assets/img/mensaje.png" alt="">
+              Noticias
+            </a>
+          </li>
+          <li class="bg-donkey list-group-item my-1 mt-0">
+            <a class="nav-link text-center" [routerLink]="['videotutoriales']">
+              <img class="img-fluid m-1 mr-2" width="30%" src="../../../assets/img/moto.png" alt="">
+              Tutoriales
+            </a>
+          </li>
+        </ul>
+      </div> 
+
+      <div class="col-12 mx-auto p-0 d-flex">
+        <button class="btn btn-block bg-danger text-white" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>
+      </div>
+
     </div>
 
-    <div class="row">
-      <div class="col-11 mx-auto">
-        <router-outlet></router-outlet>
-
-      </div>
-    </div>
-
-  </mat-drawer-container>
+  </mat-drawer> -->
 
 
 
-</div>
+
+

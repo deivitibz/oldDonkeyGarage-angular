@@ -68,7 +68,7 @@ td {
 }
 
 mat-drawer {
-  width: 185px;
+  width: 315px;
 }
 
 a.nav-link {
@@ -80,3 +80,25 @@ a.nav-link {
 .list-group-item {
   border: none;
 }
+
+.btn-donkey{
+  color: white;
+  background-color: tomato;
+}
+
+.btn-donkey:hover {
+  color: #fff;
+  background-color: rgb(230, 73, 46);
+}
+
+
+@media (min-width: 576px) { 
+  .w-10{
+    width: 50%;
+  }
+
+}
+.w-10{
+  width: 20%;
+}
+

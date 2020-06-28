@@ -30,16 +30,15 @@
             <label>Password</label>
             <input type="password" class="form-control text-center" placeholder="Introduzca su contraseña"
               name="password" formControlName="password" autocomplete="on">
-
-
+              <!-- <small class="form-text text-muted" *ngIf="!valid">Email o contraseña no valido</small> -->
           </div>
-          <div class="modal-footer border border-0 d-flex justify-content-between mx-4 mb-3">
+          <div class="modal-footer border border-0 d-flex justify-content-between mx-0 p-0 mb-4">
             <button #myButton id="acceder" class="btn btn-primary " type="submit"
               [disabled]="!form.valid">Acceder</button>
             <button class="btn btn-primary" type="submit" data-dismiss="modal"
               [routerLink]="['/registro']">Registro</button>
           </div>
-          <small class="form-text text-muted" *ngIf="!valid">Email o contraseña no valido</small>
+          
 
         </form>
 

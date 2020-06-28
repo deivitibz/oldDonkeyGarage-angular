@@ -33,19 +33,25 @@ import { UsuarioDashComponent } from './components/dashboard/usuario/usuario.com
 import { UsuarioDashPerfilComponent } from './components/dashboard/usuario/perfil/perfil.component';
 import { ConstructorDashComponent } from './components/dashboard/constructor/constructor.component';
 import { ConstructorDashPerfilComponent } from './components/dashboard/constructor/perfil/perfil.component';
+import { DetalleComponent } from './components/anuncios/detalle/detalle.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'nosotros', component: NosotrosComponent },
-  { path: 'anuncios', component: anunciosComponent },
+  { path: 'anuncios', component: anunciosComponent ,
+  children: [
+    {
+      path: 'detalle/:anuncioid', component: DetalleComponent
+    }
+  ] },
   { path: 'constructores', component: ConstructorComponent },
   { path: 'blog', component: blogComponent },
   { path: 'tutoriales', component: TutorialesComponent },
   { path: 'navegacion', component: navegacionComponent },
   { path: 'carousel', component: carouselComponent },
   { path: 'moto', component: MotoComponent },
-  { path: 'noticias', component: noticiasComponent },
+  { path: 'noticias', component: noticiasComponent},
   {
     path: 'dashboard', component: DashboardComponent,
     children: [
