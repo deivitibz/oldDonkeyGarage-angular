@@ -13,9 +13,14 @@ export class AuthService {
   constructor(private http: HttpClient,private router: Router) {}
 
   decodeToken() {
-    let token = localStorage.getItem('user-token');
-    let decoded = jwt_decode(token);
-    return decoded;
+    if(localStorage.getItem('user-token')){
+      let token = localStorage.getItem('user-token');
+      let decoded = jwt_decode(token);
+      return decoded;
+    } else {
+      return false;
+    }
+    
   }
 
   checkToken(response) {

@@ -58,8 +58,11 @@ export class noticiasComponent implements OnInit {
 
   async ngOnInit() {
     const response = await this.noticiasService.getAllNoticias();
-    this.allNoticias.push(response);
+    this.allNoticias = response;
+    console.log(response);
+    
     //console.log(respuesta);
+    
   }
 
   async getNoticia(id) {

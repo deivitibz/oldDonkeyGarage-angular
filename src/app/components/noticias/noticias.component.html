@@ -1,10 +1,64 @@
-<div class="bg-donkey text-center text-white py-3 m-0">
-  <h3 class="text-white">NOTICIAS FRESCAS</h3>
-  <hr>
+<div class="container-fluid bg-donkey p-0 pb-4">
+	<div class="bg-donkey-secondary text-center text-white pt-3 pb-2 m-0">
+	  <h3 class="text-white">NOTICIAS FRESCAS</h3>
+	  <hr>
+	</div>
+	
+	<div class="card-columns bg-donkey mt-4 mx-4">
+	  <div class="card" *ngFor="let noticia of allNoticias">
+	    <div class="card-body p-2">
+	
+	      <!-- Card content -->
+	      <div class="table mb-0">
+	        <h5 class="category">{{noticia.titulo}}</h5>
+	        <p class="card-description"> {{noticia.descripcion}}</p>
+	        <div class="row">
+	          <div class="col-6">
+	            <span>{{noticia.autor}}</span>
+	          </div>
+	          <div class="col-6">
+	            <span>{{noticia.categoria}}</span>
+	          </div>
+	        </div>
+	    </div>
+	
+	    </div>
+	  </div>
+	</div>
 </div>
 
+<!-- <article class="col-md-12">
 
-<div class="container my-4">
+  <div class="cards-1 section-gray">
+      <div class="container">
+          <div class="row">
+              <div class="col-12 col-md-6" *ngFor="let noticia of allNoticias">
+                  <div class="card card-blog mt-0">
+                      <div class="card-image">
+                          <a href="#"> <img src="http://streaming.zapto.org:3000/uploads/{{allNoticias['imagen']}}"alt="">
+                          </a>
+                      </div>
+                      <div class="table">
+                          <h5 class="category text-info">{{noticia.titulo}}</h5>
+                          <p class="card-description"> {{noticia.descripcion}}</p>
+                          <div class="row">
+                            <div class="col-6">
+                              <h6>{{noticia.autor}}</h6>
+                            </div>
+                            <div class="col-6">
+                              <h6>{{noticia.categoria}}</h6>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</article>  -->
+
+<!-- <div class="container my-4">
   <div class="row">
     <div class="col-12 col-md-4">
       <div class="card text-left">
@@ -34,4 +88,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
