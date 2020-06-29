@@ -43,7 +43,7 @@ export class anuncioService {
   }
 
   getAnuncio(id): Promise<any> {
-    return this.http.get(this.baseUrl + '/' + id,this.auth.generateHeaders()).toPromise();
+    return this.http.get(this.baseUrl + '/' + id).toPromise();
   }
 
   deleteAnuncio(id): Promise<Anuncio> {
