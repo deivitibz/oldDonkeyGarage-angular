@@ -120,4 +120,10 @@ export class anunciosComponent implements OnInit {
     console.log(getAnuncios);
     this.allAnuncios = getAnuncios;
   }
+
+  showDetail(anuncio){
+    console.log(anuncio.id);
+
+    this.router.navigate(['anuncios','detalle',anuncio.id])
+  }
 }
