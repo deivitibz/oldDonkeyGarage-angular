@@ -78,16 +78,12 @@ export class anunciosComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.getAnuncios();
+  }
+
+  async getAnuncios(){
     const response = await this.anuncioService.getAnuncios();
     this.allAnuncios = response;
-    //console.log(this.allAnuncios);
-
-    /*     if (response['error']) {
-          this.router.navigate([]);
-        } else {
-          this.arrAnuncios.push(response)
-          console.log(response);
-        } */
   }
 
   filtrarMarcas(form) {
@@ -103,17 +99,6 @@ export class anunciosComponent implements OnInit {
     console.log(this.filtroModelos);
   }
 
-  onSubmitFormulario() {
-    //this.anuncioService.addImages(this.files, this.form);
-
-    // nombre del archivo
-    console.log(this.form.value);
-  }
-
-  onFileChange($event) {
-    this.files.push($event.target.files);
-    console.log(this.files);
-  }
 
   getProvincias($event) {
     this.filtroProvincias = [];
@@ -128,5 +113,11 @@ export class anunciosComponent implements OnInit {
         this.filtroProvincias.push(result);
       }
     });
+  }
+
+  async getCategory($event){
+    const getAnuncios = await this.anuncioService.getAnuncioByCategory($event)
+    console.log(getAnuncios);
+    this.allAnuncios = getAnuncios;
   }
 }

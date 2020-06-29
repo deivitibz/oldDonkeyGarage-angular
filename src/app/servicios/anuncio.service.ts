@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Anuncio } from '../models/anuncio.model';
-import { anunciosComponent } from '../components/anuncios/anuncios.component';
 import { AuthService } from 'src/app/servicios/auth.service';
 
 @Injectable({
@@ -27,15 +26,12 @@ export class anuncioService {
     return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
   }
 
-
   editAnuncio(id, newAnuncio) {
     return this.http.put(this.baseUrl + '/' + id, newAnuncio,this.auth.generateHeaders()).toPromise();
   }
 
   getAnunciosById(id): Promise<Anuncio[]> {
-    return this.http
-      .get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id,this.auth.generateHeaders())
-      .toPromise();
+    return this.http.get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id,this.auth.generateHeaders()).toPromise();
   }
 
   editAnuncioById(id, newAnuncio): Promise<Anuncio> {
@@ -44,6 +40,10 @@ export class anuncioService {
 
   getAnuncio(id): Promise<any> {
     return this.http.get(this.baseUrl + '/' + id,this.auth.generateHeaders()).toPromise();
+  }
+
+  getAnuncioByCategory(category): Promise<Anuncio[]>{
+    return this.http.get<Anuncio[]>(this.baseUrl + '/getbycategoria/' + category,this.auth.generateHeaders()).toPromise()
   }
 
   deleteAnuncio(id): Promise<Anuncio> {
@@ -59,9 +59,7 @@ export class anuncioService {
       file,
       { headers: header }
     );
-    this.http
-      .request(req)
-      .toPromise()
+    this.http.request(req).toPromise()
       .then((result) => {
         console.log(result);
       });

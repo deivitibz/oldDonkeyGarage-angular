@@ -1,9 +1,9 @@
 <router-outlet></router-outlet>
-<div class="container-fluid mt-2" *ngIf="!router.url.includes('/dashboard/usuario/perfil')">
+<div class="container-fluid" >
   <!-- tabla -->
-  <div class="row">
+  <div class="row" >
 
-    <mat-expansion-panel [expanded]="!panelOpenState">
+    <mat-expansion-panel [expanded]="!panelOpenState" >
       <mat-expansion-panel-header>
         Mis Anuncios
       </mat-expansion-panel-header>
@@ -32,8 +32,8 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon (click)="editUser(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
-          <mat-icon (click)="deleteUser(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
+          <mat-icon (click)="editAnuncio(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon" data-toggle="modal" data-target="#exampleModal">edit</mat-icon>
+          <mat-icon (click)="deleteAnuncio(element)" class="example-icon" aria-hidden="false" aria-label="Example heart icon">delete</mat-icon>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -136,20 +136,21 @@
         <!-- tipo custom -->
         <div class="form-group mb-4">
           <label for="">Tipo de custom</label>
-          <select class="form-control" name="tipoCustom">
+          <select class="form-control" formControlName="categoria" name="tipoCustom">
             <option value="">{{anuncioEdit['tipo_custom']}}</option>
-            <option value="">Bobber</option>
-            <option value="">Café Racer</option>
-            <option value="">Chopped</option>
-            <option value="">Brad</option>
-            <option value="">Street tracker</option>
-            <option value="">Scramblet</option>
+            <option value="bobber">Bobber</option>
+            <option value="cafe_racer">Café Racer</option>
+            <option value="chopped">Chopped</option>
+            <option value="brad">Brad</option>
+            <option value="street_tracker">Street tracker</option>
+            <option value="scramblet">Scramblet</option>
+
 
           </select>
         </div>
         <div class="row mx-0">
-          <!-- <input type="file" name="avatar" (change)="onFileChange($event)"  formControlName="avatar" /> -->
-          <!-- <input class="form-control-file" (change)="onFileChange($event)" type="file" name="file" formControlName="file"> -->
+          <input class="form-control-file" (change)="onFileChange($event)" type="file" value="Enviar"
+          formControlName="imagen_id" multiple="multiple">
           <button *ngIf="!anuncioEdit['id']" class="btn btn-primary btn-block " type="submit">Enviar</button>
           <button *ngIf="anuncioEdit['id']" class="btn btn-primary btn-block " type="submit">Editar</button>
         </div>

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   valid: boolean;
   baseUrl: string;
   validToken: boolean;
-
+  error: boolean;
   constructor(
     private router: Router,
     private usuarioService: UsuarioService,
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     private httpClient: HttpClient
   ) {
     this.validToken = false;
+    this.error = false;
 
     this.baseUrl = 'http://localhost:3000/api/usuarios';
     this.form = new FormGroup({
@@ -49,49 +50,16 @@ export class LoginComponent implements OnInit {
       this.saveToken(response.token);
       this.cierraPopup();
       this.form.reset();
-      this.router.navigate(['dashboard']);
-    } else {
-      console.log('no se ha podido hacer login');
-    }
-
-    // usuario y contraseña correcto
-    // guardo token
-    // can activate comprobar rutas protegidas
-
-    /* if (!localStorage.getItem('user-token')  || !this.form.valid) {
-
-      // comprobar si el formulario es valido
-
-      //console.log(response);
-
-       if (typeof token !== 'undefined' || token !== '') {
-        localStorage.setItem('user-token', token)
-        //console.log('se a añadido el token');
-        this.cierraPopup();
-        this.form.reset()
-        this.router.navigate(['dashboard'])
+      if(response.rol === 'Admin'){
+        this.router.navigate(['admin','usuarios']);
+      } else {
+        this.router.navigate(['dashboard','perfil'])
+      }
 
       } else {
-        this.form.reset()
-        localStorage.setItem('user-token', '')
-      }
-
-
-    } else {
-
-      const token = localStorage.getItem('user-token');
-      const response = await this.checkToken(token)
-      console.log(response);
-
-      if (response['success']){
-        this.cierraPopup();
-        this.router.navigate(['dashboard'])
-      } else if (response['error_type'] === 'noToken'){
-        localStorage.setItem('user-token', '')
-      } else if (response['error_type'] === 'caducadoToken'){
-        localStorage.setItem('user-token', '')
-      }
-    } */
+        this.error = true;
+        console.log('no se ha podido hacer login');
+    }
   }
 
   checkToken(token): Promise<any> {

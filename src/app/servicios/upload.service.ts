@@ -7,32 +7,24 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class UploadService {
 
-  filePath: string;
-
   constructor(private http: HttpClient,private auth: AuthService) { }
 
   async addImages(files): Promise<any> {
     this.auth.generateHeaders();
     files[0].userId = this.auth.decodeToken()['userId'];
-    //console.log(files[0].name);
-
     let fd = new FormData();
-    fd.append('imagen', files[0], 'nuevaImagen.png');
-    fd.append('name', files[0].name);
+    fd.append('imagen', files[0], files[0].name);
     fd.append('userId',this.auth.decodeToken()['userId'])
-
     let header = new HttpHeaders();
     header.append('Content-Type', 'multipart/form-data');
     const req = new HttpRequest('POST','http://localhost:3000/api/upload',fd,
       { headers: header}
     );
+
     this.http.request(req).toPromise().then(
       (result) => {
-        this.filePath = result['body']['path']
-        console.log(this.filePath);
-
+        console.log(result);
       });
-
   }
 
 }

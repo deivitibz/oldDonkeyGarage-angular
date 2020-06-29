@@ -38,7 +38,11 @@
             <button class="btn btn-primary" type="submit" data-dismiss="modal"
               [routerLink]="['/registro']">Registro</button>
           </div>
-          
+
+          <div class="alert alert-danger" *ngIf="error">
+            <strong>Error!</strong> El email y/o la contraseña no coinciden.
+          </div>
+
 
         </form>
 

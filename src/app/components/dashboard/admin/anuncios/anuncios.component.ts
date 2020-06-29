@@ -96,7 +96,7 @@ export class AnunciosComponent implements OnInit {
       modelo: new FormControl(this.anuncioEdit['modelo'], []),
       itv: new FormControl(this.anuncioEdit['itv'], []),
       homologacion: new FormControl(this.anuncioEdit['homologacion'], []),
-      tipoCustom: new FormControl(this.anuncioEdit['tipoCustom'], []),
+      categoria: new FormControl(this.anuncioEdit['categoria'], []),
       imagen_id: new FormControl(this.anuncioEdit['imagen_id'], []),
       // tipoCustom: new FormControl('', []),
     });
@@ -178,6 +178,9 @@ export class AnunciosComponent implements OnInit {
   async onSubmitFormulario() {
     const newAnuncio = this.form.value;
     newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
+    newAnuncio.imagen_id = this.files[0].name;
+    console.log(newAnuncio);
+
     if(this.anuncioEdit.id){
       const response = await this.anuncioService.editAnuncioById(this.anuncioEdit.id,newAnuncio);
       this.reloadData();
@@ -195,11 +198,11 @@ export class AnunciosComponent implements OnInit {
 
   }
 
-  onFileChange($event) {
+  async onFileChange($event) {
     this.files = $event.target.files;
-    //console.log(this.files);
+    const response = await this.upload.addImages(this.files)
+    console.log(response);
 
-    this.upload.addImages(this.files)
   }
 
   filtrarMarcas(form) {

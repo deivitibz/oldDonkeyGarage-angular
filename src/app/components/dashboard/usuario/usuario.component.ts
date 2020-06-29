@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import * as brands from '../../../db/moto_brands.json';
 import * as models from '../../../db/moto_models.json';
 import { HttpClient } from '@angular/common/http';
+import { UploadService } from './../../../servicios/upload.service';
 
 @Component({
   selector: 'app-dash-usuario',
@@ -21,13 +22,7 @@ import { HttpClient } from '@angular/common/http';
 export class UsuarioDashComponent implements OnInit {
   panelOpenState = false;
   estado = 'Añadir';
-  displayedColumns: string[] = [
-    'id',
-    'titulo',
-    'descripcion',
-    'precio',
-    'actions',
-  ];
+  displayedColumns: string[] = ['id','titulo','descripcion','precio','actions'];
   dataSource: MatTableDataSource<Anuncio>;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
@@ -57,7 +52,8 @@ export class UsuarioDashComponent implements OnInit {
     private authService: AuthService,
     private http: HttpClient,
     private _snackBar: MatSnackBar,
-    public router: Router
+    public router: Router,
+    private upload: UploadService
   ) {
     this.marcas = brands.data;
     this.modelos = models.data;
@@ -84,7 +80,7 @@ export class UsuarioDashComponent implements OnInit {
   }
 
   initializeForm(){
-        this.form = new FormGroup({
+    this.form = new FormGroup({
       titulo: new FormControl(this.anuncioEdit['titulo'], []),
       descripcion: new FormControl(this.anuncioEdit['descripcion'], []),
       provincia: new FormControl(this.anuncioEdit['provincia'], []),
@@ -96,6 +92,9 @@ export class UsuarioDashComponent implements OnInit {
       modelo: new FormControl(this.anuncioEdit['modelo'], []),
       itv: new FormControl(this.anuncioEdit['itv'], []),
       homologacion: new FormControl(this.anuncioEdit['homologacion'], []),
+      categoria: new FormControl(this.anuncioEdit['categoria'], []),
+      imagen_id: new FormControl(this.anuncioEdit['imagen_id'], []),
+
     });
   }
 
@@ -153,14 +152,14 @@ export class UsuarioDashComponent implements OnInit {
     }
   }
 
-  async deleteUser(element) {
+  async deleteAnuncio(element) {
     const response = await this.anuncioService.deleteAnuncio(element.id);
     //const response = await this.usuarioService.deleteUser(element.id);
     this.openSnackBar(response['success']);
     this.reloadData();
   }
 
-  async editUser(element) {
+  async editAnuncio(element) {
     this.togglePanel();
     this.anuncioEdit = await this.anuncioService.getAnuncio(element.id);
     this.initializeForm();
@@ -168,15 +167,19 @@ export class UsuarioDashComponent implements OnInit {
   async onSubmit() {
     const newAnuncio = this.form.value;
     newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
+    newAnuncio.imagen_id = this.files[0].name;
     console.log(newAnuncio);
     if (this.anuncioEdit['id']) {
       const response = await this.anuncioService.editAnuncioById(this.anuncioEdit['id'],this.form.value);
       this.reloadData();
-      this.openSnackBar(response['success']);
+      this.form.reset();
+      this.anuncioEdit = [];
       this.togglePanel()
+      this.openSnackBar(response['success']);
     } else {
       const response = await this.anuncioService.addAnuncio(newAnuncio);
       this.reloadData();
+      this.form.reset();
       this.openSnackBar(response['success']);
     }
 
@@ -197,7 +200,9 @@ export class UsuarioDashComponent implements OnInit {
     });
   }
 
-  onFileChange($event) {
+  async onFileChange($event) {
     this.files = $event.target.files;
+    const response = await this.upload.addImages(this.files)
+    console.log(response);
   }
 }
