@@ -1,13 +1,34 @@
 <div class="container-fluid p-0">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span class="mx-auto" [matBadge]="allAnuncios.length" matBadgeOverlap="false" matBadgeColor="warn">Lista de Anuncios</span>
+      <span class="mx-auto" *ngIf="allAnuncios" [matBadge]="allAnuncios.length" matBadgeOverlap="false" matBadgeColor="warn">Lista de Anuncios</span>
       <span class="example-spacer"></span>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
 
 <div class="container">
+  <!-- MODO LISTA-->
+  <div class="row">
+    <ul class="list-group w-100">
+      <li class="list-group-item d-flex align-items-center" *ngFor="let anuncio of allAnuncios">
+
+        <input type="checkbox" id="exampleCheck1">
+        <div class="px-4 d-flex align-items-center">
+
+          <img class="rounded-circle" src="https://picsum.photos/id/684/50/50" alt="">
+        </div>
+        <div>
+          <h5>ID: {{anuncio.id}}</h5>
+          <p>Titulo: {{anuncio.titulo}}</p>
+        </div>
+        <div class="icons">
+          <i class="fas fa-edit fa-lg fa-fw" style="color: blue;"></i>
+          <i class="fas fa-trash fa-lg fa-fw" style="color: red;"></i>
+        </div>
+      </li>
+    </ul>
+  </div>
   <!-- tabla -->
   <div class="row">
 
@@ -71,7 +92,7 @@
         Crear Editar Anuncios
       </mat-expansion-panel-header>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmitFormulario()" enctype="multipart/form-data">
+        <form [formGroup]="form" (ngSubmit)="submit(form)" enctype="multipart/form-data">
           <!-- titulo -->
           <div class="form-group">
             <label for="">Titulo</label>
@@ -124,7 +145,8 @@
             <div class="form-group col-6">
               <label for="">Modelo</label>
               <select class="form-control" formControlName="modelo" value="{{anuncioEdit['modelo']}}" name="modelo">
-                <option value="" selected>Seleciona un modelo</option>
+                <option value="" selected *ngIf="!anuncioEdit">Seleciona un modelo</option>
+                <option value="{{anuncioEdit['modelo']}}" selected>{{anuncioEdit['modelo']}}</option>
                 <option *ngFor="let modelo of filtroModelos" [value]="modelo.name">{{modelo.name}}</option>
               </select>
             </div>
@@ -147,7 +169,8 @@
               <label for="">Población</label>
               <select class="form-control" id="poblacion" formControlName="poblacion" name="poblacion"
                 value="{{anuncioEdit['poblacion']}}">
-                <option value="" selected>Seleciona un poblacion</option>
+                <option value="" selected *ngIf="!anuncioEdit">Seleciona un poblacion</option>
+                <option value="{{anuncioEdit['poblacion']}}" selected>{{anuncioEdit['poblacion']}}</option>
                 <option *ngFor="let poblacion of filtroProvincias" [value]="poblacion.nm">{{poblacion.nm}}
                 </option>
               </select>

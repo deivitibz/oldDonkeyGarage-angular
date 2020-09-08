@@ -10,19 +10,19 @@ import { AuthService } from 'src/app/servicios/auth.service';
   styleUrls: ['./detalle.component.css']
 })
 export class DetalleComponent implements OnInit {
-  detalleAnuncio: any;
-  imagenPath = 'http://streaming.zapto.org:3000/'
+  detalleAnuncio: Anuncio;
+  imagenPath = 'http://mypanel.sytes.net:3000/'
   constructor(
-    private activatedRoute: ActivatedRoute, 
+    private activatedRoute: ActivatedRoute,
     private anuncioService: anuncioService) { }
 
    ngOnInit() {
       this.activatedRoute.params.subscribe(async(params)=>{
       this.detalleAnuncio = await this.anuncioService.getAnuncio(params.anuncioid);
       console.log(this.detalleAnuncio);
-      
+
     })
-    
+
   }
 
 

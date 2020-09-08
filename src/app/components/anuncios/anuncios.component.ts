@@ -82,8 +82,14 @@ export class anunciosComponent implements OnInit {
   }
 
   async getAnuncios(){
-    const response = await this.anuncioService.getAnuncios();
+    const response = await this.anuncioService.getAnunciosHome();
     this.allAnuncios = response;
+  }
+
+
+  test(){
+    console.log('ok');
+
   }
 
   filtrarMarcas(form) {
@@ -116,9 +122,8 @@ export class anunciosComponent implements OnInit {
   }
 
   async getCategory($event){
-    const getAnuncios = await this.anuncioService.getAnuncioByCategory($event)
-    console.log(getAnuncios);
-    this.allAnuncios = getAnuncios;
+    this.allAnuncios = [];
+    this.allAnuncios = await this.anuncioService.getAnuncioByCategory($event)
   }
 
   showDetail(anuncio){

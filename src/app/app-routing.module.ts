@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 // guard
-import { LoginGuard } from './login.guard'
+//import { LoginGuard } from './login.guard'
 
 
 import { HomeComponent } from './components/home/home.component';
@@ -53,7 +53,8 @@ const routes: Routes = [
   { path: 'moto', component: MotoComponent },
   { path: 'noticias', component: noticiasComponent},
   {
-    path: 'dashboard', component: DashboardComponent,canActivate: [LoginGuard],
+    /* path: 'dashboard', component: DashboardComponent,canActivate: [LoginGuard], */
+    path: 'dashboard', component: DashboardComponent,
     children: [
       {
         path: 'constructor', component: ConstructorDashComponent,
@@ -72,7 +73,8 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'error404', component: Error404Component },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [LoginGuard],
+  /* { path: 'admin', component: AdminComponent, canActivate: [LoginGuard], */
+  { path: 'admin', component: AdminComponent,
     children: [
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'noticias', component: NoticiasComponent },
@@ -82,6 +84,7 @@ const routes: Routes = [
       { path: 'motocicletas', component: MotocicletasComponent }
     ]
   },
+  {path: 'test', component: AdminComponent},
   { path: '**', redirectTo: '/error404' }
 ];
 

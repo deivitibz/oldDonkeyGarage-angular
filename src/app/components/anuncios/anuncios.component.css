@@ -12,3 +12,8 @@ hr {
   background-color: VAR(--color-A--color);
   border-color: VAR(--color-A--color);
 }
+
+button#filtro{
+  position: absolute;
+  right: 20px;
+}

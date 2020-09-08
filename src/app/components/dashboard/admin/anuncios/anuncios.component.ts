@@ -17,7 +17,7 @@ import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} f
 import { UploadService } from './../../../../servicios/upload.service';
 
 @Component({
-  selector: 'app-anuncios',
+  selector: 'app-admin-anuncios',
   templateUrl: './anuncios.component.html',
   styleUrls: ['./anuncios.component.css'],
 })
@@ -80,7 +80,9 @@ export class AnunciosComponent implements OnInit {
 
   async ngOnInit() {
     //this.allAnuncios = await this.anuncioService.getAnuncios();
-    this.reloadData();
+    this.reloadData()
+
+
   }
 
   initializeForm(){
@@ -110,9 +112,11 @@ export class AnunciosComponent implements OnInit {
 
   async reloadData() {
     const response = await this.anuncioService.getAllAnuncios();
-    this.allAnuncios = response
-    this.authService.checkToken(response);
+    this.allAnuncios = response;
+    //this.allAnuncios = response
+    //this.authService.checkToken(response);
     this.materialDataTable();
+    return response
   }
 
   applyFilter(event: Event) {
@@ -144,6 +148,8 @@ export class AnunciosComponent implements OnInit {
   async editAnuncio(anuncio) {
     this.togglePanel();
     this.anuncioEdit = await this.anuncioService.getAnuncio(anuncio.id);
+    console.log(this.anuncioEdit);
+
     this.initializeForm()
   }
 
@@ -175,6 +181,17 @@ export class AnunciosComponent implements OnInit {
     //console.log(response);
   }
 
+  async submit(form){
+    //console.log(form.value);
+    const response = await this.anuncioService.editAnuncioById(this.anuncioEdit.id,form.value)
+    console.log(response);
+    this.reloadData();
+    this.form.reset();
+    this.anuncioEdit = []
+    this.togglePanel()
+    this.openSnackBar(response['success'])
+  }
+
   async onSubmitFormulario() {
     const newAnuncio = this.form.value;
     newAnuncio.usuarios_id = this.authService.decodeToken()['userId'];
@@ -185,7 +202,7 @@ export class AnunciosComponent implements OnInit {
       const response = await this.anuncioService.editAnuncioById(this.anuncioEdit.id,newAnuncio);
       this.reloadData();
       this.form.reset();
-      this.anuncioEdit = [];
+      this.anuncioEdit = null;
       this.togglePanel();
       this.openSnackBar(response['success']);
     } else {

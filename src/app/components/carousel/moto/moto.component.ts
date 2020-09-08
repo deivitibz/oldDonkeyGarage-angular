@@ -17,7 +17,7 @@ export class MotoComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const response = await this.anuncioService.getAnuncios();
+    const response = await this.anuncioService.getAnunciosHome();
     this.allAnuncios = response;
     this.allAnuncios = this.allAnuncios.splice(1,9)
     // const response = await this.motoService.getAllMotos();

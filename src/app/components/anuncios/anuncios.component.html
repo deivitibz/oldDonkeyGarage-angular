@@ -1,96 +1,36 @@
 <div *ngIf="!router.url.includes('anuncios/detalle')" class="container-fluid px-4 bg-donkey-secondary">
   <div class="row">
-    <!-- <div class="col-12 text-center mt-4">
+    <div *ngIf="router.url.includes('home')" class="col-12 text-center mt-4">
       <h2>NUESTRAS BURRAS EN VENTA</h2>
       <hr>
-    </div> -->
+    </div>
 
     <div class=" container-fluid bg-donkey-secondary my-4">
-      <app-noticia (category)="getCategory($event)"></app-noticia>
+      <button id="filtro" (click)="getAnuncios()" class="btn btn-danger" style="float: right;">Borrar filtro</button>
+      <app-noticia *ngIf="!router.url.includes('home')" (category)="getCategory($event)"></app-noticia>
     </div>
 
   </div>
 
   <div class="row">
-    <div class="mx-auto col-10 col-md-6 col-lg-4 py-3" *ngFor="let anuncio of allAnuncios">
-      <mat-card class="example-card">
-        <img mat-card-image src="http://streaming.zapto.org:3000/uploads/{{anuncio['imagen_id']}}" alt="Photo of a Shiba Inu">
-        <!-- <mat-card-header> -->
+    .<div class="card-columns">
 
-        <div class="row mt-2 mb-3">
-          <div class="col-8">
-            <h5 class="">
-              {{anuncio.titulo}}
-            </h5>
-          </div>
-          <div class="col-3 p-0 d-flex justify-content-end">
-            <h5 class="mb-0 bg-precio">
-              {{anuncio.precio}} €
-            </h5>
-          </div>
-
+      <div class="card" *ngFor="let anuncio of allAnuncios">
+        <img class="card-img-top" src="http://mypanel.sytes.net:3000/uploads/{{anuncio['imagen_id']}}" alt="">
+        <div class="card-body">
+          <h4 class="card-title">{{anuncio.titulo}}</h4>
+          <p class="card-text">{{anuncio.descripcion}}</p>
+          <h5 class="mb-0 bg-precio">
+            {{anuncio.precio}} €
+          </h5>
         </div>
-
-        <!-- <mat-card-subtitle>{{anuncio.autor}}</mat-card-subtitle> -->
-        <!-- </mat-card-header> -->
-
-        <mat-card-content>
-          <p>{{anuncio.descripcion}}</p>
-        </mat-card-content>
-        <mat-card-actions>
+        <div class="card-footer">
           <button class="btn btn-info btn-block" (click)="showDetail(anuncio)">VER ANUNCIO</button>
+        </div>
+      </div>
 
-        </mat-card-actions>
-      </mat-card>
     </div>
-
   </div>
+
 </div>
 <router-outlet></router-outlet>
-
-
-
-
-<!--  <mat-form-field appearance="fill">
-  <mat-label>Enter your email</mat-label>
-  <input matInput placeholder="pat@example.com" [formControl]="email" required>
-  <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-</mat-form-field> -->
-
-<!--  <form [formGroup]="form" (ngSubmit)="onSubmitFormulario()" class="example-form">
-
-        <div class="row">
-          <mat-form-field appearance="fill">
-            <mat-label>Titulo</mat-label>
-            <input matInput formControlName="titulo" name="titulo">
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Descripcion</mat-label>
-            <textarea matInput formControlName="descripcion" name="descripcion"></textarea>
-          </mat-form-field>
-        </div>
-
-        <div class="row">
-
-           <mat-form-field appearance="fill">
-            <mat-label>Precio</mat-label>
-            <input matInput formControlName="precio" name="precio">
-          </mat-form-field>
-
-           <mat-form-field appearance="fill">
-            <mat-label>Kilometros</mat-label>
-            <input matInput formControlName="kms" name="kms">
-          </mat-form-field>
-
-           <mat-form-field appearance="fill">
-            <mat-label>ITV</mat-label>
-            <mat-checkbox class="example-margin" formControlName="itv" value="ITV"></mat-checkbox>
-          </mat-form-field>
-
-           <mat-form-field appearance="fill">
-            <mat-label>Homologado</mat-label>
-            <mat-checkbox class="example-margin" formControlName="homologado" value="homologado"></mat-checkbox>
-          </mat-form-field>
-        </div>
-
-      </form> -->

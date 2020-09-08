@@ -81,8 +81,6 @@ export class NoticiaComponent implements OnInit {
   ngOnInit(): void {}
 
   onClick(categoria: Anuncio){
-    console.log(categoria);
-
     this.category.emit(categoria);
 
   }

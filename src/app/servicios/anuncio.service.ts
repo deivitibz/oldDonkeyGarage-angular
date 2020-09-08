@@ -26,24 +26,28 @@ export class anuncioService {
     return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
   }
 
-  editAnuncio(id, newAnuncio) {
-    return this.http.put(this.baseUrl + '/' + id, newAnuncio,this.auth.generateHeaders()).toPromise();
+  getAnunciosHome():Promise<Anuncio[]>{
+    return this.http.get<Anuncio[]>(this.baseUrl + '/allAnuncios').toPromise()
+  }
+
+  editAnuncio(id, newAnuncio):Promise<Anuncio> {
+    return this.http.put<Anuncio>(this.baseUrl + '/' + id, newAnuncio,this.auth.generateHeaders()).toPromise();
   }
 
   getAnunciosById(id): Promise<Anuncio[]> {
     return this.http.get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id,this.auth.generateHeaders()).toPromise();
   }
 
-  editAnuncioById(id, newAnuncio): Promise<Anuncio> {
-    return this.http.put<Anuncio>(this.baseUrl + '/' + id, newAnuncio,this.auth.generateHeaders()).toPromise();
+  editAnuncioById(id, newAnuncio: Anuncio): Promise<Anuncio> {
+    return this.http.put<Anuncio>(this.baseUrl + '/' + id, newAnuncio).toPromise();
   }
 
-  getAnuncio(id): Promise<any> {
-    return this.http.get(this.baseUrl + '/' + id).toPromise();
+  getAnuncio(id): Promise<Anuncio> {
+    return this.http.get<Anuncio>(this.baseUrl + '/' + id).toPromise();
   }
 
   getAnuncioByCategory(category): Promise<Anuncio[]>{
-    return this.http.get<Anuncio[]>(this.baseUrl + '/getbycategoria/' + category,this.auth.generateHeaders()).toPromise()
+    return this.http.get<Anuncio[]>(this.baseUrl + '/getbycategoria/' + category).toPromise()
   }
 
   deleteAnuncio(id): Promise<Anuncio> {
