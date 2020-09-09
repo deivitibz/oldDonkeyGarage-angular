@@ -10,7 +10,7 @@ export class UsuarioService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient, private auth: AuthService) {
-    this.baseUrl = 'http://localhost:3000/api/usuarios';
+    this.baseUrl = 'http://mypanel.sytes.net:3000/api/usuarios';
   }
 
   registro(formValues): Promise<any> {
