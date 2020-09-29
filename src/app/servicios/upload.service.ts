@@ -17,7 +17,7 @@ export class UploadService {
     fd.append('userId',this.auth.decodeToken()['userId'])
     let header = new HttpHeaders();
     header.append('Content-Type', 'multipart/form-data');
-    const req = new HttpRequest('POST','http://localhost:3000/api/upload',fd,
+    const req = new HttpRequest('POST','http://mypanel.sytes.net:3000/api/upload',fd,
       { headers: header}
     );
 

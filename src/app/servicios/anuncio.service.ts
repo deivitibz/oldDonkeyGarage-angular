@@ -11,7 +11,7 @@ export class anuncioService {
   files: FormData;
 
   constructor(private http: HttpClient,private auth: AuthService) {
-    this.baseUrl = 'http://localhost:3000/api/anuncios';
+    this.baseUrl = 'http://mypanel.sytes.net:3000/api/anuncios';
   }
 
   addAnuncio(anuncio): Promise<Anuncio> {
@@ -59,7 +59,7 @@ export class anuncioService {
     header.append('Content-Type', 'multipart/form-data');
     let req = new HttpRequest(
       'POST',
-      'http://localhost:3000/api/upload',
+      'http://mypanel.sytes.net:3000/api/upload',
       file,
       { headers: header }
     );

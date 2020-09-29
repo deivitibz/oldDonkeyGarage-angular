@@ -11,7 +11,7 @@ export class ConstructorService {
   baseUrl: string;
   constructor(private httpClient: HttpClient,private auth:AuthService) {
 
-    this.baseUrl = 'http://localhost:3000/api/constructor';
+    this.baseUrl = 'http://mypanel.sytes.net:3000/api/constructor';
 
   }
 

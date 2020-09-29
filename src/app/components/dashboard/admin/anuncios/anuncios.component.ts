@@ -169,7 +169,7 @@ export class AnunciosComponent implements OnInit {
     //this.anuncioService.addImages(file);
     /* let header: HttpHeaders = new HttpHeaders();
     header.append('Content-Type','multipart/form-data');
-    let req = new HttpRequest("POST","http://localhost:3000/api/upload",file, { headers: header });
+    let req = new HttpRequest("POST","http://mypanel.sytes.net:3000/api/upload",file, { headers: header });
     this.http.request(req).toPromise()
       .then((result) => {
         console.log(result);

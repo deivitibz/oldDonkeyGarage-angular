@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.validToken = false;
     this.error = false;
 
-    this.baseUrl = 'http://localhost:3000/api/usuarios';
+    this.baseUrl = 'http://mypanel.sytes.net:3000/api/usuarios';
     this.form = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),

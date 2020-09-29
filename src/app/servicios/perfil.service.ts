@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class PerfilService {
   baseUrl: string;
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://localhost:3000/api/perfil';
+    this.baseUrl = 'http://mypanel.sytes.net:3000/api/perfil';
   }
 
   getPerfil(id) {

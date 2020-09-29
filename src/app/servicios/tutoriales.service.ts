@@ -10,7 +10,7 @@ export class TutorialesService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient, private Auth: AuthService) {
-    this.baseUrl = 'http://localhost:3000/api/tutoriales';
+    this.baseUrl = 'http://mypanel.sytes.net:3000/api/tutoriales';
   }
 
   getTutorial(id) {

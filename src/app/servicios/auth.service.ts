@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   usuarioActivo: Usuario;
-  baseUrl = 'http://localhost:3000/api/check';
+  baseUrl = 'http://mypanel.sytes.net:3000/api/check';
   constructor(private http: HttpClient,private router: Router) {}
 
   decodeToken() {
@@ -20,7 +20,7 @@ export class AuthService {
     } else {
       return false;
     }
-    
+
   }
 
   checkToken(response) {

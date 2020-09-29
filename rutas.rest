@@ -1,4 +1,4 @@
-GET http://localhost:3000/api/usuarios
+GET http://mypanel.sytes.net:3000/api/usuarios
 user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImNyZWF0ZWRBdCI6MTU5MjI0MzAwOSwiZXhwaXJlZEF0IjoxNTkyMjQzOTA5LCJpYXQiOjE1OTIyNDMwMDl9.SSbJp8HxMXxtAjIPzWA78w1ydT5oVXqeosUR8B_N0QI
 
 ###
@@ -64,7 +64,7 @@ PUT http://streaming.zapto.org:3000/api/noticia/1
 
 ### mostrar todas noticias
 
-POST http://localhost:3000/api/noticias
+POST http://mypanel.sytes.net:3000/api/noticias
 Content-Type: application/json
 user-token: asdfasd
 
@@ -115,10 +115,10 @@ user-token: añlsdkfj
 
 
 ###
-GET http://localhost:3000/api/anuncios/48
+GET http://mypanel.sytes.net:3000/api/anuncios/48
 
 ###
-PUT http://localhost:3000/api/usuarios/22
+PUT http://mypanel.sytes.net:3000/api/usuarios/22
 Content-Type: application/json
 
 {

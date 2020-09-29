@@ -10,7 +10,7 @@ export class NoticiaService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient, private auth: AuthService) {
-    this.baseUrl = 'http://localhost:3000/api/noticias';
+    this.baseUrl = 'http://mypanel.sytes.net:3000/api/noticias';
   }
 
   getNoticia(id): Promise<Noticia> {

@@ -9,7 +9,7 @@ export class MotocicletasService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://localhost:3000/api/motos';
+    this.baseUrl = 'http://mypanel.sytes.net:3000/api/motos';
   }
 
   getMoto(id) {
