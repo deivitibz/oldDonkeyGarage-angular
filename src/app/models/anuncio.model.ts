@@ -1,7 +1,6 @@
 export class Anuncio {
   id: number;
   titulo: string;
-  imagenes: string[];
   descripcion: string;
   km: string;
   year: string;
@@ -14,11 +13,11 @@ export class Anuncio {
   marca: string;
   modelo: string;
   usuarios_id: string;
+  imagen_id: string;
 
   constructor(
     id: number,
     titulo: string,
-    imagenes: string[],
     descripcion: string,
     km: string,
     year: string,
@@ -30,11 +29,12 @@ export class Anuncio {
     precio: number,
     marca: string,
     modelo: string,
-    usuarios_id: string
+    usuarios_id: string,
+    imagen_id: string
   ) {
     this.id = id;
     this.titulo = titulo;
-    this.imagenes = imagenes;
+    this.imagen_id = imagen_id
     this.descripcion = descripcion;
     this.km = km;
     this.year = year;

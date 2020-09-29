@@ -23,7 +23,7 @@
           <p>Titulo: {{anuncio.titulo}}</p>
         </div>
         <div class="icons">
-          <i class="fas fa-edit fa-lg fa-fw" style="color: blue;"></i>
+          <i (click)="editAnuncio(anuncio)" class="fas fa-edit fa-lg fa-fw" style="color: blue;" ></i>
           <i class="fas fa-trash fa-lg fa-fw" style="color: red;"></i>
         </div>
       </li>
@@ -85,6 +85,10 @@
 
     </mat-expansion-panel>
   </div>
+  <!-- MODAL FORM -->
+
+
+
   <!-- formulario -->
   <div class="row">
     <mat-expansion-panel [expanded]="panelOpenState">
@@ -200,8 +204,7 @@
 
 
           <div class="row mx-0">
-            <input class="form-control-file" (change)="onFileChange($event)" type="file" value="Enviar"
-              formControlName="imagen_id" multiple="multiple">
+            <input class="form-control-file" (change)="onFileChange($event)" type="file" value="Enviar">
             <button *ngIf="!anuncioEdit.id" class="btn btn-primary btn-block " type="submit">Enviar</button>
             <button *ngIf="anuncioEdit.id" class="btn btn-primary btn-block " type="submit">Editar</button>
           </div>

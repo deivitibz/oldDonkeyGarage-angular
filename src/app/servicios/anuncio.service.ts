@@ -10,62 +10,52 @@ export class anuncioService {
   baseUrl: string;
   files: FormData;
 
-  constructor(private http: HttpClient,private auth: AuthService) {
+  constructor(private http: HttpClient, private auth: AuthService) {
     this.baseUrl = 'http://mypanel.sytes.net:3000/api/anuncios';
   }
 
-  addAnuncio(anuncio): Promise<Anuncio> {
-    return this.http.post<Anuncio>(this.baseUrl, anuncio,this.auth.generateHeaders()).toPromise();
-  }
-
+  /* PETICIONES GET  */
   getAnuncios(): Promise<Anuncio[]> {
     return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
   }
 
-  getAllAnuncios(): Promise<Anuncio[]> {
-    return this.http.get<Anuncio[]>(this.baseUrl).toPromise();
-  }
-
-  getAnunciosHome():Promise<Anuncio[]>{
-    return this.http.get<Anuncio[]>(this.baseUrl + '/allAnuncios').toPromise()
-  }
-
-  editAnuncio(id, newAnuncio):Promise<Anuncio> {
-    return this.http.put<Anuncio>(this.baseUrl + '/' + id, newAnuncio,this.auth.generateHeaders()).toPromise();
+  getAnuncio(id): Promise<Anuncio> {
+    return this.http.get<Anuncio>(this.baseUrl + '/' + id, this.auth.generateHeaders()).toPromise();
   }
 
   getAnunciosById(id): Promise<Anuncio[]> {
-    return this.http.get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id,this.auth.generateHeaders()).toPromise();
+    return this.http.get<Anuncio[]>(this.baseUrl + '/getbyuser/' + id, this.auth.generateHeaders()).toPromise();
   }
 
-  editAnuncioById(id, newAnuncio: Anuncio): Promise<Anuncio> {
-    return this.http.put<Anuncio>(this.baseUrl + '/' + id, newAnuncio).toPromise();
-  }
-
-  getAnuncio(id): Promise<Anuncio> {
-    return this.http.get<Anuncio>(this.baseUrl + '/' + id).toPromise();
-  }
-
-  getAnuncioByCategory(category): Promise<Anuncio[]>{
+  getAnuncioByCategory(category): Promise<Anuncio[]> {
     return this.http.get<Anuncio[]>(this.baseUrl + '/getbycategoria/' + category).toPromise()
   }
 
-  deleteAnuncio(id): Promise<Anuncio> {
-    return this.http.delete<Anuncio>(this.baseUrl + '/' + id,this.auth.generateHeaders()).toPromise();
+
+  /* PETICIONES POST */
+
+  addAnuncio(anuncio: Anuncio): Promise<Anuncio> {
+    return this.http.post<Anuncio>(this.baseUrl, anuncio, this.auth.generateHeaders()).toPromise();
   }
 
-  async addImages(file) {
-    let header: HttpHeaders = new HttpHeaders();
-    header.append('Content-Type', 'multipart/form-data');
-    let req = new HttpRequest(
-      'POST',
-      'http://mypanel.sytes.net:3000/api/upload',
-      file,
-      { headers: header }
-    );
-    this.http.request(req).toPromise()
-      .then((result) => {
-        console.log(result);
-      });
+  addImages(fd: FormData) {
+    return this.http.post(this.baseUrl + '/upload', fd, this.auth.generateHeaders()).toPromise();
   }
+
+  /* PETICIONES PUT */
+
+  editAnuncio(id, newAnuncio): Promise<Anuncio> {
+    return this.http.put<Anuncio>(this.baseUrl + '/' + id, newAnuncio, this.auth.generateHeaders()).toPromise();
+  }
+
+  editAnuncioById(id, newAnuncio: Anuncio): Promise<Anuncio> {
+    return this.http.put<Anuncio>(this.baseUrl + '/' + id, newAnuncio, this.auth.generateHeaders()).toPromise();
+  }
+
+  /* PETICIONES DELETE */
+
+  deleteAnuncio(id): Promise<Anuncio> {
+    return this.http.delete<Anuncio>(this.baseUrl + '/' + id, this.auth.generateHeaders()).toPromise();
+  }
+
 }
