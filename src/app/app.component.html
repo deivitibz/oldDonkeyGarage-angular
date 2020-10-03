@@ -1,7 +1,20 @@
-<app-navegacion *ngIf="!router.url.includes('/admin') && !router.url.includes('/dashboard')"></app-navegacion>
-<router-outlet></router-outlet>
+
+
 <!-- <footer *ngIf="!router.url.includes('/admin') && !router.url.includes('/dashboard')" class="container-fluid bg-donkey">
   <div class="row">
     <p class=" footer-donkey py-4">Copyright 2020 Old Donkey Garage &copy;</p>
   </div>
 </footer> -->
+
+<div class="wrapper">
+
+  <div class="header">
+    <app-navegacion *ngIf="!router.url.includes('/admin') && !router.url.includes('/dashboard')"></app-navegacion>
+  </div>
+  <div class="main bg-donkey-secondary">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="footer">
+    <app-footer></app-footer>
+  </div>
+</div>

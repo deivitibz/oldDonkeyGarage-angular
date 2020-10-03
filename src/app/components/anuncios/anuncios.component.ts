@@ -83,7 +83,7 @@ export class anunciosComponent implements OnInit {
 
   async getAnuncios(){
     const response = await this.anuncioService.getAnuncios();
-    console.log(response);
+    //console.log(response);
 
     this.allAnuncios = response;
   }

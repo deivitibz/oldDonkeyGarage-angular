@@ -71,6 +71,9 @@ import { ConstructorDashComponent } from './components/dashboard/constructor/con
 import { UsuarioDashPerfilComponent } from './components/dashboard/usuario/perfil/perfil.component';
 import { ConstructorDashPerfilComponent } from './components/dashboard/constructor/perfil/perfil.component';
 import { DetalleComponent } from './components/anuncios/detalle/detalle.component';
+import { FooterComponent } from './components/home/footer/footer.component';
+import { ParallaxComponent } from './components/home/parallax/parallax.component';
+import { AnuncioComponent } from './components/anuncios/anuncio/anuncio.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +107,9 @@ import { DetalleComponent } from './components/anuncios/detalle/detalle.componen
     UsuarioDashPerfilComponent,
     ConstructorDashPerfilComponent,
     DetalleComponent,
+    FooterComponent,
+    ParallaxComponent,
+    AnuncioComponent,
   ],
   imports: [
     BrowserModule,

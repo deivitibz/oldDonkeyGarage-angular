@@ -12,10 +12,11 @@
 
   </div>
 
-  <div class="row">
-    .<div class="card-columns">
+  <div class="row container-80">
+    <div class="card-columns">
 
-      <div class="card" *ngFor="let anuncio of allAnuncios">
+      <app-anuncio [anuncios]="allAnuncios" *ngIf="allAnuncios"></app-anuncio>
+      <!-- <div class="card" *ngFor="let anuncio of allAnuncios">
         <img class="card-img-top" src="http://mypanel.sytes.net:3000/images/{{anuncio['imagen_id']}}" alt="">
         <div class="card-body">
           <h4 class="card-title">{{anuncio.titulo}}</h4>
@@ -27,7 +28,7 @@
         <div class="card-footer">
           <button class="btn btn-info btn-block" (click)="showDetail(anuncio)">VER ANUNCIO</button>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>

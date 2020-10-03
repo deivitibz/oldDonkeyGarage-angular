@@ -1,0 +1,10 @@
+.slick-slide img:hover {
+  filter: grayscale();
+  transition: 0.5s;
+  transform: scale(1.2);
+}
+
+
+.clickable{
+  cursor: pointer;
+}
