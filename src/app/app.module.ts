@@ -74,6 +74,8 @@ import { DetalleComponent } from './components/anuncios/detalle/detalle.componen
 import { FooterComponent } from './components/home/footer/footer.component';
 import { ParallaxComponent } from './components/home/parallax/parallax.component';
 import { AnuncioComponent } from './components/anuncios/anuncio/anuncio.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -110,6 +112,7 @@ import { AnuncioComponent } from './components/anuncios/anuncio/anuncio.componen
     FooterComponent,
     ParallaxComponent,
     AnuncioComponent,
+    ContactoComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,7 +144,10 @@ import { AnuncioComponent } from './components/anuncios/anuncio/anuncio.componen
     DataTablesModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatBadgeModule
+    MatBadgeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAVRXlCViVXiK0QGqb9t22-o9Cs3xu9ULo'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

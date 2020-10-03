@@ -16,5 +16,9 @@ app-footer{
   height: 100vh;
   display: flex;
   flex-direction: column;
-  
+
+}
+
+app-contacto{
+  background-color: var(--color-C--color);
 }
