@@ -76,6 +76,7 @@ import { ParallaxComponent } from './components/home/parallax/parallax.component
 import { AnuncioComponent } from './components/anuncios/anuncio/anuncio.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { AgmCoreModule } from '@agm/core';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -146,7 +147,7 @@ import { AgmCoreModule } from '@agm/core';
     MatExpansionModule,
     MatBadgeModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAVRXlCViVXiK0QGqb9t22-o9Cs3xu9ULo'
+      apiKey: environment.googleApiKey
     })
   ],
   providers: [],
