@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,6 +10,7 @@ import * as $ from 'jquery';
 export class AppComponent {
 
   ruta: string;
+  userForm: FormGroup ;
 
   constructor(public router: Router){
 

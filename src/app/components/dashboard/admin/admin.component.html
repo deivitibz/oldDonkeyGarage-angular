@@ -4,46 +4,136 @@
  -->
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <div class="row">
-      <div class="col">
-
-
-      <ul class="nav flex-column">
-        <li class="bg-donkey list-group-item">
-          <a class="nav-link active text-center" [routerLink]="['usuarios']">
-            <img class="img-fluid m-1" width="30%" src="../../../assets/img/casco.png" alt="">
-            Usuarios
-          </a>
-        </li>
-        <li class="bg-donkey list-group-item">
-          <a class="nav-link text-center" [routerLink]="['anuncios']">
-            <img class="img-fluid m-1 p-1 mr-2" width="30%" src="../../../assets/img/anuncios.png" alt="">
-             Anuncios
-          </a>
-        </li>
-        <li class="bg-donkey list-group-item">
-          <a class="nav-link text-center" [routerLink]="['noticias']">
-            <img class="img-fluid mr-3 m-1" width="26%" src="../../../assets/img/mensaje.png" alt="">
-            Noticias
-          </a>
-        </li>
-        <li class="bg-donkey list-group-item">
-          <a class="nav-link text-center" [routerLink]="['videotutoriales']">
-            <img class="img-fluid m-1 mr-2" width="30%" src="../../../assets/img/moto.png" alt="">
-            Tutoriales
-          </a>
-        </li>
-      </ul>
-      <button class="btn btn-block bg-danger text-white" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>
+    <div class="d-flex flex-column w-100">
+      <div class="logo">
+        <img class="img-fluid mx-auto p-2 m-1 clickable"
+          src="../../../../assets/img/iconografia/logo-b.png" alt=""
+          [routerLink]="['./']">
       </div>
+      <div class="nav">
+
+
+        <ul class="nav flex-column">
+          <li class="bg-donkey list-group-item">
+            <!-- <a class="nav-link active text-center" [routerLink]="['usuarios']" > -->
+            <a class="nav-link active text-center clickable"
+              data-toggle="collapse" data-target="#demo">
+              <img class="img-fluid m-1" width="30%"
+                src="../../../assets/img/casco.png" alt="">
+              Usuarios
+            </a>
+            <div id="demo" class="collapse">
+              <li class="bg-donkey list-group-item">
+                <a class="nav-link active text-center clickable"
+                  [routerLink]="['usuarios']" data-toggle="collapse"
+                  data-target="#demo">Lista de usuarios</a>
+              </li>
+              <li class="bg-donkey list-group-item">
+                <a class="nav-link active text-center clickable">Crear Usuario</a>
+              </li>
+            </div>
+          </li>
+          <li class="bg-donkey list-group-item">
+            <a class="nav-link text-center" [routerLink]="['anuncios']">
+              <img class="img-fluid m-1 p-1 mr-2" width="30%"
+                src="../../../assets/img/anuncios.png" alt="">
+              Anuncios
+            </a>
+          </li>
+          <li class="bg-donkey list-group-item">
+            <a class="nav-link text-center" [routerLink]="['noticias']">
+              <img class="img-fluid mr-3 m-1" width="26%"
+                src="../../../assets/img/mensaje.png" alt="">
+              Noticias
+            </a>
+          </li>
+          <li class="bg-donkey list-group-item">
+            <a class="nav-link text-center" [routerLink]="['videotutoriales']">
+              <img class="img-fluid m-1 mr-2" width="30%"
+                src="../../../assets/img/moto.png" alt="">
+              Tutoriales
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!--     <button class="btn btn-block bg-danger text-white" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="logout()">Log Out</button>
+ -->
     </div>
   </mat-drawer>
 
   <div class="example-sidenav-content">
-    <router-outlet></router-outlet>
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
+    <div class="wrapper">
+      <div class="menu-nav">
+        <div class="menu-wrapper">
+          <div class="menu-button">
+            <mat-icon class="clickable" (click)="drawer.toggle()">notes</mat-icon>
+            <!-- <button type="button" mat-button (click)="drawer.toggle()">
+              Toggle sidenav
+            </button>-->
+          </div>
+          <div class="menu-user">
+            <mat-icon>account_circle</mat-icon>
+            <p>Mi perfil</p>
+            <button mat-icon-button [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Editar mi perfil</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>grain</mat-icon>
+                <span>Ver mis anuncios</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>add</mat-icon>
+                <span>Crear anuncio</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>message</mat-icon>
+                <span>Mensajes</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>login</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xl-3">
+            <div class="card">
+
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xl-3">
+            <div class="card">
+
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xl-3">
+            <div class="card">
+
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xl-3">
+            <div class="card">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <router-outlet></router-outlet>
+
+    </div>
   </div>
 
 </mat-drawer-container>

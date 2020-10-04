@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -20,6 +20,9 @@ export interface Usuario {
   styleUrls: ['./usuarios.component.css'],
 })
 export class UsuariosComponent implements OnInit {
+
+  @Output() userForm: EventEmitter<FormGroup>;
+
   panelOpenState = false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -155,5 +158,9 @@ export class UsuariosComponent implements OnInit {
     b = b.toLowerCase();
 
     return a < b ? -1 : a > b ? 1 : 0;
+  }
+
+  sendForm(){
+    this.userForm.emit(this.form)
   }
 }

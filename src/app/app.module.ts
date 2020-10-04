@@ -24,6 +24,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
 // modulo slick carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
@@ -77,6 +80,7 @@ import { AnuncioComponent } from './components/anuncios/anuncio/anuncio.componen
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
+import { ModalComponent } from './components/dashboard/admin/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +118,7 @@ import { environment } from 'src/environments/environment';
     ParallaxComponent,
     AnuncioComponent,
     ContactoComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -148,7 +153,9 @@ import { environment } from 'src/environments/environment';
     MatBadgeModule,
     AgmCoreModule.forRoot({
       apiKey: environment.googleApiKey
-    })
+    }),
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
