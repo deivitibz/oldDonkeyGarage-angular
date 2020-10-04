@@ -51,4 +51,8 @@ export class AuthService {
       }),
     };
   }
+
+  getToken(){
+    return this.http.get('http://mypanel.sytes.net:3000/api/usuarios/getToken').toPromise()
+  }
 }

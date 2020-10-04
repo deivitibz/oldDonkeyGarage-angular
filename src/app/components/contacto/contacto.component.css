@@ -6,6 +6,14 @@ article{
   margin: 1.5em 0;
 }
 
+article i,article span{
+  margin: 0.5rem 0;
+}
+
+article span a{
+  color: white;
+}
+
 form button{
   color: #303030;
   background-color: yellow;
@@ -19,7 +27,7 @@ form button{
   width: 100%;
   background-color: var(--color-D--color);
 
-  padding: 3em 0;
+  /* padding: 3em 0; */
   /* height: 100vh; */
 }
 
@@ -32,9 +40,6 @@ form button{
 
 }
 
-article span a{
-  color: white;
-}
 
 section.map{
   margin: 0 auto;
@@ -46,4 +51,8 @@ section.map{
 agm-map{
   width: 100%;
   height: 500px;
+}
+
+h3,h5{
+  color: yellow;
 }

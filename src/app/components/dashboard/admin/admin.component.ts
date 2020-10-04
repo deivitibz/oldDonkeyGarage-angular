@@ -8,11 +8,17 @@ import { LoginGuard } from 'src/app/login.guard';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
+  token;
+  showFiller = false;
   constructor(private authService: AuthService, private guard: LoginGuard) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     //this.authService.decodeToken();
     //this.guard.canActivate();
+    this.token = await this.authService.getToken()
+    localStorage.setItem('user-token', this.token);
+
+
   }
 
   logout() {

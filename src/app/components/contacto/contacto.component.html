@@ -7,14 +7,14 @@
           <p style="text-align:end">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas aperiam et quasi repellendus velit provident officiis dolor natus repudiandae perferendis? Facilis voluptate dolorum sed repellendus mollitia maxime eligendi nisi optio!</p>
 
           <article>
-            <i class="fas fa-envelope fa-3x fa-fw"></i>
             <h5>Mail US</h5>
+            <i class="fas fa-envelope fa-3x fa-fw"></i>
             <span><a href="emaito:info@olddonkeygarage.com">info@olddonkeygarage.com</a></span>
           </article>
 
           <article>
-            <i class="fas fa-phone fa-3x fa-fw "></i>
             <h5>Call Us</h5>
+            <i class="fas fa-phone fa-3x fa-fw "></i>
             <span>+34 666 666 666</span>
           </article>
 
@@ -40,7 +40,7 @@
 
   </section>
   <section class="map">
-    <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false">
       <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
     </agm-map>
   </section>
