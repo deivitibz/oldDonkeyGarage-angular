@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.form);
+    console.log(this.usuarioEdit);
 
   }
 

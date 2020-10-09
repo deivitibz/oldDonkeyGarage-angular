@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Pslect from 'pselect.js';
 
@@ -15,6 +15,9 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
   styleUrls: ['./anuncios.component.css'],
 })
 export class anunciosComponent implements OnInit {
+
+  @Output() anunciosForm: EventEmitter<FormGroup> = new EventEmitter;
+
   files: string[];
   // filtro poblaciones / provincias
   provincias: string[];
@@ -79,20 +82,15 @@ export class anunciosComponent implements OnInit {
 
   async ngOnInit() {
     this.getAnuncios();
+
+    this.anunciosForm.emit(this.form)
   }
 
   async getAnuncios(){
     const response = await this.anuncioService.getAnuncios();
-    //console.log(response);
-
     this.allAnuncios = response;
   }
 
-
-  test(){
-    console.log('ok');
-
-  }
 
   filtrarMarcas(form) {
     this.filtroModelos = [];

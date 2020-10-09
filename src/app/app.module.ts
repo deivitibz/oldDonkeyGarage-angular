@@ -121,7 +121,7 @@ import { ModalComponent } from './components/dashboard/admin/modal/modal.compone
     ModalComponent,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
@@ -155,7 +155,8 @@ import { ModalComponent } from './components/dashboard/admin/modal/modal.compone
       apiKey: environment.googleApiKey
     }),
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],
