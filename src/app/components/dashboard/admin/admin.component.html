@@ -106,24 +106,35 @@
 
       <div class="content" *ngIf="!router.url.includes('/admin/')">
         <div class="row">
-          <div class="col-md-6 col-sm-12 col-xl-3">
-            <div class="card">
-
+          <div class="col-sm-6 ">
+            <div class="card" >
+              <i class="fas fa-user-alt fa-3x   "></i>
+              <h2>Usuarios</h2>
+            </div>
+            <div class="card" *ngIf="usuarios.length > 50">
+              <ul class="list-group w-100">
+                <li class="list-group-item" *ngFor="let usuario of usuarios" >
+                  <input type="checkbox" name="" id="">
+                  {{ usuario.username }}</li>
+              </ul>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12 col-xl-3">
-            <div class="card">
-
+          <div class="col-sm-6 ">
+            <div class="card" >
+              <i class="fas fa-book-open fa-3x   "></i>
+              <h2>Anuncios</h2>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12 col-xl-3">
-            <div class="card">
-
+          <div class="col-sm-6 ">
+            <div class="card" >
+              <i class="fas fa-address-book fa-3x  "></i>
+              <h2>Noticias</h2>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12 col-xl-3">
-            <div class="card">
-
+          <div class="col-sm-6 ">
+            <div class="card" >
+              <i class="fas fa-tape fa-3x   "></i>
+              <h2>Tutoriales</h2>
             </div>
           </div>
 
@@ -135,5 +146,23 @@
 
     </div>
   </div>
+
+    <nav class="navbar">
+      <ul class="navbar-nav navbar-expand-sm">
+        <li class="">
+          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color: #EF946C;" class=""  ><i class="fas fa-user fa-3x  "></i>Usuarios</a>
+        </li>
+        <li class="">
+          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #C4A77D;" class=""  ><i class="fas fa-user fa-3x  "></i>Anuncios</a>
+        </li>
+        <li class="">
+          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #70877F;" class=""  ><i class="fas fa-user fa-3x  "></i>Noticias</a>
+        </li>
+        <li class="">
+          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #454372;" class=""  ><i class="fas fa-user fa-3x  "></i>Tutoriales</a>
+        </li>
+      </ul>
+    </nav>
+
 
 </mat-drawer-container>

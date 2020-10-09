@@ -3,41 +3,11 @@
 }
 .example-container {
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
 
-.example-sidenav {
-  padding: 20px;
-  background-color: var(--color-A--color);
-  width: 20%;
-}
-
-.example-sidenav ul li{
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-.example-sidenav ul.nav{
-
-  margin: 0 auto;
-
-}
-
-.example-sidenav ul li a{
-  color: white;
-}
-
-.example-sidenav ul li a img{
-  width: 30px;
-}
 
 .row .col button{
     position: absolute;
@@ -92,13 +62,6 @@
 
 }
 
-.menu-button{
-  width: 5%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  align-content: center;
-}
 
 .mat-icon {
   height: 20px;
@@ -144,9 +107,95 @@
 }
 
 .card{
-  height: 100px;
+  height: auto;
   padding: 30px;
   border-radius: 5px;
   background-color: #fafafa;
   margin: 10px;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.example-sidenav {
+  display: none;
+}
+
+nav{
+  display: block;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.navbar-expand-sm {
+  justify-content: space-around;
+}
+
+.menu-button{
+  display: none;
+}
+
+nav ul li a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav ul li a i{
+  padding-bottom: 10px;
+}
+
+.navbar-nav{
+  flex-direction: row;
+}
+
+@media (min-width: 768px){
+  .example-sidenav {
+    display: block;
+  }
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .example-sidenav {
+    padding: 20px;
+    background-color: var(--color-A--color);
+    width: 250px;
+  }
+
+  .example-sidenav ul li{
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+  .example-sidenav ul.nav{
+
+    margin: 0 auto;
+
+  }
+
+  .example-sidenav ul li a{
+    color: white;
+  }
+
+  .example-sidenav ul li a img{
+    width: 30px;
+  }
+  nav.navbar{
+    display: none;
+  }
+  .menu-button{
+    width: 5%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+
+
 }
