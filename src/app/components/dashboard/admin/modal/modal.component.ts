@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Usuario } from './../../../../models/usuario_perfil.model';
+import { Anuncio } from './../../../../models/anuncio.model';
 
 @Component({
   selector: 'app-modal',
@@ -11,7 +12,9 @@ export class ModalComponent implements OnInit {
 
   @Input() usuarioEdit: Usuario;
 
-  form: FormGroup;
+  @Input() form: FormGroup;
+
+  @Input() anuncio: Anuncio;
 
   constructor() {
     this.initializeForm()
@@ -20,10 +23,13 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.usuarioEdit);
 
+
+
   }
 
+
   initializeForm(){
-    //formulario
+    // formulario
     this.form = new FormGroup({
       username: new FormControl(
         ),

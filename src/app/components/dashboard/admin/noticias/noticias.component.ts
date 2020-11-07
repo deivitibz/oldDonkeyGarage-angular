@@ -29,7 +29,7 @@ export class NoticiasComponent implements OnInit {
   allNoticias: Noticia[];
   oneNoticia: Noticia;
 
-  noticiaEdit: any;
+  noticiaEdit: Noticia;
   estado: string;
 
   //formulario
@@ -61,14 +61,14 @@ export class NoticiasComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
     this.estado = 'Añadir';
-    this.noticiaEdit = [];
+    this.noticiaEdit = null;
 
     // formulario
-    this.initializeForm();
   }
 
   async ngOnInit() {
     this.reloadData();
+    this.initializeForm();
   }
 
   initializeForm(){
@@ -142,7 +142,7 @@ export class NoticiasComponent implements OnInit {
       const response = await this.noticiasService.editNoticia(this.noticiaEdit.id,newNoticia);
       this.reloadData();
       this.form.reset();
-      this.noticiaEdit = [];
+      this.noticiaEdit = null;
       this.togglePanel();
       this.openSnackBar(response['success']);
     } else {

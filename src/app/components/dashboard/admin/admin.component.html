@@ -24,31 +24,31 @@
             </a>
             <div id="demo" class="collapse">
               <li class="bg-donkey list-group-item">
-                <a class="nav-link active text-center clickable"
+                <a (click)="drawer.toggle()" class="nav-link active text-center clickable"
                   [routerLink]="['usuarios']" data-toggle="collapse"
                   data-target="#demo">Lista de usuarios</a>
               </li>
               <li class="bg-donkey list-group-item">
-                <a class="nav-link active text-center clickable">Crear Usuario</a>
+                <a (click)="drawer.toggle()" class="nav-link active text-center clickable">Crear Usuario</a>
               </li>
             </div>
           </li>
           <li class="bg-donkey list-group-item">
-            <a class="nav-link text-center" [routerLink]="['anuncios']">
+            <a (click)="drawer.toggle()" class="nav-link text-center" [routerLink]="['anuncios']">
               <img class="img-fluid m-1 p-1 mr-2" width="30%"
                 src="../../../assets/img/anuncios.png" alt="">
               Anuncios
             </a>
           </li>
           <li class="bg-donkey list-group-item">
-            <a class="nav-link text-center" [routerLink]="['noticias']">
+            <a (click)="drawer.toggle()" class="nav-link text-center" [routerLink]="['noticias']">
               <img class="img-fluid mr-3 m-1" width="26%"
                 src="../../../assets/img/mensaje.png" alt="">
               Noticias
             </a>
           </li>
           <li class="bg-donkey list-group-item">
-            <a class="nav-link text-center" [routerLink]="['videotutoriales']">
+            <a (click)="drawer.toggle()" class="nav-link text-center" [routerLink]="['videotutoriales']">
               <img class="img-fluid m-1 mr-2" width="30%"
                 src="../../../assets/img/moto.png" alt="">
               Tutoriales
@@ -104,11 +104,12 @@
         </div>
       </div>
 
-      <div class="content" *ngIf="!router.url.includes('/admin/')">
+      <!-- <div class="content" *ngIf="!router.url.includes('/admin/')"> -->
+      <div class="content" >
         <div class="row">
-          <div class="col-sm-6 ">
+          <div class="col-sm-6 col-xl-3 ">
             <div class="card" >
-              <i class="fas fa-user-alt fa-3x   "></i>
+              <em class="fas fa-user-alt fa-3x   "></em>
               <h2>Usuarios</h2>
             </div>
             <div class="card" *ngIf="usuarios.length > 50">
@@ -119,28 +120,28 @@
               </ul>
             </div>
           </div>
-          <div class="col-sm-6 ">
+          <div class="col-sm-6 col-xl-3 ">
             <div class="card" >
-              <i class="fas fa-book-open fa-3x   "></i>
+              <em class="fas fa-book-open fa-3x   "></em>
               <h2>Anuncios</h2>
             </div>
           </div>
-          <div class="col-sm-6 ">
+          <div class="col-sm-6 col-xl-3 ">
             <div class="card" >
-              <i class="fas fa-address-book fa-3x  "></i>
+              <em class="fas fa-address-book fa-3x  "></em>
               <h2>Noticias</h2>
             </div>
           </div>
-          <div class="col-sm-6 ">
+          <div class="col-sm-6 col-xl-3 ">
             <div class="card" >
-              <i class="fas fa-tape fa-3x   "></i>
+              <em class="fas fa-tape fa-3x   "></em>
               <h2>Tutoriales</h2>
             </div>
           </div>
 
         </div>
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
       </div>
-      <router-outlet></router-outlet>
 
 
 
@@ -150,19 +151,21 @@
     <nav class="navbar">
       <ul class="navbar-nav navbar-expand-sm">
         <li class="">
-          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color: #EF946C;" class=""  ><i class="fas fa-user fa-3x  "></i>Usuarios</a>
+          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color: #EF946C;" class=""  ><em class="fas fa-user fa-3x  "></em>Usuarios</a>
         </li>
         <li class="">
-          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #C4A77D;" class=""  ><i class="fas fa-user fa-3x  "></i>Anuncios</a>
+          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #C4A77D;" class=""  ><em class="fas fa-user fa-3x  "></em>Anuncios</a>
         </li>
         <li class="">
-          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #70877F;" class=""  ><i class="fas fa-user fa-3x  "></i>Noticias</a>
+          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #70877F;" class=""  ><em class="fas fa-user fa-3x  "></em>Noticias</a>
         </li>
         <li class="">
-          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #454372;" class=""  ><i class="fas fa-user fa-3x  "></i>Tutoriales</a>
+          <a [routerLink]="['/']" routerLinkActive="router-link-active"  style="color:  #454372;" class=""  ><em class="fas fa-user fa-3x  "></em>Tutoriales</a>
         </li>
       </ul>
     </nav>
 
 
 </mat-drawer-container>
+
+<app-modal></app-modal>
