@@ -24,6 +24,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
 // modulo slick carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
@@ -71,6 +74,13 @@ import { ConstructorDashComponent } from './components/dashboard/constructor/con
 import { UsuarioDashPerfilComponent } from './components/dashboard/usuario/perfil/perfil.component';
 import { ConstructorDashPerfilComponent } from './components/dashboard/constructor/perfil/perfil.component';
 import { DetalleComponent } from './components/anuncios/detalle/detalle.component';
+import { FooterComponent } from './components/home/footer/footer.component';
+import { ParallaxComponent } from './components/home/parallax/parallax.component';
+import { AnuncioComponent } from './components/anuncios/anuncio/anuncio.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
+import { AgmCoreModule } from '@agm/core';
+import { environment } from 'src/environments/environment';
+import { ModalComponent } from './components/dashboard/admin/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -104,9 +114,14 @@ import { DetalleComponent } from './components/anuncios/detalle/detalle.componen
     UsuarioDashPerfilComponent,
     ConstructorDashPerfilComponent,
     DetalleComponent,
+    FooterComponent,
+    ParallaxComponent,
+    AnuncioComponent,
+    ContactoComponent,
+    ModalComponent,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
@@ -135,7 +150,13 @@ import { DetalleComponent } from './components/anuncios/detalle/detalle.componen
     DataTablesModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatBadgeModule
+    MatBadgeModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleApiKey
+    }),
+    MatMenuModule,
+    MatDialogModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -20,6 +20,10 @@ export interface Usuario {
   styleUrls: ['./usuarios.component.css'],
 })
 export class UsuariosComponent implements OnInit {
+
+  @Output() userForm: EventEmitter<FormGroup>;
+  @Output() userEdit: EventEmitter<Usuario>;
+
   panelOpenState = false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -33,8 +37,8 @@ export class UsuariosComponent implements OnInit {
   displayedColumns: string[] = ['id', 'username', 'email', 'rol', 'actions'];
   dataSource: MatTableDataSource<Usuario>;
 
-  usuarioEdit: any;
-  allUsers: Usuario[];
+  usuarioEdit: Usuario;
+  allUsers: Usuario[] = [];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -44,17 +48,18 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private authService: AuthService,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
   ) {
     this.allUsers = [];
-    this.usuarioEdit = [];
-
-    //formulario
-    this.initializeForm()
+    this.usuarioEdit = null;
+    // formulario
+    this.initializeForm();
   }
 
   async ngOnInit() {
     this.reloadData();
+    this.initializeForm();
+
   }
 
   materialDataTable() {
@@ -64,9 +69,10 @@ export class UsuariosComponent implements OnInit {
   }
 
   async reloadData() {
-    let response = await this.usuarioService.getUsers();
+    const response = await this.usuarioService.getUsers();
     this.allUsers = response;
-    this.authService.checkToken(response);
+    // this.authService.checkToken(response);
+    this.authService.getToken()
     this.materialDataTable();
   }
 
@@ -77,34 +83,34 @@ export class UsuariosComponent implements OnInit {
   }
 
   async editUser(element) {
-    this.togglePanel();
+    // this.togglePanel();
     this.usuarioEdit = await this.usuarioService.getUserById(element.id);
-    this.initializeForm()
-    //console.log(this.usuarioEdit);
+    this.initializeForm();
+    this.sendForm(element);
 
   }
 
-  initializeForm(){
-    //formulario
+  initializeForm() {
+    // formulario
     this.form = new FormGroup({
       username: new FormControl(
-        this.usuarioEdit['username']),
+        !this.usuarioEdit.username === undefined ? this.usuarioEdit.username : ''),
       email: new FormControl(
-        this.usuarioEdit['email']),
-      password: new FormControl(this.usuarioEdit['password']),
+        !this.usuarioEdit.email === undefined ? this.usuarioEdit.email : ''),
+      password: new FormControl(''),
 
       // repeatPassword: new FormControl(''),
-      rol: new FormControl(this.usuarioEdit['rol']),
+      rol: new FormControl(!this.usuarioEdit.rol === undefined ? this.usuarioEdit.rol : ''),
     });
   }
 
   async onSubmit() {
     const newUser = this.form.value;
     if (this.usuarioEdit.id) {
-      const response = await this.usuarioService.editUserById(this.usuarioEdit.id,newUser);
+      const response = await this.usuarioService.editUserById(this.usuarioEdit.id, newUser);
       this.reloadData()
       this.form.reset();
-      this.usuarioEdit = [];
+      this.usuarioEdit = null;
       this.togglePanel();
       this.openSnackBar(response['success'])
     } else {
@@ -116,7 +122,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   openSnackBar(message) {
-    this._snackBar.open(message, 'Cerrar', {
+    this.snackBar.open(message, 'Cerrar', {
       duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
@@ -155,5 +161,10 @@ export class UsuariosComponent implements OnInit {
     b = b.toLowerCase();
 
     return a < b ? -1 : a > b ? 1 : 0;
+  }
+
+  sendForm(element) {
+    this.userEdit.emit(element)
+    this.userForm.emit(this.form);
   }
 }

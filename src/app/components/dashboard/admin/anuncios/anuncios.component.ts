@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import Pslect from 'pselect.js';
@@ -48,6 +48,8 @@ export class AnunciosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+  @Output() anuncio: EventEmitter<Anuncio>;
+
   constructor(
     private anuncioService: anuncioService,
     private authService: AuthService,
@@ -75,6 +77,7 @@ export class AnunciosComponent implements OnInit {
     });
     /* campos formulario */
     this.initializeForm();
+    this.anuncio = new EventEmitter();
   }
 
   async ngOnInit() {
@@ -111,14 +114,9 @@ export class AnunciosComponent implements OnInit {
 
   async reloadData() {
     try {
-      const response = await this.anuncioService.getAnuncios();
-      this.allAnuncios = response;
-      console.log(response);
-
-      //this.allAnuncios = response
-      //this.authService.checkToken(response);
+      this.allAnuncios = await this.anuncioService.getAnuncios();
       this.materialDataTable();
-      return response
+      // return response
     } catch (err) {
       console.log(err);
 
@@ -152,11 +150,12 @@ export class AnunciosComponent implements OnInit {
   }
 
   async editAnuncio(anuncio) {
-    this.togglePanel();
+/*     this.togglePanel();
     this.anuncioEdit = await this.anuncioService.getAnuncio(anuncio.id);
     console.log(this.anuncioEdit);
 
-    this.initializeForm()
+    this.initializeForm() */
+    this.anuncio.emit(anuncio);
   }
 
   async addAnuncio() {

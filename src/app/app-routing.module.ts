@@ -34,6 +34,7 @@ import { UsuarioDashPerfilComponent } from './components/dashboard/usuario/perfi
 import { ConstructorDashComponent } from './components/dashboard/constructor/constructor.component';
 import { ConstructorDashPerfilComponent } from './components/dashboard/constructor/perfil/perfil.component';
 import { DetalleComponent } from './components/anuncios/detalle/detalle.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -84,7 +85,7 @@ const routes: Routes = [
       { path: 'motocicletas', component: MotocicletasComponent }
     ]
   },
-  {path: 'test', component: AdminComponent},
+  {path: 'contacto', component: ContactoComponent},
   { path: '**', redirectTo: '/error404' }
 ];
 

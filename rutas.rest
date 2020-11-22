@@ -140,4 +140,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://mypanel.sytes.net:3000/api/anuncios
+GET http://mypanel.sytes.net:3000/api/usuarios/getToken

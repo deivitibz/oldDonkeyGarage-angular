@@ -15,8 +15,20 @@ h5,p{
 .icons{
   position: absolute;
   right: 5%;
+  display: flex;
 }
 
-.icons i{
+.icons em{
   cursor: pointer;
+  margin: 0 10px;
+}
+
+ul li div img{
+  width: 60px;
+  height: 60px;
+}
+
+.mat-toolbar{
+  background-color: #303030;
+  color: #fafafa;
 }

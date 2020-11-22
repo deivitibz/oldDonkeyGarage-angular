@@ -6,10 +6,19 @@
 
 }
 
-.footer-donkey {
-  color: white;
-  margin: 0 auto;
-  font-family: var(--font-principal--font-family);
-  font-weight: 400;
-  font-size: 15px;
+app-footer{
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+
+.wrapper{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+}
+
+app-contacto{
+  background-color: var(--color-C--color);
 }

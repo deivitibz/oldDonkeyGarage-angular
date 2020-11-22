@@ -22,7 +22,7 @@ export class UsuarioDashPerfilComponent implements OnInit {
   filtroProvincias: any[];
   usuarioActivo: Usuario;
   form: FormGroup;
-  datosUsuario: Usuario[];
+  datosUsuario: Usuario;
   files;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -34,7 +34,7 @@ export class UsuarioDashPerfilComponent implements OnInit {
     private http: HttpClient,
     private _snackBar: MatSnackBar
   ) {
-    this.datosUsuario = [];
+    this.datosUsuario = null;
     this.provincias = new Pslect().constructor.provincesData;
     this.poblaciones = new Pslect().constructor.municipesData;
     this.provinciasOrder = [];

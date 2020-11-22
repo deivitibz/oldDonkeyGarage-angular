@@ -30,7 +30,7 @@ export class AuthService {
       this.router.navigate(['home']);
     } else {
       // console.log(response);
-      if(response['error']){
+      if(response.error){
         localStorage.removeItem('user-token');
         this.router.navigate(['home']);
 
@@ -50,5 +50,9 @@ export class AuthService {
         'user-token': localStorage.getItem('user-token'),
       }),
     };
+  }
+
+  getToken(){
+    return this.http.get('http://mypanel.sytes.net:3000/api/usuarios/getToken').toPromise()
   }
 }

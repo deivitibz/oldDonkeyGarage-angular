@@ -47,13 +47,13 @@ export class LoginComponent implements OnInit {
     console.log(response);
 
     if (response['success']) {
-      this.saveToken(response.token);
+      this.saveToken(response['token']);
       this.cierraPopup();
       this.form.reset();
       if(response.rol === 'Admin'){
-        this.router.navigate(['admin','usuarios']);
+        this.router.navigate(['admin', 'usuarios']);
       } else {
-        this.router.navigate(['dashboard','usuario', 'perfil'])
+        this.router.navigate(['dashboard', 'usuario', 'perfil']);
       }
 
       } else {

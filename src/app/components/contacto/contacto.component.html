@@ -1,0 +1,47 @@
+<div class="wrapper">
+  <section class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+        <div class="d-flex flex-column align-items-end">
+          <h3 style="color: yellow">CONTACT US</h3>
+          <p style="text-align:end">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas aperiam et quasi repellendus velit provident officiis dolor natus repudiandae perferendis? Facilis voluptate dolorum sed repellendus mollitia maxime eligendi nisi optio!</p>
+
+          <article>
+            <h5>Mail US</h5>
+            <i class="fas fa-envelope fa-3x fa-fw"></i>
+            <span><a href="emaito:info@olddonkeygarage.com">info@olddonkeygarage.com</a></span>
+          </article>
+
+          <article>
+            <h5>Call Us</h5>
+            <i class="fas fa-phone fa-3x fa-fw "></i>
+            <span>+34 666 666 666</span>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12 pt-1">
+        <form action="">
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Enter your name">
+          </div>
+
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Enter a valid email address">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="" id="" cols="30" rows="10" placeholder="Enter your message"></textarea>
+          </div>
+          <button type="submit" class="btn bg-donkey border border-dark btn-block">Send</button>
+        </form>
+      </div>
+    </div>
+
+  </section>
+  <section class="map">
+    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
+  </section>
+</div>

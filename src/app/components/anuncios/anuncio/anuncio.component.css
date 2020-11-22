@@ -1,0 +1,18 @@
+hr {
+  border-color: VAR(--color-A--color);
+  margin-bottom: 30px;
+  width: 40%;
+}
+
+
+.btn-info {
+  color: #fff;
+  background-color: VAR(--color-A--color);
+  border-color: VAR(--color-A--color);
+}
+
+button#filtro{
+  position: absolute;
+  right: 20px;
+}
+

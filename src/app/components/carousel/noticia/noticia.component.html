@@ -5,7 +5,7 @@
 
   <div ngxSlickItem *ngFor="let slide of slides" class="slide mx-auto">
 
-    <img class="mx-auto my-3" src="{{ slide.img }}" alt="" style="width: 75%; height: auto;" (click)="onClick(slide.category)">
+    <img class="mx-auto my-3 clickable" src="{{ slide.img }}" alt="" style="width: 75%; height: auto;" (click)="onClick(slide.category)">
     <div class="text-center">
       <h5 class="text-white">{{ slide.name }}</h5>
     </div>
