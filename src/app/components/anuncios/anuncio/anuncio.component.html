@@ -1,15 +1,53 @@
-<div class="card" *ngFor="let anuncio of anuncios">
-  <img class="card-img-top" src="http://mypanel.sytes.net:3000/images/{{anuncio['imagen_id']}}" alt="">
-  <img class="card-img-top" src="http://mypanel.sytes.net:3000/images/noimage.jpg" alt="" *ngIf="!anuncio['imagen_id']">
+<div class="container">
+  <!--   <div class="card-columns">
 
-  <div class="card-body">
-    <h4 class="card-title">{{anuncio.titulo}}</h4>
-    <!-- <p class="card-text">{{anuncio.descripcion}}</p> -->
-    <h5 class="mb-0 bg-precio">
-      {{anuncio.precio}} €
-    </h5>
-  </div>
-  <div class="card-footer">
-    <button class="btn btn-info btn-block" (click)="showDetail(anuncio)">VER ANUNCIO</button>
+    <div class="card" *ngFor="let anuncio of anuncios">
+      <img class="card-img-top"
+        src="http://mypanel.sytes.net:3000/images/{{anuncio['imagen_id']}}"
+        alt="">
+      <img class="card-img-top"
+        src="http://mypanel.sytes.net:3000/images/noimage.jpg" alt=""
+        *ngIf="!anuncio['imagen_id']">
+
+      <div class="card-body">
+        <h4 class="card-title">{{anuncio.titulo}}</h4>
+
+        <h5 class="mb-0 bg-precio">
+          {{anuncio.precio}} €
+        </h5>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-info btn-block" (click)="showDetail(anuncio)">VER
+          ANUNCIO</button>
+      </div>
+    </div>
+
+
+  </div> -->
+  <div class="row">
+    <div class="column" *ngFor="let anuncio of anuncios">
+      <div class="card">
+        <img class="card-img-top"
+          src="http://mypanel.sytes.net:3000/images/{{anuncio['imagen_id']}}"
+          alt="">
+        <img class="card-img-top"
+          src="http://mypanel.sytes.net:3000/images/noimage.jpg" alt=""
+          *ngIf="!anuncio['imagen_id']">
+
+        <div class="card-body">
+          <h4 class="card-title">{{anuncio.titulo}}</h4>
+
+          <h5 class="mb-0 bg-precio">
+            {{anuncio.precio}} €
+          </h5>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-info btn-block" (click)="showDetail(anuncio)">VER
+            ANUNCIO</button>
+        </div>
+      </div>
+
+
+    </div>
   </div>
 </div>

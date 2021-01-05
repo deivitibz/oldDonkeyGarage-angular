@@ -1,13 +1,93 @@
-<app-carousel></app-carousel>
+<!-- <app-carousel></app-carousel> -->
+<div class="wrapper">
 
-<div class="container-fluid bg-donkey-secondary">
-  <app-noticia (category)="category($event)"> </app-noticia>
+
+  <div class="container-fluid p-0 m-0">
+    <app-header></app-header>
+
+  </div>
+
+  <!-- <app-parallax></app-parallax> -->
+
+  <section class="container-fluid">
+
+    <app-categorias></app-categorias>
+
+<!-- <app-parallax></app-parallax> -->
+    <!-- <app-noticia (category)="category($event)"> </app-noticia> -->
+    <!-- <app-anuncios></app-anuncios> -->
+
+  </section>
+  <section id="banner" class="container-fluid">
+    <app-banner [bannerImg]="bannerImg"></app-banner>
+  </section>
+
+  <section id="categorias">
+    <div class="row flex-column text-center w-90">
+      <h2>Todas nuestras motos</h2>
+      <p>Aqui encontraras una seleccion de las motos de los mejores customizadores</p>
+    </div>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <img src="../../../assets/img/paralax-1.jpg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Title</h4>
+              <p class="card-text">Text</p>
+              <button class="btn btn-primary btn-block">Ir al anuncio</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <img src="../../../assets/img/paralax-nosotros.jpg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Title</h4>
+              <p class="card-text">Text</p>
+              <button class="btn btn-primary btn-block">Ir al anuncio</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <section id="noticias">
+    <div class="row flex-column text-center w-90">
+      <h2>Noticias destacadas</h2>
+      <p>No te pierdas nada sobre el mundo de las 2 ruedas customizadas</p>
+    </div>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <img src="../../../assets/img/pexels-photo-3817843.jpeg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Title</h4>
+              <p class="card-text">Text</p>
+              <button class="btn btn-primary btn-block">Ir a la noticia</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <img src="../../../assets/img/taller.jpg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Title</h4>
+              <p class="card-text">Text</p>
+              <button class="btn btn-primary btn-block">Ir a la noticia</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
 </div>
 
-<app-parallax></app-parallax>
-
-<section class="container">
-
-  <app-anuncios></app-anuncios>
-
-</section>

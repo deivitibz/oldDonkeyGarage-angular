@@ -38,6 +38,10 @@ export class AuthService {
     }
   }
 
+  checkLogged(){
+    return localStorage.getItem('user-token') ? true : false;
+  }
+
   isAdmin() {
     if (this.decodeToken) {
       return true;

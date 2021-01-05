@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css'],
 })
-export class blogComponent implements OnInit {
+export class BlogComponent implements OnInit {
   formulario: FormGroup;
   allBlogs: any[];
 

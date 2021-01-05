@@ -1,0 +1,16 @@
+<div class="container">
+<ngx-slick-carousel class="carousel m-0 pb-3" #slickModal="slick-carousel" [config]="slideConfig">
+
+  <div ngxSlickItem *ngFor="let slide of slides" class="slide mx-auto">
+
+    <img class="mx-auto my-3 clickable" src="{{ slide.img }}" alt="">
+    <div class="text-center">
+      <h5>{{ slide.name }}</h5>
+    </div>
+
+  </div>
+
+
+</ngx-slick-carousel>
+
+</div>

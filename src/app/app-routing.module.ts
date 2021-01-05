@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { anunciosComponent } from './components/anuncios/anuncios.component';
-import { blogComponent } from './components/blog/blog.component';
+import { BlogComponent } from './components/blog/blog.component';
 import { TutorialesComponent } from './components/tutoriales/tutoriales.component';
 import { navegacionComponent } from './components/home/navegacion/navegacion.component';
 import { carouselComponent } from './components/carousel/carousel.component';
@@ -40,19 +40,21 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'nosotros', component: NosotrosComponent },
-  { path: 'anuncios', component: anunciosComponent ,
-  children: [
-    {
-      path: 'detalle/:anuncioid', component: DetalleComponent
-    }
-  ] },
+  {
+    path: 'anuncios', component: anunciosComponent,
+    children: [
+      {
+        path: 'detalle/:anuncioid', component: DetalleComponent
+      }
+    ]
+  },
   { path: 'constructores', component: ConstructorComponent },
-  { path: 'blog', component: blogComponent },
+  { path: 'blog', component: BlogComponent },
   { path: 'tutoriales', component: TutorialesComponent },
   { path: 'navegacion', component: navegacionComponent },
   { path: 'carousel', component: carouselComponent },
   { path: 'moto', component: MotoComponent },
-  { path: 'noticias', component: noticiasComponent},
+  { path: 'noticias', component: noticiasComponent },
   {
     /* path: 'dashboard', component: DashboardComponent,canActivate: [LoginGuard], */
     path: 'dashboard', component: DashboardComponent,
@@ -75,7 +77,8 @@ const routes: Routes = [
   { path: 'error404', component: Error404Component },
   { path: 'perfil', component: PerfilComponent },
   /* { path: 'admin', component: AdminComponent, canActivate: [LoginGuard], */
-  { path: 'admin', component: AdminComponent,
+  {
+    path: 'admin', component: AdminComponent,
     children: [
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'noticias', component: NoticiasComponent },
@@ -85,12 +88,12 @@ const routes: Routes = [
       { path: 'motocicletas', component: MotocicletasComponent }
     ]
   },
-  {path: 'contacto', component: ContactoComponent},
+  { path: 'contacto', component: ContactoComponent },
   { path: '**', redirectTo: '/error404' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
-exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

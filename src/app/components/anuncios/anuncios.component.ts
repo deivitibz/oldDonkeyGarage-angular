@@ -86,7 +86,7 @@ export class anunciosComponent implements OnInit {
     this.anunciosForm.emit(this.form)
   }
 
-  async getAnuncios(){
+  async getAnuncios() {
     const response = await this.anuncioService.getAnuncios();
     this.allAnuncios = response;
   }
@@ -121,14 +121,13 @@ export class anunciosComponent implements OnInit {
     });
   }
 
-  async getCategory($event){
+  async getCategory($event) {
     this.allAnuncios = [];
     this.allAnuncios = await this.anuncioService.getAnuncioByCategory($event)
   }
 
-  showDetail(anuncio){
-    console.log(anuncio.id);
+  showDetail(anuncio) {
 
-    this.router.navigate(['anuncios','detalle',anuncio.id])
+    this.router.navigate(['anuncios', 'detalle', anuncio.id])
   }
 }

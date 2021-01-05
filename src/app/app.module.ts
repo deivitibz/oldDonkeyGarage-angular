@@ -20,11 +20,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 // modulo slick carousel
@@ -53,7 +53,7 @@ import { NoticiaComponent } from './components/carousel/noticia/noticia.componen
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/dashboard/login/login.component';
 import { RegisterComponent } from './components/dashboard/register/register.component';
-import { blogComponent } from './components/blog/blog.component';
+import { BlogComponent } from './components/blog/blog.component';
 import { TutorialesComponent } from './components/tutoriales/tutoriales.component';
 import { ChatComponent } from './components/dashboard/chat/chat.component';
 import { Error404Component } from './components/error404/error404.component';
@@ -81,6 +81,9 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
 import { ModalComponent } from './components/dashboard/admin/modal/modal.component';
+import { HeaderComponent } from './components/home/header/header.component';
+import { CategoriasComponent } from './components/home/categorias/categorias.component';
+import { BannerComponent } from './components/home/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +98,7 @@ import { ModalComponent } from './components/dashboard/admin/modal/modal.compone
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    blogComponent,
+    BlogComponent,
     TutorialesComponent,
     ChatComponent,
     Error404Component,
@@ -119,9 +122,12 @@ import { ModalComponent } from './components/dashboard/admin/modal/modal.compone
     AnuncioComponent,
     ContactoComponent,
     ModalComponent,
+    HeaderComponent,
+    CategoriasComponent,
+    BannerComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
@@ -161,4 +167,4 @@ import { ModalComponent } from './components/dashboard/admin/modal/modal.compone
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

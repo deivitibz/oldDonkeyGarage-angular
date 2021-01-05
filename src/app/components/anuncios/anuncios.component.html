@@ -1,24 +1,78 @@
-<div *ngIf="!router.url.includes('anuncios/detalle')" class="container-fluid px-4 bg-donkey-secondary">
+<div *ngIf="!router.url.includes('anuncios/detalle')" class="container-fluid px-4
+  bg-donkey-secondary">
   <div class="row">
-    <div *ngIf="router.url.includes('home')" class="col-12 text-center mt-4">
+    <!-- <div *ngIf="router.url.includes('home')" class="col-12 text-center mt-4"> -->
+    <div class="col-12 text-center mt-4">
       <h2>NUESTRAS BURRAS EN VENTA</h2>
       <hr>
     </div>
 
-    <div class=" container-fluid bg-donkey-secondary my-4">
-      <button id="filtro" (click)="getAnuncios()" class="btn btn-danger" style="float: right;">Borrar filtro</button>
-      <app-noticia *ngIf="!router.url.includes('home')" (category)="getCategory($event)"></app-noticia>
+    <div class="container bg-donkey-secondary my-4">
+      <button id="filtro" (click)="getAnuncios()" class="btn btn-danger"
+        style="float: right;">Borrar filtro</button>
+      <!-- <app-noticia *ngIf="router.url !== '/home'"
+        (category)="getCategory($event)"></app-noticia> -->
     </div>
 
   </div>
+  <div class="container">
 
-  <div class="row container-80">
-    <div class="card-columns">
+    <div class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary"
+              data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <app-anuncio [anuncios]="allAnuncios" *ngIf="allAnuncios"></app-anuncio>
 
+    <div class="row">
+      <ul class="nav nav-tabs">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Active</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+            role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
     </div>
   </div>
 
+  <app-anuncio [anuncios]="allAnuncios" *ngIf="allAnuncios"></app-anuncio>
 </div>
 <router-outlet></router-outlet>

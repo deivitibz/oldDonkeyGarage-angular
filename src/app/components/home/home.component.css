@@ -11,3 +11,18 @@ h1 {
   font-family: VAR(--font-principal--);
   font-weight: 300;
 }
+
+.wrapper{
+  position: relative;
+  /* bottom: 120px; */
+}
+
+#categorias{
+  background-color: #f0f0f0;
+  padding: 60px 0;
+}
+
+.card img{
+  width: 100%;
+  height: 300px;
+}

@@ -1,12 +1,14 @@
 <div class="wrapper">
-  <div class="header">
-    <app-navegacion *ngIf="!router.url.includes('/admin') && !router.url.includes('/dashboard')"></app-navegacion>
-  </div>
-  <div class="main bg-donkey-secondary">
-    <router-outlet (activate)="componentAdded($event)"></router-outlet>
+  <header class="header">
+    <!-- <app-navegacion *ngIf="!router.url.includes('/admin') &&
+      !router.url.includes('/dashboard')"></app-navegacion> -->
+    <app-navegacion *ngIf="router.url !== '/admin' && router.url !== '/dashboard' && router.url !== '/home'"></app-navegacion>
+    </header>
+  <div class="main">
+    <router-outlet></router-outlet>
   </div>
   <div class="footer">
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
   </div>
 </div>
 <!-- <app-modal [usuarioEdit]="userForm" [form]="form" [anuncio]="anuncioAdmin"></app-modal> -->

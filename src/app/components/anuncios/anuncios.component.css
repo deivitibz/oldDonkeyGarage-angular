@@ -1,4 +1,4 @@
-@import url('../../../styles.css');
+@import url("../../../styles.css");
 
 hr {
   border-color: VAR(--color-A--color);
@@ -6,29 +6,40 @@ hr {
   width: 40%;
 }
 
-
 .btn-info {
   color: #fff;
   background-color: VAR(--color-A--color);
   border-color: VAR(--color-A--color);
 }
 
-button#filtro{
+button#filtro {
   position: absolute;
   right: 20px;
 }
 
-.container-80{
+.container-80 {
   width: 80%;
   margin: 0 auto;
 }
 
 .card-columns {
-  @include media-breakpoint-only(sm) {
-    column-count: 1;
+  column-count: 1;
+}
+
+@media screen and (min-width: 960px) {
+  .card-columns {
+    column-count: 4;
   }
-  @include media-breakpoint-only(xl) {
-    column-count: 5;
+}
+
+@media screen and (max-width: 960px) {
+  .card-columns {
+    column-count: 3;
   }
-  column-count: 4;
+}
+
+@media screen and (max-width: 700px) {
+  .card-columns {
+    column-count: 2;
+  }
 }

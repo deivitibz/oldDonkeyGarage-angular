@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Anuncio } from 'src/app/models/anuncio.model';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,14 @@ import { Anuncio } from 'src/app/models/anuncio.model';
 })
 export class HomeComponent implements OnInit {
 
+  isLogged: boolean = false;
+  userToken: string;
+  bannerImg: string = "../../../assets/img/paralax-3.jpg";
 
-
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-
+    this.isLogged = this.authService.checkLogged();
   }
 
   category($event){

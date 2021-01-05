@@ -18,33 +18,33 @@ export class AppComponent {
   useredit: Usuario;
   anuncioAdmin: Anuncio;
 
-  constructor(public router: Router){
+  constructor(public router: Router) {
 
     this.ruta = 'usuarios';
-/*     this.userForm = new FormGroup ({
-      id_provincia: new FormControl('', []),
-      titulo: new FormControl('', []),
-      descripcion: new FormControl('', []),
-      provincia: new FormControl('', []),
-      poblacion: new FormControl('', []),
-      precio: new FormControl('', []),
-      marca: new FormControl('', []),
-      kms: new FormControl('', []),
-      modelo: new FormControl('', []),
-      itv: new FormControl('', []),
-      homologacion: new FormControl('', []),
-      imagenes: new FormControl('', []),
-      tipoCustom: new FormControl('', []),
-    }) */
+    /*     this.userForm = new FormGroup ({
+          id_provincia: new FormControl('', []),
+          titulo: new FormControl('', []),
+          descripcion: new FormControl('', []),
+          provincia: new FormControl('', []),
+          poblacion: new FormControl('', []),
+          precio: new FormControl('', []),
+          marca: new FormControl('', []),
+          kms: new FormControl('', []),
+          modelo: new FormControl('', []),
+          itv: new FormControl('', []),
+          homologacion: new FormControl('', []),
+          imagenes: new FormControl('', []),
+          tipoCustom: new FormControl('', []),
+        }) */
 
   }
 
-  componentAdded(event){
-    event.anuncioAdmin.subscribe((event) => {
-      this.anuncioAdmin = event;
+  /*   componentAdded(event){
+      event.anuncioAdmin.subscribe((event) => {
+        this.anuncioAdmin = event;
 
-    });
+      });
 
-  }
+    } */
 
 }
