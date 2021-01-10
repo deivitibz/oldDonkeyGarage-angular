@@ -15,14 +15,28 @@ h1 {
 .wrapper{
   position: relative;
   /* bottom: 120px; */
+  background-color: var(--color-C--color);
 }
 
 #categorias{
-  background-color: #f0f0f0;
-  padding: 60px 0;
+  background-color: var(--color-B--color);
+  padding: 20px 0;
+}
+
+#anuncios{
+  /* background-color: var(--color-C--color); */
+  padding: 20px 0;
 }
 
 .card img{
   width: 100%;
   height: 300px;
+}
+
+.card{
+  padding: 5px;
+}
+
+.card .card-body{
+  padding: 0;
 }

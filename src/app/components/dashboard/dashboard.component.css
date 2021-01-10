@@ -92,7 +92,7 @@ a.nav-link {
 }
 
 
-@media (min-width: 576px) { 
+@media (min-width: 576px) {
   .w-10{
     width: 50%;
   }
@@ -101,4 +101,10 @@ a.nav-link {
 .w-10{
   width: 20%;
 }
+
+
+.wrapper{
+  height: 100vh;
+}
+
 

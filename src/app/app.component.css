@@ -23,3 +23,6 @@ app-contacto{
   background-color: var(--color-C--color);
 }
 
+.main{
+  background-color: var(--color-B--color)
+}

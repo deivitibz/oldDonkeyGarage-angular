@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Usuario } from './../../../../models/usuario_perfil.model';
 import { Anuncio } from './../../../../models/anuncio.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal',
@@ -10,20 +11,15 @@ import { Anuncio } from './../../../../models/anuncio.model';
 })
 export class ModalComponent implements OnInit {
 
-  @Input() usuarioEdit: Usuario;
+  form: FormGroup;
 
-  @Input() form: FormGroup;
+  @Input() formType: string;
 
-  @Input() anuncio: Anuncio;
-
-  constructor() {
+  constructor(public router: Router) {
     this.initializeForm()
   }
 
   ngOnInit(): void {
-    console.log(this.usuarioEdit);
-
-
 
   }
 
@@ -42,9 +38,13 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  onSubmit(){
-    console.log(this.form.value);
+  onLoginSubmit(){
+    console.log('login submitted')
+  }
 
+  onRegisterSubmit(){
+    console.log('register submitted')
+    this.router.navigate(['/registro'])
   }
 
 

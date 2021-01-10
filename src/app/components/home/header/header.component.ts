@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,27 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLogged: boolean;
 
-  constructor(private authService: AuthService) { }
+  isLogged: boolean;
+  modal: any;
+
+  constructor(
+    private authService: AuthService,
+    public router: Router
+    ) {
+
+    }
 
   ngOnInit(): void {
     this.isLogged = this.authService.checkLogged();
+
   }
+
+  openModal(){
+    console.log('entra aqui')
+    this.modal.modal();
+  }
+
+
 
 }

@@ -1,13 +1,15 @@
 <div class="wrapper">
+
   <header class="header">
     <!-- <app-navegacion *ngIf="!router.url.includes('/admin') &&
       !router.url.includes('/dashboard')"></app-navegacion> -->
-    <app-navegacion *ngIf="router.url !== '/admin' && router.url !== '/dashboard' && router.url !== '/home'"></app-navegacion>
+    <!-- <app-navegacion *ngIf="router.url !== '/admin' && router.url !== '/dashboard' && router.url !== '/home'"></app-navegacion> -->
+    <app-header *ngIf="router.url === '/registro'"></app-header>
     </header>
   <div class="main">
     <router-outlet></router-outlet>
   </div>
-  <div class="footer">
+  <div class="footer" *ngIf="router.url !== '/registro'">
     <!-- <app-footer></app-footer> -->
   </div>
 </div>

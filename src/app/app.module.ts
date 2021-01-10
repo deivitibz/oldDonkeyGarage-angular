@@ -84,6 +84,7 @@ import { ModalComponent } from './components/dashboard/admin/modal/modal.compone
 import { HeaderComponent } from './components/home/header/header.component';
 import { CategoriasComponent } from './components/home/categorias/categorias.component';
 import { BannerComponent } from './components/home/banner/banner.component';
+import { SidebarNavComponent } from './components/home/navegacion/sidebar-nav/sidebar-nav.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { BannerComponent } from './components/home/banner/banner.component';
     HeaderComponent,
     CategoriasComponent,
     BannerComponent,
+    SidebarNavComponent,
   ],
   imports: [
     BrowserModule,

@@ -35,10 +35,13 @@ import { ConstructorDashComponent } from './components/dashboard/constructor/con
 import { ConstructorDashPerfilComponent } from './components/dashboard/constructor/perfil/perfil.component';
 import { DetalleComponent } from './components/anuncios/detalle/detalle.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { LoginComponent } from './components/dashboard/login/login.component';
+
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'nosotros', component: NosotrosComponent },
   {
     path: 'anuncios', component: anunciosComponent,
@@ -93,7 +96,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes)],
+exports: [RouterModule],
 })
 export class AppRoutingModule { }

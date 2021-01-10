@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
 import { Usuario } from './models/usuario_perfil.model';
 import { FormGroup } from '@angular/forms';
 import { Anuncio } from './models/anuncio.model';
+
+declare var $: any;
 
 @Component({
   selector: 'app-root',

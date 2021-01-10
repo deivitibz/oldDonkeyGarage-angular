@@ -1,27 +1,28 @@
 <div class="wrapper">
+<app-modal></app-modal>
   <!-- NAVEGACION TOP -->
   <div class="container-fluid top-nav">
   <div class="w-90">
     <div class="row py-2 align-items-center">
       <div class="col-4 col-md-4 col-lg-2">
-        <img class="" src="../../../../assets/img/log-nav.png" alt="" style="width: 130px; ">
+        <img class="logo" src="../../../../assets/img/log-nav.png" alt=""  (click)="router.navigate(['/'])">
       </div>
       <div class="col-8 col-lg-6">
         <input class="form-control" type="text" placeholder="Buscar en todas las categorias">
       </div>
       <div class="col-md-4 top-nav-buttons">
-        <button class="" style="border: 1px solid var(--color-B--color); border-radius: 20px;" *ngIf="isLogged"> <i class="fa fa-comment" aria-hidden="true"></i> Mensajes</button>
-        <button class="" style="border: 1px solid var(--color-E--color); color: var(--color-E--color); border-radius: 20px;">Inicia Sesion</button>
-        <button class="" style="background-color: var(--color-E--color); border-radius: 20px; color: white;"> <i class="fa fa-plus" aria-hidden="true"></i> Subir Producto</button>
+        <button class="btn" style="border: 1px solid var(--color-B--color); border-radius: 20px;" *ngIf="isLogged"> <i class="fa fa-comment" aria-hidden="true"></i> Mensajes</button>
+        <button class="btn" style="border: 1px solid var(--color-E--color); color: var(--color-E--color); border-radius: 20px;" data-bs-toggle="modal" data-bs-target="#login">Inicia Sesion</button>
+        <button class="btn" style="background-color: var(--color-E--color); border-radius: 20px; color: white;"> <i class="fa fa-plus" aria-hidden="true"></i> Subir Producto</button>
       </div>
     </div>
   </div>
 </div>
-<section id="banner-text">
+<section id="banner-text" *ngIf="router.url !== '/registro' && router.url !== '/dashboard' ">
 
-  <div class="row flex-column text-center w-90" >
-    <h4>La plataforma de los amantes de las motocicletas customizadas</h4>
-    <h1>¿Que Burra Quieres?</h1>
+  <div class="row flex-column text-center parallax" >
+    <h4 class="text-white">La plataforma de los amantes de las motocicletas customizadas</h4>
+    <h1 class="text-white">¿Que Burra Quieres?</h1>
   </div>
 </section>
 
