@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../models/usuario_perfil.model';
+import { UsuarioPerfil } from '../models/usuario_perfil.model';
 import { AuthService } from 'src/app/servicios/auth.service';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class ConstructorService {
     return this.httpClient.get(this.baseUrl,options).toPromise();
   }
 
-  newConstructor(usuario: Usuario) {
+  newConstructor(usuario: UsuarioPerfil) {
     return this.httpClient.post(this.baseUrl, usuario,this.auth.generateHeaders()).toPromise();
   }
 

@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isLogged = this.authService.checkLogged();
+    //this.isLogged = this.authService.checkLogged();
   }
 
   category($event){

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from './../../../../models/usuario_perfil.model';
+import { UsuarioPerfil } from './../../../../models/usuario_perfil.model';
 import { AuthService } from './../../../../servicios/auth.service';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -20,9 +20,9 @@ export class UsuarioDashPerfilComponent implements OnInit {
   provinciasOrder: any[];
   poblaciones: string[];
   filtroProvincias: any[];
-  usuarioActivo: Usuario;
+  usuarioActivo: UsuarioPerfil;
   form: FormGroup;
-  datosUsuario: Usuario;
+  datosUsuario: UsuarioPerfil;
   files;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';

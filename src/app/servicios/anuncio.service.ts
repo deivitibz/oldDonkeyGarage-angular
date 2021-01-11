@@ -11,7 +11,7 @@ export class anuncioService {
   files: FormData;
 
   constructor(private http: HttpClient, private auth: AuthService) {
-    this.baseUrl = 'http://mypanel.sytes.net:3000/api/anuncios';
+    this.baseUrl = 'http://localhost:3000/api/anuncios';
   }
 
   /* PETICIONES GET  */

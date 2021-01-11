@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
-import { Usuario } from './../models/usuario_perfil.model';
+import { UsuarioPerfil } from './../models/usuario_perfil.model';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  usuarioActivo: Usuario;
+  usuarioActivo: UsuarioPerfil;
   baseUrl = 'http://mypanel.sytes.net:3000/api/check';
   constructor(private http: HttpClient,private router: Router) {}
 
@@ -56,7 +56,7 @@ export class AuthService {
     };
   }
 
-  getToken(){
-    return this.http.get('http://mypanel.sytes.net:3000/api/usuarios/getToken').toPromise()
-  }
+  /* getToken(){
+    //return this.http.get('http://mypanel.sytes.net:3000/api/usuarios/getToken').toPromise()
+  } */
 }

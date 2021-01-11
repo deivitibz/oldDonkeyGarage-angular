@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import * as $ from 'jquery';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from 'src/app/servicios/auth.service';
+import { TokenPayload } from './../../../models/payload.interface';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +26,15 @@ export class LoginComponent implements OnInit {
   baseUrl: string;
   validToken: boolean;
   error: boolean;
+
+  userToken: TokenPayload;
+
   constructor(
     private router: Router,
     private usuarioService: UsuarioService,
     private renderer: Renderer2,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private authService: AuthService
   ) {
     this.validToken = false;
     this.error = false;
@@ -43,10 +49,24 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   async onSubmit() {
-    const response = await this.usuarioService.login(this.form.value);
-    console.log(response);
+    try {
+      const response = await this.usuarioService.login(this.form.value);
+      console.log(response);
 
-    if (response['success']) {
+      if(response.login){
+        this.saveToken(response.token);
+        this.cierraPopup();
+        this.form.reset();
+        this.userToken = this.authService.decodeToken()
+        this.userToken.role === 'Admin' ? this.router.navigate(['dashboard']) : this.router.navigate(['admin'])
+
+      }
+    } catch (error) {
+      console.error(error)
+    }
+
+
+/*     if (response['success']) {
       this.saveToken(response['token']);
       this.cierraPopup();
       this.form.reset();
@@ -59,7 +79,7 @@ export class LoginComponent implements OnInit {
       } else {
         this.error = true;
         console.log('no se ha podido hacer login');
-    }
+    } */
   }
 
   checkToken(token): Promise<any> {

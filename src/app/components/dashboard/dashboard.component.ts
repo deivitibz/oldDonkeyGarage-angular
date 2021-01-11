@@ -4,6 +4,7 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,16 +15,22 @@ export class DashboardComponent implements OnInit {
   userData: Anuncio[]
   userList;
 
+
   constructor(
     private authService: AuthService,
     private anuncioService: anuncioService,
     private http: HttpClient) {
+
+
+
   }
 
   ngOnInit(): void {
-    this.loadData()
-    //this.getData()
-    this.getImg()
+
+    this.getData()
+    //this.confDtOptions();
+    //this.loadData()
+    //this.getImg()
 
   }
 
@@ -52,4 +59,6 @@ export class DashboardComponent implements OnInit {
     console.log(this.userData);
 
   }
+
+
 }

@@ -72,7 +72,7 @@ export class UsuariosComponent implements OnInit {
     const response = await this.usuarioService.getUsers();
     this.allUsers = response;
     // this.authService.checkToken(response);
-    this.authService.getToken()
+    //this.authService.getToken()
     this.materialDataTable();
   }
 

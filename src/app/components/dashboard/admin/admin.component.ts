@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
   async ngOnInit() {
     //this.authService.decodeToken();
     //this.guard.canActivate();
-    this.token = await this.authService.getToken()
+    //this.token = await this.authService.getToken()
     localStorage.setItem('user-token', this.token);
     this.usuarios = await this.usuarioService.getUsers()
     console.log(this.usuarios);

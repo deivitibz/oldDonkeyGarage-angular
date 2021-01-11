@@ -54,8 +54,8 @@ button {
     background-color: var(--color-A--color);
     height: 80px;
     width: 100%;
-    position: fixed;
-    bottom: 0;
+    position: absolute;
+    bottom: -80px;
     left: 0;
     justify-content: space-around;
   }

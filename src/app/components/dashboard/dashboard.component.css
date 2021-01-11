@@ -104,7 +104,9 @@ a.nav-link {
 
 
 .wrapper{
-  height: 100vh;
+  height: auto;
 }
 
-
+.col-11{
+  padding: 30px 0;
+}

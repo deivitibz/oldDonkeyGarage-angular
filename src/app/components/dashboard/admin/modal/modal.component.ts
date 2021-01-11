@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Usuario } from './../../../../models/usuario_perfil.model';
+import { UsuarioPerfil } from './../../../../models/usuario_perfil.model';
 import { Anuncio } from './../../../../models/anuncio.model';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-modal',
@@ -15,8 +16,12 @@ export class ModalComponent implements OnInit {
 
   @Input() formType: string;
 
-  constructor(public router: Router) {
-    this.initializeForm()
+  constructor(
+    public router: Router,
+    private userService: UsuarioService
+    ) {
+    //this.initializeRegisterForm()
+      this.initializeLoginForm();
   }
 
   ngOnInit(): void {
@@ -24,7 +29,7 @@ export class ModalComponent implements OnInit {
   }
 
 
-  initializeForm(){
+  initializeRegisterForm(){
     // formulario
     this.form = new FormGroup({
       username: new FormControl(
@@ -38,8 +43,16 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  onLoginSubmit(){
-    console.log('login submitted')
+  initializeLoginForm(){
+    this.form = new FormGroup({
+      email: new FormControl(),
+      password: new FormControl()
+    })
+  }
+
+  async onLoginSubmit(){
+    const response = await this.userService.login(this.form.value)
+    console.log(response)
   }
 
   onRegisterSubmit(){

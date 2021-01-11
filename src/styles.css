@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'Old-stamper';
   src: url("./assets/fonts/old_stamper.otf");
 }
@@ -7,7 +7,7 @@
   src: url("./assets/fonts/Barber-Street_PersonalUseOnly.otf");
 }
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Serif+Pro:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;500;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;500;800&display=swap'); */
 /*
 font-family: 'Oswald', sans-serif;
 font-family: 'Source Serif Pro', serif;
@@ -33,7 +33,7 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Mulish", sans-serif;
+  font-family: Roboto, "Oswald", sans-serif;
   font-weight: 300;
 }
 

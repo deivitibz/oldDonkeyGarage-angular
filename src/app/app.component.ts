@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from './models/usuario_perfil.model';
+import { UsuarioPerfil } from './models/usuario_perfil.model';
 import { FormGroup } from '@angular/forms';
 import { Anuncio } from './models/anuncio.model';
-
-declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -16,7 +14,7 @@ export class AppComponent {
   ruta: string;
   userForm: FormGroup;
   form: FormGroup = new FormGroup({});
-  useredit: Usuario;
+  useredit: UsuarioPerfil;
   anuncioAdmin: Anuncio;
 
   constructor(public router: Router) {
