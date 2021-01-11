@@ -1,6 +1,6 @@
 .sidebar-nav{
   height: 100%;
-  width: 120px;
+  width: 100%;
   background-color: #333;
   position: relative;
   top: 0;
@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 .sidenav-section span{
@@ -35,4 +36,14 @@
 .sidenav-section a img{
   border-radius: 50%;
   margin-bottom: 10px;
+}
+
+.sidebar-nav{
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .sidebar-nav{
+    display: block;
+  }
 }

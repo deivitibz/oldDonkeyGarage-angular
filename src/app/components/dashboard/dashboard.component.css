@@ -51,7 +51,14 @@ td {
   vertical-align: middle;
 }
 
+.col-md-1{
+  display: none;
+}
+
 @media (min-width: 992px) {
+  .col-md-1{
+    display: block;
+  }
   .sidebar {
     /* width: 90px; */
     background-color: var(--color-B--color);

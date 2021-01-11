@@ -11,14 +11,15 @@
         <input class="form-control" type="text" placeholder="Buscar en todas las categorias">
       </div>
       <div class="col-md-4 top-nav-buttons">
-        <button class="btn" style="border: 1px solid var(--color-B--color); border-radius: 20px;" *ngIf="isLogged"> <i class="fa fa-comment" aria-hidden="true"></i> Mensajes</button>
-        <button class="btn" style="border: 1px solid var(--color-E--color); color: var(--color-E--color); border-radius: 20px;" data-bs-toggle="modal" data-bs-target="#login">Inicia Sesion</button>
+        <button class="btn" style="border: 1px solid var(--color-B--color); border-radius: 20px;" *ngIf="isLogged" [routerLink]="['chat']"> <i class="fa fa-comment" aria-hidden="true"  ></i> Mensajes</button>
+        <button class="btn" style="border: 1px solid var(--color-E--color); color: var(--color-E--color); border-radius: 20px;" data-bs-toggle="modal" data-bs-target="#login" *ngIf="!isLogged">Inicia Sesion</button>
+        <button class="btn" style="border: 1px solid var(--color-E--color); color: var(--color-E--color); border-radius: 20px;" *ngIf="isLogged" (click)="closeSession()">Cerrar Session</button>
         <button class="btn" style="background-color: var(--color-E--color); border-radius: 20px; color: white;"> <i class="fa fa-plus" aria-hidden="true"></i> Subir Producto</button>
       </div>
     </div>
   </div>
 </div>
-<section id="banner-text" *ngIf="router.url !== '/registro' && router.url !== '/dashboard' ">
+<section id="banner-text" *ngIf="router.url === '/home'">
 
   <div class="row flex-column text-center parallax" >
     <h4 class="text-white">La plataforma de los amantes de las motocicletas customizadas</h4>

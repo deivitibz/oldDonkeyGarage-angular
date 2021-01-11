@@ -1,0 +1,12 @@
+.col-10 p,
+.col-10 span,
+.col-2 p,
+.col-2 span{
+  color: white;
+}
+
+.col-2{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

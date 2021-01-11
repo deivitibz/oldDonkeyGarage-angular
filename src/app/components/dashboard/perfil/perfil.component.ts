@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -16,6 +16,8 @@ import { PerfilService } from '../../../servicios/perfil.service';
 export class PerfilComponent implements OnInit {
   formulario: FormGroup;
   allPerfil: any[];
+
+  @Input() userList: any;
 
   constructor(private perfilService: PerfilService) {
     this.allPerfil = [];

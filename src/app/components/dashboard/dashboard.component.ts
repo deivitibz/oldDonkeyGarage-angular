@@ -3,7 +3,9 @@ import { AuthService } from './../../servicios/auth.service';
 import { anuncioService } from 'src/app/servicios/anuncio.service';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -19,15 +21,18 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private anuncioService: anuncioService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    public router: Router) {
 
 
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.getData();
+    this.datatableInit(this.userList);
 
-    this.getData()
+
     //this.confDtOptions();
     //this.loadData()
     //this.getImg()
@@ -48,9 +53,8 @@ export class DashboardComponent implements OnInit {
   }
 
   async getData(){
-    const result = await this.http.get('https://jsonplaceholder.typicode.com/users').toPromise();
-    this.userList = result
-    console.log(this.userList)
+    this.userList = await this.http.get('https://jsonplaceholder.typicode.com/users').toPromise();
+
   }
 
   async loadData(){
@@ -60,5 +64,22 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  datatableInit(data){
+
+    const options = {
+      pageLength: 5,
+      data: data,
+      columns: [
+        { data: 'id'},
+        { data: 'email'},
+        { data: 'username'},
+        { data: 'name'},
+        { data: 'website'},
+        { data: 'phone'}
+      ]
+    }
+
+    $('#table_id').DataTable(options);
+  }
 
 }

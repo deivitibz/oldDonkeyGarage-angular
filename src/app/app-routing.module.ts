@@ -36,6 +36,7 @@ import { ConstructorDashPerfilComponent } from './components/dashboard/construct
 import { DetalleComponent } from './components/anuncios/detalle/detalle.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { LoginComponent } from './components/dashboard/login/login.component';
+import { ChatComponent } from './components/dashboard/chat/chat.component';
 
 
 const routes: Routes = [
@@ -62,18 +63,7 @@ const routes: Routes = [
     /* path: 'dashboard', component: DashboardComponent,canActivate: [LoginGuard], */
     path: 'dashboard', component: DashboardComponent,
     children: [
-      {
-        path: 'constructor', component: ConstructorDashComponent,
-        children: [
-          { path: 'perfil', component: ConstructorDashPerfilComponent }
-        ]
-      },
-      {
-        path: 'usuario', component: UsuarioDashComponent,
-        children: [
-          { path: 'perfil', component: UsuarioDashPerfilComponent }
-        ]
-      }
+      {path: 'chat', component: ChatComponent}
     ]
   },
   { path: 'registro', component: RegisterComponent },
@@ -92,11 +82,12 @@ const routes: Routes = [
     ]
   },
   { path: 'contacto', component: ContactoComponent },
+  { path: 'chat', component: ChatComponent },
   { path: '**', redirectTo: '/error404' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

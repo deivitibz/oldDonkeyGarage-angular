@@ -25,6 +25,11 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  closeSession(){
+    localStorage.removeItem('user-token')
+    this.router.navigate(['home'])
+  }
+
   openModal(){
     console.log('entra aqui')
     this.modal.modal();

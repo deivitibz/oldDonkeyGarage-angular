@@ -1,80 +1,37 @@
 <div class="wrapper">
 
   <app-header></app-header>
-  <div class="row">
-    <div class="col-1">
+  <div class="row m-0 p-0">
+    <div class="col-md-1 p-0">
       <app-sidebar-nav></app-sidebar-nav>
     </div>
-    <div class="col-11">
-
-      <!-- TODO://  METER EN COMPONENTE -->
-
-
-      <div class="container">
-        <div class="row">
-          <div class="col-10">
-            <h3>Tus Productos</h3>
-            <p>Aqui tienes los productos en venta</p>
-          </div>
-          <div class="col-2">
-            <span>6</span>
-            <p>Productos</p>
-          </div>
-        </div>
-        <div class="row">
-
-          <!-- TODO:// METER EN COMPONENTE -->
-        <table class="min-w-full divide-y divide-gray-200">
-
-          <tbody class="bg-white divide-y divide-gray-200">
-
-            <tr *ngFor="let user of userList">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0 h-10 w-10">
-                    <img class="rounded-full" src="../../../../assets/img/log-nav.png" alt="" style="width: 60px; height: 60px;">
-                  </div>
-                  <div class="ml-4">
-                    <div class="text-sm font-medium text-gray-900">
-                      {{user.name}}
-                    </div>
-                    <div class="text-sm text-gray-500">
-                      {{user.email}}
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{user.website}}</div>
-                <div class="text-sm text-gray-500">{{user.address.city}}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Active
-                </span>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Admin
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-              </td>
+    <div class="col-12 col-md-11 p-0" style="background-color: #fafafa;">
+      <div class="container h-100" *ngIf="router.url === '/dashboard'">
+        <table class="table min-w-full divide-y divide-gray-200" id="table_id">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+              <th scope="col">Email</th>
+              <th scope="col">Address</th>
             </tr>
-
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
 
           </tbody>
         </table>
+      </div>
+      <div class="container">
+        <router-outlet></router-outlet>
 
-
-        </div>
       </div>
 
+      <!-- <app-perfil [userList]="userList"></app-perfil> -->
 
-
-      <!-- METER EN COMPONENTE -->
 
     </div>
   </div>
-
 
 </div>

@@ -1,4 +1,4 @@
-<div class="container mx-auto px-4">
+<!-- <div class="container mx-auto px-4">
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <div class="form-group mt-5 ">
       <div class="text-center">
@@ -103,4 +103,62 @@
     <button type="submit" class="btn btn-primary btn-block my-4 " [disabled]="!formulario.valid">Enviar</button>
 
   </form>
+</div>
+ -->
+
+ <div class="container">
+  <div class="row">
+    <div class="col-10">
+      <h3>Tus Productos</h3>
+      <p>Aqui tienes los productos en venta</p>
+    </div>
+    <div class="col-2">
+      <span>{{userList.length}}</span>
+      <p>Productos</p>
+    </div>
+  </div>
+  <div class="row">
+
+    <!-- TODO:// METER EN COMPONENTE -->
+  <table >
+
+    <tbody class="bg-white divide-y divide-gray-200">
+
+      <tr *ngFor="let user of userList">
+        <td class="px-6 py-4 whitespace-nowrap">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 h-10 w-10">
+              <img class="rounded-full" src="../../../../assets/img/log-nav.png" alt="" style="width: 60px; height: 60px;">
+            </div>
+            <div class="ml-4">
+              <div class="text-sm font-medium text-gray-900">
+                {{user.name}}
+              </div>
+              <div class="text-sm text-gray-500">
+                {{user.email}}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <div class="text-sm text-gray-900">{{user.website}}</div>
+          <div class="text-sm text-gray-500">{{user.address.city}}</div>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+            Active
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          Admin
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+          <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+        </td>
+      </tr>
+
+
+    </tbody>
+  </table>
+</div>
 </div>
