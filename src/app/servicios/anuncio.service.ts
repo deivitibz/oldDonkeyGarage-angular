@@ -4,10 +4,11 @@ import { Anuncio } from '../models/anuncio.model';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { environment } from 'src/environments/environment'
 import { AngularFireDatabase, AngularFireList, AngularFireDatabaseModule } from '@angular/fire/database';
-import { AnuncioInterface } from './../models/anuncio.interface';
+import { AnuncioInterface, UsuarioInterface } from './../models/anuncio.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
+import { element } from 'protractor';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class anuncioService {
 
   async getAnuncios(): Promise<AnuncioInterface[]>{
     const response = await this.http.get<AnuncioInterface[]>(`${environment.mockHost}/assets/mocks/anuncios.mock.json`).toPromise();
-    response.map(element => element.imagen_id = element.imagen_id ? element.imagen_id : 'assets/img/moto.png');
+    response.map((element) => element.imagen_id = element.imagen_id ? element.imagen_id : 'assets/img/moto.png');
     return response;
   }
 

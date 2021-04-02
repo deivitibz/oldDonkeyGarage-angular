@@ -59,8 +59,8 @@ export class DashboardComponent implements OnInit {
 
   async loadData(){
     const userId = this.authService.decodeToken()['userId']
-    this.userData = await this.anuncioService.getAnunciosById(userId)
-    console.log(this.userData);
+    //this.userData = await this.anuncioService.getAnunciosById(userId)
+    //console.log(this.userData);
 
   }
 

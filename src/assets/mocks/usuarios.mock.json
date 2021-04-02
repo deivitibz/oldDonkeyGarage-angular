@@ -1,0 +1,14 @@
+[
+  {
+    "username": "deivit",
+    "email": "deivit@deivit.es",
+    "password": "12345",
+    "role":"Admin"
+  },
+  {
+    "username": "ramon",
+    "email": "ramon@ramon.es",
+    "password": "12345",
+    "role":"Usuario"
+  }
+]

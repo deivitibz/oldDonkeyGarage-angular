@@ -17,3 +17,9 @@ export interface AnuncioInterface {
   usuarios_id?: string;
   imagen_id?: string
 }
+
+export interface UsuarioInterface{
+  username: string;
+  email: string;
+  password: string;
+}
