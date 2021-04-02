@@ -85,6 +85,8 @@ import { HeaderComponent } from './components/home/header/header.component';
 import { CategoriasComponent } from './components/home/categorias/categorias.component';
 import { BannerComponent } from './components/home/banner/banner.component';
 import { SidebarNavComponent } from './components/home/navegacion/sidebar-nav/sidebar-nav.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -164,6 +166,9 @@ import { SidebarNavComponent } from './components/home/navegacion/sidebar-nav/si
     }),
     MatMenuModule,
     MatDialogModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+
 
   ],
   providers: [],

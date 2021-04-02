@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   async onSubmit() {
 
     const response = await this.userService.registro(this.formulario.value);
+    console.log(response)
     this.message = response['error'];
     if (response['success']){
       this.router.navigate(['home'])

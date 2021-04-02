@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { UploadService } from './../../../../servicios/upload.service';
 import { anuncioService } from './../../../../servicios/anuncio.service';
+import { AnuncioInterface } from './../../../../models/anuncio.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-anuncios',
@@ -21,7 +23,7 @@ import { anuncioService } from './../../../../servicios/anuncio.service';
   styleUrls: ['./anuncios.component.css'],
 })
 export class AnunciosComponent implements OnInit {
-  allAnuncios: Anuncio[];
+  allAnuncios: AnuncioInterface[] = [];
   anuncioEdit: any;
   files;
   //files: string[];
@@ -32,7 +34,7 @@ export class AnunciosComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   //datatables settings
   displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'precio', 'actions'];
-  dataSource: MatTableDataSource<Anuncio>;
+  dataSource: MatTableDataSource<Observable<AnuncioInterface[]>>;
   // filtro poblaciones / provincias
   provincias: string[];
   poblaciones: string[];
@@ -107,7 +109,7 @@ export class AnunciosComponent implements OnInit {
   }
 
   materialDataTable() {
-    this.dataSource = new MatTableDataSource(this.allAnuncios);
+    //this.dataSource = new MatTableDataSource(this.allAnuncios);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

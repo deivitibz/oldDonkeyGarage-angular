@@ -1,64 +1,16 @@
-
-
-<div class="container py-3" *ngIf="detalleAnuncio">
-    <!-- Card Start -->
-    <div class="card mt-0">
-      <div class="row ">
-
-        <div class="col-md-7 px-3">
-          <div class="card-block px-6">
-            <h4 class="card-title">{{detalleAnuncio['titulo']}}</h4>
-            <p class="card-text">
-                {{detalleAnuncio['descripcion']}}
-              </p>
-            <!-- <a href="#" class="mt-auto btn btn-primary  ">Read More</a> -->
-            <div class="row">
-                <div class="col-6">
-                    <ul class="pl-2 ul-izquierda">
-                        <li><strong>Marca: </strong>{{detalleAnuncio['marca']}}</li>
-                        <li><strong>Modelo: </strong>{{detalleAnuncio['modelo']}}</li>
-                        <li><strong>Categoria: </strong>{{detalleAnuncio['categoria']}}</li>
-                        <li><input *ngIf="detalleAnuncio.homologacion;else homologacionFalse" type="checkbox" name="homologacion" id="homologacion" checked><span>Homologacion</span></li>
-                        <ng-template #homologacionFalse>
-                          <li><input type="checkbox" name="homologacion" id="homologacion"><span>Homologacion</span></li>
-                        </ng-template>
-
-
-                    </ul>
-                </div>
-                <div class="col-6">
-                    <ul class="pr-0 ul-derecha">
-                        <li><strong>Año: </strong>{{detalleAnuncio['year']}}</li>
-                        <li><strong>Provincia: </strong>{{detalleAnuncio['provincia']}}</li>
-                        <li><strong>Población: </strong>{{detalleAnuncio['poblacion']}}</li>
-                        <li><input type="checkbox" name="itv" id="itv"><span>ITV</span></li>
-                    </ul>
-                </div>
-
-            </div>
-            <div class="col-12 mx-auto">
-                <h4 class="bg-precio text-center">{{detalleAnuncio['precio']}}€</h4>
-            </div>
-
-
-
-        </div>
-
-      </div>
-      <div class="col-md-5">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block" src="http://mypanel.sytes.net:3000/images/{{detalleAnuncio['imagen_id']}}" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    <!-- End of card -->
-
+<div class="wrapper" *ngIf="anuncio">
+  <div class="product-img">
+    <img [src]="anuncio.imagen_id" height="420" width="327">
   </div>
-
-
-   <br>
-  <br>
-
+  <div class="product-info" *ngIf="anuncio">
+    <div class="product-text">
+      <h1>{{anuncio.titulo}}</h1>
+      <h2>by studio and friends</h2>
+      <p>{{anuncio.descripcion}}</p>
+    </div>
+    <div class="product-price-btn">
+      <p><span>{{anuncio.precio}}</span>$</p>
+      <button type="button">buy now</button>
+    </div>
+  </div>
+</div>

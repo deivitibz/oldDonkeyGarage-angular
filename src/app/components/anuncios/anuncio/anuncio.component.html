@@ -1,53 +1,45 @@
-<div class="container">
-  <!--   <div class="card-columns">
-
-    <div class="card" *ngFor="let anuncio of anuncios">
-      <img class="card-img-top"
-        src="http://mypanel.sytes.net:3000/images/{{anuncio['imagen_id']}}"
-        alt="">
-      <img class="card-img-top"
-        src="http://mypanel.sytes.net:3000/images/noimage.jpg" alt=""
-        *ngIf="!anuncio['imagen_id']">
-
-      <div class="card-body">
-        <h4 class="card-title">{{anuncio.titulo}}</h4>
-
-        <h5 class="mb-0 bg-precio">
-          {{anuncio.precio}} €
-        </h5>
-      </div>
-      <div class="card-footer">
-        <button class="btn btn-info btn-block" (click)="showDetail(anuncio)">VER
-          ANUNCIO</button>
-      </div>
+<!-- <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+<div class="wrapper" *ngFor="let anuncio of anuncios">
+  <!-- <div class="card-box-img">
+  </div>
+  <div class="card-box-body">
+    <img src="https://picsum.photos/id/684/300/300" alt="">
+    <div class="card-box-body-row">
+      <h1>{{anuncio.titulo}}</h1>
+      <p>{{anuncio.descripcion}}</p>
     </div>
-
-
-  </div> -->
-  <div class="row">
-    <div class="column" *ngFor="let anuncio of anuncios">
-      <div class="card">
-        <img class="card-img-top"
-          src="http://mypanel.sytes.net:3000/images/{{anuncio['imagen_id']}}"
-          alt="">
-        <img class="card-img-top"
-          src="http://mypanel.sytes.net:3000/images/noimage.jpg" alt=""
-          *ngIf="!anuncio['imagen_id']">
-
-        <div class="card-body">
-          <h4 class="card-title">{{anuncio.titulo}}</h4>
-
-          <h5 class="mb-0 bg-precio">
-            {{anuncio.precio}} €
-          </h5>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-info btn-block" (click)="showDetail(anuncio)">VER
-            ANUNCIO</button>
-        </div>
+    <div class="card-box-body-row">
+      <p><span>17</span>per person</p>
+      <div class="calification">
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <p>28 reviews</p>
       </div>
-
-
     </div>
   </div>
+</div>
+</div> -->
+<div class="wrapper">
+
+  <div class="container">
+    <div class="card" *ngFor="let anuncio of anuncios" (click)="showDetail(anuncio)">
+      <div class="face face1">
+        <div class="content">
+          <img
+            [src]="anuncio.imagen_id">
+          <h3>{{anuncio.titulo}}</h3>
+        </div>
+      </div>
+      <div class="face face2">
+        <div class="content">
+          <p>{{anuncio.descripcion}}</p>
+          <a href="#">{{anuncio.precio}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

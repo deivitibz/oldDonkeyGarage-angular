@@ -1,0 +1,322 @@
+export const ANUNCIOS_MOCK = [
+  {
+    "id": "6064f395091905193390e19a",
+    "titulo": "nisi eu",
+    "descripcion": "Enim consectetur deserunt sint aute. Dolore velit do mollit ipsum cupidatat tempor qui ad tempor amet excepteur aliquip proident.",
+    "km": 34059,
+    "year": 1987,
+    "provincia": "Cape Verde",
+    "poblacion": "Zaire",
+    "itv": false,
+    "homologacion": false,
+    "fecha_publicacion": "2020-06-14T07:10:44 -02:00",
+    "precio": 12697,
+    "marca": "kawasaki",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f3950e867a0e4770d3d2",
+    "titulo": "non labore",
+    "descripcion": "Nisi velit ex voluptate non officia dolor pariatur veniam aliquip excepteur laborum do cupidatat aute. Incididunt ex do eu excepteur officia velit veniam et id adipisicing in deserunt velit labore.",
+    "km": 14320,
+    "year": 2002,
+    "provincia": "Tonga",
+    "poblacion": "El Salvador",
+    "itv": false,
+    "homologacion": true,
+    "fecha_publicacion": "2020-02-09T11:31:03 -01:00",
+    "precio": 11236,
+    "marca": "kawasaki",
+    "modelo": "sr"
+  },
+  {
+    "id": "6064f395a9ae416d86b44b02",
+    "titulo": "minim nulla",
+    "descripcion": "Occaecat aliquip laborum minim reprehenderit proident culpa occaecat. Labore do consequat nulla labore occaecat est reprehenderit labore in sit.",
+    "km": 64999,
+    "year": 2020,
+    "provincia": "Turkmenistan",
+    "poblacion": "Hungary",
+    "itv": false,
+    "homologacion": true,
+    "fecha_publicacion": "2020-12-21T01:10:56 -01:00",
+    "precio": 27637,
+    "marca": "kawasaki",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f395a36ea29bd89d1e47",
+    "titulo": "quis voluptate",
+    "descripcion": "Veniam dolore deserunt eiusmod culpa esse reprehenderit do commodo eu. Ad nisi qui culpa nulla eiusmod sunt cillum elit ad est dolor.",
+    "km": 6452,
+    "year": 2000,
+    "provincia": "St. Pierre and Miquelon",
+    "poblacion": "Cuba",
+    "itv": false,
+    "homologacion": true,
+    "fecha_publicacion": "2020-04-21T03:46:47 -02:00",
+    "precio": 15674,
+    "marca": "kawasaki",
+    "modelo": "aerox"
+  },
+  {
+    "id": "6064f395f1c4d97cf5adb976",
+    "titulo": "magna commodo",
+    "descripcion": "Veniam laborum nostrud mollit do esse do nostrud excepteur. Est fugiat officia veniam ex do nulla excepteur ullamco.",
+    "km": 22070,
+    "year": 2004,
+    "provincia": "Christmas Island",
+    "poblacion": "Mali",
+    "itv": true,
+    "homologacion": true,
+    "fecha_publicacion": "2020-12-15T04:37:58 -01:00",
+    "precio": 16169,
+    "marca": "aprilia",
+    "modelo": "aerox"
+  },
+  {
+    "id": "6064f3959533a44621d1b862",
+    "titulo": "dolore ipsum",
+    "descripcion": "Occaecat duis consectetur sunt sint eiusmod. Culpa tempor cupidatat officia aliquip laboris pariatur mollit.",
+    "km": 2652,
+    "year": 2011,
+    "provincia": "Barbados",
+    "poblacion": "Samoa",
+    "itv": false,
+    "homologacion": false,
+    "fecha_publicacion": "2020-02-15T04:08:34 -01:00",
+    "precio": 2579,
+    "marca": "kawasaki",
+    "modelo": "aerox"
+  },
+  {
+    "id": "6064f3950d95d29e0529912a",
+    "titulo": "incididunt veniam",
+    "descripcion": "Reprehenderit officia qui ea nisi enim reprehenderit mollit pariatur enim. Adipisicing est culpa cillum est anim ullamco incididunt Lorem tempor.",
+    "km": 21894,
+    "year": 1989,
+    "provincia": "Jamaica",
+    "poblacion": "Uruguay",
+    "itv": false,
+    "homologacion": false,
+    "fecha_publicacion": "2020-03-15T05:44:38 -01:00",
+    "precio": 16707,
+    "marca": "aprilia",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f39559ad055ca0a9197d",
+    "titulo": "cillum laborum",
+    "descripcion": "Veniam incididunt ullamco sint consectetur. Aliqua est do commodo nostrud amet reprehenderit est officia.",
+    "km": 23741,
+    "year": 2001,
+    "provincia": "Cocos (Keeling Islands)",
+    "poblacion": "Maldives",
+    "itv": true,
+    "homologacion": true,
+    "fecha_publicacion": "2021-03-29T07:42:35 -02:00",
+    "precio": 12281,
+    "marca": "yamaha",
+    "modelo": "sr"
+  },
+  {
+    "id": "6064f39530b72046bc540b8d",
+    "titulo": "exercitation aliqua",
+    "descripcion": "Consectetur laborum ea minim sunt velit culpa ipsum laboris in occaecat. Nisi cillum incididunt minim mollit laboris.",
+    "km": 49604,
+    "year": 2013,
+    "provincia": "Argentina",
+    "poblacion": "Monaco",
+    "itv": true,
+    "homologacion": true,
+    "fecha_publicacion": "2020-03-16T04:06:47 -01:00",
+    "precio": 9025,
+    "marca": "kawasaki",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f3955cbcc8830fbf6b59",
+    "titulo": "et ipsum",
+    "descripcion": "Cupidatat nulla velit tempor ex qui sint minim occaecat. Veniam do elit aute veniam commodo pariatur irure.",
+    "km": 66216,
+    "year": 1995,
+    "provincia": "Madagascar",
+    "poblacion": "Zimbabwe",
+    "itv": true,
+    "homologacion": true,
+    "fecha_publicacion": "2020-04-03T12:54:44 -02:00",
+    "precio": 10022,
+    "marca": "aprilia",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f395ccff98e20d97d6bf",
+    "titulo": "cillum voluptate",
+    "descripcion": "Sunt ullamco quis amet laborum exercitation minim quis pariatur quis duis Lorem minim. Deserunt eu anim commodo magna est ipsum labore sunt.",
+    "km": 17349,
+    "year": 1970,
+    "provincia": "Vanuatu",
+    "poblacion": "Peru",
+    "itv": false,
+    "homologacion": true,
+    "fecha_publicacion": "2020-03-30T12:42:32 -02:00",
+    "precio": 26659,
+    "marca": "yamaha",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f395612b8e24a70da2a0",
+    "titulo": "elit laborum",
+    "descripcion": "Anim deserunt aute nulla qui exercitation. Incididunt mollit ipsum sunt sit irure.",
+    "km": 8744,
+    "year": 2012,
+    "provincia": "Grenada",
+    "poblacion": "Pitcairn",
+    "itv": false,
+    "homologacion": true,
+    "fecha_publicacion": "2020-10-08T03:59:22 -02:00",
+    "precio": 11136,
+    "marca": "yamaha",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f3952731a3bedc10c1cb",
+    "titulo": "cillum et",
+    "descripcion": "Enim irure ipsum culpa sit fugiat ea excepteur aute proident sint nulla nostrud aliqua. Qui elit nulla commodo ut proident.",
+    "km": 63336,
+    "year": 2019,
+    "provincia": "Finland",
+    "poblacion": "Mauritania",
+    "itv": false,
+    "homologacion": true,
+    "fecha_publicacion": "2020-03-30T05:09:53 -02:00",
+    "precio": 17466,
+    "marca": "kawasaki",
+    "modelo": "sr"
+  },
+  {
+    "id": "6064f39500e54a1b4470ac8f",
+    "titulo": "aute do",
+    "descripcion": "Mollit excepteur adipisicing magna eiusmod ex do voluptate ex aliqua commodo consectetur. Ea consectetur adipisicing culpa ex exercitation.",
+    "km": 32566,
+    "year": 1976,
+    "provincia": "Norfolk Island",
+    "poblacion": "New Zealand",
+    "itv": true,
+    "homologacion": true,
+    "fecha_publicacion": "2020-02-12T07:29:51 -01:00",
+    "precio": 8693,
+    "marca": "aprilia",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f39562f389c5293fe19a",
+    "titulo": "ullamco Lorem",
+    "descripcion": "Exercitation sunt adipisicing velit veniam quis laborum et elit magna. Commodo dolore ut consequat aliquip reprehenderit.",
+    "km": 45807,
+    "year": 2001,
+    "provincia": "Sri Lanka",
+    "poblacion": "Papua New Guinea",
+    "itv": true,
+    "homologacion": false,
+    "fecha_publicacion": "2020-02-18T02:14:12 -01:00",
+    "precio": 2063,
+    "marca": "kawasaki",
+    "modelo": "sr"
+  },
+  {
+    "id": "6064f39574e2973ea960997d",
+    "titulo": "deserunt anim",
+    "descripcion": "Esse cillum eiusmod voluptate dolore pariatur. Do veniam sit commodo occaecat eu irure veniam sint consectetur.",
+    "km": 39167,
+    "year": 1971,
+    "provincia": "Reunion",
+    "poblacion": "Costa Rica",
+    "itv": true,
+    "homologacion": true,
+    "fecha_publicacion": "2020-07-12T01:27:50 -02:00",
+    "precio": 13203,
+    "marca": "aprilia",
+    "modelo": "z700"
+  },
+  {
+    "id": "6064f39557afddfc836b0db4",
+    "titulo": "et esse",
+    "descripcion": "Pariatur esse adipisicing officia qui id nulla voluptate commodo excepteur et excepteur ex. Eu nostrud duis tempor exercitation occaecat nulla proident ex id aliquip duis quis duis.",
+    "km": 50077,
+    "year": 2017,
+    "provincia": "Iran",
+    "poblacion": "Chad",
+    "itv": true,
+    "homologacion": true,
+    "fecha_publicacion": "2020-10-07T01:03:37 -02:00",
+    "precio": 21400,
+    "marca": "aprilia",
+    "modelo": "sr"
+  },
+  {
+    "id": "6064f395edeb9b076fa21ccd",
+    "titulo": "laboris voluptate",
+    "descripcion": "Elit ullamco do reprehenderit ipsum ad minim sunt. Aliqua dolore esse anim officia qui cillum minim ex est.",
+    "km": 47393,
+    "year": 1984,
+    "provincia": "Liechtenstein",
+    "poblacion": "Dominica",
+    "itv": false,
+    "homologacion": false,
+    "fecha_publicacion": "2020-02-21T04:14:58 -01:00",
+    "precio": 28118,
+    "marca": "aprilia",
+    "modelo": "aerox"
+  },
+  {
+    "id": "6064f395ce0fa086c64662e5",
+    "titulo": "ex consectetur",
+    "descripcion": "Reprehenderit in ex aute laborum esse voluptate adipisicing excepteur. Id ad officia consequat adipisicing.",
+    "km": 23031,
+    "year": 2016,
+    "provincia": "Colombia",
+    "poblacion": "Niger",
+    "itv": true,
+    "homologacion": false,
+    "fecha_publicacion": "2020-10-11T05:38:54 -02:00",
+    "precio": 6807,
+    "marca": "yamaha",
+    "modelo": "sr"
+  }
+]
+
+
+/**
+
+
+ */
+
+export const json_generator = {
+  id: '{{objectId()}}',
+  titulo: '{{lorem(2, "word")}}',
+  descripcion: '{{lorem(2, "sentences")}}',
+  km: '{{integer(1000, 70000)}}',
+  year: '{{integer(1970, 2021)}}',
+  provincia: '{{country()}}',
+  poblacion: '{{country()}}',
+  itv: '{{bool()}}',
+  homologacion: '{{bool()}}',
+  fecha_publicacion: '{{date(new Date(2020, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss Z")}}',
+  precio: '{{integer(1000, 30000)}}',
+  marca: function (tags) {
+    var fruits = ['aprilia', 'yamaha', 'kawasaki'];
+    return fruits[tags.integer(0, fruits.length - 1)];
+  },
+  modelo: function (tags) {
+    var fruits = ['sr', 'aerox', 'z700'];
+    return fruits[tags.integer(0, fruits.length - 1)];
+  },
+  tipo: function (tags) {
+    var tipos = ['bobber','scrambler','racer','chopped','brad','tracker'];
+    return tipos[tags.integer(0, tipos.length - 1)];
+  }
+
+}
+
+
