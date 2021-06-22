@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MotocicletasService } from 'src/app/servicios/motocicletas.service';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import { anuncioService } from 'src/app/servicios/anuncio.service';
+import { AnuncioInterface } from './../../../models/anuncio.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-moto',
@@ -9,7 +11,7 @@ import { anuncioService } from 'src/app/servicios/anuncio.service';
   styleUrls: ['./moto.component.css'],
 })
 export class MotoComponent implements OnInit {
-  allAnuncios: Anuncio[];
+  allAnuncios: AnuncioInterface[];
 
   constructor(
     private motoService: MotocicletasService,
@@ -19,7 +21,7 @@ export class MotoComponent implements OnInit {
   async ngOnInit() {
     const response = await this.anuncioService.getAnuncios();
     this.allAnuncios = response;
-    this.allAnuncios = this.allAnuncios.splice(1,9)
+    //this.allAnuncios = this.allAnuncios.splice(1,9)
     // const response = await this.motoService.getAllMotos();
     // console.log(response);
     // this.getMoto(1)

@@ -114,7 +114,7 @@ export class UsuarioDashComponent implements OnInit {
   }
   async reloadData() {
     const currentUser = this.authService.decodeToken();
-    this.anunciosUser = await this.anuncioService.getAnunciosById(currentUser['userId']);
+    //this.anunciosUser = await this.anuncioService.getAnunciosById(currentUser['userId']);
     this.materialDataTable();
   }
 
@@ -153,15 +153,15 @@ export class UsuarioDashComponent implements OnInit {
   }
 
   async deleteAnuncio(element) {
-    const response = await this.anuncioService.deleteAnuncio(element.id);
+    //const response = await this.anuncioService.deleteAnuncio(element.id);
     //const response = await this.usuarioService.deleteUser(element.id);
-    this.openSnackBar(response['success']);
+    //this.openSnackBar(response['success']);
     this.reloadData();
   }
 
   async editAnuncio(element) {
     this.togglePanel();
-    this.anuncioEdit = await this.anuncioService.getAnuncio(element.id);
+    //this.anuncioEdit = await this.anuncioService.getAnuncio(element.id);
     this.initializeForm();
   }
   async onSubmit() {
@@ -170,17 +170,17 @@ export class UsuarioDashComponent implements OnInit {
     newAnuncio.imagen_id = this.files[0].name;
     console.log(newAnuncio);
     if (this.anuncioEdit['id']) {
-      const response = await this.anuncioService.editAnuncioById(this.anuncioEdit['id'],this.form.value);
+      //const response = await this.anuncioService.editAnuncioById(this.anuncioEdit['id'],this.form.value);
       this.reloadData();
       this.form.reset();
       this.anuncioEdit = [];
       this.togglePanel()
-      this.openSnackBar(response['success']);
+      //this.openSnackBar(response['success']);
     } else {
-      const response = await this.anuncioService.addAnuncio(newAnuncio);
+      //const response = await this.anuncioService.addAnuncio(newAnuncio);
       this.reloadData();
       this.form.reset();
-      this.openSnackBar(response['success']);
+      //this.openSnackBar(response['success']);
     }
 
 

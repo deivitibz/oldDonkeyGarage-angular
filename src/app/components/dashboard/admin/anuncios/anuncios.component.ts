@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { UploadService } from './../../../../servicios/upload.service';
 import { anuncioService } from './../../../../servicios/anuncio.service';
+import { AnuncioInterface } from './../../../../models/anuncio.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-anuncios',
@@ -21,7 +23,7 @@ import { anuncioService } from './../../../../servicios/anuncio.service';
   styleUrls: ['./anuncios.component.css'],
 })
 export class AnunciosComponent implements OnInit {
-  allAnuncios: Anuncio[];
+  allAnuncios: AnuncioInterface[] = [];
   anuncioEdit: any;
   files;
   //files: string[];
@@ -32,7 +34,7 @@ export class AnunciosComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   //datatables settings
   displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'precio', 'actions'];
-  dataSource: MatTableDataSource<Anuncio>;
+  dataSource: MatTableDataSource<Observable<AnuncioInterface[]>>;
   // filtro poblaciones / provincias
   provincias: string[];
   poblaciones: string[];
@@ -107,7 +109,7 @@ export class AnunciosComponent implements OnInit {
   }
 
   materialDataTable() {
-    this.dataSource = new MatTableDataSource(this.allAnuncios);
+    //this.dataSource = new MatTableDataSource(this.allAnuncios);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -144,8 +146,8 @@ export class AnunciosComponent implements OnInit {
   }
 
   async deleteAnuncio(anuncio) {
-    const response = await this.anuncioService.deleteAnuncio(anuncio.id);
-    this.openSnackBar(response['success']);
+    //const response = await this.anuncioService.deleteAnuncio(anuncio.id);
+    //this.openSnackBar(response['success']);
     this.reloadData();
   }
 
@@ -159,7 +161,7 @@ export class AnunciosComponent implements OnInit {
   }
 
   async addAnuncio() {
-    this.anuncioService.addAnuncio(this.form.value);
+    //this.anuncioService.addAnuncio(this.form.value);
   }
 
   onSubmit() {
@@ -201,12 +203,12 @@ export class AnunciosComponent implements OnInit {
     if (this.files) {
       fd.append('imagen_id', this.files[0])
     }
-    this.anuncioService.addImages(fd)
-      .then(result => console.log(result))
-    this.anuncioService.editAnuncioById(this.anuncioEdit.id, form.value)
-      .then(response => {
-        this.openSnackBar(response['success'])
-      })
+    // this.anuncioService.addImages(fd)
+    //   .then(result => console.log(result))
+    // this.anuncioService.editAnuncioById(this.anuncioEdit.id, form.value)
+    //   .then(response => {
+    //     this.openSnackBar(response['success'])
+    //   })
     this.reloadData();
     this.form.reset();
     this.anuncioEdit = []
@@ -226,17 +228,17 @@ export class AnunciosComponent implements OnInit {
     console.log(newAnuncio);
 
     if (this.anuncioEdit.id) {
-      const response = await this.anuncioService.editAnuncioById(this.anuncioEdit.id, newAnuncio);
+      //const response = await this.anuncioService.editAnuncioById(this.anuncioEdit.id, newAnuncio);
       this.reloadData();
       this.form.reset();
       this.anuncioEdit = null;
       this.togglePanel();
-      this.openSnackBar(response['success']);
+      //this.openSnackBar(response['success']);
     } else {
-      const response = await this.anuncioService.addAnuncio(newAnuncio);
+      //const response = await this.anuncioService.addAnuncio(newAnuncio);
       this.reloadData();
       this.form.reset();
-      this.openSnackBar(response['success']);
+      //this.openSnackBar(response['success']);
       this.panelOpenState = false;
     }
 

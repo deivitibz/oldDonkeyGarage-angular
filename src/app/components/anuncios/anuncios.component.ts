@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Anuncio } from 'src/app/models/anuncio.model';
 import { anuncioService } from 'src/app/servicios/anuncio.service';
+import { Observable } from 'rxjs';
+import { AnuncioInterface } from './../../models/anuncio.interface';
+import { ANUNCIOS_MOCK } from './../../mocks/anuncios.mock';
 
 @Component({
   selector: 'app-anuncios',
@@ -29,7 +32,8 @@ export class anunciosComponent implements OnInit {
   filtroModelos: any[];
   filtroProvincias: any[];
 
-  allAnuncios: Anuncio[];
+  allAnuncios: AnuncioInterface[] = [];
+  anuncios: AnuncioInterface[] = [];
   // formulario
   form: FormGroup;
 
@@ -81,6 +85,7 @@ export class anunciosComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.anuncios = await this.anuncioService.getAnuncios()
     this.getAnuncios();
 
     this.anunciosForm.emit(this.form)
@@ -89,6 +94,10 @@ export class anunciosComponent implements OnInit {
   async getAnuncios() {
     const response = await this.anuncioService.getAnuncios();
     this.allAnuncios = response;
+    this.allAnuncios.map(element => {
+      element.imagen_id = element.imagen_id ? element.imagen_id : 'assets/img/moto.png'
+    })
+    console.log(this.allAnuncios)
   }
 
 
@@ -122,8 +131,8 @@ export class anunciosComponent implements OnInit {
   }
 
   async getCategory($event) {
-    this.allAnuncios = [];
-    this.allAnuncios = await this.anuncioService.getAnuncioByCategory($event)
+    //this.allAnuncios = [];
+    //this.allAnuncios = await this.anuncioService.getAnuncioByCategory($event)
   }
 
   showDetail(anuncio) {

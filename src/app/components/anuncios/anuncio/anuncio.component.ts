@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Anuncio } from './../../../models/anuncio.model';
 import { Router } from '@angular/router';
+import { AnuncioInterface } from './../../../models/anuncio.interface';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { anuncioService } from 'src/app/servicios/anuncio.service';
 
 @Component({
   selector: 'app-anuncio',
@@ -9,21 +12,19 @@ import { Router } from '@angular/router';
 })
 export class AnuncioComponent implements OnInit {
 
-  @Input() anuncios: Anuncio[];
+  @Input() anuncios: AnuncioInterface[];
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private anuncioService: anuncioService
+    ) {
     this.anuncios = [];
    }
 
   ngOnInit(): void {
-    console.log('desde anuncios');
-    console.log(this.anuncios);
-
   }
 
-  showDetail(anuncio){
-    console.log(anuncio.id);
-
+  async showDetail(anuncio: AnuncioInterface){
     this.router.navigate(['anuncios','detalle',anuncio.id])
   }
 

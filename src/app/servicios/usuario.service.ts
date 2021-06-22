@@ -2,25 +2,34 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsuarioPerfil } from './../models/usuario_perfil.model';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
+import { UsuarioInterface } from './../models/usuario.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuarioService {
   baseUrl: string;
+  private usuariosDB: AngularFireList<UsuarioInterface>
 
-  constructor(private httpClient: HttpClient, private auth: AuthService) {
+  constructor(
+    private httpClient: HttpClient,
+    private auth: AuthService,
+    private db: AngularFireDatabase
+    ) {
     this.baseUrl = 'http://localhost:3000/api/usuarios';
+    this.usuariosDB = this.db.list('/usuarios', ref => ref.orderByChild('id'));
+
   }
 
-  registro(formValues): Promise<UsuarioPerfil> {
-    /* const options = {
-      headers: new HttpHeaders({
-        'user-token': localStorage.getItem('user-token'),
-      }),
-    }; */
-    return this.httpClient.post<UsuarioPerfil>(this.baseUrl + '/registro', formValues).toPromise();
-  }
+  // registro(formValues): Promise<UsuarioPerfil> {
+  //   /* const options = {
+  //     headers: new HttpHeaders({
+  //       'user-token': localStorage.getItem('user-token'),
+  //     }),
+  //   }; */
+  //   return this.httpClient.post<UsuarioPerfil>(this.baseUrl + '/registro', formValues).toPromise();
+  // }
 
   // login(formValues): Promise<UsuarioPerfil> {
   //   return this.httpClient.post<UsuarioPerfil>(this.baseUrl + '/login', formValues).toPromise();
@@ -28,6 +37,15 @@ export class UsuarioService {
 
   login(formValues): Promise<{message: string, login: boolean, token: string}> {
     return this.httpClient.post<{message: string, login: boolean, token: string}>(`${this.baseUrl}/login`, formValues).toPromise()
+  }
+
+  registro(usuario: UsuarioInterface){
+
+    return this.usuariosDB.push({
+      username: usuario.username,
+      email: usuario.email,
+      password: usuario.password
+    })
   }
 
   getUsers(): Promise<UsuarioPerfil[]> {
